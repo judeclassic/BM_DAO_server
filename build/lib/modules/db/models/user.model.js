@@ -1,0 +1,163 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.User = void 0;
+//@ts-check
+//User Schema
+const mongoose_1 = require("mongoose");
+const user_dto_1 = __importDefault(require("../../../../types/dtos/user.dto"));
+const user_response_1 = require("../../../../types/interfaces/response/user.response");
+const logger_1 = require("../../logger");
+const WalletSchema = new mongoose_1.Schema({
+    balance: {
+        referalBonus: {
+            type: Number,
+        },
+        taskBalance: {
+            type: Number,
+        },
+        walletBalance: {
+            type: Number
+        },
+        totalBalance: {
+            type: Number
+        }
+    }
+});
+const UserSchema = new mongoose_1.Schema({
+    accountType: {
+        type: String,
+        enum: Object.values(user_response_1.AccountTypeEnum),
+        trim: true,
+    },
+    name: {
+        type: String,
+    },
+    emailAddress: {
+        type: String,
+        trim: true,
+    },
+    phoneNumber: {
+        type: String,
+        trim: true,
+    },
+    password: {
+        type: String,
+    },
+    country: {
+        type: String,
+    },
+    updatedAt: {
+        type: Date,
+        default: new Date()
+    },
+    createdAt: {
+        type: Date,
+        default: new Date()
+    },
+    accessToken: {
+        type: String
+    },
+    wallet: WalletSchema,
+    referal: {
+        myReferalCode: {
+            type: String,
+        },
+        referalCode: {
+            type: String
+        },
+    },
+    authenticationCode: {
+        type: String,
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
+});
+exports.User = (0, mongoose_1.model)("User", UserSchema);
+class UserModel {
+    constructor() {
+        this.deepSearchDetails = (name, data) => {
+            const finalObject = {};
+            Object.entries(data).forEach((data) => {
+                finalObject[`personal_information.${data[0]}`] = data[1];
+            });
+            return finalObject;
+        };
+        this.saveUserToDB = (details) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.User.create(details);
+                if (data) {
+                    return { status: true, data: new user_dto_1.default(data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't create user" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
+        this.updateUserDetailToDB = (id, details) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.User.findByIdAndUpdate(id, details, { new: true });
+                if (data) {
+                    return { status: true, data: new user_dto_1.default(data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't update user" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
+        this.checkIfExist = (details) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.User.findOne(details);
+                if (data) {
+                    return { status: true, data: new user_dto_1.default(data) };
+                }
+                else {
+                    return { status: false, error: `Can't find Details` };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
+        this.checkIfReferalExist = (details) => __awaiter(this, void 0, void 0, function* () {
+            const referalInformation = this.deepSearchDetails('referal', details);
+            try {
+                const data = yield this.User.findOne(referalInformation);
+                if (data) {
+                    return { status: true, data: new user_dto_1.default(data) };
+                }
+                else {
+                    return { status: false, error: `Can't find Details` };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
+        this.User = exports.User;
+    }
+}
+exports.default = UserModel;

@@ -1,0 +1,353 @@
+openapi: 3.0.2
+info:
+  title: Bakely API
+  version: "1.0"
+servers:
+  - url: http://localhost:8080/
+  - url: https://bakely.fly.io/
+tags:
+  - name: test
+    description: Just for Test, this should not be implemented
+paths:
+  /test:
+    get:
+      responses:
+        "200":
+          description: Testing Servers to see if server is up
+  /api/user/login:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Login to the user application
+        "403":
+          description: Failed to retry API
+  /api/user/logout:
+    post:
+      responses:
+        "200":
+          description: Logout of the user application
+  /api/user/register:
+    post:
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/RegistrationRequest"
+      responses:
+        "201":
+          description: OK
+  /api/user/:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/user/security/accountNumber:
+    put:
+      responses:
+        "200":
+          description: OK
+  /api/user/password/reset:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/user/password/confirmreset:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/user/email/reset:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/user/email/confirmreset:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/user/profile/:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/user/profile/confirmreset:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/store/create:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/store/update:
+    put:
+      responses:
+        "200":
+          description: OK
+  /api/store/mystore:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/store/delete:
+    delete:
+      responses:
+        "200":
+          description: OK
+  /api/store/getStoreByLinkName/:storeLink:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/store/allstores:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/store/categories/add:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/store/categories/addmultiple:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/store/categories/update:
+    put:
+      responses:
+        "200":
+          description: OK
+  /api/store/categories/remove:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/store/edit/userprofile:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/store/edit/userstore:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/store/search/all:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/store/search/state:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/store/search/category:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/store/search/categoryAndState:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/store/search/link:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/order/create:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/order/list:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/order/status/pend:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/order/status/complete:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/order/status/reject:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/review/write:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/review/list:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/payment/getBanks:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/payment/validateAccount:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/payment/updateAccount:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/payment/requestPayout:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/userrequest/createRequest:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/admin/login:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/admin/create:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/admin/:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/admin/orders/listbystore:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/admin/orders/listbystatus:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/admin/orders/list:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/admin/orders/pend:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/admin/orders/complete:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/admin/orders/reject:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/admin/orders/deliver:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/admin/payments/getPayouts:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/admin/payments/getPayoutsByStatus:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/admin/payments/grantPayouts:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/admin/payments/rejectPayouts:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/admin/userRequest/list:
+    get:
+      responses:
+        "200":
+          description: OK
+  /api/admin/userRequest/status/complete:
+    post:
+      responses:
+        "200":
+          description: OK
+  /api/admin/userRequest/delete:
+    delete:
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          default: judeclassic@gmail.com
+        password:
+          type: string
+          default: 1234567
+    RegistrationRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          default: Jude Man
+        phoneNumber:
+          type: string
+          default: "948375983575"
+        email:
+          type: string
+          default: judeclassic@gmail.com
+        password:
+          type: string
+          default: 1234678@
+        fileName:
+          type: string
+          format: binary
+    CreateStoreRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          default: judeclassic@gmail.com
+        password:
+          type: string
+          default: 123467

@@ -1,0 +1,34 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const task_validator_1 = __importDefault(require("../../../../domain/validators/task.validator"));
+const user_model_1 = __importDefault(require("../../../../lib/modules/db/models/user.model"));
+const raider_model_1 = __importDefault(require("../../../../lib/modules/db/models/service/raider.model"));
+const raider_model_2 = __importDefault(require("../../../../lib/modules/db/models/task/raider.model"));
+const raid_model_1 = __importDefault(require("../../../../lib/modules/db/models/task/raid.model"));
+const raider_user_controller_1 = __importDefault(require("../../../../domain/controllers/task.controller/moderator.controller/raider.user.controller"));
+const moderator_user_service_1 = __importDefault(require("../../../../domain/services/task.service/moderator.service/moderator.user.service"));
+const moderator_model_1 = __importDefault(require("../../../../lib/modules/db/models/service/moderator.model"));
+const useRaiderTaskForUserRoutes = ({ router }) => {
+    const taskValidator = new task_validator_1.default();
+    const userModel = new user_model_1.default();
+    const raidModel = new raid_model_1.default();
+    const raiderTaskModel = new raider_model_2.default();
+    const raiderServiceModel = new raider_model_1.default();
+    const moderatorServiceModel = new moderator_model_1.default();
+    const moderatorUserTaskService = new moderator_user_service_1.default({ raiderTaskModel, raidModel, userModel, raiderServiceModel, moderatorServiceModel });
+    const clientRaidController = new raider_user_controller_1.default({ taskValidator, moderatorUserTaskService });
+    router.getWithAuth('/active', clientRaidController.getAllActiveTask);
+    router.getWithAuth('/other', clientRaidController.getAllOtherTask);
+    router.postWithBodyAndAuth('/moderate_task', clientRaidController.moderateTask);
+    router.getWithAuth('/me/active', clientRaidController.getAllModeratorsActiveTasks);
+    router.getWithAuth('/me/other', clientRaidController.getAllModeratorsTasks);
+    router.getWithAuth('/me', clientRaidController.getModeratorTask);
+    router.postWithBodyAndAuth('/me/approve', clientRaidController.approveTaskAsComplete);
+    router.getWithAuth('/raids', clientRaidController.getModeratedRaids);
+    router.getWithAuth('/raid/:raidId', clientRaidController.getUserSingleRaid);
+    router.postWithBodyAndAuth('/raid/reject', clientRaidController.rejectRaid);
+};
+exports.default = useRaiderTaskForUserRoutes;

@@ -1,0 +1,961 @@
+[[31merror[39m] Tue, 13 Sep 2022 22:48:31 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: secretKey_1 dup key: { secretKey: null }]
+[[31merror[39m] Tue, 13 Sep 2022 22:51:34 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: secretKey_1 dup key: { secretKey: null }]
+[[31merror[39m] Tue, 13 Sep 2022 22:55:05 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: secretKey_1 dup key: { secretKey: null }]
+[[31merror[39m] Tue, 13 Sep 2022 23:05:19 GMT undefined [[!!🐞] Error: MongoNetworkError: connection 1 to 13.38.188.97:27017 closed]
+[[31merror[39m] Fri, 16 Sep 2022 13:44:08 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Sat, 17 Sep 2022 16:48:44 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Sat, 17 Sep 2022 16:50:25 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Sat, 17 Sep 2022 20:53:36 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Sat, 17 Sep 2022 20:59:08 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Mon, 19 Sep 2022 21:37:22 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Mon, 19 Sep 2022 22:42:51 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 19 Sep 2022 22:44:31 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 19 Sep 2022 22:51:39 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 19 Sep 2022 23:30:33 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 19 Sep 2022 23:34:20 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 19 Sep 2022 23:35:19 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 19 Sep 2022 23:49:41 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 19 Sep 2022 23:50:44 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 19 Sep 2022 23:54:29 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 19 Sep 2022 23:55:08 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 19 Sep 2022 23:55:54 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 00:06:25 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 00:06:40 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 00:07:01 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 00:07:30 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 14:54:33 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 14:54:43 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 21:23:18 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 21:26:08 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 21:28:16 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 21:30:31 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 20 Sep 2022 21:32:13 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Wed, 21 Sep 2022 13:35:02 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Wed, 21 Sep 2022 13:35:24 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Wed, 21 Sep 2022 22:38:42 GMT undefined [[!!🐞] queryA ETIMEOUT localhost]
+[[31merror[39m] Wed, 21 Sep 2022 22:39:16 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: phoneNumber_1 dup key: { phoneNumber: "78849r74978" }]
+[[31merror[39m] Wed, 21 Sep 2022 22:39:24 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 19:34:41 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 22 Sep 2022 19:36:49 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 19:37:51 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 19:37:55 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 19:38:01 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 19:38:36 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 19:45:02 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 19:49:42 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 19:50:23 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 22:19:00 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 22:24:05 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Thu, 22 Sep 2022 23:43:15 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 23:44:02 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 23:44:18 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 23:53:37 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 22 Sep 2022 23:57:45 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:10:44 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:27:37 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:29:19 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:30:04 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:30:16 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:31:09 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:32:16 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:32:33 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:34:41 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:35:24 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:37:27 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:37:30 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:37:48 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:38:54 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:39:15 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 27 Sep 2022 17:42:38 GMT undefined [[!!🐞] Cast to ObjectId failed for value "632ce083075398383d127e0" (type string) at path "_id" for model "Order"]
+[[31merror[39m] Tue, 27 Sep 2022 20:32:31 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Sun, 02 Oct 2022 11:13:28 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Sun, 02 Oct 2022 20:41:00 GMT undefined [[!!🐞] Error: MongoNetworkTimeoutError: connection timed out]
+[[31merror[39m] Sun, 02 Oct 2022 20:52:46 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Wed, 05 Oct 2022 22:53:55 GMT undefined [[!!🐞] Error: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.]
+[[31merror[39m] Wed, 05 Oct 2022 22:54:18 GMT undefined [[!!🐞] Error: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.]
+[[31merror[39m] Wed, 05 Oct 2022 22:55:37 GMT undefined [[!!🐞] Error: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.]
+[[31merror[39m] Sat, 08 Oct 2022 23:00:06 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Sat, 08 Oct 2022 23:03:03 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sat, 08 Oct 2022 23:04:35 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sat, 08 Oct 2022 23:05:13 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sat, 08 Oct 2022 23:05:57 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sat, 08 Oct 2022 23:09:32 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sat, 08 Oct 2022 23:10:33 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sat, 08 Oct 2022 23:11:53 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sat, 08 Oct 2022 23:12:20 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sat, 08 Oct 2022 23:13:05 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sat, 08 Oct 2022 23:14:33 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sat, 08 Oct 2022 23:15:17 GMT undefined [[!!🐞] Request failed with status code 500]
+[[31merror[39m] Sun, 09 Oct 2022 00:13:02 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Sun, 09 Oct 2022 00:13:40 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Sun, 09 Oct 2022 00:14:40 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Sun, 09 Oct 2022 00:32:35 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Sun, 09 Oct 2022 00:34:43 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Sun, 09 Oct 2022 00:40:33 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Sun, 09 Oct 2022 23:01:21 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 09 Oct 2022 23:15:18 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 10 Oct 2022 10:18:34 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 10 Oct 2022 10:18:37 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 10 Oct 2022 10:18:38 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 10 Oct 2022 10:18:39 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 11 Oct 2022 01:17:14 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Tue, 11 Oct 2022 01:17:39 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Wed, 12 Oct 2022 01:15:26 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Wed, 12 Oct 2022 01:19:20 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Wed, 12 Oct 2022 01:20:51 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Wed, 12 Oct 2022 01:34:07 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Wed, 12 Oct 2022 02:16:12 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Wed, 12 Oct 2022 02:24:39 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Wed, 12 Oct 2022 10:47:19 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Wed, 12 Oct 2022 11:10:11 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Wed, 12 Oct 2022 11:27:03 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Thu, 13 Oct 2022 10:40:07 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 10:40:21 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 10:45:06 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 10:47:08 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 10:47:37 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 10:57:12 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 10:58:20 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 10:58:37 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 10:59:00 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:03:02 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:03:39 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:03:49 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:04:11 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:14:05 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:14:55 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:19:50 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:20:01 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:24:30 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:24:34 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:25:20 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:26:14 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 11:33:36 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 18:21:10 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 18:45:45 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 18:55:47 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 19:05:52 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 19:06:03 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 19:11:33 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 13 Oct 2022 19:11:46 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Sun, 16 Oct 2022 08:21:17 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Sun, 16 Oct 2022 08:29:28 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 20 Oct 2022 01:12:35 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Thu, 20 Oct 2022 01:32:32 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Sun, 30 Oct 2022 13:33:48 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:33:54 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:34:09 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:34:44 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:35:36 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:35:44 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:35:45 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:36:38 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:38:02 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:38:20 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:44:13 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:45:02 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:45:05 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:45:23 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:47:53 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:49:46 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:49:58 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 13:54:18 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 14:57:18 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 16:16:49 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 21:15:31 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 21:15:45 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sun, 30 Oct 2022 22:09:25 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:15:06 GMT undefined [[!!🐞] queryA ETIMEOUT uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:16:50 GMT undefined [[!!🐞] queryA ETIMEOUT uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:18:05 GMT undefined [[!!🐞] queryA ETIMEOUT uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:19:33 GMT undefined [[!!🐞] queryA ETIMEOUT uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:36:19 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 31 Oct 2022 00:42:00 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:42:14 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:42:18 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:43:24 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:45:34 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:46:36 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 00:47:16 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 04:58:57 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND api.paystack.co]
+[[31merror[39m] Mon, 31 Oct 2022 04:58:57 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND api.paystack.co]
+[[31merror[39m] Mon, 31 Oct 2022 04:59:00 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND api.paystack.co]
+[[31merror[39m] Mon, 31 Oct 2022 04:59:00 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND api.paystack.co]
+[[31merror[39m] Mon, 31 Oct 2022 04:59:17 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND api.paystack.co]
+[[31merror[39m] Mon, 31 Oct 2022 04:59:17 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND api.paystack.co]
+[[31merror[39m] Mon, 31 Oct 2022 04:59:27 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 04:59:30 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 04:59:47 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:00:03 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:00:04 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:00:24 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:01:25 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:01:25 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:02:04 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:02:04 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:02:15 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:02:25 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:02:34 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:02:35 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:03:01 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:03:31 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:03:51 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:04:15 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:04:34 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:04:35 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:04:56 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:05:01 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 05:30:47 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 05:32:48 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 06:11:21 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 31 Oct 2022 07:07:22 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 07:07:24 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 07:07:44 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 07:07:54 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 09:13:51 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 09:20:20 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 31 Oct 2022 09:36:22 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 09:36:31 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 31 Oct 2022 09:36:42 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 09:45:52 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 09:49:49 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 09:50:25 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 09:54:08 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 10:01:16 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 15:35:40 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 15:45:07 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 31 Oct 2022 15:50:47 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 31 Oct 2022 16:39:56 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Mon, 31 Oct 2022 16:41:56 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 16:43:45 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 16:46:44 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 16:47:43 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 16:49:34 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 16:58:10 GMT undefined [[!!🐞] connection <monitor> to 13.38.188.97:27017 timed out]
+[[31merror[39m] Mon, 31 Oct 2022 16:58:11 GMT undefined [[!!🐞] connection <monitor> to 13.38.188.97:27017 timed out]
+[[31merror[39m] Mon, 31 Oct 2022 16:59:42 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 19:51:18 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 19:56:38 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 19:59:13 GMT undefined [[!!🐞] connect ETIMEDOUT 52.56.203.171:443]
+[[31merror[39m] Mon, 31 Oct 2022 19:59:13 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'authDetails')]
+[[31merror[39m] Mon, 31 Oct 2022 19:59:16 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 20:01:47 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 20:01:49 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Mon, 31 Oct 2022 20:02:48 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 20:06:06 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 31 Oct 2022 21:19:56 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 21:20:16 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 21:20:25 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 21:20:41 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 21:20:48 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 21:20:54 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 21:20:58 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 21:21:00 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 31 Oct 2022 21:21:05 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 05 Nov 2022 02:41:26 GMT undefined [[!!🐞] Error: MongoNetworkError: getaddrinfo ENOTFOUND ac-1dyglcr-shard-00-01.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 10 Nov 2022 21:21:08 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 10 Nov 2022 21:26:07 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 10 Nov 2022 21:26:26 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 10 Nov 2022 21:28:09 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Mon, 28 Nov 2022 15:05:41 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 28 Nov 2022 15:06:01 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 28 Nov 2022 15:06:03 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 28 Nov 2022 15:06:05 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 28 Nov 2022 15:06:05 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 28 Nov 2022 15:06:28 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 28 Nov 2022 23:55:30 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 28 Nov 2022 23:55:50 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Tue, 29 Nov 2022 21:32:47 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Wed, 30 Nov 2022 23:48:29 GMT undefined [[!!🐞] Operation `admins.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Wed, 30 Nov 2022 23:48:33 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Wed, 30 Nov 2022 23:48:34 GMT undefined [[!!🐞] Operation `admins.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Wed, 30 Nov 2022 23:49:24 GMT undefined [[!!🐞] Operation `admins.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Wed, 30 Nov 2022 23:49:48 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 01 Dec 2022 00:32:12 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 01:51:09 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 01:51:47 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 01:52:31 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:32:44 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:33:07 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:33:37 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:33:45 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:33:48 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:34:16 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:34:30 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:34:36 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:34:36 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:34:43 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:35:09 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:35:14 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:35:15 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Thu, 01 Dec 2022 18:35:24 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Thu, 01 Dec 2022 18:35:37 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Sat, 03 Dec 2022 06:01:21 GMT undefined [[!!🐞] Operation `admins.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Sat, 03 Dec 2022 20:48:20 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 03 Dec 2022 20:50:08 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 03 Dec 2022 20:56:38 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 03 Dec 2022 21:00:02 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 03 Dec 2022 21:22:55 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 03 Dec 2022 21:30:41 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 03 Dec 2022 21:37:08 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 03 Dec 2022 22:28:32 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sun, 04 Dec 2022 07:32:34 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 15:00:27 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Mon, 05 Dec 2022 15:01:25 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Mon, 05 Dec 2022 21:53:59 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:04 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:11 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:15 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:17 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:22 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:22 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:34 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:41 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:47 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:50 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:54:57 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:55:22 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:55:25 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:55:26 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:55:28 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:55:30 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:55:32 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Mon, 05 Dec 2022 21:56:02 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Tue, 06 Dec 2022 01:20:29 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Tue, 06 Dec 2022 01:23:49 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Tue, 06 Dec 2022 01:31:38 GMT undefined [[!!🐞] Operation `admins.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Tue, 06 Dec 2022 01:31:44 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Tue, 06 Dec 2022 01:31:48 GMT undefined [[!!🐞] Operation `orders.countDocuments()` buffering timed out after 10000ms]
+[[31merror[39m] Tue, 06 Dec 2022 22:29:34 GMT undefined [[!!🐞] Cast to ObjectId failed for value "{ requestId: '638ae5c0a53a8de8af3f09af' }" (type Object) at path "_id" for model "UserRequest"]
+[[31merror[39m] Tue, 06 Dec 2022 22:32:47 GMT undefined [[!!🐞] Cast to ObjectId failed for value "{ requestId: '638ae5c0a53a8de8af3f09af' }" (type Object) at path "_id" for model "UserRequest"]
+[[31merror[39m] Tue, 06 Dec 2022 22:32:59 GMT undefined [[!!🐞] Cast to ObjectId failed for value "{ requestId: '638ae5c0a53a8de8af3f09af' }" (type Object) at path "_id" for model "UserRequest"]
+[[31merror[39m] Tue, 06 Dec 2022 22:33:35 GMT undefined [[!!🐞] Cast to ObjectId failed for value "{ requestId: '638ae5c0a53a8de8af3f09af' }" (type Object) at path "_id" for model "UserRequest"]
+[[31merror[39m] Tue, 06 Dec 2022 22:34:40 GMT undefined [[!!🐞] Cast to ObjectId failed for value "{ requestId: '638ae5c0a53a8de8af3f09af' }" (type Object) at path "_id" for model "UserRequest"]
+[[31merror[39m] Tue, 06 Dec 2022 22:35:52 GMT undefined [[!!🐞] Cast to ObjectId failed for value "{ requestId: '638ae5c0a53a8de8af3f09af' }" (type Object) at path "_id" for model "UserRequest"]
+[[31merror[39m] Tue, 06 Dec 2022 22:36:26 GMT undefined [[!!🐞] Cast to ObjectId failed for value "{ requestId: '638ae5c0a53a8de8af3f09af' }" (type Object) at path "_id" for model "UserRequest"]
+[[31merror[39m] Tue, 06 Dec 2022 22:36:34 GMT undefined [[!!🐞] Cast to ObjectId failed for value "{ requestId: '638ae5c0a53a8de8af3f09af' }" (type Object) at path "_id" for model "UserRequest"]
+[[31merror[39m] Fri, 09 Dec 2022 16:45:16 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Mon, 19 Dec 2022 20:02:26 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Tue, 20 Dec 2022 17:59:21 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Wed, 24 May 2023 11:09:54 GMT undefined [[!!🐞] User validation failed: email: email is required]
+[[31merror[39m] Wed, 24 May 2023 11:15:36 GMT undefined [[!!🐞] User validation failed: email: email is required]
+[[31merror[39m] Wed, 24 May 2023 11:15:44 GMT undefined [[!!🐞] User validation failed: email: email is required]
+[[31merror[39m] Wed, 24 May 2023 11:16:06 GMT undefined [[!!🐞] User validation failed: email: email is required]
+[[31merror[39m] Wed, 24 May 2023 11:22:54 GMT undefined [[!!🐞] User validation failed: email: email is required]
+[[31merror[39m] Wed, 24 May 2023 16:58:45 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Wed, 24 May 2023 16:58:55 GMT undefined [[!!🐞] Operation `users.insertOne()` buffering timed out after 10000ms]
+[[31merror[39m] Wed, 24 May 2023 16:58:59 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017]
+[[31merror[39m] Thu, 25 May 2023 11:21:31 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Thu, 25 May 2023 11:24:12 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sat, 27 May 2023 23:10:30 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("646eb546e8d9d38f2f509ac7"),
+  name: 'J-store',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1684976918978.png',
+  phoneNumber: '08011111111111',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'jude',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  id: new ObjectId("646df41cf19dcafaa31aff40"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1685079119789.png',
+  phoneNumber: '08011111111111',
+  createdAt: '2023-05-24T11:25:09.075Z',
+  updatedAt: '2023-05-24T11:25:09.075Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError", customization.size: `fiveInches` is not a valid enum value for path `size`., customization.flavour: `butterScotch` is not a valid enum value for path `flavour`., customization.frosting: `vanillaCream` is not a valid enum value for path `frosting`.]
+[[31merror[39m] Sat, 27 May 2023 23:13:37 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("646eb546e8d9d38f2f509ac7"),
+  name: 'J-store',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1684976918978.png',
+  phoneNumber: '08011111111111',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'jude',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  id: new ObjectId("646df41cf19dcafaa31aff40"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1685079119789.png',
+  phoneNumber: '08011111111111',
+  createdAt: '2023-05-24T11:25:09.075Z',
+  updatedAt: '2023-05-24T11:25:09.075Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError", customization.size: `fiveInches` is not a valid enum value for path `size`., customization.flavour: `butterScotch` is not a valid enum value for path `flavour`., customization.frosting: `vanillaCream` is not a valid enum value for path `frosting`.]
+[[31merror[39m] Sat, 27 May 2023 23:13:39 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("646eb546e8d9d38f2f509ac7"),
+  name: 'J-store',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1684976918978.png',
+  phoneNumber: '08011111111111',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'jude',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  id: new ObjectId("646df41cf19dcafaa31aff40"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1685079119789.png',
+  phoneNumber: '08011111111111',
+  createdAt: '2023-05-24T11:25:09.075Z',
+  updatedAt: '2023-05-24T11:25:09.075Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError", customization.size: `fiveInches` is not a valid enum value for path `size`., customization.flavour: `butterScotch` is not a valid enum value for path `flavour`., customization.frosting: `vanillaCream` is not a valid enum value for path `frosting`.]
+[[31merror[39m] Sat, 27 May 2023 23:53:03 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("646eb546e8d9d38f2f509ac7"),
+  name: 'J-store',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1684976918978.png',
+  phoneNumber: '08011111111111',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'jude',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  id: new ObjectId("646df41cf19dcafaa31aff40"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1685079119789.png',
+  phoneNumber: '08011111111111',
+  createdAt: '2023-05-24T11:25:09.075Z',
+  updatedAt: '2023-05-24T11:25:09.075Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError", customization.size: `fiveInches` is not a valid enum value for path `size`., customization.flavour: `butterScotch` is not a valid enum value for path `flavour`., customization.frosting: `vanillaCream` is not a valid enum value for path `frosting`.]
+[[31merror[39m] Sun, 28 May 2023 00:00:03 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("646eb546e8d9d38f2f509ac7"),
+  name: 'J-store',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1684976918978.png',
+  phoneNumber: '08011111111111',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'jude',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  id: new ObjectId("646df41cf19dcafaa31aff40"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1685079119789.png',
+  phoneNumber: '08011111111111',
+  createdAt: '2023-05-24T11:25:09.075Z',
+  updatedAt: '2023-05-24T11:25:09.075Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError"]
+[[31merror[39m] Tue, 30 May 2023 05:37:22 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017]
+[[31merror[39m] Tue, 30 May 2023 21:04:51 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Tue, 30 May 2023 21:04:58 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Tue, 30 May 2023 21:05:03 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Tue, 30 May 2023 21:05:34 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Tue, 30 May 2023 21:06:41 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Tue, 30 May 2023 21:06:49 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Tue, 30 May 2023 22:54:12 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Wed, 31 May 2023 21:31:35 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017]
+[[31merror[39m] Sat, 03 Jun 2023 21:39:07 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017]
+[[31merror[39m] Sun, 04 Jun 2023 21:50:54 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Sun, 04 Jun 2023 21:51:04 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Sun, 04 Jun 2023 21:51:08 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Sun, 04 Jun 2023 21:53:10 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Sun, 04 Jun 2023 21:53:16 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Sun, 04 Jun 2023 21:53:20 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Sun, 04 Jun 2023 21:54:45 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Mon, 05 Jun 2023 15:26:39 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Mon, 05 Jun 2023 18:20:20 GMT undefined [[!!🐞] Socket connection timeout]
+[[31merror[39m] Mon, 05 Jun 2023 19:51:01 GMT undefined [[!!🐞] Socket connection timeout]
+[[31merror[39m] Mon, 05 Jun 2023 20:01:50 GMT undefined [[!!🐞] read ECONNRESET]
+[[31merror[39m] Mon, 05 Jun 2023 20:04:45 GMT undefined [[!!🐞] Socket connection timeout]
+[[31merror[39m] Mon, 05 Jun 2023 20:09:29 GMT undefined [[!!🐞] Socket connection timeout]
+[[31merror[39m] Mon, 05 Jun 2023 20:40:04 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Tue, 06 Jun 2023 05:38:57 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Tue, 06 Jun 2023 05:38:57 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Tue, 06 Jun 2023 05:39:09 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Tue, 06 Jun 2023 05:47:09 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Tue, 06 Jun 2023 05:50:18 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("647ec7b53ca5902a9e5268ad"),
+  name: 'Jude Sweet Cakes',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'judecakes',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  accountType: 'baker',
+  id: new ObjectId("647ec5fb3ca5902a9e526883"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  createdAt: '2023-06-06T04:33:41.291Z',
+  updatedAt: '2023-06-06T04:33:41.291Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError"]
+[[31merror[39m] Tue, 06 Jun 2023 05:50:43 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("647ec7b53ca5902a9e5268ad"),
+  name: 'Jude Sweet Cakes',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'judecakes',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  accountType: 'baker',
+  id: new ObjectId("647ec5fb3ca5902a9e526883"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  createdAt: '2023-06-06T04:33:41.291Z',
+  updatedAt: '2023-06-06T04:33:41.291Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError"]
+[[31merror[39m] Tue, 06 Jun 2023 06:19:01 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("647ec7b53ca5902a9e5268ad"),
+  name: 'Jude Sweet Cakes',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'judecakes',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  accountType: 'baker',
+  id: new ObjectId("647ec5fb3ca5902a9e526883"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  createdAt: '2023-06-06T04:33:41.291Z',
+  updatedAt: '2023-06-06T04:33:41.291Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError"]
+[[31merror[39m] Tue, 06 Jun 2023 06:22:09 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("647ec7b53ca5902a9e5268ad"),
+  name: 'Jude Sweet Cakes',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'judecakes',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  accountType: 'baker',
+  id: new ObjectId("647ec5fb3ca5902a9e526883"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  createdAt: '2023-06-06T04:33:41.291Z',
+  updatedAt: '2023-06-06T04:33:41.291Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError"]
+[[31merror[39m] Tue, 06 Jun 2023 06:23:19 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("647ec7b53ca5902a9e5268ad"),
+  name: 'Jude Sweet Cakes',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'judecakes',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  accountType: 'baker',
+  id: new ObjectId("647ec5fb3ca5902a9e526883"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  createdAt: '2023-06-06T04:33:41.291Z',
+  updatedAt: '2023-06-06T04:33:41.291Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError"]
+[[31merror[39m] Tue, 06 Jun 2023 06:36:35 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("647ec7b53ca5902a9e5268ad"),
+  name: 'Jude Sweet Cakes',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'judecakes',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  accountType: 'baker',
+  id: new ObjectId("647ec5fb3ca5902a9e526883"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  createdAt: '2023-06-06T04:33:41.291Z',
+  updatedAt: '2023-06-06T04:33:41.291Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError"]
+[[31merror[39m] Tue, 06 Jun 2023 06:37:05 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("647ec7b53ca5902a9e5268ad"),
+  name: 'Jude Sweet Cakes',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'judecakes',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError"]
+[[31merror[39m] Tue, 06 Jun 2023 06:37:18 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("647ec7b53ca5902a9e5268ad"),
+  name: 'Jude Sweet Cakes',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'judecakes',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError"]
+[[31merror[39m] Tue, 06 Jun 2023 08:51:09 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("647ec7b53ca5902a9e5268ad"),
+  name: 'Jude Sweet Cakes',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'judecakes',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  accountType: 'baker',
+  id: new ObjectId("647ec5fb3ca5902a9e526883"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  createdAt: '2023-06-06T04:33:41.291Z',
+  updatedAt: '2023-06-06T04:33:41.291Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError"]
+[[31merror[39m] Tue, 06 Jun 2023 08:58:11 GMT undefined [[!!🐞] Order validation failed: store: Cast to ObjectId failed for value "{
+  id: new ObjectId("647ec7b53ca5902a9e5268ad"),
+  name: 'Jude Sweet Cakes',
+  ownerName: 'jude',
+  ownerImage: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  isVerified: false,
+  status: 'ACTIVE',
+  storeLink: 'judecakes',
+  streetAddress: undefined,
+  country: undefined,
+  state: undefined
+}" (type Object) at path "store" because of "BSONTypeError", buyer: Cast to ObjectId failed for value "{
+  accountType: 'baker',
+  id: new ObjectId("647ec5fb3ca5902a9e526883"),
+  username: 'jude',
+  email: undefined,
+  image: 'https://bakely-image.s3.eu-central-1.amazonaws.com/1686029929281.png',
+  phoneNumber: '08011111111120',
+  createdAt: '2023-06-06T04:33:41.291Z',
+  updatedAt: '2023-06-06T04:33:41.291Z',
+  isVerified: false
+}" (type Object) at path "buyer" because of "BSONTypeError"]
+[[31merror[39m] Tue, 06 Jun 2023 12:56:31 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Tue, 06 Jun 2023 12:57:17 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Tue, 06 Jun 2023 12:57:32 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Tue, 06 Jun 2023 22:36:06 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Wed, 07 Jun 2023 22:38:24 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 08 Jun 2023 02:33:17 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 08 Jun 2023 14:27:13 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Thu, 08 Jun 2023 14:29:50 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Thu, 08 Jun 2023 14:38:10 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Thu, 08 Jun 2023 15:55:03 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Thu, 08 Jun 2023 15:56:34 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Thu, 08 Jun 2023 15:57:25 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Thu, 08 Jun 2023 15:57:54 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "" }]
+[[31merror[39m] Thu, 08 Jun 2023 15:58:22 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: email_1 dup key: { email: null }]
+[[31merror[39m] Thu, 08 Jun 2023 16:10:00 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Thu, 08 Jun 2023 21:34:55 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 08 Jun 2023 21:42:36 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 08 Jun 2023 23:18:08 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 08 Jun 2023 23:19:45 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 08 Jun 2023 23:20:04 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 03:13:46 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 09:22:34 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.orders index: buyer.phoneNumber_1 dup key: { buyer.phoneNumber: "070665649011" }]
+[[31merror[39m] Fri, 09 Jun 2023 09:23:02 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.orders index: buyer.phoneNumber_1 dup key: { buyer.phoneNumber: "070665649011" }]
+[[31merror[39m] Fri, 09 Jun 2023 09:24:58 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.orders index: buyer.phoneNumber_1 dup key: { buyer.phoneNumber: "070665649011" }]
+[[31merror[39m] Fri, 09 Jun 2023 09:27:43 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.orders index: buyer.phoneNumber_1 dup key: { buyer.phoneNumber: "070665649011" }]
+[[31merror[39m] Fri, 09 Jun 2023 09:29:33 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.orders index: buyer.phoneNumber_1 dup key: { buyer.phoneNumber: "070665649011" }]
+[[31merror[39m] Fri, 09 Jun 2023 09:29:44 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.orders index: buyer.phoneNumber_1 dup key: { buyer.phoneNumber: "070665649011" }]
+[[31merror[39m] Fri, 09 Jun 2023 09:40:24 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 09:41:02 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 10:12:20 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 11:13:03 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 12:34:20 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 14:19:05 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Fri, 09 Jun 2023 14:19:12 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.store.xk9ylw3.mongodb.net]
+[[31merror[39m] Fri, 09 Jun 2023 14:48:12 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 17:46:34 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 18:04:19 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 18:04:19 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'authDetails')]
+[[31merror[39m] Fri, 09 Jun 2023 18:06:35 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 09 Jun 2023 18:06:35 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'authDetails')]
+[[31merror[39m] Fri, 09 Jun 2023 19:43:08 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Sat, 10 Jun 2023 06:10:58 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Sat, 10 Jun 2023 18:05:31 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Sat, 10 Jun 2023 19:32:08 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 10 Jun 2023 19:32:12 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 10 Jun 2023 19:32:32 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 10 Jun 2023 19:32:53 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 10 Jun 2023 19:33:13 GMT undefined [[!!🐞] Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/]
+[[31merror[39m] Sat, 10 Jun 2023 22:05:43 GMT undefined [[!!🐞] Socket connection timeout]
+[[31merror[39m] Sat, 10 Jun 2023 22:13:43 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 12 Jun 2023 03:33:26 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 12 Jun 2023 03:37:43 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 12 Jun 2023 03:53:10 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 12 Jun 2023 04:02:44 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 04:04:31 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 04:08:02 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 04:09:34 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.owner.email: email is required]
+[[31merror[39m] Mon, 12 Jun 2023 05:05:44 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 12 Jun 2023 05:46:54 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Mon, 12 Jun 2023 11:48:10 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Mon, 12 Jun 2023 14:53:56 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 14:54:47 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 14:55:26 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 14:59:52 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:01:56 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:02:21 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:05:38 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:06:59 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:07:23 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:13:23 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:16:26 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:18:56 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:19:04 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:20:18 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:22:29 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:22:33 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required., product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:24:09 GMT undefined [[!!🐞] Order validation failed: product.state: Path `state` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:32:57 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:34:30 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:34:57 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:35:02 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:36:36 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:37:37 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 15:37:43 GMT undefined [[!!🐞] Order validation failed: buyer.name: Path `name` is required.]
+[[31merror[39m] Mon, 12 Jun 2023 17:17:08 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 12 Jun 2023 17:17:08 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'authDetails')]
+[[31merror[39m] Mon, 12 Jun 2023 17:19:14 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 12 Jun 2023 17:19:14 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'authDetails')]
+[[31merror[39m] Wed, 14 Jun 2023 09:40:22 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Wed, 14 Jun 2023 11:09:31 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Thu, 15 Jun 2023 23:56:46 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 15 Jun 2023 23:56:52 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Thu, 15 Jun 2023 23:56:56 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 15 Jun 2023 23:58:56 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 15 Jun 2023 23:59:05 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 15 Jun 2023 23:59:06 GMT undefined [[!!🐞] Operation `users.insertOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 15 Jun 2023 23:59:09 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Fri, 16 Jun 2023 22:03:52 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Fri, 16 Jun 2023 22:05:35 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Sat, 17 Jun 2023 06:22:07 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Sat, 17 Jun 2023 23:25:59 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Mon, 19 Jun 2023 06:52:14 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Mon, 19 Jun 2023 06:52:56 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Mon, 19 Jun 2023 09:19:53 GMT undefined [[!!🐞] getaddrinfo ENOTFOUND uniuo]
+[[31merror[39m] Tue, 20 Jun 2023 23:39:24 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Wed, 21 Jun 2023 18:03:06 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Wed, 21 Jun 2023 18:04:33 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Wed, 21 Jun 2023 18:05:53 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Wed, 21 Jun 2023 18:59:39 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Thu, 22 Jun 2023 08:44:37 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 08:44:55 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 08:46:03 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 08:46:43 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 08:49:25 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 08:51:42 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 09:16:41 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 09:20:13 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 19:12:15 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 19:59:56 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 20:02:21 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 20:03:07 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Thu, 22 Jun 2023 20:04:05 GMT undefined [[!!🐞] connect ETIMEDOUT 92.205.60.250:443]
+[[31merror[39m] Fri, 23 Jun 2023 16:19:05 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Fri, 23 Jun 2023 16:23:00 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Fri, 23 Jun 2023 16:24:36 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Fri, 23 Jun 2023 16:25:47 GMT undefined [[!!🐞] Request failed with status code 401]
+[[31merror[39m] Fri, 23 Jun 2023 16:26:50 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 23 Jun 2023 16:27:45 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 23 Jun 2023 16:34:02 GMT undefined [[!!🐞] Request failed with status code 400]
+[[31merror[39m] Fri, 23 Jun 2023 21:17:57 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Fri, 23 Jun 2023 21:20:35 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Mon, 26 Jun 2023 21:18:11 GMT undefined [[!!🐞] Error: MongooseServerSelectionError]
+[[31merror[39m] Fri, 30 Jun 2023 01:47:02 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017]
+[[31merror[39m] Sun, 02 Jul 2023 01:45:09 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: connect ECONNREFUSED ::1:27017]
+[[31merror[39m] Sun, 02 Jul 2023 07:13:17 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Sun, 02 Jul 2023 07:13:46 GMT undefined [[!!🐞] connect ECONNREFUSED 127.0.0.1:465]
+[[31merror[39m] Thu, 20 Jul 2023 19:36:22 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: connect ECONNREFUSED ::1:27017]
+[[31merror[39m] Thu, 20 Jul 2023 19:48:12 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/]
+[[31merror[39m] Thu, 20 Jul 2023 20:08:01 GMT undefined [[!!🐞] User validation failed: phoneNumber: phoneNumber is required]
+[[31merror[39m] Thu, 20 Jul 2023 20:09:17 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 20 Jul 2023 20:09:27 GMT undefined [[!!🐞] Operation `users.insertOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 20 Jul 2023 20:09:28 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 20 Jul 2023 20:09:49 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'asset')]
+[[31merror[39m] Thu, 20 Jul 2023 20:11:04 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'asset')]
+[[31merror[39m] Thu, 20 Jul 2023 20:11:04 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: phoneNumber_1 dup key: { phoneNumber: null }]
+[[31merror[39m] Thu, 20 Jul 2023 20:12:19 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'asset')]
+[[31merror[39m] Thu, 20 Jul 2023 20:30:09 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Thu, 20 Jul 2023 20:32:47 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Thu, 20 Jul 2023 20:33:35 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Thu, 20 Jul 2023 20:34:16 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Thu, 20 Jul 2023 20:58:05 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Thu, 20 Jul 2023 20:58:26 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Thu, 20 Jul 2023 21:00:22 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Thu, 20 Jul 2023 21:00:29 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 01:37:57 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'balance')]
+[[31merror[39m] Fri, 21 Jul 2023 01:37:57 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: phoneNumber_1 dup key: { phoneNumber: null }]
+[[31merror[39m] Fri, 21 Jul 2023 01:40:54 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'balance')]
+[[31merror[39m] Fri, 21 Jul 2023 01:46:43 GMT undefined [[!!🐞] Cannot read properties of undefined (reading 'balance')]
+[[31merror[39m] Fri, 21 Jul 2023 01:46:44 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.users index: phoneNumber_1 dup key: { phoneNumber: null }]
+[[31merror[39m] Fri, 21 Jul 2023 01:48:31 GMT undefined [[!!🐞] E11000 duplicate key error collection: test.allusers index: phoneNumber_1 dup key: { phoneNumber: null }]
+[[31merror[39m] Fri, 21 Jul 2023 03:09:30 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 03:12:17 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:41:33 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:42:14 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:42:22 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:42:39 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:45:03 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:47:37 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:47:58 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:51:03 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:53:54 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:54:23 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 21 Jul 2023 20:54:29 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Sun, 23 Jul 2023 21:28:02 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Sun, 23 Jul 2023 21:28:17 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Sun, 23 Jul 2023 21:28:42 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Sun, 23 Jul 2023 21:28:44 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Sun, 23 Jul 2023 21:29:07 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Sun, 23 Jul 2023 21:29:26 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Sun, 23 Jul 2023 22:34:35 GMT undefined [[!!🐞] Task validation failed: userId: TaskId is required]
+[[31merror[39m] Sun, 23 Jul 2023 22:53:35 GMT undefined [[!!🐞] Task validation failed: userId: TaskId is required]
+[[31merror[39m] Sun, 23 Jul 2023 22:57:14 GMT undefined [[!!🐞] Task validation failed: userId: TaskId is required]
+[[31merror[39m] Sun, 23 Jul 2023 22:58:02 GMT undefined [[!!🐞] Task validation failed: userId: TaskId is required]
+[[31merror[39m] Thu, 27 Jul 2023 18:40:41 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 27 Jul 2023 18:40:53 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Thu, 27 Jul 2023 21:12:15 GMT undefined [[!!🐞] RaiderTask validation failed: userId: TaskId is required]
+[[31merror[39m] Thu, 27 Jul 2023 21:21:14 GMT undefined [[!!🐞] RaiderTask validation failed: userId: TaskId is required]
+[[31merror[39m] Thu, 27 Jul 2023 21:21:18 GMT undefined [[!!🐞] RaiderTask validation failed: userId: TaskId is required]
+[[31merror[39m] Thu, 27 Jul 2023 21:25:15 GMT undefined [[!!🐞] RaiderTask validation failed: userId: TaskId is required]
+[[31merror[39m] Fri, 28 Jul 2023 21:35:29 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 28 Jul 2023 22:07:06 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Sat, 29 Jul 2023 23:38:10 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Sat, 29 Jul 2023 23:41:58 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Sun, 30 Jul 2023 00:08:01 GMT undefined [[!!🐞] Error: Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 31 Jul 2023 11:42:14 GMT undefined [[!!🐞] Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/]
+[[31merror[39m] Tue, 01 Aug 2023 16:15:30 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 01 Aug 2023 16:16:04 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 01 Aug 2023 16:17:45 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 01 Aug 2023 16:18:22 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 01 Aug 2023 20:17:31 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 04 Aug 2023 08:47:12 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 08 Sep 2023 07:05:21 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 08 Sep 2023 07:07:13 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 08 Sep 2023 10:15:12 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Fri, 08 Sep 2023 10:15:25 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:41:40 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:42:59 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:43:31 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:44:23 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:44:40 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:44:52 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:46:14 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:46:35 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:46:53 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:47:17 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:48:29 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:48:36 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:49:00 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:49:38 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:49:57 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:51:20 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:51:42 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:52:25 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:52:39 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:52:53 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:53:29 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:53:48 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:53:53 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:54:27 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:54:39 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:55:25 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:56:37 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:57:19 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:57:32 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:59:18 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 20:59:22 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 21:12:15 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:50:15 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:50:33 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:50:56 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:51:08 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:51:48 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:52:10 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:52:24 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:52:47 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:53:56 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:54:34 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:55:01 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:55:05 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Mon, 02 Oct 2023 23:55:14 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:36:53 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:37:00 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:37:36 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:38:14 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:38:25 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:38:50 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:38:59 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:39:46 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:39:57 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:40:07 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:41:21 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:43:27 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 00:43:56 GMT undefined [[!!🐞] Error: Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.um7gj6s.mongodb.net]
+[[31merror[39m] Tue, 03 Oct 2023 10:01:13 GMT undefined [[!!🐞] Moderator validation failed: accountType: accountType is required]
