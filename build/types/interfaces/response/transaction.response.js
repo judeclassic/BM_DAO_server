@@ -9,4 +9,6 @@ var TransactionTypeEnum;
 var TransactionStatusEnum;
 (function (TransactionStatusEnum) {
     TransactionStatusEnum["PENDING"] = "PENDING";
+    TransactionStatusEnum["CANCELLED"] = "CANCELLED";
+    TransactionStatusEnum["COMPLETED"] = "COMPLETED";
 })(TransactionStatusEnum = exports.TransactionStatusEnum || (exports.TransactionStatusEnum = {}));

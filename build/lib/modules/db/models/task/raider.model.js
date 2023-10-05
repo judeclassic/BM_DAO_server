@@ -81,6 +81,13 @@ const RaiderTaskSchema = new mongoose_1.Schema({
     endTimeLine: {
         type: Number,
     },
+    isModerated: {
+        type: Boolean,
+        default: false
+    },
+    moderatorId: {
+        type: String
+    }
 });
 RaiderTaskSchema.plugin(mongoose_paginate_v2_1.default);
 exports.Task = (0, mongoose_1.model)("RaiderTask", RaiderTaskSchema);
@@ -156,6 +163,28 @@ class RaiderTaskModel {
                 const date = (new Date()).toISOString();
                 const timeLine = Date.parse(date);
                 const data = yield this.Task.paginate(Object.assign({ startTimeLine: { $lt: timeLine }, endTimeLine: { $gt: timeLine } }, details), option);
+                if (data) {
+                    return { status: true,
+                        data: new raiders_dto_1.MultipleRaiderTaskDto({
+                            tasks: data.docs,
+                            totalTasks: data.totalDocs,
+                            hasNextPage: data.hasNextPage
+                        })
+                    };
+                }
+                else {
+                    return { status: false, error: "Couldn't get store details" };
+                }
+            }
+            catch (error) {
+                return { status: false, error };
+            }
+        });
+        this.getFutureTask = (details, option) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const date = (new Date()).toISOString();
+                const timeLine = Date.parse(date);
+                const data = yield this.Task.paginate(Object.assign({ endTimeLine: { $gt: timeLine } }, details), option);
                 if (data) {
                     return { status: true,
                         data: new raiders_dto_1.MultipleRaiderTaskDto({

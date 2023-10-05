@@ -157,6 +157,22 @@ class UserModel {
                 return { status: false, error };
             }
         });
+        this.getReferals = (details) => __awaiter(this, void 0, void 0, function* () {
+            const referalInformation = this.deepSearchDetails('referal', details);
+            try {
+                const data = yield this.User.find(referalInformation);
+                if (data) {
+                    return { status: true, data: data.map((user) => (new user_dto_1.default(user)).getUnSecureResponse) };
+                }
+                else {
+                    return { status: false, error: `Can't find Details` };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
         this.User = exports.User;
     }
 }

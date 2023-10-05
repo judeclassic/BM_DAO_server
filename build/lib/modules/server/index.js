@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const server_1 = __importDefault(require("./server"));
-const server = ({ logger, config, callback }) => {
+const server = (callback) => {
     const app = (0, express_1.default)();
     app.use((0, cors_1.default)());
     app.use(express_1.default.static('public'));
@@ -15,12 +15,8 @@ const server = ({ logger, config, callback }) => {
         extended: true
     }));
     app.use(express_1.default.json());
-    const server = new server_1.default({ app, config, logger });
-    process.env.NODE_ENV === 'production'
-        ?
-            server.production()
-        :
-            server.development();
+    const server = new server_1.default({ app });
+    server.development();
     callback(app, server);
     return { app, server };
 };

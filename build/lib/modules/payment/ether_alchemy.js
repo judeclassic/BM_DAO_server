@@ -8,7 +8,6 @@ const ethers = require("ethers");
 const usdt_abi_1 = __importDefault(require("./usdt_abi"));
 class UsdtContractHandler {
 }
-exports.UsdtContractHandler = UsdtContractHandler;
 UsdtContractHandler.intializeListener = (usdtAddress) => {
     // const usdtAddress = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
     const provider = new ethers.WebSocketProvider(`${process.env.ALCHEMY_WEBSOCKET}`);
@@ -23,3 +22,4 @@ UsdtContractHandler.intializeListener = (usdtAddress) => {
         console.log(JSON.stringify(info, null, 4));
     });
 };
+exports.UsdtContractHandler = UsdtContractHandler;

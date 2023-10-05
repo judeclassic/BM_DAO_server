@@ -24,8 +24,8 @@ class RaidDto {
     }
     get getResponse() {
         var _a;
-        const currentTime = Date.parse((new Date()).toISOString());
-        const timeLine = currentTime < this.timeLine ? 'ACTIVE' : 'EXPIRED';
+        const currentTime = Date.parse((new Date()).toISOString()); // + (1000 * 60 * 60 * 24)
+        const timeLine = currentTime < (this.timeLine + (1000 * 60 * 60 * 24)) ? 'ACTIVE' : 'EXPIRED';
         return {
             id: this._id,
             assignerId: this.assignerId,

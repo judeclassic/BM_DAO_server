@@ -35,6 +35,7 @@ class WalletDto {
 exports.WalletDto = WalletDto;
 class UserDto {
     constructor(user) {
+        this.referals = [];
         this.toTokens = () => {
             return {
                 accountType: this.accountType,
@@ -132,18 +133,23 @@ class UserDto {
             isVerified: this.isVerified,
             updatedAt: this.updatedAt ? new Date(this.updatedAt) : undefined,
             createdAt: this.createdAt ? new Date(this.createdAt) : undefined,
+            raiderService: this.raiderService,
+            moderatorService: this.moderatorService,
+            referals: this.referals
         };
     }
     get getUnSecureResponse() {
         return {
             accountType: this.accountType,
             id: this.id,
+            name: this.name,
             username: this.username,
             emailAddress: this.emailAddress,
             phoneNumber: this.phoneNumber,
             isVerified: this.isVerified,
             updatedAt: this.updatedAt ? new Date(this.updatedAt) : undefined,
             createdAt: this.createdAt ? new Date(this.createdAt) : undefined,
+            referal: this.referal
         };
     }
 }

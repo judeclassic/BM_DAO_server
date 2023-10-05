@@ -66,6 +66,7 @@ class RaiderTaskDto {
         };
     }
     get getDBModel() {
+        var _a;
         return {
             userId: this.userId,
             raids: this.raids,
@@ -83,7 +84,7 @@ class RaiderTaskDto {
             endTimeLine: this.endTimeLine,
             level: this.level,
             moderator: this.moderator,
-            moderatorId: this.moderatorId,
+            moderatorId: (_a = this.moderatorId) !== null && _a !== void 0 ? _a : 'nanananaan',
             isModerated: this.isModerated
         };
     }

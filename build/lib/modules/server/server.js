@@ -1,19 +1,24 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const config_1 = __importDefault(require("../../constant/config"));
+const logger_1 = require("../logger");
 class HttpServer {
-    constructor({ app, config, logger }) {
+    constructor({ app }) {
         this.close = () => {
             this.httpsServer.close();
         };
-        this.options = config.options;
-        this.port = config.server.port;
+        this.options = config_1.default.options;
+        this.port = config_1.default.server.port;
         this.app = app;
-        this.logger = logger;
+        this.logger = logger_1.defaultLogger;
         this.test(app);
     }
     test(app) {
         app.get('/test', (_req, res) => {
-            res.send('server started');
+            res.send('server running successfully');
         });
     }
     production() {
