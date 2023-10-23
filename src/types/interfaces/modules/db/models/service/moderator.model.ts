@@ -8,6 +8,12 @@ interface IModeratorServiceModelRepository{
     createUserService: (details: IModeratorUserService) => Promise<{status: boolean, error?: string | unknown, data?: ModeratorUserServiceDto }>;
 
     updateUserService: (id : string, details : Partial<IModeratorUserService>) => Promise<{status: boolean, error?: string | unknown, data?: ModeratorUserServiceDto }>;
+    
+    updateCreatedAnalytics: (userId: string) => Promise<{status: boolean, error?: string | unknown, data?: ModeratorUserServiceDto }>;
+
+    updateCompletedAnalytics: (userId: string) => Promise<{status: boolean, error?: string | unknown, data?: ModeratorUserServiceDto }>;
+
+    updateCancelAnalytics: (userId: string) => Promise<{status: boolean, error?: string | unknown, data?: ModeratorUserServiceDto }>;
 
     checkIfExist: (details : Partial<IModeratorUserService>) => Promise<{status: boolean, error?: string | unknown, data?: ModeratorUserServiceDto }>;
 

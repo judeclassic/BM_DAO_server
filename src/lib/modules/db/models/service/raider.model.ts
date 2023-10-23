@@ -3,8 +3,23 @@ import mongoosePaginate from 'mongoose-paginate-v2'
 import UserServiceDto, { MultipleUserServiceDto } from '../../../../../types/dtos/service/raiders.dto';
 import IRaiderUserServiceModelRepository from '../../../../../types/interfaces/modules/db/models/service/raider.model';
 import { ServiceAccountTypeEnum } from '../../../../../types/interfaces/response/services/enums';
-import { IRaiderUserService } from '../../../../../types/interfaces/response/services/raider.response';
+import { IAnalytic, IRaiderUserService } from '../../../../../types/interfaces/response/services/raider.response';
 import { defaultLogger } from '../../../logger';
+
+const AnalyticSchema = new Schema<IAnalytic>({
+  availableTask: {
+    type: Number,
+    default: 0,
+  },
+  pendingTask: {
+    type: Number,
+    default: 0,
+  },
+  completedTask: {
+    type: Number,
+    default: 0,
+  },
+})
 
 const RaiderUserServiceSchema = new Schema<IRaiderUserService>({
   accountType: {
@@ -30,6 +45,7 @@ const RaiderUserServiceSchema = new Schema<IRaiderUserService>({
   work_timeout: {
     type: Number,
   },
+  analytics: AnalyticSchema
 });
 
 RaiderUserServiceSchema.plugin(mongoosePaginate);
@@ -49,13 +65,14 @@ class  RaiderUserServiceModel implements  IRaiderUserServiceModelRepository {
       if (data) {
         return {status: true, data: new UserServiceDto(data)};
       } else {
-        return {status: false, error: "Couldn't create user"};
+        return {status: false, error: "Couldn't update userservice"};
       }
     } catch (error) {
         defaultLogger.error(error);
         return {status: false, error };
     }
   }
+
   updateUserService = async (id: string, details: Partial<IRaiderUserService>) => {
     try {
       const data = await this.UserService.findByIdAndUpdate(id, details, { new: true });
@@ -66,7 +83,58 @@ class  RaiderUserServiceModel implements  IRaiderUserServiceModelRepository {
       }
     } catch (error) {
         defaultLogger.error(error);
-        return {status: false, error };
+        return { status: false, error };
+    }
+  }
+
+  updateCreatedAnalytics = async (userId: string) => {
+    try {
+      const data = await this.UserService.findOne({userId});
+      if (data) {
+        data.analytics.availableTask++;
+        data.analytics.pendingTask++;
+        const updatedUser = await data.save();
+        return {status: true, data: new UserServiceDto(updatedUser ?? data)};
+      } else {
+        return {status: false, error: "Couldn't updated user"};
+      }
+    } catch (error) {
+        defaultLogger.error(error);
+        return { status: false, error };
+    }
+  }
+
+  updateCompletedAnalytics = async (userId: string) => {
+    try {
+      const data = await this.UserService.findOne({userId});
+      if (data) {
+        data.analytics.pendingTask--;
+        data.analytics.completedTask++;
+        const updatedUser = await data.save();
+        return {status: true, data: new UserServiceDto(updatedUser ?? data)};
+      } else {
+        return {status: false, error: "Couldn't update userservice"};
+      }
+    } catch (error) {
+        defaultLogger.error(error);
+        return { status: false, error };
+    }
+  }
+
+  updateCancelAnalytics = async (userId: string) => {
+    try {
+      const data = await this.UserService.findOne({userId});
+      if (data) {
+        data.analytics.availableTask--;
+        data.analytics.pendingTask--;
+        const updatedUser = await data.save();
+        return {status: true, data: new UserServiceDto(updatedUser ?? data)};
+      } else {
+        return {status: false, error: "Couldn't update userservice"};
+      }
+    } catch (error) {
+        defaultLogger.error(error);
+        return { status: false, error };
     }
   }
 
@@ -80,7 +148,7 @@ class  RaiderUserServiceModel implements  IRaiderUserServiceModelRepository {
       }
     } catch (error) {
         defaultLogger.error(error);
-        return {status: false, error };
+        return { status: false, error };
     }
   }
   getAllUserService = async (details: Partial<IRaiderUserService>, option: { page: number; limit: number; }) => {
@@ -97,7 +165,7 @@ class  RaiderUserServiceModel implements  IRaiderUserServiceModelRepository {
         return {status: false, error: "Couldn't get store details"};
       }
     } catch (error) {
-        return {status: false, error };
+        return { status: false, error };
     }
   }
   getAllUserServices = async (details: Partial<IRaiderUserService>[]) => {

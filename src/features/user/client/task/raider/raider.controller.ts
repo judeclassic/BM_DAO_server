@@ -4,7 +4,7 @@ import { ICreateRaiderGigRequest, ICreateRaiderTaskRequest } from "../../../../.
 import AutheticatedUserInterface from "../../../../../types/interfaces/requests/user/authencated-user";
 import ResponseInterface from "../../../../../types/interfaces/response/response";
 import RaiderClientTaskService from "./raider.client.service";
-import RaiderClientTaskValidator from "./task.validator";
+import RaiderClientTaskValidator from "./raider.validator";
 
 class ClientRaidController {
     private _taskValidator: RaiderClientTaskValidator;

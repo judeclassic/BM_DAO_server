@@ -1,4 +1,5 @@
 import { ServiceAccountTypeEnum } from "./enums";
+import { IAnalytic } from "./raider.response";
 
 export interface IModeratorUserService {
     _id?: string;
@@ -10,6 +11,7 @@ export interface IModeratorUserService {
     createdAt?: Date;
     isVerified?: boolean;
     work_timeout: number;
+    analytics: IAnalytic
 }
 export interface IMultipleModeratorUserService {
     moderatorServices: IModeratorUserService[],

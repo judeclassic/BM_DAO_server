@@ -17,7 +17,7 @@ const useRaiderTaskForModeratorRoutes = ({router}: {router: RequestHandler}) => 
     const raiderServiceModel = new RaiderUserServiceModel();
     const moderatorServiceModel = new ModeratorUserServiceModel();
 
-    const moderatorUserTaskService = new ModeratorUserTaskService({ raiderTaskModel, raidModel, moderatorServiceModel });
+    const moderatorUserTaskService = new ModeratorUserTaskService({ raiderTaskModel, raidModel, raiderServiceModel, moderatorServiceModel, userModel });
 
     const clientRaidController = new ModeratorUserRaidController({ taskValidator, moderatorUserTaskService });
 

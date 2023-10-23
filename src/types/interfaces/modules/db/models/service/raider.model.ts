@@ -7,6 +7,12 @@ interface IRaiderServiceModelRepository{
     createUserService: (details: IRaiderUserService) => Promise<{status: boolean, error?: string | unknown, data?: UserServiceDto }>;
 
     updateUserService: (id : string, details : Partial<IRaiderUserService>) => Promise<{status: boolean, error?: string | unknown, data?: UserServiceDto }>;
+    
+    updateCreatedAnalytics: (userId: string) => Promise<{status: boolean, error?: string | unknown, data?: UserServiceDto }>;
+
+    updateCompletedAnalytics: (userId: string) => Promise<{status: boolean, error?: string | unknown, data?: UserServiceDto }>;
+
+    updateCancelAnalytics: (userId: string) => Promise<{status: boolean, error?: string | unknown, data?: UserServiceDto }>;
 
     checkIfExist: (details : Partial<IRaiderUserService>) => Promise<{status: boolean, error?: string | unknown, data?: UserServiceDto }>;
 

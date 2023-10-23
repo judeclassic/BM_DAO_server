@@ -1,9 +1,12 @@
 import { RaidDto, MultipleRaidDto } from "../../../../../../types/dtos/service/raids.dto";
 import { MultipleRaiderTaskDto, RaiderTaskDto } from "../../../../../../types/dtos/task/raiders.dto";
 import ErrorInterface from "../../../../../../types/interfaces/error";
+import IUserModelRepository from "../../../../../../types/interfaces/modules/db/models/Iuser.model";
 import IModeratorServiceModelRepository from "../../../../../../types/interfaces/modules/db/models/service/moderator.model";
 import IRaidModelRepository from "../../../../../../types/interfaces/modules/db/models/service/raid.model";
+import IRaiderServiceModelRepository from "../../../../../../types/interfaces/modules/db/models/service/raider.model";
 import IRaiderTaskModelRepository from "../../../../../../types/interfaces/modules/db/models/task/Iraider.model";
+import { ServiceAccountTypeEnum } from "../../../../../../types/interfaces/response/services/enums";
 import { TaskPriorityEnum } from "../../../../../../types/interfaces/response/task/raider_task.response";
 
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE: ErrorInterface = {
@@ -39,18 +42,24 @@ const ERROR_THIS_TASK_IS_ALREADY_MODERATED_BY_YOU: ErrorInterface = {
 
 class ModeratorUserTaskService {
   private _raidModel: IRaidModelRepository;
+  private _userModel: IUserModelRepository;
   private _raiderTaskModel: IRaiderTaskModelRepository;
+  private _raiderServiceModel: IRaiderServiceModelRepository;
   private _moderatorServiceModel: IModeratorServiceModelRepository;
 
   constructor (
-    { raiderTaskModel, raidModel, moderatorServiceModel } : {
+    { raiderTaskModel, raidModel, moderatorServiceModel, raiderServiceModel, userModel } : {
       raidModel: IRaidModelRepository;
       raiderTaskModel: IRaiderTaskModelRepository;
+      raiderServiceModel: IRaiderServiceModelRepository;
       moderatorServiceModel: IModeratorServiceModelRepository;
+      userModel: IUserModelRepository;
     }){
       this._raidModel = raidModel;
       this._raiderTaskModel = raiderTaskModel;
       this._moderatorServiceModel = moderatorServiceModel;
+      this._raiderServiceModel = raiderServiceModel;
+      this._userModel = userModel;
   }
 
   public getAllActiveTask = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaiderTaskDto }> => {
@@ -83,7 +92,7 @@ class ModeratorUserTaskService {
 
   public getRaiderSingleRaid = async (raidId: string) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const raidsResponse = await this._raidModel.checkIfExist({ _id: raidId });
-    if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };  
 
     const tasksResponse = await this._raiderTaskModel.checkIfExist({ _id: raidsResponse.data.taskId });
     if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
@@ -115,6 +124,7 @@ class ModeratorUserTaskService {
 
     tasksResponse.data.addModerator = userService.data;
     const updatedTaskResponse = await this._raiderTaskModel.updateTaskDetailToDB(taskId, tasksResponse.data.getDBModel);
+    this._raiderServiceModel.updateCreatedAnalytics(userId);
 
     return { task: updatedTaskResponse.data }
   }
@@ -141,6 +151,7 @@ class ModeratorUserTaskService {
     if (!updatedTaskResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
     raidResponse.data.addTaskToModel = updatedTaskResponse.data;
+    this._raiderServiceModel.updateCancelAnalytics(raidResponse.data.assigneeId);
 
     return { raid: raidResponse.data }
   }
@@ -151,6 +162,12 @@ class ModeratorUserTaskService {
 
     const updatedTaskResponse = await this._raiderTaskModel.updateTaskDetailToDB(taskId, tasksResponse.data.getDBModel);
     if (!updatedTaskResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    await this._userModel.updateCompletedAnalytics(tasksResponse.data.userId, ServiceAccountTypeEnum.raider);
+
+
+    this._moderatorServiceModel.updateCompletedAnalytics(userId);
+
+    await this._raidModel.deleteAllRaids({ taskId });
 
     return { task: updatedTaskResponse.data }
   }

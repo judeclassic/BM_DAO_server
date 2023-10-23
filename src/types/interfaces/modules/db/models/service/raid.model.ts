@@ -3,6 +3,7 @@ import { IRaid } from "../../../../response/services/raid.response";
 
 
 interface IRaidModelRepository{
+    deleteAllRaids: (arg0: { taskId: string; }) => Promise<{status: boolean, error?: string | unknown, data?: RaidDto }>;
 
     createRaid: (details: IRaid) => Promise<{status: boolean, error?: string | unknown, data?: RaidDto }>;
 

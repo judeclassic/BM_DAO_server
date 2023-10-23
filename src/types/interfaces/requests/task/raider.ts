@@ -1,4 +1,5 @@
 import { ServiceAccountTypeEnum } from "../../response/services/enums";
+import { RaidActionEnum } from "../../response/task/raider_task.response";
 
 export type ICreateRaiderGigRequest = {
     serviceType: ServiceAccountTypeEnum; 
@@ -11,8 +12,8 @@ export type ICreateRaiderGigRequest = {
 }
 export type ICreateRaiderTaskRequest = {
     taskType: ServiceAccountTypeEnum;
-    actions: [];
-    users: number;
+    action: RaidActionEnum;
+    numbers: number;
     raidLink: string;
     mediaUrl: string;
     campaignCaption: string;

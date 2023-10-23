@@ -4,12 +4,13 @@ export enum RaidActionEnum {
     likePost = 'Like Post',
     retweetPost = 'Retweet Post',
     commentOnPost = 'Comment on Post',
+    createATweet = 'Create a Tweet',
 }
 
 
 
 export interface IRaidTaskInformation {
-    actions: RaidActionEnum[],
+    action: RaidActionEnum,
     raidLink: string;
     campaignCaption: string;
     amount: number;
@@ -25,7 +26,6 @@ export interface IRaiderModerator {
     serviceId: string;
     name: string;
 }
-
 export interface IRaiderTask {
     _id?: string;
     level: TaskPriorityEnum;

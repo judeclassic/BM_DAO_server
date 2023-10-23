@@ -6,10 +6,10 @@ import { defaultLogger } from '../../../logger';
 import { MultipleRaiderTaskDto, RaiderTaskDto } from '../../../../../types/dtos/task/raiders.dto';
 
 const RaidTaskInformationSchema = new Schema<IRaidTaskInformation>({
-  actions: [{
+  action: {
     type: String,
     enum: Object.values(RaidActionEnum)
-  }],
+  },
   raidLink: {
     type: String,
   },

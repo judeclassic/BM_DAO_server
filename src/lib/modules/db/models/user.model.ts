@@ -2,9 +2,9 @@
 //User Schema
 import { Schema, model } from 'mongoose';
 import UserDto from '../../../../types/dtos/user.dto';
-import { AvailableCountryEnum } from '../../../../types/interfaces/entities/location';
 import IUserModelRepository from '../../../../types/interfaces/modules/db/models/Iuser.model';
-import { AccountTypeEnum, IUser, IWallet } from '../../../../types/interfaces/response/user.response';
+import { ServiceAccountTypeEnum } from '../../../../types/interfaces/response/services/enums';
+import { AccountTypeEnum, IAnalytics, IUser, IWallet } from '../../../../types/interfaces/response/user.response';
 import { defaultLogger } from '../../logger';
 
 const WalletSchema = new Schema<IWallet>({
@@ -23,6 +23,27 @@ const WalletSchema = new Schema<IWallet>({
     }
   }
 });
+
+const AnalyticSchema = new Schema<IAnalytics>({
+  totalUploaded: Number,
+  totalCompleted: Number,
+  raiders: {
+      totalUploaded: Number,
+      totalCompleted: Number,
+  },
+  moderators: {
+      totalUploaded: Number,
+      totalCompleted: Number,
+  },
+  chatEngagers: {
+      totalUploaded: Number,
+      totalCompleted: Number,
+  },
+  collabManagers: {
+      totalUploaded: Number,
+      totalCompleted: Number,
+  }
+})
 
 const UserSchema = new Schema<IUser>({
   accountType: {
@@ -74,6 +95,9 @@ const UserSchema = new Schema<IUser>({
     type: Boolean,
     default: false
   },
+  analytics: {
+    type: AnalyticSchema,
+  }
 });
 
 export const User = model("User", UserSchema)
@@ -91,6 +115,48 @@ class  UserModel implements  IUserModelRepository {
           finalObject[`personal_information.${data[0]}`] = data[1];
       })
       return finalObject;
+    }
+
+    updateUpdatedAnalytics = async (userId: string, type: ServiceAccountTypeEnum) => {
+      try {
+        const data = await this.User.findById(userId);
+        if (data) {
+          if (!data.analytics) data.analytics = this.createAnalytics;
+          data.analytics.totalUploaded++;
+          if (type === ServiceAccountTypeEnum.chatter) data.analytics.chatEngagers.totalUploaded++;
+          if (type === ServiceAccountTypeEnum.collab_manager) data.analytics.collabManagers.totalUploaded++;
+          if (type === ServiceAccountTypeEnum.moderators) data.analytics.moderators.totalUploaded++;
+          if (type === ServiceAccountTypeEnum.raider) data.analytics.raiders.totalUploaded++;
+          const updatedUser = await data.save();
+          return {status: true, data: new UserDto(updatedUser ?? data)};
+        } else {
+          return {status: false, error: "Couldn't create user"};
+        }
+      } catch (error) {
+          defaultLogger.error(error);
+          return {status: false, error };
+      }
+    }
+
+    updateCompletedAnalytics = async (userId: string, type: ServiceAccountTypeEnum) => {
+      try {
+        const data = await this.User.findById(userId);
+        if (data) {
+          if (!data.analytics) data.analytics = this.createAnalytics;
+          data.analytics.totalCompleted++;
+          if (type === ServiceAccountTypeEnum.chatter) data.analytics.chatEngagers.totalCompleted++;
+          if (type === ServiceAccountTypeEnum.collab_manager) data.analytics.collabManagers.totalCompleted++;
+          if (type === ServiceAccountTypeEnum.moderators) data.analytics.moderators.totalCompleted++;
+          if (type === ServiceAccountTypeEnum.raider) data.analytics.raiders.totalCompleted++;
+          const updatedUser = await data.save();
+          return {status: true, data: new UserDto(updatedUser ?? data)};
+        } else {
+          return {status: false, error: "Couldn't create user"};
+        }
+      } catch (error) {
+          defaultLogger.error(error);
+          return {status: false, error };
+      }
     }
 
     saveUserToDB = async (details: Partial<IUser>) => {
@@ -163,6 +229,29 @@ class  UserModel implements  IUserModelRepository {
             defaultLogger.error(error);
             return {status: false, error }
         }
+    }
+
+    private get createAnalytics() {
+      return {
+        totalUploaded: 0,
+        totalCompleted: 0,
+        raiders: {
+            totalUploaded: 0,
+            totalCompleted: 0,
+        },
+        moderators: {
+            totalUploaded: 0,
+            totalCompleted: 0,
+        },
+        chatEngagers: {
+            totalUploaded: 0,
+            totalCompleted: 0,
+        },
+        collabManagers: {
+            totalUploaded: 0,
+            totalCompleted: 0,
+        }
+      }
     }
 }
 

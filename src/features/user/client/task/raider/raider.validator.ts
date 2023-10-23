@@ -70,7 +70,7 @@ class RaiderClientTaskValidator extends _BaseValidator {
     return errors;
   }
 
-  validateBeforeRaiderTaskCreation = ({taskType, actions, users, raidLink, mediaUrl, campaignCaption, startDate }: ICreateRaiderTaskRequest) => {
+  validateBeforeRaiderTaskCreation = ({taskType, action, numbers, raidLink, mediaUrl, campaignCaption, startDate }: ICreateRaiderTaskRequest) => {
     const errors: ErrorInterface[] = [];
 
     if (!taskType) {
@@ -81,34 +81,25 @@ class RaiderClientTaskValidator extends _BaseValidator {
       }
     }
 
-    if (!actions) {
-      errors.push({ field: 'actions', message: 'actions can not be empty' });
+    if (!action) {
+      errors.push({ field: 'actions', message: 'action can not be empty' });
     } else {
       try {
-        if (!actions.length) {
-          errors.push({ field: 'actions', message: 'actions must be an array' });
-        } else if (actions.length < 1 ) {
-          errors.push({ field: 'actions', message: 'select at least one action' });
-        } else {
-          actions.forEach((action) => {
-            if (!(Object.values(RaidActionEnum).find((c) => c === action ))) {
-              errors.push({field: 'actions', message: `actions is a valid account type '${Object.values(RaidActionEnum).join("', '")}'` });
-              return;
-            }
-          });
+        if (!(Object.values(RaidActionEnum).find((c) => c === action ))) {
+          errors.push({field: 'actions', message: `actions is a valid account type '${Object.values(RaidActionEnum).join("', '")}'` });
         }
       } catch (er) {
-        errors.push({field: 'actions', message: `actions is a valid account type '${Object.values(RaidActionEnum).join("', '")}'` });
+        errors.push({field: 'action', message: `action is a valid account type '${Object.values(RaidActionEnum).join("', '")}'` });
       }
     }
 
-    if (!users) {
-      errors.push({ field: 'users', message: 'users can not be empty' });
+    if (!numbers) {
+      errors.push({ field: 'numbers', message: 'users can not be empty' });
     } else {
       try {
-        parseInt(users.toString());
+        parseInt(numbers.toString());
       } catch (er) {
-        errors.push({ field: 'users', message: 'users must be an interger' });
+        errors.push({ field: 'numbers', message: 'users must be an interger' });
       }
     }
 

@@ -1,3 +1,4 @@
+import TransactionModel from "../../../../../lib/modules/db/models/transaction.model";
 import ModeratorUserServiceDto, { MultipleModeratorServiceDto } from "../../../../../types/dtos/service/moderators.dto";
 import RaiderUserServiceDto, { MultipleUserServiceDto } from "../../../../../types/dtos/service/raiders.dto";
 import { AmountEnum, AmountPercentageEnum } from "../../../../../types/dtos/user.dto";
@@ -9,6 +10,7 @@ import IRaiderServiceModelRepository from "../../../../../types/interfaces/modul
 import { ICreateUserServiceRequest } from "../../../../../types/interfaces/requests/user/create-user";
 import { ServiceAccountTypeEnum } from "../../../../../types/interfaces/response/services/enums";
 import { IModeratorUserService } from "../../../../../types/interfaces/response/services/moderator.response";
+import { TransactionStatusEnum, TransactionTypeEnum } from "../../../../../types/interfaces/response/transaction.response";
 import { AccountTypeEnum } from "../../../../../types/interfaces/response/user.response";
 
 
@@ -44,18 +46,21 @@ const ERROR_USER_IS_A_CLIENT: ErrorInterface = {
 };
 
 class ModeratorUserServiceService {
+  private _transactionModel: TransactionModel;
   private _userServiceModel: IModeratorServiceModelRepository;
   private _userModel: IUserModelRepository;
   private _authRepo: AuthorizationInterface;
 
-  constructor ({ authRepo, userModel, userServiceModel } : {
+  constructor ({ authRepo, userModel, userServiceModel, transactionModel } : {
       authRepo: AuthorizationInterface;
       userModel: IUserModelRepository;
+      transactionModel: TransactionModel;
       userServiceModel: IModeratorServiceModelRepository;
   }){
     this._authRepo = authRepo;
     this._userModel = userModel;
     this._userServiceModel = userServiceModel;
+    this._transactionModel = transactionModel;
   }
 
   public subscribeForAService = async ({
@@ -85,15 +90,31 @@ class ModeratorUserServiceService {
       createdAt: new Date(),
       subscriptionDate: Date.parse((new Date()).toISOString()),
       isVerified: false,
+      analytics: {
+        availableTask: 0,
+        pendingTask: 0,
+        completedTask: 0,
+      }
     }
     const userServiceResponse = await this._userServiceModel.createUserService(userServiceRequest);
 
     if ( !userServiceResponse.data ) return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
 
-    const updateUser = await this._userModel.updateUserDetailToDB( user.data.id!, user.data.getDBModel );
-    if (!updateUser.data) return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] }
+    const updatedUser = await this._userModel.updateUserDetailToDB( user.data.id!, user.data.getDBModel );
+    if (!updatedUser.data) return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] }
 
-    this.adwardReferals(updateUser.data.referal);
+    this._transactionModel.saveTransaction({
+      name: updatedUser.data.name,
+      userId: user.data.id,
+      updatedAt: new Date(),
+      createdAt: new Date(),
+      transactionType: TransactionTypeEnum.FUNDING,
+      transactionStatus: TransactionStatusEnum.COMPLETED,
+      amount: (AmountEnum.moderatorSubscriptionPackage1),
+      isVerified: true,
+    });
+
+    this.adwardReferals(updatedUser.data.referal);
 
     return { userService: userServiceResponse.data };
   };

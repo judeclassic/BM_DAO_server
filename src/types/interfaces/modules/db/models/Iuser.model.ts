@@ -1,8 +1,12 @@
 import UserDto, { UnSecureUserResponseInterface } from "../../../../dtos/user.dto";
+import { ServiceAccountTypeEnum } from "../../../response/services/enums";
 import { IUser } from "../../../response/user.response";
 
 
 interface IUserModelRepository{
+    updateUpdatedAnalytics: (userId: string, type: ServiceAccountTypeEnum) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;
+
+    updateCompletedAnalytics: (userId: string, type: ServiceAccountTypeEnum) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;
 
     saveUserToDB: (details: Partial<IUser>) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;
 

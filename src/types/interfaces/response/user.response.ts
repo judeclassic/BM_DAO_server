@@ -12,6 +12,27 @@ export interface IWallet {
     };
 }
 
+export interface IAnalytics {
+    totalUploaded: number;
+    totalCompleted: number;
+    raiders: {
+        totalUploaded: number;
+        totalCompleted: number;
+    },
+    moderators: {
+        totalUploaded: number;
+        totalCompleted: number;
+    },
+    chatEngagers: {
+        totalUploaded: number;
+        totalCompleted: number;
+    },
+    collabManagers: {
+        totalUploaded: number;
+        totalCompleted: number;
+    }
+}
+
 export interface IUser {
     _id?: string;
     accountType: AccountTypeEnum;
@@ -34,4 +55,5 @@ export interface IUser {
     isVerified?: boolean;
     wallet: IWallet;
     authenticationCode?: string;
+    analytics?: IAnalytics;
 }

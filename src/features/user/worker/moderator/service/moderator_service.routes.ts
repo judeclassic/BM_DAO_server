@@ -1,5 +1,6 @@
 import AuthorizationRepo from "../../../../../lib/modules/auth";
 import ModeratorUserServiceModel from "../../../../../lib/modules/db/models/service/moderator.model";
+import TransactionModel from "../../../../../lib/modules/db/models/transaction.model";
 import UserModel from "../../../../../lib/modules/db/models/user.model";
 import RequestHandler from "../../../../../lib/modules/server/router";
 import ModeratorUserServiceController from "./moderator_service.controller";
@@ -12,8 +13,9 @@ const useModeratorUserServicesRoutes = ({router}: {router: RequestHandler}) => {
     const authRepo = new AuthorizationRepo();
     const userModel = new UserModel();
     const userServiceModel = new ModeratorUserServiceModel()
+    const transactionModel = new TransactionModel();
     
-    const userServiceService = new ModeratorUserServiceService({ authRepo, userModel, userServiceModel });
+    const userServiceService = new ModeratorUserServiceService({ authRepo, userModel, userServiceModel, transactionModel });
 
     const userServiceController = new ModeratorUserServiceController({ userServiceValidator, userServiceService });
 

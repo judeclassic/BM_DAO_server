@@ -1,6 +1,7 @@
 export enum TransactionTypeEnum {
     FUNDING = 'FUNDING',
     WITHDRAWAL = 'WITHDRAWAL',
+    REFERRAL = "REFERRAL",
 }
 
 export enum TransactionStatusEnum {

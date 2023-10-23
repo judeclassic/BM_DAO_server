@@ -1,5 +1,6 @@
 import { ISubSciptionStatus, ServiceAccountTypeEnum } from "../../interfaces/response/services/enums";
 import { IModeratorUserService, IMultipleModeratorUserService } from "../../interfaces/response/services/moderator.response";
+import { IAnalytic } from "../../interfaces/response/services/raider.response";
 
 export interface IModeratorServiceResponse {
   _id?: string;
@@ -9,6 +10,7 @@ export interface IModeratorServiceResponse {
   createdAt?: Date;
   subscriptionStatus: ISubSciptionStatus;
   isVerified?: boolean;
+  analytics: IAnalytic;
 }
 
 export interface IMultipleModeratorServiceResponse {
@@ -27,6 +29,7 @@ class ModeratorUserServiceDto implements IModeratorUserService {
   subscriptionDate: number;
   isVerified?: boolean;
   work_timeout: number;
+  analytics: IAnalytic;
 
 
   constructor (subUser: IModeratorUserService) {
@@ -39,6 +42,7 @@ class ModeratorUserServiceDto implements IModeratorUserService {
     this.subscriptionDate = subUser.subscriptionDate;
     this.isVerified = subUser.isVerified;
     this.work_timeout = subUser.work_timeout;
+    this.analytics = subUser.analytics;
   }
 
   get getDBModel() {
@@ -50,7 +54,8 @@ class ModeratorUserServiceDto implements IModeratorUserService {
       createdAt: this.createdAt,
       isVerified: this.isVerified,
       subscriptionDate: this.subscriptionDate,
-      work_timeout: this.work_timeout
+      work_timeout: this.work_timeout,
+      analytics: this.analytics
     } as IModeratorUserService
   }
 
@@ -74,6 +79,7 @@ class ModeratorUserServiceDto implements IModeratorUserService {
       createdAt: this.createdAt,
       subscriptionStatus: subscriptionStatus,
       isVerified: this.isVerified,
+      analytics: this.analytics
     } as IModeratorServiceResponse;
   }
 

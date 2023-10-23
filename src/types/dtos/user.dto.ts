@@ -1,6 +1,5 @@
-import { User } from "../../lib/modules/db/models/user.model";
 import AutheticatedUserInterface from "../interfaces/requests/user/authencated-user";
-import { AccountTypeEnum, IUser, IWallet } from "../interfaces/response/user.response";
+import { AccountTypeEnum, IAnalytics, IUser, IWallet } from "../interfaces/response/user.response";
 import ModeratorUserServiceDto from "./service/moderators.dto";
 import RaiderUserServiceDto from "./service/raiders.dto";
 
@@ -42,6 +41,7 @@ export interface UnSecureUserResponseInterface {
   updatedAt?: string;
   createdAt?: string;
   isVerified?: boolean;
+  analytics?: IAnalytics;
 }
 
 export interface UserResponseInterface {
@@ -63,6 +63,7 @@ export interface UserResponseInterface {
     authenticationCode?: string;
     raiderService?: RaiderUserServiceDto;
     moderatorService?: ModeratorUserServiceDto;
+    analytics?: IAnalytics;
 }
 
 export class WalletDto implements IWallet {
@@ -112,11 +113,11 @@ class UserDto implements IUser {
     referalCode3?: string;
   };
   public authenticationCode?: string;
-
   public raiderService?: RaiderUserServiceDto;
   public moderatorService?: ModeratorUserServiceDto;
 
   public referals?: UnSecureUserResponseInterface[] = []
+  public analytics?: IAnalytics;
   
   constructor(user: IUser) {
     this.id = user._id;
@@ -134,8 +135,10 @@ class UserDto implements IUser {
     this.wallet = new WalletDto(user.wallet);
     this.referal = user.referal;
     this.authenticationCode = user.authenticationCode;
+    this.analytics = user.analytics;
     
   }
+
   
   get getUserForToken() {
     return {
@@ -162,7 +165,8 @@ class UserDto implements IUser {
       createdAt: this.createdAt ? new Date(this.createdAt): undefined,
       wallet: this.wallet.getModel,
       referal: this.referal,
-      authenticationCode: this.authenticationCode
+      authenticationCode: this.authenticationCode,
+      analytics: this.analytics
     } as IUser
   }
 
@@ -181,7 +185,8 @@ class UserDto implements IUser {
       createdAt: this.createdAt ? new Date(this.createdAt): undefined,
       wallet: this.wallet.getModel,
       referal: this.referal,
-      authenticationCode: this.authenticationCode
+      authenticationCode: this.authenticationCode,
+      analytics: this.analytics
     } as IUser
   }
 
@@ -202,7 +207,8 @@ class UserDto implements IUser {
       createdAt: this.createdAt ? new Date(this.createdAt): undefined,
       raiderService: this.raiderService,
       moderatorService: this.moderatorService,
-      referals: this.referals
+      referals: this.referals,
+      analytics: this.analytics
     } as UserResponseInterface
   }
 
@@ -217,7 +223,8 @@ class UserDto implements IUser {
       isVerified: this.isVerified,
       updatedAt: this.updatedAt ? new Date(this.updatedAt): undefined,
       createdAt: this.createdAt ? new Date(this.createdAt): undefined,
-      referal: this.referal
+      referal: this.referal,
+      analytics: this.analytics
     } as UnSecureUserResponseInterface
   }
 

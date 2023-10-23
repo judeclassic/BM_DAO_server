@@ -5,7 +5,23 @@ import UserServiceDto, { MultipleUserServiceDto } from '../../../../../types/dto
 import IModeratorServiceModelRepository from '../../../../../types/interfaces/modules/db/models/service/moderator.model';
 import { ServiceAccountTypeEnum } from '../../../../../types/interfaces/response/services/enums';
 import { IModeratorUserService } from '../../../../../types/interfaces/response/services/moderator.response';
+import { IAnalytic } from '../../../../../types/interfaces/response/services/raider.response';
 import { defaultLogger } from '../../../logger';
+
+const AnalyticSchema = new Schema<IAnalytic>({
+  availableTask: {
+    type: Number,
+    default: 0,
+  },
+  pendingTask: {
+    type: Number,
+    default: 0,
+  },
+  completedTask: {
+    type: Number,
+    default: 0,
+  },
+})
 
 const ModeratorUserServiceSchema = new Schema<IModeratorUserService>({
   accountType: {
@@ -34,6 +50,7 @@ const ModeratorUserServiceSchema = new Schema<IModeratorUserService>({
   work_timeout: {
     type: Number,
   },
+  analytics: AnalyticSchema
 });
 
 ModeratorUserServiceSchema.plugin(mongoosePaginate);
@@ -71,6 +88,57 @@ class  ModeratorUserServiceModel implements  IModeratorServiceModelRepository {
     } catch (error) {
         defaultLogger.error(error);
         return {status: false, error };
+    }
+  }
+
+  updateCreatedAnalytics = async (userId: string) => {
+    try {
+      const data = await this.UserService.findOne({userId});
+      if (data) {
+        data.analytics.availableTask++;
+        data.analytics.pendingTask++;
+        const updatedUser = await data.save();
+        return {status: true, data: new ModeratorUserServiceDto(updatedUser ?? data)};
+      } else {
+        return {status: false, error: "Couldn't updated user"};
+      }
+    } catch (error) {
+        defaultLogger.error(error);
+        return { status: false, error };
+    }
+  }
+
+  updateCompletedAnalytics = async (userId: string) => {
+    try {
+      const data = await this.UserService.findOne({userId});
+      if (data) {
+        data.analytics.pendingTask--;
+        data.analytics.completedTask++;
+        const updatedUser = await data.save();
+        return {status: true, data: new ModeratorUserServiceDto(updatedUser ?? data)};
+      } else {
+        return {status: false, error: "Couldn't update userservice"};
+      }
+    } catch (error) {
+        defaultLogger.error(error);
+        return { status: false, error };
+    }
+  }
+
+  updateCancelAnalytics = async (userId: string) => {
+    try {
+      const data = await this.UserService.findOne({userId});
+      if (data) {
+        data.analytics.availableTask--;
+        data.analytics.pendingTask--;
+        const updatedUser = await data.save();
+        return {status: true, data: new ModeratorUserServiceDto(updatedUser ?? data)};
+      } else {
+        return {status: false, error: "Couldn't update userservice"};
+      }
+    } catch (error) {
+        defaultLogger.error(error);
+        return { status: false, error };
     }
   }
 

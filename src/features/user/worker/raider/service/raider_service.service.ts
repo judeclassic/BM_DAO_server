@@ -1,3 +1,4 @@
+import TransactionModel from "../../../../../lib/modules/db/models/transaction.model";
 import RaiderUserServiceDto, { MultipleUserServiceDto } from "../../../../../types/dtos/service/raiders.dto";
 import { AmountEnum, AmountPercentageEnum } from "../../../../../types/dtos/user.dto";
 import ErrorInterface from "../../../../../types/interfaces/error";
@@ -5,6 +6,7 @@ import AuthorizationInterface from "../../../../../types/interfaces/modules/auth
 import IUserModelRepository from "../../../../../types/interfaces/modules/db/models/Iuser.model";
 import IRaiderServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/raider.model";
 import { ICreateUserServiceRequest } from "../../../../../types/interfaces/requests/user/create-user";
+import { TransactionStatusEnum, TransactionTypeEnum } from "../../../../../types/interfaces/response/transaction.response";
 import { AccountTypeEnum } from "../../../../../types/interfaces/response/user.response";
 
 const ERROR_UNABLE_TO_REWARD_USER: ErrorInterface = {
@@ -36,11 +38,13 @@ const ERROR_USER_IS_A_CLIENT: ErrorInterface = {
 };
 
 class RaiderUserServiceService {
+  private _transactionModel: TransactionModel;
   private _userServiceModel: IRaiderServiceModelRepository;
   private _userModel: IUserModelRepository;
   private _authRepo: AuthorizationInterface;
 
-  constructor ({ authRepo, userModel, userServiceModel } : {
+  constructor ({ authRepo, userModel, userServiceModel, transactionModel } : {
+      transactionModel: TransactionModel;
       authRepo: AuthorizationInterface;
       userModel: IUserModelRepository;
       userServiceModel: IRaiderServiceModelRepository;
@@ -48,6 +52,7 @@ class RaiderUserServiceService {
     this._authRepo = authRepo;
     this._userModel = userModel;
     this._userServiceModel = userServiceModel;
+    this._transactionModel = transactionModel;
   }
 
   public subscribeForAService = async ({
@@ -78,6 +83,11 @@ class RaiderUserServiceService {
         isVerified: false,
         work_timeout: Date.parse((new Date()).toISOString()),
         tasks: [],
+        analytics: {
+          availableTask: 0,
+          pendingTask: 0,
+          completedTask: 0,
+        }
     }
     const userServiceResponse = await this._userServiceModel.createUserService(userServiceRequest);
 
@@ -111,8 +121,19 @@ class RaiderUserServiceService {
     const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: AmountEnum.subscriptionPackage1, type: 'charged' });
     if (!isWithdrawed) return { errors: [ERROR_NOT_ENOUGH_BALANCE] };
 
-    const updateUser = await this._userModel.updateUserDetailToDB( user.data.id!, user.data.getDBModel );
-    if (!updateUser.data) return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
+    const updatedUser = await this._userModel.updateUserDetailToDB( user.data.id!, user.data.getDBModel );
+    if (!updatedUser.data) return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
+
+    this._transactionModel.saveTransaction({
+      name: updatedUser.data.name,
+      userId: user.data.id,
+      updatedAt: new Date(),
+      createdAt: new Date(),
+      transactionType: TransactionTypeEnum.FUNDING,
+      transactionStatus: TransactionStatusEnum.COMPLETED,
+      amount: (AmountEnum.subscriptionPackage1),
+      isVerified: true,
+    });
 
     const updatedRaiderService = await this._userServiceModel.updateUserService(userService.data._id!, {
       subscriptionDate: Date.parse((new Date()).toISOString())

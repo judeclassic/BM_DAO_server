@@ -1,5 +1,6 @@
 import { ISubSciptionStatus, ServiceAccountTypeEnum } from "../../interfaces/response/services/enums";
 import { 
+  IAnalytic,
   IMultipleRaiderUserService,
   IRaiderUserService,
 } from "../../interfaces/response/services/raider.response";
@@ -12,6 +13,7 @@ export interface IUserServiceResponse {
   createdAt?: Date;
   subscriptionStatus: ISubSciptionStatus;
   isVerified?: boolean;
+  analytics: IAnalytic;
 }
 
 export interface IMultipleUserServiceResponse {
@@ -29,6 +31,7 @@ class RaiderUserServiceDto implements IRaiderUserService {
   subscriptionDate: number;
   isVerified?: boolean;
   work_timeout: number;
+  analytics: IAnalytic;
 
 
   constructor (subUser: IRaiderUserService) {
@@ -40,6 +43,7 @@ class RaiderUserServiceDto implements IRaiderUserService {
     this.subscriptionDate = subUser.subscriptionDate;
     this.isVerified = subUser.isVerified;
     this.work_timeout = subUser.work_timeout;
+    this.analytics = subUser.analytics;
   }
 
   get getDBModel() {
@@ -50,7 +54,8 @@ class RaiderUserServiceDto implements IRaiderUserService {
       createdAt: this.createdAt,
       isVerified: this.isVerified,
       subscriptionDate: this.subscriptionDate,
-      work_timeout: this.work_timeout
+      work_timeout: this.work_timeout,
+      analytics: this.analytics
     } as IRaiderUserService
   }
 
@@ -73,6 +78,7 @@ class RaiderUserServiceDto implements IRaiderUserService {
       createdAt: this.createdAt,
       subscriptionStatus: subscriptionStatus,
       isVerified: this.isVerified,
+      analytics: this.analytics
     } as IUserServiceResponse;
   }
 

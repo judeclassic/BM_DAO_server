@@ -1,11 +1,9 @@
 import { MultipleRaidDto, RaidDto } from "../../../../../types/dtos/service/raids.dto";
-import { MultipleRaiderTaskDto, RaiderTaskDto } from "../../../../../types/dtos/task/raiders.dto";
 import ErrorInterface from "../../../../../types/interfaces/error";
 import IUserModelRepository from "../../../../../types/interfaces/modules/db/models/Iuser.model";
 import IRaidModelRepository from "../../../../../types/interfaces/modules/db/models/service/raid.model";
 import IRaiderServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/raider.model";
 import IRaiderTaskModelRepository from "../../../../../types/interfaces/modules/db/models/task/Iraider.model";
-import { TaskPriorityEnum } from "../../../../../types/interfaces/response/task/raider_task.response";
 
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE: ErrorInterface = {
   field: 'userId',
@@ -38,17 +36,20 @@ const ERROR_RAID_DO_NOT_BELONG_TO_THIS_USER: ErrorInterface = {
 class RaiderUserTaskRaidService {
   private _raiderTaskModel: IRaiderTaskModelRepository;
   private _raidModel: IRaidModelRepository;
+  private _userModel: IUserModelRepository;
   private _raiderServiceModel: IRaiderServiceModelRepository;
 
   constructor (
-    { raiderTaskModel, raidModel, raiderServiceModel } : {
+    { raiderTaskModel, raidModel, raiderServiceModel, userModel } : {
       raidModel: IRaidModelRepository;
       raiderTaskModel: IRaiderTaskModelRepository;
       raiderServiceModel: IRaiderServiceModelRepository;
+      userModel: IUserModelRepository;
     }){
       this._raiderTaskModel = raiderTaskModel;
       this._raidModel = raidModel;
       this._raiderServiceModel = raiderServiceModel;
+      this._userModel = userModel;
   }
 
   public getAllUsersRaids = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaidDto }> => {
@@ -92,6 +93,8 @@ class RaiderUserTaskRaidService {
 
     raidResponse.data.addTaskToModel = tasksResponse.data;
 
+    this._raiderServiceModel.updateCreatedAnalytics(userId);
+
     return { raid: raidResponse.data }
   }
 
@@ -112,6 +115,8 @@ class RaiderUserTaskRaidService {
 
     updatedRaidResponse.data.addTaskToModel = updatedTaskResponse.data;
 
+    this._raiderServiceModel.updateCancelAnalytics(raidResponse.data.assigneeId);
+
     return { raid: updatedRaidResponse.data }
   }
 
@@ -131,6 +136,8 @@ class RaiderUserTaskRaidService {
     if (!updatedTaskResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
     raidResponse.data.addTaskToModel = updatedTaskResponse.data;
+
+    this._raiderServiceModel.updateCompletedAnalytics(raidResponse.data.assigneeId);
 
     return { raid: raidResponse.data }
   }

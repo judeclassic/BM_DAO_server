@@ -4,6 +4,9 @@ import { defaultLogger } from '../../../logger';
 import { IRaid } from '../../../../../types/interfaces/response/services/raid.response';
 import IRaidModelRepository from '../../../../../types/interfaces/modules/db/models/service/raid.model';
 import { RaidDto, MultipleRaidDto } from '../../../../../types/dtos/service/raids.dto';
+import UserDto from '../../../../../types/dtos/user.dto';
+import { ServiceAccountTypeEnum } from '../../../../../types/interfaces/response/services/enums';
+import { IAnalytic } from '../../../../../types/interfaces/response/services/raider.response';
 
 
 const RaidSchema = new Schema<IRaid>({
@@ -23,6 +26,20 @@ class  RaidModel implements  IRaidModelRepository {
 
     constructor() {
         this.Raid =  Raid;
+    }
+
+    deleteAllRaids = async ( { taskId } : { taskId: string; }) => {
+      try {
+        const data = await this.Raid.deleteMany({ taskId });
+        if (data) {
+          return { status: true }
+        } else {
+          return {status: false, error: "Couldn't create Raid" };
+        }
+      } catch (error) {
+          defaultLogger.error(error);
+          return {status: false, error };
+      }
     }
 
     createRaid = async (details: IRaid) => {

@@ -82,7 +82,7 @@ class UserAuthService {
       country,
       password: hashedPassword,
       referal: { myReferalCode, ...referalCodes.referalCodes, isGiven: false },
-      wallet,
+      wallet
     };
     
     const user = await this._userModel.saveUserToDB(request);

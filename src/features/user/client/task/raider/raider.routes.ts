@@ -1,10 +1,11 @@
 import RaiderUserServiceModel from "../../../../../lib/modules/db/models/service/raider.model";
 import RaiderTaskModel from "../../../../../lib/modules/db/models/task/raider.model";
+import TransactionModel from "../../../../../lib/modules/db/models/transaction.model";
 import UserModel from "../../../../../lib/modules/db/models/user.model";
 import RequestHandler from "../../../../../lib/modules/server/router";
 import RaiderClientTaskService from "./raider.client.service";
 import ClientRaidController from "./raider.controller";
-import RaiderClientTaskValidator from "./task.validator";
+import RaiderClientTaskValidator from "./raider.validator";
 
 const useClientRaidersTaskRoutes = ({router}: {router: RequestHandler}) => {
     const taskValidator = new RaiderClientTaskValidator();
@@ -12,8 +13,9 @@ const useClientRaidersTaskRoutes = ({router}: {router: RequestHandler}) => {
     const userModel = new UserModel();
     const raiderTaskModel = new RaiderTaskModel();
     const raiderServiceModel = new RaiderUserServiceModel();
+    const transactionModel = new TransactionModel()
 
-    const raiderTaskService = new RaiderClientTaskService({ raiderTaskModel, userModel, raiderServiceModel });
+    const raiderTaskService = new RaiderClientTaskService({ raiderTaskModel, userModel, raiderServiceModel, transactionModel });
 
     const clientRaidController = new ClientRaidController({ taskValidator, raiderTaskService });
 

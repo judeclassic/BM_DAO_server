@@ -12,8 +12,9 @@ const useRaiderRaidForUserRoutes = ({router}: {router: RequestHandler}) => {
     const raidModel = new RaidModel();
     const raiderTaskModel = new RaiderTaskModel();
     const raiderServiceModel = new RaiderUserServiceModel();
+    const userModel = new UserModel();
 
-    const raiderTaskService = new RaiderUserTaskRaidService({ raiderTaskModel, raidModel, raiderServiceModel });
+    const raiderTaskService = new RaiderUserTaskRaidService({ raiderTaskModel, raidModel, raiderServiceModel, userModel });
 
     const clientRaidController = new UserRaidController({ taskValidator, raiderTaskService });
 
