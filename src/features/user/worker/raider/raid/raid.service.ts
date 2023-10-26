@@ -4,6 +4,7 @@ import IUserModelRepository from "../../../../../types/interfaces/modules/db/mod
 import IRaidModelRepository from "../../../../../types/interfaces/modules/db/models/service/raid.model";
 import IRaiderServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/raider.model";
 import IRaiderTaskModelRepository from "../../../../../types/interfaces/modules/db/models/task/Iraider.model";
+import { TaskStatusStatus } from "../../../../../types/interfaces/response/services/raid.response";
 
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE: ErrorInterface = {
   field: 'userId',
@@ -98,7 +99,7 @@ class RaiderUserTaskRaidService {
     return { raid: raidResponse.data }
   }
 
-  public cancelRaidTask = async (userId: string, raidId: string ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
+  public cancelRaidTask = async (userId: string, raidId: string, ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const raidResponse = await this._raidModel.checkIfExist({ _id: raidId });
     if (!raidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
     if ( raidResponse.data.assigneeId !== userId ) return { errors: [ERROR_RAID_DO_NOT_BELONG_TO_THIS_USER] };
@@ -120,7 +121,7 @@ class RaiderUserTaskRaidService {
     return { raid: updatedRaidResponse.data }
   }
 
-  public completeRaidTask = async (userId: string, raidId: string ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
+  public completeRaidTask = async (userId: string, raidId: string, proofs: string[] ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const raidResponse = await this._raidModel.checkIfExist({ _id: raidId });
     if (!raidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
     if ( raidResponse.data.assigneeId !== userId ) return { errors: [ERROR_RAID_DO_NOT_BELONG_TO_THIS_USER] };
@@ -128,7 +129,7 @@ class RaiderUserTaskRaidService {
     const tasksResponse = await this._raiderTaskModel.checkIfExist({_id: raidResponse.data.taskId });
     if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
-    const updateRaidResponse = await this._raidModel.updateRaid(raidId, {  });
+    const updateRaidResponse = await this._raidModel.updateRaid(raidId, { proofs, taskStatus: TaskStatusStatus.COMPLETED });
     if (!updateRaidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
     tasksResponse.data.modifyUserRaidsNumber('complete');

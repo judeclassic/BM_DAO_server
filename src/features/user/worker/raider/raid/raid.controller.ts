@@ -30,13 +30,13 @@ class UserRaidController {
       sendJson(201, { data: response.raid.getResponse, code: 201, status: true });
     }
 
-    public completeRaidTask = async ({ body, user }: { body: { raidId: string }, user: AutheticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IRaidResponse>)=>void)  => {
+    public completeRaidTask = async ({ body, user }: { body: { raidId: string, proofs: string[] }, user: AutheticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IRaidResponse>)=>void)  => {
       const validationErrors = this._taskValidator.validateIdBeforeCreation(body.raidId);
       if (validationErrors.length > 0) {
         return sendJson(400, { error: validationErrors, code: 400, status: false });
       }
   
-      const response = await this._raiderUserTaskService.completeRaidTask(user.id, body.raidId );
+      const response = await this._raiderUserTaskService.completeRaidTask(user.id, body.raidId, body.proofs );
       if ( !response.raid ) {
         sendJson(401, { error: response.errors, code: 401, status: false });
         return;

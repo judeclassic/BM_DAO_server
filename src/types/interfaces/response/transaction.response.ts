@@ -1,7 +1,9 @@
 export enum TransactionTypeEnum {
-    FUNDING = 'FUNDING',
-    WITHDRAWAL = 'WITHDRAWAL',
-    REFERRAL = "REFERRAL",
+  FUNDING = 'FUNDING',
+  WITHDRAWAL = 'WITHDRAWAL',
+  REFERRAL = "REFERRAL",
+  TASK_CREATION = "TASK_CREATION",
+  RAIDER_SUBSCRIPTION = "RAIDER_SUBSCRIPTION"
 }
 
 export enum TransactionStatusEnum {

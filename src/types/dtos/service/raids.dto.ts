@@ -9,7 +9,7 @@ export interface IRaidResponse {
   taskId: string;
   timeLine: ISubSciptionStatus;
   taskStatus: TaskStatusStatus;
-  imageProve: string; 
+  imageProve?: string[]; 
   task?: IRaiderTaskResponse
 }
 
@@ -26,7 +26,7 @@ export class RaidDto implements IRaid {
   taskId: string;
   taskStatus: TaskStatusStatus;
   timeLine: number;
-  imageProve?: string;
+  proofs?: string[];
   task?: RaiderTaskDto
 
   constructor (raid: IRaid) {
@@ -36,7 +36,7 @@ export class RaidDto implements IRaid {
     this.taskId = raid.taskId;
     this.taskStatus = raid.taskStatus;
     this.timeLine = raid.timeLine;
-    this.imageProve = raid.imageProve;
+    this.proofs = raid.proofs;
   }
 
   get getDBModel() {
@@ -47,7 +47,7 @@ export class RaidDto implements IRaid {
       taskId: this.taskId,
       taskStatus: this.taskStatus,
       timeLine: this.timeLine,
-      imageProve: this.imageProve,
+      imageProve: this.proofs,
     } as IRaid
   }
 
@@ -62,7 +62,7 @@ export class RaidDto implements IRaid {
       taskId: this.taskId,
       taskStatus: this.taskStatus,
       timeLine: timeLine,
-      imageProve: this.imageProve,
+      proofs: this.proofs,
       task: this.task?.getResponse
     } as IRaidResponse
   }

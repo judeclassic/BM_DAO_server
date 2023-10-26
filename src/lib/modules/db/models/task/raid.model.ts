@@ -4,9 +4,6 @@ import { defaultLogger } from '../../../logger';
 import { IRaid } from '../../../../../types/interfaces/response/services/raid.response';
 import IRaidModelRepository from '../../../../../types/interfaces/modules/db/models/service/raid.model';
 import { RaidDto, MultipleRaidDto } from '../../../../../types/dtos/service/raids.dto';
-import UserDto from '../../../../../types/dtos/user.dto';
-import { ServiceAccountTypeEnum } from '../../../../../types/interfaces/response/services/enums';
-import { IAnalytic } from '../../../../../types/interfaces/response/services/raider.response';
 
 
 const RaidSchema = new Schema<IRaid>({
@@ -15,6 +12,7 @@ const RaidSchema = new Schema<IRaid>({
   taskId: String,
   timeLine: Number,
   taskStatus: String,
+  proofs: [String],
 });
 
 RaidSchema.plugin(mongoosePaginate);

@@ -183,7 +183,7 @@ class RaiderClientTaskService {
       userId: user.data.id,
       updatedAt: new Date(),
       createdAt: new Date(),
-      transactionType: TransactionTypeEnum.FUNDING,
+      transactionType: TransactionTypeEnum.TASK_CREATION,
       transactionStatus: TransactionStatusEnum.COMPLETED,
       amount: (AmountEnum.raidUserPay1 * task.numbers),
       isVerified: true,

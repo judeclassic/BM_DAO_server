@@ -20,9 +20,9 @@ const useRaiderRaidForUserRoutes = ({router}: {router: RequestHandler}) => {
 
     router.postWithBodyAndAuth('/start_raid', clientRaidController.startRaidTask );
 
-    router.postWithBodyAndAuth('/complete_task', clientRaidController.completeRaidTask );
+    router.postWithBodyAndAuth('/complete_raid', clientRaidController.completeRaidTask );
 
-    router.postWithBodyAndAuth('/cancel_task', clientRaidController.cancelRaidTask );
+    router.postWithBodyAndAuth('/cancel_raid', clientRaidController.cancelRaidTask );
 
     router.getWithAuth('/', clientRaidController.getAllUserRaid );
 

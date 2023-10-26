@@ -4,6 +4,8 @@ import { IUser } from "../../../response/user.response";
 
 
 interface IUserModelRepository{
+    updateBalance: (userId: string, amount: Number) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;
+
     updateUpdatedAnalytics: (userId: string, type: ServiceAccountTypeEnum) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;
 
     updateCompletedAnalytics: (userId: string, type: ServiceAccountTypeEnum) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;

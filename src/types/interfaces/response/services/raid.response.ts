@@ -18,7 +18,7 @@ export interface IRaid {
     taskId: string;
     timeLine: number;
     taskStatus: TaskStatusStatus;
-    imageProve?: string;
+    proofs?: string[];
 }
 
 export interface IMultipleRaids {

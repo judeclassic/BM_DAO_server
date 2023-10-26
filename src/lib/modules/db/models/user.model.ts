@@ -108,13 +108,30 @@ class  UserModel implements  IUserModelRepository {
     constructor() {
         this.User =  User;
     }
-
+    
     private deepSearchDetails = (name: string, data: any) => {
       const finalObject: any = {};
       Object.entries(data).forEach((data) => {
-          finalObject[`personal_information.${data[0]}`] = data[1];
+        finalObject[`personal_information.${data[0]}`] = data[1];
       })
       return finalObject;
+    }
+
+    updateBalance = async (userId: string, amount: Number) => {
+      try {
+        const data = await this.User.findByIdAndUpdate(userId, {$inc : {
+          'wallet.balance.walletBalance': amount,
+          'wallet.balance.totalBalance': amount,
+        }}, { new: true });
+        if (data) {
+          return {status: true, data: new UserDto(data)};
+        } else {
+          return {status: false, error: "Couldn't create user"};
+        }
+      } catch (error) {
+        defaultLogger.error(error);
+        return {status: false, error };
+      }
     }
 
     updateUpdatedAnalytics = async (userId: string, type: ServiceAccountTypeEnum) => {

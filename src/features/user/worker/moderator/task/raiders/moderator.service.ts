@@ -1,5 +1,7 @@
+import TransactionModel from "../../../../../../lib/modules/db/models/transaction.model";
 import { RaidDto, MultipleRaidDto } from "../../../../../../types/dtos/service/raids.dto";
 import { MultipleRaiderTaskDto, RaiderTaskDto } from "../../../../../../types/dtos/task/raiders.dto";
+import { AmountEnum } from "../../../../../../types/dtos/user.dto";
 import ErrorInterface from "../../../../../../types/interfaces/error";
 import IUserModelRepository from "../../../../../../types/interfaces/modules/db/models/Iuser.model";
 import IModeratorServiceModelRepository from "../../../../../../types/interfaces/modules/db/models/service/moderator.model";
@@ -8,6 +10,7 @@ import IRaiderServiceModelRepository from "../../../../../../types/interfaces/mo
 import IRaiderTaskModelRepository from "../../../../../../types/interfaces/modules/db/models/task/Iraider.model";
 import { ServiceAccountTypeEnum } from "../../../../../../types/interfaces/response/services/enums";
 import { TaskPriorityEnum } from "../../../../../../types/interfaces/response/task/raider_task.response";
+import { TransactionStatusEnum, TransactionTypeEnum } from "../../../../../../types/interfaces/response/transaction.response";
 
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE: ErrorInterface = {
   field: 'userId',
@@ -46,20 +49,23 @@ class ModeratorUserTaskService {
   private _raiderTaskModel: IRaiderTaskModelRepository;
   private _raiderServiceModel: IRaiderServiceModelRepository;
   private _moderatorServiceModel: IModeratorServiceModelRepository;
+  private _transactionModel: TransactionModel;
 
   constructor (
-    { raiderTaskModel, raidModel, moderatorServiceModel, raiderServiceModel, userModel } : {
+    { raiderTaskModel, raidModel, moderatorServiceModel, raiderServiceModel, userModel, transactionModel } : {
       raidModel: IRaidModelRepository;
       raiderTaskModel: IRaiderTaskModelRepository;
       raiderServiceModel: IRaiderServiceModelRepository;
       moderatorServiceModel: IModeratorServiceModelRepository;
       userModel: IUserModelRepository;
+      transactionModel: TransactionModel;
     }){
       this._raidModel = raidModel;
       this._raiderTaskModel = raiderTaskModel;
       this._moderatorServiceModel = moderatorServiceModel;
       this._raiderServiceModel = raiderServiceModel;
       this._userModel = userModel;
+      this._transactionModel = transactionModel;
   }
 
   public getAllActiveTask = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaiderTaskDto }> => {
@@ -164,8 +170,25 @@ class ModeratorUserTaskService {
     if (!updatedTaskResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
     await this._userModel.updateCompletedAnalytics(tasksResponse.data.userId, ServiceAccountTypeEnum.raider);
 
+    const raidsResponse = await this._raidModel.getAllRaids([{ taskId }]);
+    if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
+    Promise.all(raidsResponse.data.map((raid) => {
+      this._userModel.updateBalance(raid.assigneeId, AmountEnum.raidUserPay1);
+      this._transactionModel.saveTransaction({
+        name: TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+        userId: raid.assigneeId,
+        updatedAt: new Date(),
+        createdAt: new Date(),
+        transactionType: TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+        transactionStatus: TransactionStatusEnum.COMPLETED,
+        amount: (AmountEnum.raidUserPay1),
+        isVerified: true,
+      });
+    }));
 
     this._moderatorServiceModel.updateCompletedAnalytics(userId);
+    this._userModel.updateCompletedAnalytics(updatedTaskResponse.data.userId, ServiceAccountTypeEnum.raider);
 
     await this._raidModel.deleteAllRaids({ taskId });
 
