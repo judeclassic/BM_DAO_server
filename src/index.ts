@@ -20,7 +20,6 @@ const callback = (app: RouterInterface, server: any)=> {
     const router = new RequestHandler({ router: app,  authenticationRepo, host: '/api' });
     
     router.extend('/user', useUserRoutes);
-
     if (process.env.NODE_ENV === 'development') defaultLogger.checkRoutes(router);
     if (process.env.NODE_ENV === 'development') defaultLogger.useExpressMonganMiddleWare(app);
 }
