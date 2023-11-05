@@ -12,6 +12,7 @@ class ModeratorUserServiceDto {
         this.subscriptionDate = subUser.subscriptionDate;
         this.isVerified = subUser.isVerified;
         this.work_timeout = subUser.work_timeout;
+        this.analytics = subUser.analytics;
     }
     get getDBModel() {
         return {
@@ -22,7 +23,8 @@ class ModeratorUserServiceDto {
             createdAt: this.createdAt,
             isVerified: this.isVerified,
             subscriptionDate: this.subscriptionDate,
-            work_timeout: this.work_timeout
+            work_timeout: this.work_timeout,
+            analytics: this.analytics
         };
     }
     get expirationDate() {
@@ -43,6 +45,7 @@ class ModeratorUserServiceDto {
             createdAt: this.createdAt,
             subscriptionStatus: subscriptionStatus,
             isVerified: this.isVerified,
+            analytics: this.analytics
         };
     }
     get isUserSubscribed() {

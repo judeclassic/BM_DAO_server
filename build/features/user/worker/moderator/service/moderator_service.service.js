@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_dto_1 = require("../../../../../types/dtos/user.dto");
 const enums_1 = require("../../../../../types/interfaces/response/services/enums");
+const transaction_response_1 = require("../../../../../types/interfaces/response/transaction.response");
 const user_response_1 = require("../../../../../types/interfaces/response/user.response");
 const ERROR_UNABLE_TO_REWARD_USER = {
     message: 'could not update user with referral',
@@ -43,7 +44,7 @@ const ERROR_USER_IS_A_CLIENT = {
     message: 'user is a client, unable to subscribe service',
 };
 class ModeratorUserServiceService {
-    constructor({ authRepo, userModel, userServiceModel }) {
+    constructor({ authRepo, userModel, userServiceModel, transactionModel }) {
         this.subscribeForAService = ({ accountType, userId, }) => __awaiter(this, void 0, void 0, function* () {
             var _a;
             const user = yield this._userModel.checkIfExist({ _id: userId });
@@ -67,14 +68,29 @@ class ModeratorUserServiceService {
                 createdAt: new Date(),
                 subscriptionDate: Date.parse((new Date()).toISOString()),
                 isVerified: false,
+                analytics: {
+                    availableTask: 0,
+                    pendingTask: 0,
+                    completedTask: 0,
+                }
             };
             const userServiceResponse = yield this._userServiceModel.createUserService(userServiceRequest);
             if (!userServiceResponse.data)
                 return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
-            const updateUser = yield this._userModel.updateUserDetailToDB(user.data.id, user.data.getDBModel);
-            if (!updateUser.data)
+            const updatedUser = yield this._userModel.updateUserDetailToDB(user.data.id, user.data.getDBModel);
+            if (!updatedUser.data)
                 return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
-            this.adwardReferals(updateUser.data.referal);
+            this._transactionModel.saveTransaction({
+                name: updatedUser.data.name,
+                userId: user.data.id,
+                updatedAt: new Date(),
+                createdAt: new Date(),
+                transactionType: transaction_response_1.TransactionTypeEnum.FUNDING,
+                transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
+                amount: (user_dto_1.AmountEnum.moderatorSubscriptionPackage1),
+                isVerified: true,
+            });
+            this.adwardReferals(updatedUser.data.referal);
             return { userService: userServiceResponse.data };
         });
         this.resubscribeAService = ({ userId, userServiceId }) => __awaiter(this, void 0, void 0, function* () {
@@ -152,6 +168,7 @@ class ModeratorUserServiceService {
         this._authRepo = authRepo;
         this._userModel = userModel;
         this._userServiceModel = userServiceModel;
+        this._transactionModel = transactionModel;
     }
 }
 exports.default = ModeratorUserServiceService;

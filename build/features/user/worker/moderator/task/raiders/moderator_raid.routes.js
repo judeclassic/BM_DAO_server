@@ -7,6 +7,7 @@ const moderator_model_1 = __importDefault(require("../../../../../../lib/modules
 const raider_model_1 = __importDefault(require("../../../../../../lib/modules/db/models/service/raider.model"));
 const raid_model_1 = __importDefault(require("../../../../../../lib/modules/db/models/task/raid.model"));
 const raider_model_2 = __importDefault(require("../../../../../../lib/modules/db/models/task/raider.model"));
+const transaction_model_1 = __importDefault(require("../../../../../../lib/modules/db/models/transaction.model"));
 const user_model_1 = __importDefault(require("../../../../../../lib/modules/db/models/user.model"));
 const moderator_controller_1 = __importDefault(require("./moderator.controller"));
 const moderator_service_1 = __importDefault(require("./moderator.service"));
@@ -18,7 +19,8 @@ const useRaiderTaskForModeratorRoutes = ({ router }) => {
     const raiderTaskModel = new raider_model_2.default();
     const raiderServiceModel = new raider_model_1.default();
     const moderatorServiceModel = new moderator_model_1.default();
-    const moderatorUserTaskService = new moderator_service_1.default({ raiderTaskModel, raidModel, moderatorServiceModel });
+    const transactionModel = new transaction_model_1.default();
+    const moderatorUserTaskService = new moderator_service_1.default({ raiderTaskModel, raidModel, raiderServiceModel, moderatorServiceModel, userModel, transactionModel });
     const clientRaidController = new moderator_controller_1.default({ taskValidator, moderatorUserTaskService });
     router.getWithAuth('/active', clientRaidController.getAllActiveTask);
     router.getWithAuth('/other', clientRaidController.getAllOtherTask);

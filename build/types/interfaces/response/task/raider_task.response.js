@@ -7,6 +7,7 @@ var RaidActionEnum;
     RaidActionEnum["likePost"] = "Like Post";
     RaidActionEnum["retweetPost"] = "Retweet Post";
     RaidActionEnum["commentOnPost"] = "Comment on Post";
+    RaidActionEnum["createATweet"] = "Create a Tweet";
 })(RaidActionEnum = exports.RaidActionEnum || (exports.RaidActionEnum = {}));
 var TaskPriorityEnum;
 (function (TaskPriorityEnum) {

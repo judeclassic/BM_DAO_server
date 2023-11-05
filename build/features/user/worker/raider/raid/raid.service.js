@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const raid_response_1 = require("../../../../../types/interfaces/response/services/raid.response");
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE = {
     field: 'userId',
     message: 'this user have not subscribed top be a raider',
@@ -34,7 +35,7 @@ const ERROR_RAID_DO_NOT_BELONG_TO_THIS_USER = {
     message: 'this raid was not created by this user',
 };
 class RaiderUserTaskRaidService {
-    constructor({ raiderTaskModel, raidModel, raiderServiceModel }) {
+    constructor({ raiderTaskModel, raidModel, raiderServiceModel, userModel }) {
         this.getAllUsersRaids = (userId, option) => __awaiter(this, void 0, void 0, function* () {
             const tasksResponse = yield this._raidModel.getAllRaid({ assigneeId: userId }, option);
             if (!tasksResponse.data)
@@ -73,6 +74,7 @@ class RaiderUserTaskRaidService {
             if (!updatedTaskResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             raidResponse.data.addTaskToModel = tasksResponse.data;
+            this._raiderServiceModel.updateCreatedAnalytics(userId);
             return { raid: raidResponse.data };
         });
         this.cancelRaidTask = (userId, raidId) => __awaiter(this, void 0, void 0, function* () {
@@ -92,9 +94,10 @@ class RaiderUserTaskRaidService {
             if (!updatedRaidResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             updatedRaidResponse.data.addTaskToModel = updatedTaskResponse.data;
+            this._raiderServiceModel.updateCancelAnalytics(raidResponse.data.assigneeId);
             return { raid: updatedRaidResponse.data };
         });
-        this.completeRaidTask = (userId, raidId) => __awaiter(this, void 0, void 0, function* () {
+        this.completeRaidTask = (userId, raidId, proofs) => __awaiter(this, void 0, void 0, function* () {
             const raidResponse = yield this._raidModel.checkIfExist({ _id: raidId });
             if (!raidResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
@@ -103,7 +106,7 @@ class RaiderUserTaskRaidService {
             const tasksResponse = yield this._raiderTaskModel.checkIfExist({ _id: raidResponse.data.taskId });
             if (!tasksResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
-            const updateRaidResponse = yield this._raidModel.updateRaid(raidId, {});
+            const updateRaidResponse = yield this._raidModel.updateRaid(raidId, { proofs, taskStatus: raid_response_1.TaskStatusStatus.COMPLETED });
             if (!updateRaidResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             tasksResponse.data.modifyUserRaidsNumber('complete');
@@ -111,11 +114,13 @@ class RaiderUserTaskRaidService {
             if (!updatedTaskResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             raidResponse.data.addTaskToModel = updatedTaskResponse.data;
+            this._raiderServiceModel.updateCompletedAnalytics(raidResponse.data.assigneeId);
             return { raid: raidResponse.data };
         });
         this._raiderTaskModel = raiderTaskModel;
         this._raidModel = raidModel;
         this._raiderServiceModel = raiderServiceModel;
+        this._userModel = userModel;
     }
 }
 exports.default = RaiderUserTaskRaidService;

@@ -9,7 +9,7 @@ class RaidDto {
         this.taskId = raid.taskId;
         this.taskStatus = raid.taskStatus;
         this.timeLine = raid.timeLine;
-        this.imageProve = raid.imageProve;
+        this.proofs = raid.proofs;
     }
     get getDBModel() {
         return {
@@ -19,7 +19,7 @@ class RaidDto {
             taskId: this.taskId,
             taskStatus: this.taskStatus,
             timeLine: this.timeLine,
-            imageProve: this.imageProve,
+            imageProve: this.proofs,
         };
     }
     get getResponse() {
@@ -33,7 +33,7 @@ class RaidDto {
             taskId: this.taskId,
             taskStatus: this.taskStatus,
             timeLine: timeLine,
-            imageProve: this.imageProve,
+            proofs: this.proofs,
             task: (_a = this.task) === null || _a === void 0 ? void 0 : _a.getResponse
         };
     }

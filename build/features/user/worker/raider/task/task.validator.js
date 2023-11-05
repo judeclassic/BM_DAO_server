@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const validator_1 = __importDefault(require("../../../../../lib/modules/validator/validator"));
 const enums_1 = require("../../../../../types/interfaces/response/services/enums");
-const raider_task_response_1 = require("../../../../../types/interfaces/response/task/raider_task.response");
 class RaidersTaskValidator extends validator_1.default {
     constructor() {
         super(...arguments);
@@ -69,73 +68,6 @@ class RaidersTaskValidator extends validator_1.default {
             const raidLinkError = this._validateLink(raidLink);
             if (raidLinkError.message) {
                 errors.push({ field: 'raidLink', message: raidLinkError.message });
-            }
-            return errors;
-        };
-        this.validateBeforeRaiderTaskCreation = ({ taskType, actions, users, raidLink, mediaUrl, campaignCaption, startDate }) => {
-            const errors = [];
-            if (!taskType) {
-                errors.push({ field: 'taskType', message: 'taskType can not be empty' });
-            }
-            else {
-                if (!(Object.values(enums_1.ServiceAccountTypeEnum).find((c) => c === taskType))) {
-                    errors.push({ field: 'taskType', message: `taskType is a valid account type '${Object.values(enums_1.ServiceAccountTypeEnum).join("', '")}'` });
-                }
-            }
-            if (!actions) {
-                errors.push({ field: 'actions', message: 'actions can not be empty' });
-            }
-            else {
-                try {
-                    if (!actions.length) {
-                        errors.push({ field: 'actions', message: 'actions must be an array' });
-                    }
-                    else if (actions.length < 1) {
-                        errors.push({ field: 'actions', message: 'select at least one action' });
-                    }
-                    else {
-                        actions.forEach((action) => {
-                            if (!(Object.values(raider_task_response_1.RaidActionEnum).find((c) => c === action))) {
-                                errors.push({ field: 'actions', message: `actions is a valid account type '${Object.values(raider_task_response_1.RaidActionEnum).join("', '")}'` });
-                                return;
-                            }
-                        });
-                    }
-                }
-                catch (er) {
-                    errors.push({ field: 'actions', message: `actions is a valid account type '${Object.values(raider_task_response_1.RaidActionEnum).join("', '")}'` });
-                }
-            }
-            if (!users) {
-                errors.push({ field: 'users', message: 'users can not be empty' });
-            }
-            else {
-                try {
-                    parseInt(users.toString());
-                }
-                catch (er) {
-                    errors.push({ field: 'users', message: 'users must be an interger' });
-                }
-            }
-            if (!raidLink) {
-                errors.push({ field: 'raidLink', message: 'raidLink can not be empty' });
-            }
-            if (!mediaUrl) {
-                errors.push({ field: 'mediaUrl', message: 'mediaUrl can not be empty' });
-            }
-            if (!campaignCaption) {
-                errors.push({ field: 'campaignCaption', message: 'campaignCaption can not be empty' });
-            }
-            if (!startDate) {
-                errors.push({ field: 'startDate', message: 'startDate can not be empty' });
-            }
-            else {
-                try {
-                    new Date(startDate).toISOString();
-                }
-                catch (er) {
-                    errors.push({ field: 'startDate', message: 'startDate must be date' });
-                }
             }
             return errors;
         };

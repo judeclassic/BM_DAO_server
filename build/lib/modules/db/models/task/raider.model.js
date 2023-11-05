@@ -19,10 +19,10 @@ const raider_task_response_1 = require("../../../../../types/interfaces/response
 const logger_1 = require("../../../logger");
 const raiders_dto_1 = require("../../../../../types/dtos/task/raiders.dto");
 const RaidTaskInformationSchema = new mongoose_1.Schema({
-    actions: [{
-            type: String,
-            enum: Object.values(raider_task_response_1.RaidActionEnum)
-        }],
+    action: {
+        type: String,
+        enum: Object.values(raider_task_response_1.RaidActionEnum)
+    },
     raidLink: {
         type: String,
     },

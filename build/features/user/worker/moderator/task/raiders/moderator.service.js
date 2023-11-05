@@ -9,7 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const user_dto_1 = require("../../../../../../types/dtos/user.dto");
+const enums_1 = require("../../../../../../types/interfaces/response/services/enums");
 const raider_task_response_1 = require("../../../../../../types/interfaces/response/task/raider_task.response");
+const transaction_response_1 = require("../../../../../../types/interfaces/response/transaction.response");
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE = {
     field: 'userId',
     message: 'this user have not subscribed to be a moderator',
@@ -35,7 +38,7 @@ const ERROR_THIS_TASK_IS_ALREADY_MODERATED_BY_YOU = {
     message: 'This task is being moderated by you already',
 };
 class ModeratorUserTaskService {
-    constructor({ raiderTaskModel, raidModel, moderatorServiceModel }) {
+    constructor({ raiderTaskModel, raidModel, moderatorServiceModel, raiderServiceModel, userModel, transactionModel }) {
         this.getAllActiveTask = (userId, option) => __awaiter(this, void 0, void 0, function* () {
             const tasksResponse = yield this._raiderTaskModel.getActiveTask({ level: raider_task_response_1.TaskPriorityEnum.high, isModerated: false }, option);
             if (!tasksResponse.data)
@@ -93,6 +96,7 @@ class ModeratorUserTaskService {
                 return { errors: [ERROR_THIS_TASK_HAS_A_MODERATOR_ALREADY] };
             tasksResponse.data.addModerator = userService.data;
             const updatedTaskResponse = yield this._raiderTaskModel.updateTaskDetailToDB(taskId, tasksResponse.data.getDBModel);
+            this._raiderServiceModel.updateCreatedAnalytics(userId);
             return { task: updatedTaskResponse.data };
         });
         this.getModeratorRaidersRaid = (taskId, option) => __awaiter(this, void 0, void 0, function* () {
@@ -115,6 +119,7 @@ class ModeratorUserTaskService {
             if (!updatedTaskResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             raidResponse.data.addTaskToModel = updatedTaskResponse.data;
+            this._raiderServiceModel.updateCancelAnalytics(raidResponse.data.assigneeId);
             return { raid: raidResponse.data };
         });
         this.approveTaskAsComplete = (userId, taskId) => __awaiter(this, void 0, void 0, function* () {
@@ -124,11 +129,34 @@ class ModeratorUserTaskService {
             const updatedTaskResponse = yield this._raiderTaskModel.updateTaskDetailToDB(taskId, tasksResponse.data.getDBModel);
             if (!updatedTaskResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+            yield this._userModel.updateCompletedAnalytics(tasksResponse.data.userId, enums_1.ServiceAccountTypeEnum.raider);
+            const raidsResponse = yield this._raidModel.getAllRaids([{ taskId }]);
+            if (!raidsResponse.data)
+                return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+            Promise.all(raidsResponse.data.map((raid) => {
+                this._userModel.updateBalance(raid.assigneeId, user_dto_1.AmountEnum.raidUserPay1);
+                this._transactionModel.saveTransaction({
+                    name: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+                    userId: raid.assigneeId,
+                    updatedAt: new Date(),
+                    createdAt: new Date(),
+                    transactionType: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+                    transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
+                    amount: (user_dto_1.AmountEnum.raidUserPay1),
+                    isVerified: true,
+                });
+            }));
+            this._moderatorServiceModel.updateCompletedAnalytics(userId);
+            this._userModel.updateCompletedAnalytics(updatedTaskResponse.data.userId, enums_1.ServiceAccountTypeEnum.raider);
+            yield this._raidModel.deleteAllRaids({ taskId });
             return { task: updatedTaskResponse.data };
         });
         this._raidModel = raidModel;
         this._raiderTaskModel = raiderTaskModel;
         this._moderatorServiceModel = moderatorServiceModel;
+        this._raiderServiceModel = raiderServiceModel;
+        this._userModel = userModel;
+        this._transactionModel = transactionModel;
     }
 }
 exports.default = ModeratorUserTaskService;

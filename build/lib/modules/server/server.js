@@ -18,7 +18,7 @@ class HttpServer {
     }
     test(app) {
         app.get('/test', (_req, res) => {
-            res.send('server running successfully');
+            res.send('server running successfully and this is test');
         });
     }
     production() {

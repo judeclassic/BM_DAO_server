@@ -29,7 +29,19 @@ class UserRaidController {
             if (validationErrors.length > 0) {
                 return sendJson(400, { error: validationErrors, code: 400, status: false });
             }
-            const response = yield this._raiderUserTaskService.completeRaidTask(user.id, body.raidId);
+            const response = yield this._raiderUserTaskService.completeRaidTask(user.id, body.raidId, body.proofs);
+            if (!response.raid) {
+                sendJson(401, { error: response.errors, code: 401, status: false });
+                return;
+            }
+            sendJson(201, { data: response.raid.getResponse, code: 201, status: true });
+        });
+        this.cancelRaidTask = ({ body, user }, sendJson) => __awaiter(this, void 0, void 0, function* () {
+            const validationErrors = this._taskValidator.validateIdBeforeCreation(body.raidId);
+            if (validationErrors.length > 0) {
+                return sendJson(400, { error: validationErrors, code: 400, status: false });
+            }
+            const response = yield this._raiderUserTaskService.cancelRaidTask(user.id, body.raidId);
             if (!response.raid) {
                 sendJson(401, { error: response.errors, code: 401, status: false });
                 return;

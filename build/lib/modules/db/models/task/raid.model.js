@@ -23,11 +23,27 @@ const RaidSchema = new mongoose_1.Schema({
     taskId: String,
     timeLine: Number,
     taskStatus: String,
+    proofs: [String],
 });
 RaidSchema.plugin(mongoose_paginate_v2_1.default);
 exports.Raid = (0, mongoose_1.model)("Raid", RaidSchema);
 class RaidModel {
     constructor() {
+        this.deleteAllRaids = ({ taskId }) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.Raid.deleteMany({ taskId });
+                if (data) {
+                    return { status: true };
+                }
+                else {
+                    return { status: false, error: "Couldn't create Raid" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
         this.createRaid = (details) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield this.Raid.create(details);

@@ -17,6 +17,7 @@ exports.User = void 0;
 //User Schema
 const mongoose_1 = require("mongoose");
 const user_dto_1 = __importDefault(require("../../../../types/dtos/user.dto"));
+const enums_1 = require("../../../../types/interfaces/response/services/enums");
 const user_response_1 = require("../../../../types/interfaces/response/user.response");
 const logger_1 = require("../../logger");
 const WalletSchema = new mongoose_1.Schema({
@@ -33,6 +34,26 @@ const WalletSchema = new mongoose_1.Schema({
         totalBalance: {
             type: Number
         }
+    }
+});
+const AnalyticSchema = new mongoose_1.Schema({
+    totalUploaded: Number,
+    totalCompleted: Number,
+    raiders: {
+        totalUploaded: Number,
+        totalCompleted: Number,
+    },
+    moderators: {
+        totalUploaded: Number,
+        totalCompleted: Number,
+    },
+    chatEngagers: {
+        totalUploaded: Number,
+        totalCompleted: Number,
+    },
+    collabManagers: {
+        totalUploaded: Number,
+        totalCompleted: Number,
     }
 });
 const UserSchema = new mongoose_1.Schema({
@@ -85,6 +106,9 @@ const UserSchema = new mongoose_1.Schema({
         type: Boolean,
         default: false
     },
+    analytics: {
+        type: AnalyticSchema,
+    }
 });
 exports.User = (0, mongoose_1.model)("User", UserSchema);
 class UserModel {
@@ -96,6 +120,78 @@ class UserModel {
             });
             return finalObject;
         };
+        this.updateBalance = (userId, amount) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.User.findByIdAndUpdate(userId, { $inc: {
+                        'wallet.balance.walletBalance': amount,
+                        'wallet.balance.totalBalance': amount,
+                    } }, { new: true });
+                if (data) {
+                    return { status: true, data: new user_dto_1.default(data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't create user" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
+        this.updateUpdatedAnalytics = (userId, type) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.User.findById(userId);
+                if (data) {
+                    if (!data.analytics)
+                        data.analytics = this.createAnalytics;
+                    data.analytics.totalUploaded++;
+                    if (type === enums_1.ServiceAccountTypeEnum.chatter)
+                        data.analytics.chatEngagers.totalUploaded++;
+                    if (type === enums_1.ServiceAccountTypeEnum.collab_manager)
+                        data.analytics.collabManagers.totalUploaded++;
+                    if (type === enums_1.ServiceAccountTypeEnum.moderators)
+                        data.analytics.moderators.totalUploaded++;
+                    if (type === enums_1.ServiceAccountTypeEnum.raider)
+                        data.analytics.raiders.totalUploaded++;
+                    const updatedUser = yield data.save();
+                    return { status: true, data: new user_dto_1.default(updatedUser !== null && updatedUser !== void 0 ? updatedUser : data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't create user" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
+        this.updateCompletedAnalytics = (userId, type) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.User.findById(userId);
+                if (data) {
+                    if (!data.analytics)
+                        data.analytics = this.createAnalytics;
+                    data.analytics.totalCompleted++;
+                    if (type === enums_1.ServiceAccountTypeEnum.chatter)
+                        data.analytics.chatEngagers.totalCompleted++;
+                    if (type === enums_1.ServiceAccountTypeEnum.collab_manager)
+                        data.analytics.collabManagers.totalCompleted++;
+                    if (type === enums_1.ServiceAccountTypeEnum.moderators)
+                        data.analytics.moderators.totalCompleted++;
+                    if (type === enums_1.ServiceAccountTypeEnum.raider)
+                        data.analytics.raiders.totalCompleted++;
+                    const updatedUser = yield data.save();
+                    return { status: true, data: new user_dto_1.default(updatedUser !== null && updatedUser !== void 0 ? updatedUser : data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't create user" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
         this.saveUserToDB = (details) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield this.User.create(details);
@@ -174,6 +270,28 @@ class UserModel {
             }
         });
         this.User = exports.User;
+    }
+    get createAnalytics() {
+        return {
+            totalUploaded: 0,
+            totalCompleted: 0,
+            raiders: {
+                totalUploaded: 0,
+                totalCompleted: 0,
+            },
+            moderators: {
+                totalUploaded: 0,
+                totalCompleted: 0,
+            },
+            chatEngagers: {
+                totalUploaded: 0,
+                totalCompleted: 0,
+            },
+            collabManagers: {
+                totalUploaded: 0,
+                totalCompleted: 0,
+            }
+        };
     }
 }
 exports.default = UserModel;

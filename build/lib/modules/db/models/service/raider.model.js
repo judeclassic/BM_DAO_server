@@ -41,6 +41,20 @@ const mongoose_paginate_v2_1 = __importDefault(require("mongoose-paginate-v2"));
 const raiders_dto_1 = __importStar(require("../../../../../types/dtos/service/raiders.dto"));
 const enums_1 = require("../../../../../types/interfaces/response/services/enums");
 const logger_1 = require("../../../logger");
+const AnalyticSchema = new mongoose_1.Schema({
+    availableTask: {
+        type: Number,
+        default: 0,
+    },
+    pendingTask: {
+        type: Number,
+        default: 0,
+    },
+    completedTask: {
+        type: Number,
+        default: 0,
+    },
+});
 const RaiderUserServiceSchema = new mongoose_1.Schema({
     accountType: {
         type: String,
@@ -65,6 +79,7 @@ const RaiderUserServiceSchema = new mongoose_1.Schema({
     work_timeout: {
         type: Number,
     },
+    analytics: AnalyticSchema
 });
 RaiderUserServiceSchema.plugin(mongoose_paginate_v2_1.default);
 exports.UserService = (0, mongoose_1.model)("RaiderService", RaiderUserServiceSchema);
@@ -77,7 +92,7 @@ class RaiderUserServiceModel {
                     return { status: true, data: new raiders_dto_1.default(data) };
                 }
                 else {
-                    return { status: false, error: "Couldn't create user" };
+                    return { status: false, error: "Couldn't update userservice" };
                 }
             }
             catch (error) {
@@ -90,6 +105,60 @@ class RaiderUserServiceModel {
                 const data = yield this.UserService.findByIdAndUpdate(id, details, { new: true });
                 if (data) {
                     return { status: true, data: new raiders_dto_1.default(data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't update userservice" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
+        this.updateCreatedAnalytics = (userId) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.UserService.findOne({ userId });
+                if (data) {
+                    data.analytics.availableTask++;
+                    data.analytics.pendingTask++;
+                    const updatedUser = yield data.save();
+                    return { status: true, data: new raiders_dto_1.default(updatedUser !== null && updatedUser !== void 0 ? updatedUser : data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't updated user" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
+        this.updateCompletedAnalytics = (userId) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.UserService.findOne({ userId });
+                if (data) {
+                    data.analytics.pendingTask--;
+                    data.analytics.completedTask++;
+                    const updatedUser = yield data.save();
+                    return { status: true, data: new raiders_dto_1.default(updatedUser !== null && updatedUser !== void 0 ? updatedUser : data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't update userservice" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
+        this.updateCancelAnalytics = (userId) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.UserService.findOne({ userId });
+                if (data) {
+                    data.analytics.availableTask--;
+                    data.analytics.pendingTask--;
+                    const updatedUser = yield data.save();
+                    return { status: true, data: new raiders_dto_1.default(updatedUser !== null && updatedUser !== void 0 ? updatedUser : data) };
                 }
                 else {
                     return { status: false, error: "Couldn't update userservice" };

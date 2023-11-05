@@ -71,6 +71,7 @@ class UserDto {
         this.wallet = new WalletDto(user.wallet);
         this.referal = user.referal;
         this.authenticationCode = user.authenticationCode;
+        this.analytics = user.analytics;
     }
     get getUserForToken() {
         var _a;
@@ -97,7 +98,8 @@ class UserDto {
             createdAt: this.createdAt ? new Date(this.createdAt) : undefined,
             wallet: this.wallet.getModel,
             referal: this.referal,
-            authenticationCode: this.authenticationCode
+            authenticationCode: this.authenticationCode,
+            analytics: this.analytics
         };
     }
     get getDBModel() {
@@ -115,7 +117,8 @@ class UserDto {
             createdAt: this.createdAt ? new Date(this.createdAt) : undefined,
             wallet: this.wallet.getModel,
             referal: this.referal,
-            authenticationCode: this.authenticationCode
+            authenticationCode: this.authenticationCode,
+            analytics: this.analytics
         };
     }
     get getResponse() {
@@ -135,7 +138,8 @@ class UserDto {
             createdAt: this.createdAt ? new Date(this.createdAt) : undefined,
             raiderService: this.raiderService,
             moderatorService: this.moderatorService,
-            referals: this.referals
+            referals: this.referals,
+            analytics: this.analytics
         };
     }
     get getUnSecureResponse() {
@@ -149,7 +153,8 @@ class UserDto {
             isVerified: this.isVerified,
             updatedAt: this.updatedAt ? new Date(this.updatedAt) : undefined,
             createdAt: this.createdAt ? new Date(this.createdAt) : undefined,
-            referal: this.referal
+            referal: this.referal,
+            analytics: this.analytics
         };
     }
 }

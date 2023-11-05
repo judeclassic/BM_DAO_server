@@ -57,7 +57,7 @@ class UserAuthService {
                 country,
                 password: hashedPassword,
                 referal: Object.assign(Object.assign({ myReferalCode }, referalCodes.referalCodes), { isGiven: false }),
-                wallet,
+                wallet
             };
             const user = yield this._userModel.saveUserToDB(request);
             if (!user.data)

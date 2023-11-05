@@ -10,7 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_dto_1 = require("../../../../../types/dtos/user.dto");
+const enums_1 = require("../../../../../types/interfaces/response/services/enums");
 const raider_task_response_1 = require("../../../../../types/interfaces/response/task/raider_task.response");
+const transaction_response_1 = require("../../../../../types/interfaces/response/transaction.response");
 const user_response_1 = require("../../../../../types/interfaces/response/user.response");
 const ERROR_UNABLE_TO_CREATE_TASK = {
     field: 'user',
@@ -40,7 +42,7 @@ const ERROR_USER_NUMBERS_ARE_BELOW_REQUIRED_NUMBER = {
     message: 'we do not have enough raiders to complete this task',
 };
 class RaiderClientTaskService {
-    constructor({ raiderTaskModel, userModel, raiderServiceModel }) {
+    constructor({ raiderTaskModel, userModel, raiderServiceModel, transactionModel }) {
         this.createRaidTask = (userId, task) => __awaiter(this, void 0, void 0, function* () {
             var _a;
             const user = yield this._userModel.checkIfExist({ _id: userId });
@@ -70,30 +72,33 @@ class RaiderClientTaskService {
                 const startDate = Date.parse((new Date(task.startDate)).toISOString()) + (1000 * 3600 * 24 * (i));
                 const endDate = Date.parse((new Date(task.startDate)).toISOString()) + (1000 * 3600 * 24 * (i + 1));
                 for (let j = 0; j < task.dailyPost; j++) {
-                    const createdTask = yield this._raiderTaskModel.saveTaskToDB({
-                        userId: userId,
-                        startedAt: new Date(startDate),
-                        endedAt: new Date(endDate),
-                        raidInformation: {
-                            actions: [raider_task_response_1.RaidActionEnum.commentOnPost, raider_task_response_1.RaidActionEnum.followAccount, raider_task_response_1.RaidActionEnum.likePost, raider_task_response_1.RaidActionEnum.retweetPost],
-                            raidLink: task.raidLink,
-                            campaignCaption: task.compaignCaption,
-                            amount: task.raidersNumber,
-                        },
-                        availableRaids: task.raidersNumber,
-                        totalRaids: task.raidersNumber,
-                        completedRaids: 0,
-                        updatedAt: new Date(),
-                        createdAt: new Date(),
-                        isVerified: false,
-                        startTimeLine: startDate,
-                        endTimeLine: endDate,
-                        level: raider_task_response_1.TaskPriorityEnum.high
-                    });
-                    if (!createdTask.data) {
-                        return { errors: [ERROR_UNABLE_TO_CREATE_TASK] };
+                    const actions = Object.values(raider_task_response_1.RaidActionEnum);
+                    for (const element of actions) {
+                        const createdTask = yield this._raiderTaskModel.saveTaskToDB({
+                            userId: userId,
+                            startedAt: new Date(startDate),
+                            endedAt: new Date(endDate),
+                            raidInformation: {
+                                action: element,
+                                raidLink: task.raidLink,
+                                campaignCaption: task.compaignCaption,
+                                amount: task.raidersNumber,
+                            },
+                            availableRaids: task.raidersNumber,
+                            totalRaids: task.raidersNumber,
+                            completedRaids: 0,
+                            updatedAt: new Date(),
+                            createdAt: new Date(),
+                            isVerified: false,
+                            startTimeLine: startDate,
+                            endTimeLine: endDate,
+                            level: raider_task_response_1.TaskPriorityEnum.high
+                        });
+                        if (!createdTask.data) {
+                            return { errors: [ERROR_UNABLE_TO_CREATE_TASK] };
+                        }
+                        createdTasks.push(createdTask.data);
                     }
-                    createdTasks.push(createdTask.data);
                 }
             }
             return { tasks: createdTasks };
@@ -106,14 +111,18 @@ class RaiderClientTaskService {
             if (((_b = user.data) === null || _b === void 0 ? void 0 : _b.accountType) === user_response_1.AccountTypeEnum.user)
                 return { errors: [ERROR_USER_IS_NOT_A_CLIENT] };
             user.data.referal.isGiven = true;
-            const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: user_dto_1.AmountEnum.raidUserPay1, type: 'charged' });
+            const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: user_dto_1.AmountEnum.raidUserPay1, multiplier: task.numbers, type: 'charged' });
             if (!isWithdrawed)
                 return { errors: [ERROR_NOT_ENOUGH_BALANCE] };
+            const updatedUser = yield this._userModel.updateUserDetailToDB(userId, user.data.getDBModel);
+            if (!updatedUser.data) {
+                return { errors: [ERROR_UNABLE_TO_CREATE_TASK] };
+            }
             const userServiceResponse = yield this._raiderServiceModel.countUsersInPlatform({});
             if (!userServiceResponse.data) {
                 return { errors: [ERROR_USER_NOT_FOUND] };
             }
-            if (userServiceResponse.data < task.users)
+            if (userServiceResponse.data < task.numbers)
                 return { errors: [ERROR_USER_NUMBERS_ARE_BELOW_REQUIRED_NUMBER] };
             const endDate = new Date(Date.parse((new Date(task.startDate)).toISOString()) + (1000 * 3600 * 24));
             const createdTask = yield this._raiderTaskModel.saveTaskToDB({
@@ -121,13 +130,13 @@ class RaiderClientTaskService {
                 startedAt: new Date(task.startDate),
                 endedAt: endDate,
                 raidInformation: {
-                    actions: task.actions,
+                    action: task.action,
                     raidLink: task.raidLink,
                     campaignCaption: task.campaignCaption,
-                    amount: task.users,
+                    amount: task.numbers,
                 },
-                availableRaids: task.users,
-                totalRaids: task.users,
+                availableRaids: task.numbers,
+                totalRaids: task.numbers,
                 completedRaids: 0,
                 updatedAt: new Date(),
                 createdAt: new Date(),
@@ -139,6 +148,17 @@ class RaiderClientTaskService {
             if (!createdTask.data) {
                 return { errors: [ERROR_UNABLE_TO_CREATE_TASK] };
             }
+            this._transactionModel.saveTransaction({
+                name: updatedUser.data.name,
+                userId: user.data.id,
+                updatedAt: new Date(),
+                createdAt: new Date(),
+                transactionType: transaction_response_1.TransactionTypeEnum.TASK_CREATION,
+                transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
+                amount: (user_dto_1.AmountEnum.raidUserPay1 * task.numbers),
+                isVerified: true,
+            });
+            this._userModel.updateUpdatedAnalytics(userId, enums_1.ServiceAccountTypeEnum.raider);
             return { task: createdTask.data };
         });
         this.getAllUserTask = (userId, option) => __awaiter(this, void 0, void 0, function* () {
@@ -162,6 +182,7 @@ class RaiderClientTaskService {
         this._raiderTaskModel = raiderTaskModel;
         this._userModel = userModel;
         this._raiderServiceModel = raiderServiceModel;
+        this._transactionModel = transactionModel;
     }
 }
 exports.default = RaiderClientTaskService;

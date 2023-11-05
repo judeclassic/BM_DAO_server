@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_dto_1 = require("../../../../../types/dtos/user.dto");
+const transaction_response_1 = require("../../../../../types/interfaces/response/transaction.response");
 const user_response_1 = require("../../../../../types/interfaces/response/user.response");
 const ERROR_UNABLE_TO_REWARD_USER = {
     message: 'could not update user with referral',
@@ -39,7 +40,7 @@ const ERROR_USER_IS_A_CLIENT = {
     message: 'user is a client, unable to subscribe service',
 };
 class RaiderUserServiceService {
-    constructor({ authRepo, userModel, userServiceModel }) {
+    constructor({ authRepo, userModel, userServiceModel, transactionModel }) {
         this.subscribeForAService = ({ accountType, userId, }) => __awaiter(this, void 0, void 0, function* () {
             var _a;
             console.log(userId);
@@ -64,14 +65,29 @@ class RaiderUserServiceService {
                 isVerified: false,
                 work_timeout: Date.parse((new Date()).toISOString()),
                 tasks: [],
+                analytics: {
+                    availableTask: 0,
+                    pendingTask: 0,
+                    completedTask: 0,
+                }
             };
             const userServiceResponse = yield this._userServiceModel.createUserService(userServiceRequest);
             if (!userServiceResponse.data)
                 return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
-            const updateUser = yield this._userModel.updateUserDetailToDB(user.data.id, user.data.getDBModel);
-            if (!updateUser.data)
+            const updatedUser = yield this._userModel.updateUserDetailToDB(user.data.id, user.data.getDBModel);
+            if (!updatedUser.data)
                 return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
-            this.adwardReferals(updateUser.data.referal);
+            this._transactionModel.saveTransaction({
+                name: updatedUser.data.name,
+                userId: user.data.id,
+                updatedAt: new Date(),
+                createdAt: new Date(),
+                transactionType: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+                transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
+                amount: (user_dto_1.AmountEnum.subscriptionPackage1),
+                isVerified: true,
+            });
+            this.adwardReferals(updatedUser.data.referal);
             return { userService: userServiceResponse.data };
         });
         this.resubscribeAService = ({ userId, userServiceId }) => __awaiter(this, void 0, void 0, function* () {
@@ -91,9 +107,19 @@ class RaiderUserServiceService {
             const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: user_dto_1.AmountEnum.subscriptionPackage1, type: 'charged' });
             if (!isWithdrawed)
                 return { errors: [ERROR_NOT_ENOUGH_BALANCE] };
-            const updateUser = yield this._userModel.updateUserDetailToDB(user.data.id, user.data.getDBModel);
-            if (!updateUser.data)
+            const updatedUser = yield this._userModel.updateUserDetailToDB(user.data.id, user.data.getDBModel);
+            if (!updatedUser.data)
                 return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
+            this._transactionModel.saveTransaction({
+                name: updatedUser.data.name,
+                userId: user.data.id,
+                updatedAt: new Date(),
+                createdAt: new Date(),
+                transactionType: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+                transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
+                amount: (user_dto_1.AmountEnum.subscriptionPackage1),
+                isVerified: true,
+            });
             const updatedRaiderService = yield this._userServiceModel.updateUserService(userService.data._id, {
                 subscriptionDate: Date.parse((new Date()).toISOString())
             });
@@ -154,6 +180,7 @@ class RaiderUserServiceService {
         this._authRepo = authRepo;
         this._userModel = userModel;
         this._userServiceModel = userServiceModel;
+        this._transactionModel = transactionModel;
     }
 }
 exports.default = RaiderUserServiceService;

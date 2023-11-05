@@ -5,6 +5,9 @@ var TransactionTypeEnum;
 (function (TransactionTypeEnum) {
     TransactionTypeEnum["FUNDING"] = "FUNDING";
     TransactionTypeEnum["WITHDRAWAL"] = "WITHDRAWAL";
+    TransactionTypeEnum["REFERRAL"] = "REFERRAL";
+    TransactionTypeEnum["TASK_CREATION"] = "TASK_CREATION";
+    TransactionTypeEnum["RAIDER_SUBSCRIPTION"] = "RAIDER_SUBSCRIPTION";
 })(TransactionTypeEnum = exports.TransactionTypeEnum || (exports.TransactionTypeEnum = {}));
 var TransactionStatusEnum;
 (function (TransactionStatusEnum) {

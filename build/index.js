@@ -14,7 +14,7 @@ const user_routes_1 = __importDefault(require("./features/user/user.routes"));
 (0, load_env_1.default)();
 const dBConnection = new db_1.default(logger_1.defaultLogger);
 dBConnection.connect({ config: config_1.default });
-const callback = (app, server) => {
+const callback = (app, _server) => {
     const authenticationRepo = new auth_1.default();
     const router = new router_1.default({ router: app, authenticationRepo, host: '/api' });
     router.extend('/user', user_routes_1.default);
