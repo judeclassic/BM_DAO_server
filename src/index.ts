@@ -14,7 +14,7 @@ const dBConnection = new DBConnection(defaultLogger);
 
 dBConnection.connect({config});
 
-const callback = (app: RouterInterface, server: any)=> {
+const callback = (app: RouterInterface, _server: any)=> {
     const authenticationRepo = new AuthorizationRepo();
     
     const router = new RequestHandler({ router: app,  authenticationRepo, host: '/api' });
