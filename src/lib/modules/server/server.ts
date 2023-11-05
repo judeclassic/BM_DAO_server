@@ -19,7 +19,7 @@ export default class HttpServer {
 
     private test(app: any) {
         app.get('/test', (_req: any, res: any) =>{
-            res.send('server running successfully');
+            res.send('server running successfully and this is test');
         });
     }
 
