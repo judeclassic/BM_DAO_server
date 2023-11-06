@@ -45,7 +45,14 @@ const RaiderUserServiceSchema = new Schema<IRaiderUserService>({
   work_timeout: {
     type: Number,
   },
-  analytics: AnalyticSchema
+  analytics: {
+    type: AnalyticSchema,
+    default: {
+      availableTask: 0,
+      pendingTask: 0,
+      completedTask: 0
+    }
+  }
 });
 
 RaiderUserServiceSchema.plugin(mongoosePaginate);

@@ -79,7 +79,14 @@ const RaiderUserServiceSchema = new mongoose_1.Schema({
     work_timeout: {
         type: Number,
     },
-    analytics: AnalyticSchema
+    analytics: {
+        type: AnalyticSchema,
+        default: {
+            availableTask: 0,
+            pendingTask: 0,
+            completedTask: 0
+        }
+    }
 });
 RaiderUserServiceSchema.plugin(mongoose_paginate_v2_1.default);
 exports.UserService = (0, mongoose_1.model)("RaiderService", RaiderUserServiceSchema);
