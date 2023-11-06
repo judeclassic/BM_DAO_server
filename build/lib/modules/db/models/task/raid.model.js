@@ -91,7 +91,7 @@ class RaidModel {
         });
         this.getAllRaid = (details, option) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = yield this.Raid.paginate(details, option);
+                const data = yield this.Raid.paginate(details, Object.assign(Object.assign({}, option), { sort: { _id: -1 } }));
                 if (data) {
                     return { status: true,
                         data: new raids_dto_1.MultipleRaidDto({
@@ -124,7 +124,7 @@ class RaidModel {
         });
         this.getAllRaidsInPages = (details, option) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = yield this.Raid.paginate(details, option);
+                const data = yield this.Raid.paginate(details, Object.assign(Object.assign({}, option), { sort: { _id: -1 } }));
                 if (data) {
                     return { status: true,
                         data: new raids_dto_1.MultipleRaidDto({
@@ -145,9 +145,9 @@ class RaidModel {
             try {
                 const currentTime = Date.parse((new Date()).toISOString());
                 const data = status === 'free' ?
-                    yield this.Raid.paginate({ work_timeout: { $lt: currentTime }, subscriptionDate: { $lt: currentTime } }, option)
+                    yield this.Raid.paginate({ work_timeout: { $lt: currentTime }, subscriptionDate: { $lt: currentTime } }, Object.assign(Object.assign({}, option), { sort: { _id: -1 } }))
                     :
-                        yield this.Raid.paginate({ work_timeout: { $gt: currentTime }, subscriptionDate: { $lt: currentTime } }, option);
+                        yield this.Raid.paginate({ work_timeout: { $gt: currentTime }, subscriptionDate: { $lt: currentTime } }, Object.assign(Object.assign({}, option), { sort: { _id: -1 } }));
                 if (data) {
                     return { status: true,
                         data: new raids_dto_1.MultipleRaidDto({

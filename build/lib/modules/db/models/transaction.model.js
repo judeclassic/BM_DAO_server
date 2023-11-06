@@ -98,7 +98,7 @@ class TransactionModel {
         });
         this.getTransactions = (details, option) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = yield this.Transaction.paginate(details, option);
+                const data = yield this.Transaction.paginate(details, Object.assign(Object.assign({}, option), { sort: { _id: -1 } }));
                 if (data) {
                     return {
                         status: true,

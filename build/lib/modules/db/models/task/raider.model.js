@@ -141,7 +141,7 @@ class RaiderTaskModel {
         });
         this.getAllTask = (details, option) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = yield this.Task.paginate(details, option);
+                const data = yield this.Task.paginate(details, Object.assign(Object.assign({}, option), { sort: { _id: -1 } }));
                 if (data) {
                     return { status: true,
                         data: new raiders_dto_1.MultipleRaiderTaskDto({
@@ -162,7 +162,7 @@ class RaiderTaskModel {
             try {
                 const date = (new Date()).toISOString();
                 const timeLine = Date.parse(date);
-                const data = yield this.Task.paginate(Object.assign({ startTimeLine: { $lt: timeLine }, endTimeLine: { $gt: timeLine } }, details), option);
+                const data = yield this.Task.paginate(Object.assign({ startTimeLine: { $lt: timeLine }, endTimeLine: { $gt: timeLine } }, details), Object.assign(Object.assign({}, option), { sort: { _id: -1 } }));
                 if (data) {
                     return { status: true,
                         data: new raiders_dto_1.MultipleRaiderTaskDto({
@@ -184,7 +184,7 @@ class RaiderTaskModel {
             try {
                 const date = (new Date()).toISOString();
                 const timeLine = Date.parse(date);
-                const data = yield this.Task.paginate(Object.assign({ endTimeLine: { $gt: timeLine } }, details), option);
+                const data = yield this.Task.paginate(Object.assign({ endTimeLine: { $gt: timeLine } }, details), Object.assign(Object.assign({}, option), { sort: { _id: -1 } }));
                 if (data) {
                     return { status: true,
                         data: new raiders_dto_1.MultipleRaiderTaskDto({

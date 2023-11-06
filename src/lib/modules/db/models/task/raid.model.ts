@@ -84,7 +84,7 @@ class  RaidModel implements  IRaidModelRepository {
 
     getAllRaid = async (details: Partial<IRaid>, option: { page: number; limit: number; }) => {
       try {
-        const data = await this.Raid.paginate(details, option);
+        const data = await this.Raid.paginate(details, {...option, sort: {_id: -1}});
         if (data) {
           return {status: true,
             data: new MultipleRaidDto({ 
@@ -114,7 +114,7 @@ class  RaidModel implements  IRaidModelRepository {
     }
     getAllRaidsInPages = async (details: Partial<IRaid>[], option: { page: number; limit: number; }) => {
       try {
-        const data = await this.Raid.paginate(details, option);
+        const data = await this.Raid.paginate(details, {...option, sort: {_id: -1}});
         if (data) {
           return {status: true,
             data: new MultipleRaidDto({ 
@@ -134,9 +134,9 @@ class  RaidModel implements  IRaidModelRepository {
       try {
         const currentTime = Date.parse((new Date()).toISOString())
         const data = status === 'free' ?
-            await this.Raid.paginate({ work_timeout: { $lt: currentTime }, subscriptionDate: { $lt: currentTime } }, option)
+            await this.Raid.paginate({ work_timeout: { $lt: currentTime }, subscriptionDate: { $lt: currentTime } }, {...option, sort: {_id: -1}})
             :
-            await this.Raid.paginate({ work_timeout: { $gt: currentTime }, subscriptionDate: { $lt: currentTime } }, option)
+            await this.Raid.paginate({ work_timeout: { $gt: currentTime }, subscriptionDate: { $lt: currentTime } }, {...option, sort: {_id: -1}})
   
         if (data) {
           return {status: true,

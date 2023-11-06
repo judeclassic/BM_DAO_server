@@ -135,7 +135,7 @@ class  RaiderTaskModel implements  IRaiderTaskModelRepository {
     
     getAllTask = async (details: Partial<IRaiderTask>, option: { page: number, limit: number }) => {
       try {
-        const data = await this.Task.paginate(details, option);
+        const data = await this.Task.paginate(details, {...option, sort: {_id: -1}});
         if (data) {
           return {status: true,
             data: new MultipleRaiderTaskDto({
@@ -156,7 +156,7 @@ class  RaiderTaskModel implements  IRaiderTaskModelRepository {
         const date = (new Date()).toISOString();
         const timeLine = Date.parse(date);
 
-        const data = await this.Task.paginate({ startTimeLine: { $lt: timeLine }, endTimeLine: { $gt: timeLine }, ...details }, option);
+        const data = await this.Task.paginate({ startTimeLine: { $lt: timeLine }, endTimeLine: { $gt: timeLine }, ...details }, {...option, sort: {_id: -1}});
         if (data) {
           return {status: true,
             data: new MultipleRaiderTaskDto({
@@ -178,7 +178,7 @@ class  RaiderTaskModel implements  IRaiderTaskModelRepository {
         const date = (new Date()).toISOString();
         const timeLine = Date.parse(date);
 
-        const data = await this.Task.paginate({ endTimeLine: { $gt: timeLine }, ...details }, option);
+        const data = await this.Task.paginate({ endTimeLine: { $gt: timeLine }, ...details }, {...option, sort: {_id: -1}});
         if (data) {
           return {status: true,
             data: new MultipleRaiderTaskDto({

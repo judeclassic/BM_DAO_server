@@ -90,7 +90,7 @@ class  TransactionModel {
 
     getTransactions = async (details: Partial<ITransaction>, option: { page: number; limit: number; }) => {
       try {
-        const data = await this.Transaction.paginate(details, option);
+        const data = await this.Transaction.paginate(details, {...option, sort: {_id: -1}});
         if (data) {
           return {
             status: true,
