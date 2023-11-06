@@ -119,7 +119,10 @@ class RaiderClientTaskValidator extends _BaseValidator {
       errors.push({ field: 'startDate', message: 'startDate can not be empty' });
     } else {
       try {
-        new Date(startDate).toISOString();
+        const date = new Date(startDate).toISOString() as any;
+        if (!(date instanceof Date)) {
+          errors.push({ field: 'startDate', message: 'startDate must be date' });
+        }
       } catch (er) {
         errors.push({ field: 'startDate', message: 'startDate must be date' });
       }

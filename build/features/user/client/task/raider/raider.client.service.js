@@ -111,7 +111,7 @@ class RaiderClientTaskService {
             if (((_b = user.data) === null || _b === void 0 ? void 0 : _b.accountType) === user_response_1.AccountTypeEnum.user)
                 return { errors: [ERROR_USER_IS_NOT_A_CLIENT] };
             user.data.referal.isGiven = true;
-            const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: user_dto_1.AmountEnum.raidUserPay1, multiplier: task.numbers, type: 'charged' });
+            const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: user_dto_1.AmountEnum.raidClientCharge2, multiplier: task.numbers, type: 'charged' });
             if (!isWithdrawed)
                 return { errors: [ERROR_NOT_ENOUGH_BALANCE] };
             const updatedUser = yield this._userModel.updateUserDetailToDB(userId, user.data.getDBModel);
