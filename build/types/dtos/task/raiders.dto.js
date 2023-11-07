@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MultipleRaiderTaskDto = exports.RaiderTaskDto = void 0;
 const raid_response_1 = require("../../interfaces/response/services/raid.response");
+const raider_task_response_1 = require("../../interfaces/response/task/raider_task.response");
+const user_dto_1 = require("../user.dto");
 class RaiderTaskDto {
     constructor(task) {
         var _a;
@@ -96,6 +98,42 @@ class RaiderTaskDto {
             serviceId: moderatorServiceDto._id,
             name: moderatorServiceDto.name
         };
+    }
+    static getPricingByAction(action) {
+        if (action === raider_task_response_1.RaidActionEnum.commentOnPost) {
+            return user_dto_1.AmountEnum.raidClientCommentCharge;
+        }
+        if (action === raider_task_response_1.RaidActionEnum.createATweet) {
+            return user_dto_1.AmountEnum.raidClientTweetCharge;
+        }
+        if (action === raider_task_response_1.RaidActionEnum.followAccount) {
+            return user_dto_1.AmountEnum.raidClientFollowCharge;
+        }
+        if (action === raider_task_response_1.RaidActionEnum.likePost) {
+            return user_dto_1.AmountEnum.raidClientLikeCharge;
+        }
+        if (action === raider_task_response_1.RaidActionEnum.raid) {
+            return user_dto_1.AmountEnum.raidClientRaidCharge;
+        }
+        return user_dto_1.AmountEnum.raidClientRetweetCharge;
+    }
+    static getPayoutByAction(action) {
+        if (action === raider_task_response_1.RaidActionEnum.commentOnPost) {
+            return user_dto_1.AmountEnum.raidClientCommentpay;
+        }
+        if (action === raider_task_response_1.RaidActionEnum.createATweet) {
+            return user_dto_1.AmountEnum.raidClientTweetPay;
+        }
+        if (action === raider_task_response_1.RaidActionEnum.followAccount) {
+            return user_dto_1.AmountEnum.raidClientFollowPay;
+        }
+        if (action === raider_task_response_1.RaidActionEnum.likePost) {
+            return user_dto_1.AmountEnum.raidClientLikePay;
+        }
+        if (action === raider_task_response_1.RaidActionEnum.raid) {
+            return user_dto_1.AmountEnum.raidClientRaidPay;
+        }
+        return user_dto_1.AmountEnum.raidClientRetweetpay;
     }
 }
 exports.RaiderTaskDto = RaiderTaskDto;

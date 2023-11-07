@@ -1,6 +1,7 @@
 import { IRaid, TaskStatusStatus } from "../../interfaces/response/services/raid.response";
-import { IRaiderTask, IMultipleRaiderTask, IRaidTaskInformation, TaskPriorityEnum, IRaiderModerator } from "../../interfaces/response/task/raider_task.response";
+import { IRaiderTask, IMultipleRaiderTask, IRaidTaskInformation, TaskPriorityEnum, IRaiderModerator, RaidActionEnum } from "../../interfaces/response/task/raider_task.response";
 import ModeratorUserServiceDto from "../service/moderators.dto";
+import { AmountEnum } from "../user.dto";
 
 export interface IRaiderTaskResponse {
   _id?: string;
@@ -142,6 +143,44 @@ export class RaiderTaskDto implements IRaiderTask {
     if (type === 'complete') {
       this.completedRaids = this.completedRaids + (userAmount ?? 1);
     }
+  }
+
+  static getPricingByAction(action: RaidActionEnum) {
+    if (action === RaidActionEnum.commentOnPost) {
+      return AmountEnum.raidClientCommentCharge
+    }
+    if (action === RaidActionEnum.createATweet) {
+      return AmountEnum.raidClientTweetCharge
+    }
+    if (action === RaidActionEnum.followAccount) {
+      return AmountEnum.raidClientFollowCharge
+    }
+    if (action === RaidActionEnum.likePost) {
+      return AmountEnum.raidClientLikeCharge
+    }
+    if (action === RaidActionEnum.raid) {
+      return AmountEnum.raidClientRaidCharge
+    }
+    return AmountEnum.raidClientRetweetCharge;
+  }
+
+  static getPayoutByAction(action: RaidActionEnum) {
+    if (action === RaidActionEnum.commentOnPost) {
+      return AmountEnum.raidClientCommentpay
+    }
+    if (action === RaidActionEnum.createATweet) {
+      return AmountEnum.raidClientTweetPay
+    }
+    if (action === RaidActionEnum.followAccount) {
+      return AmountEnum.raidClientFollowPay
+    }
+    if (action === RaidActionEnum.likePost) {
+      return AmountEnum.raidClientLikePay
+    }
+    if (action === RaidActionEnum.raid) {
+      return AmountEnum.raidClientRaidPay
+    }
+    return AmountEnum.raidClientRetweetpay;
   }
 }
 

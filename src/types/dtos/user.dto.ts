@@ -12,15 +12,37 @@ export enum AmountPercentageEnum {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export enum AmountEnum {
   subscriptionPackage1 = 10.00,
   moderatorSubscriptionPackage1 = 50.0,
 
-  raidUserPay1 = 0.02,
-  raidUserPay2 = 0.04,
+  raidClientFollowPay = 0.01,
+  raidClientRaidPay = 0.2,
+  raidClientLikePay = 0.007,
+  raidClientTweetPay = 0.16,
+  raidClientCommentpay = 0.03,
+  raidClientRetweetpay = 0.007,
 
-  raidClientCharge1 = 0.03,
-  raidClientCharge2 = 0.06,
+  raidClientFollowCharge = 0.015,
+  raidClientRaidCharge = 0.03,
+  raidClientLikeCharge = 0.01,
+  raidClientTweetCharge = 0.25,
+  raidClientCommentCharge = 0.045,
+  raidClientRetweetCharge = 0.01
 }
 
 export interface IWalletResponse {

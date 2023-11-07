@@ -66,7 +66,7 @@ class RaiderClientTaskService {
 
     user.data.referal.isGiven = true;
     const isWithdrawed = user.data.updateUserWithdrawableBalance({ 
-      amount: AmountEnum.raidClientCharge1,
+      amount: AmountEnum.raidClientRaidCharge,
       multiplier: task.dailyPost * task.raidersNumber * task.weeks * 7,
       type: 'charged'
     });
@@ -135,7 +135,12 @@ class RaiderClientTaskService {
     if ( user.data?.accountType === AccountTypeEnum.user) return { errors: [ERROR_USER_IS_NOT_A_CLIENT] };
 
     user.data.referal.isGiven = true;
-    const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: AmountEnum.raidClientCharge1, multiplier: task.numbers, type: 'charged' });
+    const isWithdrawed = user.data.updateUserWithdrawableBalance({ 
+      amount: RaiderTaskDto.getPricingByAction(task.action),
+      multiplier: task.numbers,
+      type: 'charged'
+    });
+    
     if (!isWithdrawed) return { errors: [ERROR_NOT_ENOUGH_BALANCE] };
 
     const updatedUser = await this._userModel.updateUserDetailToDB(userId, user.data.getDBModel);
@@ -185,7 +190,7 @@ class RaiderClientTaskService {
       createdAt: new Date(),
       transactionType: TransactionTypeEnum.TASK_CREATION,
       transactionStatus: TransactionStatusEnum.COMPLETED,
-      amount: (AmountEnum.raidClientCharge1 * task.numbers),
+      amount: (RaiderTaskDto.getPricingByAction(task.action) * task.numbers),
       isVerified: true,
     });
 

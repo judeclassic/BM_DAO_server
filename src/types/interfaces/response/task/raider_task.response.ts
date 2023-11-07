@@ -5,6 +5,7 @@ export enum RaidActionEnum {
     retweetPost = 'Retweet Post',
     commentOnPost = 'Comment on Post',
     createATweet = 'Create a Tweet',
+    raid = 'Raid',
 }
 
 

@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const raiders_dto_1 = require("../../../../../types/dtos/task/raiders.dto");
 const user_dto_1 = require("../../../../../types/dtos/user.dto");
 const enums_1 = require("../../../../../types/interfaces/response/services/enums");
 const raider_task_response_1 = require("../../../../../types/interfaces/response/task/raider_task.response");
@@ -52,7 +53,7 @@ class RaiderClientTaskService {
                 return { errors: [ERROR_USER_IS_NOT_A_CLIENT] };
             user.data.referal.isGiven = true;
             const isWithdrawed = user.data.updateUserWithdrawableBalance({
-                amount: user_dto_1.AmountEnum.raidClientCharge1,
+                amount: user_dto_1.AmountEnum.raidClientRaidCharge,
                 multiplier: task.dailyPost * task.raidersNumber * task.weeks * 7,
                 type: 'charged'
             });
@@ -111,7 +112,11 @@ class RaiderClientTaskService {
             if (((_b = user.data) === null || _b === void 0 ? void 0 : _b.accountType) === user_response_1.AccountTypeEnum.user)
                 return { errors: [ERROR_USER_IS_NOT_A_CLIENT] };
             user.data.referal.isGiven = true;
-            const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: user_dto_1.AmountEnum.raidClientCharge1, multiplier: task.numbers, type: 'charged' });
+            const isWithdrawed = user.data.updateUserWithdrawableBalance({
+                amount: raiders_dto_1.RaiderTaskDto.getPricingByAction(task.action),
+                multiplier: task.numbers,
+                type: 'charged'
+            });
             if (!isWithdrawed)
                 return { errors: [ERROR_NOT_ENOUGH_BALANCE] };
             const updatedUser = yield this._userModel.updateUserDetailToDB(userId, user.data.getDBModel);
@@ -155,7 +160,7 @@ class RaiderClientTaskService {
                 createdAt: new Date(),
                 transactionType: transaction_response_1.TransactionTypeEnum.TASK_CREATION,
                 transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
-                amount: (user_dto_1.AmountEnum.raidClientCharge1 * task.numbers),
+                amount: (raiders_dto_1.RaiderTaskDto.getPricingByAction(task.action) * task.numbers),
                 isVerified: true,
             });
             this._userModel.updateUpdatedAnalytics(userId, enums_1.ServiceAccountTypeEnum.raider);

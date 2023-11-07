@@ -110,10 +110,14 @@ class RaiderClientTaskValidator extends validator_1.default {
             if (!raidLink) {
                 errors.push({ field: 'raidLink', message: 'raidLink can not be empty' });
             }
-            if (!mediaUrl) {
+            if (!mediaUrl && ((action === raider_task_response_1.RaidActionEnum.commentOnPost) ||
+                (action === raider_task_response_1.RaidActionEnum.createATweet) ||
+                (action === raider_task_response_1.RaidActionEnum.raid))) {
                 errors.push({ field: 'mediaUrl', message: 'mediaUrl can not be empty' });
             }
-            if (!campaignCaption) {
+            if (!campaignCaption && ((action === raider_task_response_1.RaidActionEnum.commentOnPost) ||
+                (action === raider_task_response_1.RaidActionEnum.createATweet) ||
+                (action === raider_task_response_1.RaidActionEnum.raid))) {
                 errors.push({ field: 'campaignCaption', message: 'campaignCaption can not be empty' });
             }
             if (!startDate) {

@@ -1,7 +1,6 @@
 import TransactionModel from "../../../../../../lib/modules/db/models/transaction.model";
 import { RaidDto, MultipleRaidDto } from "../../../../../../types/dtos/service/raids.dto";
 import { MultipleRaiderTaskDto, RaiderTaskDto } from "../../../../../../types/dtos/task/raiders.dto";
-import { AmountEnum } from "../../../../../../types/dtos/user.dto";
 import ErrorInterface from "../../../../../../types/interfaces/error";
 import IUserModelRepository from "../../../../../../types/interfaces/modules/db/models/Iuser.model";
 import IModeratorServiceModelRepository from "../../../../../../types/interfaces/modules/db/models/service/moderator.model";
@@ -174,7 +173,7 @@ class ModeratorUserTaskService {
     if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
     Promise.all(raidsResponse.data.map((raid) => {
-      this._userModel.updateBalance(raid.assigneeId, AmountEnum.raidUserPay1);
+      this._userModel.updateBalance(raid.assigneeId, RaiderTaskDto.getPricingByAction(tasksResponse.data?.raidInformation.action!));
       this._transactionModel.saveTransaction({
         name: TransactionTypeEnum.RAIDER_SUBSCRIPTION,
         userId: raid.assigneeId,
@@ -182,7 +181,7 @@ class ModeratorUserTaskService {
         createdAt: new Date(),
         transactionType: TransactionTypeEnum.RAIDER_SUBSCRIPTION,
         transactionStatus: TransactionStatusEnum.COMPLETED,
-        amount: (AmountEnum.raidUserPay1),
+        amount: (RaiderTaskDto.getPricingByAction(tasksResponse.data?.raidInformation.action!)),
         isVerified: true,
       });
     }));

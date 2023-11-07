@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const user_dto_1 = require("../../../../../../types/dtos/user.dto");
+const raiders_dto_1 = require("../../../../../../types/dtos/task/raiders.dto");
 const enums_1 = require("../../../../../../types/interfaces/response/services/enums");
 const raider_task_response_1 = require("../../../../../../types/interfaces/response/task/raider_task.response");
 const transaction_response_1 = require("../../../../../../types/interfaces/response/transaction.response");
@@ -134,7 +134,8 @@ class ModeratorUserTaskService {
             if (!raidsResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             Promise.all(raidsResponse.data.map((raid) => {
-                this._userModel.updateBalance(raid.assigneeId, user_dto_1.AmountEnum.raidUserPay1);
+                var _a, _b;
+                this._userModel.updateBalance(raid.assigneeId, raiders_dto_1.RaiderTaskDto.getPricingByAction((_a = tasksResponse.data) === null || _a === void 0 ? void 0 : _a.raidInformation.action));
                 this._transactionModel.saveTransaction({
                     name: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
                     userId: raid.assigneeId,
@@ -142,7 +143,7 @@ class ModeratorUserTaskService {
                     createdAt: new Date(),
                     transactionType: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
                     transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
-                    amount: (user_dto_1.AmountEnum.raidUserPay1),
+                    amount: (raiders_dto_1.RaiderTaskDto.getPricingByAction((_b = tasksResponse.data) === null || _b === void 0 ? void 0 : _b.raidInformation.action)),
                     isVerified: true,
                 });
             }));

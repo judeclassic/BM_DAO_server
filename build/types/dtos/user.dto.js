@@ -12,10 +12,18 @@ var AmountEnum;
 (function (AmountEnum) {
     AmountEnum[AmountEnum["subscriptionPackage1"] = 10] = "subscriptionPackage1";
     AmountEnum[AmountEnum["moderatorSubscriptionPackage1"] = 50] = "moderatorSubscriptionPackage1";
-    AmountEnum[AmountEnum["raidUserPay1"] = 0.02] = "raidUserPay1";
-    AmountEnum[AmountEnum["raidUserPay2"] = 0.04] = "raidUserPay2";
-    AmountEnum[AmountEnum["raidClientCharge1"] = 0.03] = "raidClientCharge1";
-    AmountEnum[AmountEnum["raidClientCharge2"] = 0.06] = "raidClientCharge2";
+    AmountEnum[AmountEnum["raidClientFollowPay"] = 0.01] = "raidClientFollowPay";
+    AmountEnum[AmountEnum["raidClientRaidPay"] = 0.2] = "raidClientRaidPay";
+    AmountEnum[AmountEnum["raidClientLikePay"] = 0.007] = "raidClientLikePay";
+    AmountEnum[AmountEnum["raidClientTweetPay"] = 0.16] = "raidClientTweetPay";
+    AmountEnum[AmountEnum["raidClientCommentpay"] = 0.03] = "raidClientCommentpay";
+    AmountEnum[AmountEnum["raidClientRetweetpay"] = 0.007] = "raidClientRetweetpay";
+    AmountEnum[AmountEnum["raidClientFollowCharge"] = 0.015] = "raidClientFollowCharge";
+    AmountEnum[AmountEnum["raidClientRaidCharge"] = 0.03] = "raidClientRaidCharge";
+    AmountEnum[AmountEnum["raidClientLikeCharge"] = 0.01] = "raidClientLikeCharge";
+    AmountEnum[AmountEnum["raidClientTweetCharge"] = 0.25] = "raidClientTweetCharge";
+    AmountEnum[AmountEnum["raidClientCommentCharge"] = 0.045] = "raidClientCommentCharge";
+    AmountEnum[AmountEnum["raidClientRetweetCharge"] = 0.01] = "raidClientRetweetCharge";
 })(AmountEnum = exports.AmountEnum || (exports.AmountEnum = {}));
 class WalletDto {
     constructor(wallet) {
