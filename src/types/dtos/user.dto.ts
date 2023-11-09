@@ -11,31 +11,16 @@ export enum AmountPercentageEnum {
   referal3 = 3,
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export enum AmountEnum {
   subscriptionPackage1 = 10.00,
   moderatorSubscriptionPackage1 = 50.0,
 
-  raidClientFollowPay = 0.01,
-  raidClientRaidPay = 0.2,
-  raidClientLikePay = 0.007,
-  raidClientTweetPay = 0.16,
-  raidClientCommentpay = 0.03,
-  raidClientRetweetpay = 0.007,
+  raidClientFollowPay = 0.0075,
+  raidClientRaidPay = 0.15,
+  raidClientLikePay = 0.005,
+  raidClientTweetPay = 0.12,
+  raidClientCommentpay = 0.022,
+  raidClientRetweetpay = 0.005,
 
   raidClientFollowCharge = 0.015,
   raidClientRaidCharge = 0.03,
