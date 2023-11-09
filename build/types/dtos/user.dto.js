@@ -63,6 +63,8 @@ class UserDto {
         this.updateReferalBalance = ({ amount, percentage, level }) => {
             this.wallet.balance.referalBonus = this.wallet.balance.referalBonus + (amount * percentage / 100);
             this.wallet.balance.totalBalance = this.wallet.balance.totalBalance + (amount * percentage / 100);
+            this.referal.analytics.totalAmount += 1;
+            this.referal.analytics.totalEarned += (amount * percentage / 100);
             if (level === 1) {
                 this.referal.analytics.level1.amount += 1;
                 this.referal.analytics.level1.earned += (amount * percentage / 100);
@@ -151,7 +153,7 @@ class UserDto {
             phoneNumber: this.phoneNumber,
             accessToken: this.accessToken,
             wallet: this.wallet.getResponse,
-            referal: { myReferalCode: this.referal.myReferalCode },
+            referal: { myReferalCode: this.referal.myReferalCode, analytics: this.referal.analytics },
             country: this.country,
             isVerified: this.isVerified,
             updatedAt: this.updatedAt ? new Date(this.updatedAt) : undefined,
