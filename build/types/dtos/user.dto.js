@@ -60,9 +60,21 @@ class UserDto {
             this.wallet.balance.totalBalance += (amount * multiplier);
             return (this.wallet.balance.walletBalance > 0);
         };
-        this.updateReferalBalance = ({ amount, percentage }) => {
+        this.updateReferalBalance = ({ amount, percentage, level }) => {
             this.wallet.balance.referalBonus = this.wallet.balance.referalBonus + (amount * percentage / 100);
             this.wallet.balance.totalBalance = this.wallet.balance.totalBalance + (amount * percentage / 100);
+            if (level === 1) {
+                this.referal.analytics.level1.amount += 1;
+                this.referal.analytics.level1.earned += (amount * percentage / 100);
+            }
+            if (level === 2) {
+                this.referal.analytics.level2.amount += 1;
+                this.referal.analytics.level2.earned += (amount * percentage / 100);
+            }
+            if (level === 3) {
+                this.referal.analytics.level3.amount += 1;
+                this.referal.analytics.level3.earned += (amount * percentage / 100);
+            }
         };
         this.id = user._id;
         this.accountType = user.accountType;

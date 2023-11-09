@@ -109,7 +109,24 @@ class UserAuthService {
             }
         });
         this.getReferalInfo = (referalCode) => __awaiter(this, void 0, void 0, function* () {
-            const referalCodes = {};
+            const referalCodes = {
+                analytics: {
+                    totalAmount: 0,
+                    totalEarned: 0,
+                    level1: {
+                        amount: 0,
+                        earned: 0
+                    },
+                    level2: {
+                        amount: 0,
+                        earned: 0
+                    },
+                    level3: {
+                        amount: 0,
+                        earned: 0
+                    }
+                }
+            };
             if (referalCode) {
                 const userWith1stReferalExists = yield this._userModel.checkIfReferalExist({ myReferalCode: referalCode });
                 if (!userWith1stReferalExists.data)

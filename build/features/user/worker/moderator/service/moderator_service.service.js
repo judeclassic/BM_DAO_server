@@ -143,21 +143,21 @@ class ModeratorUserServiceService {
         this.adwardReferals = ({ referalCode1, referalCode2, referalCode3, isGiven }) => __awaiter(this, void 0, void 0, function* () {
             if (isGiven)
                 return;
-            const response1 = yield this.adwardReferal(user_dto_1.AmountPercentageEnum.referal1, referalCode1);
+            const response1 = yield this.adwardReferal(user_dto_1.AmountPercentageEnum.referal1, 1, referalCode1);
             if (!response1.status)
                 return response1;
-            const response2 = yield this.adwardReferal(user_dto_1.AmountPercentageEnum.referal2, referalCode2);
+            const response2 = yield this.adwardReferal(user_dto_1.AmountPercentageEnum.referal2, 2, referalCode2);
             if (!response2.status)
                 return response2;
-            const response3 = yield this.adwardReferal(user_dto_1.AmountPercentageEnum.referal3, referalCode3);
+            const response3 = yield this.adwardReferal(user_dto_1.AmountPercentageEnum.referal3, 3, referalCode3);
             if (!response3.status)
                 return response3;
         });
-        this.adwardReferal = (percentage, referalCode) => __awaiter(this, void 0, void 0, function* () {
+        this.adwardReferal = (percentage, level, referalCode) => __awaiter(this, void 0, void 0, function* () {
             if (referalCode) {
                 const userWith1stReferalExists = yield this._userModel.checkIfReferalExist({ myReferalCode: referalCode });
                 if (userWith1stReferalExists.data) {
-                    userWith1stReferalExists.data.updateReferalBalance({ amount: user_dto_1.AmountEnum.subscriptionPackage1, percentage });
+                    userWith1stReferalExists.data.updateReferalBalance({ amount: user_dto_1.AmountEnum.subscriptionPackage1, percentage, level });
                     const updateUserWith1stReferal = yield this._userModel.updateUserDetailToDB(userWith1stReferalExists.data.id, userWith1stReferalExists.data.getDBModel);
                     if (!updateUserWith1stReferal.data)
                         return { status: false, errors: [ERROR_UNABLE_TO_REWARD_USER] };
