@@ -62,6 +62,7 @@ export interface UserResponseInterface {
     country?: string;
     referal: {
         myReferalCode: string;
+        analytics: IUser['referal']['analytics']
     };
     updatedAt?: Date;
     createdAt?: Date;
@@ -202,7 +203,7 @@ class UserDto implements IUser {
       phoneNumber: this.phoneNumber,
       accessToken: this.accessToken,
       wallet: this.wallet.getResponse,
-      referal: { myReferalCode: this.referal.myReferalCode },
+      referal: { myReferalCode: this.referal.myReferalCode, analytics: this.referal.analytics },
       country: this.country,
       isVerified: this.isVerified,
       updatedAt: this.updatedAt ? new Date(this.updatedAt): undefined,
@@ -251,6 +252,8 @@ class UserDto implements IUser {
   updateReferalBalance = ({ amount, percentage, level }: { amount: AmountEnum, percentage: AmountPercentageEnum, level: number }) => {
     this.wallet.balance.referalBonus = this.wallet.balance.referalBonus + (amount * percentage / 100);
     this.wallet.balance.totalBalance = this.wallet.balance.totalBalance + (amount * percentage / 100);
+    this.referal.analytics.totalAmount += 1;
+    this.referal.analytics.totalEarned += (amount * percentage / 100);
     if (level === 1) {
       this.referal.analytics.level1.amount += 1;
       this.referal.analytics.level1.earned += (amount * percentage / 100);

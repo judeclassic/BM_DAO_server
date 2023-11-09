@@ -242,7 +242,7 @@ class  UserModel implements  IUserModelRepository {
             if (data) {
               return {status: true, data: new UserDto(data)};
             } else {
-              return {status: false, error: "Couldn't update user"};
+              return { status: false, error: "Couldn't update user" };
             }
         } catch (error) {
             defaultLogger.error(error);

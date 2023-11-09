@@ -69,9 +69,9 @@ class UserProfileService {
   };
 
   private getReferalInfo = async (level: '1' | '2' | '3', referal?: {
-    referalCode1?: string | undefined;
-    referalCode2?: string | undefined;
-    referalCode3?: string | undefined;
+    referalCode1?: string;
+    referalCode2?: string;
+    referalCode3?: string;
 }) => {
     if (level === '1') {
       const userWith1stReferalExists = await this._userModel.getReferals({ referalCode1: referal?.referalCode1 });
