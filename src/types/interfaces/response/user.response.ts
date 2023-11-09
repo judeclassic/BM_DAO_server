@@ -47,6 +47,22 @@ export interface IUser {
         referalCode1?: string;
         referalCode2?: string;
         referalCode3?: string;
+        analytics: {
+            totalAmount: number,
+            totalEarned: number
+            level1: {
+                amount: number,
+                earned: number
+            }
+            level2: {
+                amount: number,
+                earned: number
+            }
+            level3: {
+                amount: number,
+                earned: number
+            }
+        }
     };
     password: string;
     updatedAt?: Date;

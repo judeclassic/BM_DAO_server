@@ -199,23 +199,21 @@ class RaiderUserServiceService {
   ) => {
     if (isGiven) return;
 
-    const response1 = await this.adwardReferal(AmountPercentageEnum.referal1, referalCode1);
+    const response1 = await this.adwardReferal(AmountPercentageEnum.referal1, 1, referalCode1);
     if (!response1.status) return response1;
 
-    const response2 = await this.adwardReferal(AmountPercentageEnum.referal2, referalCode2);
+    const response2 = await this.adwardReferal(AmountPercentageEnum.referal2, 2, referalCode2);
     if (!response2.status) return response2;
 
-    const response3 = await this.adwardReferal(AmountPercentageEnum.referal3, referalCode3);
+    const response3 = await this.adwardReferal(AmountPercentageEnum.referal3, 3, referalCode3);
     if (!response3.status) return response3;
-
-    
   }
 
-  private adwardReferal = async (percentage: AmountPercentageEnum, referalCode?: string,) => {
+  private adwardReferal = async (percentage: AmountPercentageEnum, level: number, referalCode?: string) => {
     if (referalCode) {
       const userWith1stReferalExists = await this._userModel.checkIfReferalExist({ myReferalCode: referalCode });
       if (userWith1stReferalExists.data) {
-        userWith1stReferalExists.data.updateReferalBalance({ amount: AmountEnum.subscriptionPackage1, percentage });
+        userWith1stReferalExists.data.updateReferalBalance({ amount: AmountEnum.subscriptionPackage1, percentage, level });
         const updateUserWith1stReferal = await this._userModel.updateUserDetailToDB(
           userWith1stReferalExists.data.id!, userWith1stReferalExists.data.getDBModel );
         if ( !updateUserWith1stReferal.data ) return { status: false, errors: [ERROR_UNABLE_TO_REWARD_USER] };

@@ -1,3 +1,4 @@
+import { level } from "winston";
 import AutheticatedUserInterface from "../interfaces/requests/user/authencated-user";
 import { AccountTypeEnum, IAnalytics, IUser, IWallet } from "../interfaces/response/user.response";
 import ModeratorUserServiceDto from "./service/moderators.dto";
@@ -112,13 +113,7 @@ class UserDto implements IUser {
   public accessToken?: string;
   public isVerified?: boolean;
   public wallet: WalletDto;
-  public referal: {
-    isGiven: boolean;
-    myReferalCode: string;
-    referalCode1?: string;
-    referalCode2?: string;
-    referalCode3?: string;
-  };
+  public referal: IUser['referal'];
   public authenticationCode?: string;
   public raiderService?: RaiderUserServiceDto;
   public moderatorService?: ModeratorUserServiceDto;
@@ -253,9 +248,21 @@ class UserDto implements IUser {
     return (this.wallet.balance.walletBalance > 0);
   }
 
-  updateReferalBalance = ({ amount, percentage }: { amount: AmountEnum, percentage: AmountPercentageEnum }) => {
+  updateReferalBalance = ({ amount, percentage, level }: { amount: AmountEnum, percentage: AmountPercentageEnum, level: number }) => {
     this.wallet.balance.referalBonus = this.wallet.balance.referalBonus + (amount * percentage / 100);
     this.wallet.balance.totalBalance = this.wallet.balance.totalBalance + (amount * percentage / 100);
+    if (level === 1) {
+      this.referal.analytics.level1.amount += 1;
+      this.referal.analytics.level1.earned += (amount * percentage / 100);
+    }
+    if (level === 2) {
+      this.referal.analytics.level2.amount += 1;
+      this.referal.analytics.level2.earned += (amount * percentage / 100);
+    }
+    if (level === 3) {
+      this.referal.analytics.level3.amount += 1;
+      this.referal.analytics.level3.earned += (amount * percentage / 100);
+    }
   }
 }
 

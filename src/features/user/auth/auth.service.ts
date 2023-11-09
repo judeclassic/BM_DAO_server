@@ -153,7 +153,24 @@ class UserAuthService {
   };
 
   private getReferalInfo = async (referalCode?: string) => {
-    const referalCodes: { referalCode1?: string, referalCode2?: string, referalCode3?: string } = {};
+    const referalCodes: { referalCode1?: string, referalCode2?: string, referalCode3?: string, analytics: IUser['referal']['analytics'] } = {
+      analytics: {
+        totalAmount: 0,
+        totalEarned: 0,
+        level1: {
+            amount: 0,
+            earned: 0
+        },
+        level2: {
+            amount: 0,
+            earned: 0
+        },
+        level3: {
+            amount: 0,
+            earned: 0
+        }
+      }
+    };
 
     if (referalCode) {
       const userWith1stReferalExists = await this._userModel.checkIfReferalExist({ myReferalCode: referalCode });

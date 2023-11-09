@@ -84,9 +84,55 @@ const UserSchema = new Schema<IUser>({
     myReferalCode: {
       type: String,
     },
-    referalCode: {
+    referalCode1: {
       type: String
     },
+    referalCode2: {
+      type: String
+    },
+    referalCode3: {
+      type: String
+    },
+    analytics: {
+      totalAmount: {
+        type: Number,
+        default: 0
+      },
+      totalEarned: {
+        type: Number,
+        default: 0
+      },
+      level1: {
+          amount: {
+            type: Number,
+            default: 0
+          },
+          earned: {
+            type: Number,
+            default: 0
+          },
+      },
+      level2: {
+          amount: {
+            type: Number,
+            default: 0
+          },
+          earned: {
+            type: Number,
+            default: 0
+          }
+      },
+      level3: {
+          amount: {
+            type: Number,
+            default: 0
+          },
+          earned: {
+            type: Number,
+            default: 0
+          }
+      }
+  }
   },
   authenticationCode: {
     type: String,
