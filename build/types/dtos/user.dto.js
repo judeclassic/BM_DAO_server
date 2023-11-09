@@ -12,12 +12,12 @@ var AmountEnum;
 (function (AmountEnum) {
     AmountEnum[AmountEnum["subscriptionPackage1"] = 10] = "subscriptionPackage1";
     AmountEnum[AmountEnum["moderatorSubscriptionPackage1"] = 50] = "moderatorSubscriptionPackage1";
-    AmountEnum[AmountEnum["raidClientFollowPay"] = 0.01] = "raidClientFollowPay";
-    AmountEnum[AmountEnum["raidClientRaidPay"] = 0.2] = "raidClientRaidPay";
-    AmountEnum[AmountEnum["raidClientLikePay"] = 0.007] = "raidClientLikePay";
-    AmountEnum[AmountEnum["raidClientTweetPay"] = 0.16] = "raidClientTweetPay";
-    AmountEnum[AmountEnum["raidClientCommentpay"] = 0.03] = "raidClientCommentpay";
-    AmountEnum[AmountEnum["raidClientRetweetpay"] = 0.007] = "raidClientRetweetpay";
+    AmountEnum[AmountEnum["raidClientFollowPay"] = 0.0075] = "raidClientFollowPay";
+    AmountEnum[AmountEnum["raidClientRaidPay"] = 0.15] = "raidClientRaidPay";
+    AmountEnum[AmountEnum["raidClientLikePay"] = 0.005] = "raidClientLikePay";
+    AmountEnum[AmountEnum["raidClientTweetPay"] = 0.12] = "raidClientTweetPay";
+    AmountEnum[AmountEnum["raidClientCommentpay"] = 0.022] = "raidClientCommentpay";
+    AmountEnum[AmountEnum["raidClientRetweetpay"] = 0.005] = "raidClientRetweetpay";
     AmountEnum[AmountEnum["raidClientFollowCharge"] = 0.015] = "raidClientFollowCharge";
     AmountEnum[AmountEnum["raidClientRaidCharge"] = 0.03] = "raidClientRaidCharge";
     AmountEnum[AmountEnum["raidClientLikeCharge"] = 0.01] = "raidClientLikeCharge";

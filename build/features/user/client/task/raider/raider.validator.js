@@ -126,8 +126,8 @@ class RaiderClientTaskValidator extends validator_1.default {
             else {
                 try {
                     const date = new Date(startDate).toISOString();
-                    if (!(date instanceof Date)) {
-                        errors.push({ field: 'startDate', message: 'startDate must be date' });
+                    if (!(date)) {
+                        errors.push({ field: 'startDate', message: 'startDate must be date anana' });
                     }
                 }
                 catch (er) {
