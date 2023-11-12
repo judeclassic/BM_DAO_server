@@ -15,6 +15,10 @@ const ERROR_UNABLE_TO_REWARD_USER: ErrorInterface = {
 const ERROR_USER_NOT_FOUND: ErrorInterface = {
   message: 'this user is not found.',
 };
+
+const ERROR_USER_DO_NOT_HAVE_THIS_SERVICE: ErrorInterface = {
+  message: 'this user do not have this service.',
+};
 const ERROR_NOT_ENOUGH_BALANCE: ErrorInterface = {
   message: 'user do not have enough balance please recharge',
 };
@@ -159,7 +163,7 @@ class RaiderUserServiceService {
     userServices?: RaiderUserServiceDto
   }> => {
     const userServices = await this._userServiceModel.checkIfExist({userId});
-    if (userServices.error || !userServices.data ) return {errors: [ERROR_USER_NOT_FOUND]};
+    if (userServices.error || !userServices.data ) return {errors: [ERROR_USER_DO_NOT_HAVE_THIS_SERVICE]};
 
     return { userServices: userServices.data };
   };

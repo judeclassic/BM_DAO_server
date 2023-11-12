@@ -1,4 +1,3 @@
-import { level } from "winston";
 import AutheticatedUserInterface from "../interfaces/requests/user/authencated-user";
 import { AccountTypeEnum, IAnalytics, IUser, IWallet } from "../interfaces/response/user.response";
 import ModeratorUserServiceDto from "./service/moderators.dto";

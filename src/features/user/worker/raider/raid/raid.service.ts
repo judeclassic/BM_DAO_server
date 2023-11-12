@@ -7,7 +7,7 @@ import IRaiderTaskModelRepository from "../../../../../types/interfaces/modules/
 import { TaskStatusStatus } from "../../../../../types/interfaces/response/services/raid.response";
 
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE: ErrorInterface = {
-  field: 'userId',
+  field: 'serviceId',
   message: 'this user have not subscribed top be a raider',
 };
 
@@ -15,9 +15,9 @@ const ERROR_UNABLE_TO_GET_TASK: ErrorInterface = {
   field: 'taskId',
   message: 'unable to get this task',
 };
-const ERROR_USER_IS_NOT_A_CLIENT: ErrorInterface = {
-  field: 'user',
-  message: 'user not found with this user Id',
+const ERROR_USER_IS_NOT_A_USER: ErrorInterface = {
+  field: 'serviceId',
+  message: 'This raider account is expired please subscribe again',
 };
 const ERROR_GETING_ALL_USER_TASKS: ErrorInterface = {
   message: 'unable to fetch all users tasks',
@@ -74,10 +74,11 @@ class RaiderUserTaskRaidService {
 
   public startRaidTask = async (userId: string, taskId: string, serviceId: string ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const userService = await this._raiderServiceModel.checkIfExist({ _id: serviceId });
+    console.log("userService: ",userService.data)
 
     if (!userService.data) return { errors: [ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE] };
     if ( userService.data.userId !== userId ) return { errors: [ERROR_SERVICE_DO_NOT_BELONG_TO_THIS_USER] };
-    if ( !userService.data.isUserSubscribed ) return { errors: [ERROR_USER_IS_NOT_A_CLIENT] };
+    if ( !userService.data.isUserSubscribed ) return { errors: [ERROR_USER_IS_NOT_A_USER] };
 
     const tasksResponse = await this._raiderTaskModel.checkIfExist({ _id: taskId });
     if (!tasksResponse.data) return { errors: [ERROR_UNABLE_TO_GET_TASK] };
