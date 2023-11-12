@@ -23,6 +23,7 @@ const ERROR_GETING_ALL_USER_TASKS: ErrorInterface = {
   message: 'unable to fetch all users tasks',
 };
 
+
 const ERROR_USER_HAS_STARTED_THIS_TASK: ErrorInterface = {
   message: 'user have already aplied for this task',
 };
