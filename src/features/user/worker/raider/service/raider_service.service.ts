@@ -70,10 +70,6 @@ class RaiderUserServiceService {
 
     if ( user.data?.accountType === AccountTypeEnum.client) return { errors: [ERROR_USER_IS_A_CLIENT] };
 
-    const userServiceExists = await this._userServiceModel.checkIfExist({ userId, accountType });
-
-    if ( userServiceExists.data ) return { errors: [ERROR_ALREADY_HAVE_THIS_ACCOUNT] };
-
     user.data.referal.isGiven = true;
     const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: AmountEnum.subscriptionPackage1, type: 'charged' });
     if (!isWithdrawed) return { errors: [ERROR_NOT_ENOUGH_BALANCE] };
