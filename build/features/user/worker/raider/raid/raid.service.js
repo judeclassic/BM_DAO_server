@@ -11,16 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const raid_response_1 = require("../../../../../types/interfaces/response/services/raid.response");
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE = {
-    field: 'userId',
+    field: 'serviceId',
     message: 'this user have not subscribed top be a raider',
 };
 const ERROR_UNABLE_TO_GET_TASK = {
     field: 'taskId',
     message: 'unable to get this task',
 };
-const ERROR_USER_IS_NOT_A_CLIENT = {
-    field: 'user',
-    message: 'user not found with this user Id',
+const ERROR_USER_IS_NOT_A_USER = {
+    field: 'serviceId',
+    message: 'This raider account is expired please subscribe again',
 };
 const ERROR_GETING_ALL_USER_TASKS = {
     message: 'unable to fetch all users tasks',
@@ -54,12 +54,13 @@ class RaiderUserTaskRaidService {
         });
         this.startRaidTask = (userId, taskId, serviceId) => __awaiter(this, void 0, void 0, function* () {
             const userService = yield this._raiderServiceModel.checkIfExist({ _id: serviceId });
+            console.log("userService: ", userService.data);
             if (!userService.data)
                 return { errors: [ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE] };
             if (userService.data.userId !== userId)
                 return { errors: [ERROR_SERVICE_DO_NOT_BELONG_TO_THIS_USER] };
             if (!userService.data.isUserSubscribed)
-                return { errors: [ERROR_USER_IS_NOT_A_CLIENT] };
+                return { errors: [ERROR_USER_IS_NOT_A_USER] };
             const tasksResponse = yield this._raiderTaskModel.checkIfExist({ _id: taskId });
             if (!tasksResponse.data)
                 return { errors: [ERROR_UNABLE_TO_GET_TASK] };

@@ -18,6 +18,9 @@ const ERROR_UNABLE_TO_REWARD_USER = {
 const ERROR_USER_NOT_FOUND = {
     message: 'this user is not found.',
 };
+const ERROR_USER_DO_NOT_HAVE_THIS_SERVICE = {
+    message: 'this user do not have this service.',
+};
 const ERROR_NOT_ENOUGH_BALANCE = {
     message: 'user do not have enough balance please recharge',
 };
@@ -49,9 +52,6 @@ class RaiderUserServiceService {
                 return { errors: [ERROR_USER_NOT_FOUND] };
             if (((_a = user.data) === null || _a === void 0 ? void 0 : _a.accountType) === user_response_1.AccountTypeEnum.client)
                 return { errors: [ERROR_USER_IS_A_CLIENT] };
-            const userServiceExists = yield this._userServiceModel.checkIfExist({ userId, accountType });
-            if (userServiceExists.data)
-                return { errors: [ERROR_ALREADY_HAVE_THIS_ACCOUNT] };
             user.data.referal.isGiven = true;
             const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: user_dto_1.AmountEnum.subscriptionPackage1, type: 'charged' });
             if (!isWithdrawed)
@@ -130,7 +130,7 @@ class RaiderUserServiceService {
         this.getUserService = (userId) => __awaiter(this, void 0, void 0, function* () {
             const userServices = yield this._userServiceModel.checkIfExist({ userId });
             if (userServices.error || !userServices.data)
-                return { errors: [ERROR_USER_NOT_FOUND] };
+                return { errors: [ERROR_USER_DO_NOT_HAVE_THIS_SERVICE] };
             return { userServices: userServices.data };
         });
         this.listAllUserServices = (userId, { page, limit }) => __awaiter(this, void 0, void 0, function* () {
