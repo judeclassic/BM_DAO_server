@@ -110,8 +110,23 @@ class ModeratorUserServiceService {
             const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: user_dto_1.AmountEnum.subscriptionPackage1, type: 'charged' });
             if (!isWithdrawed)
                 return { errors: [ERROR_NOT_ENOUGH_BALANCE] };
-            const updateUser = yield this._userModel.updateUserDetailToDB(user.data.id, user.data.getDBModel);
-            if (!updateUser.data)
+            const updatedUser = yield this._userModel.updateUserDetailToDB(user.data.id, user.data.getDBModel);
+            if (!updatedUser.data)
+                return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
+            this._transactionModel.saveTransaction({
+                name: updatedUser.data.name,
+                userId: user.data.id,
+                updatedAt: new Date(),
+                createdAt: new Date(),
+                transactionType: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+                transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
+                amount: (user_dto_1.AmountEnum.subscriptionPackage1),
+                isVerified: true,
+            });
+            const updatedRaiderService = yield this._userServiceModel.updateUserService(userService.data._id, {
+                subscriptionDate: Date.parse((new Date()).toISOString())
+            });
+            if (!updatedRaiderService.data)
                 return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
             return { userService: userService.data };
         });

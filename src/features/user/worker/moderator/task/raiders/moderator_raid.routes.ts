@@ -11,7 +11,6 @@ import ModeratorTaskValidator from "./moderator.validator";
 
 const useRaiderTaskForModeratorRoutes = ({router}: {router: RequestHandler}) => {
     const taskValidator = new ModeratorTaskValidator();
-
     const userModel = new UserModel();
     const raidModel = new RaidModel();
     const raiderTaskModel = new RaiderTaskModel();

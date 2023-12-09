@@ -4,7 +4,6 @@ import bcrypt from 'bcryptjs';
 import { v4 as uuid } from 'uuid';
 import AuthorizationInterface, { TokenType } from '../../../types/interfaces/modules/auth';
 import config from '../../constant/config';
-import crypto from 'crypto';
 const { accessTokenSecret, verifyEmailSecret, adminAccessTokenSecret } = config.auth;
 
 class AuthorizationRepo implements AuthorizationInterface {
