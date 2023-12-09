@@ -8,6 +8,7 @@ import IRaidModelRepository from "../../../../../../types/interfaces/modules/db/
 import IRaiderServiceModelRepository from "../../../../../../types/interfaces/modules/db/models/service/raider.model";
 import IRaiderTaskModelRepository from "../../../../../../types/interfaces/modules/db/models/task/Iraider.model";
 import { ServiceAccountTypeEnum } from "../../../../../../types/interfaces/response/services/enums";
+import { TaskStatusStatus } from "../../../../../../types/interfaces/response/services/raid.response";
 import { TaskPriorityEnum } from "../../../../../../types/interfaces/response/task/raider_task.response";
 import { TransactionStatusEnum, TransactionTypeEnum } from "../../../../../../types/interfaces/response/transaction.response";
 
@@ -141,6 +142,13 @@ class ModeratorUserTaskService {
     return { raids: raidsResponse.data };
   }
 
+  public getModeratorRaiderRaid = async ( raidId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
+    const raidsResponse = await this._raidModel.checkIfExist({ _id: raidId });
+    if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
+    return { raid: raidsResponse.data };
+  }
+
   public rejectRaid = async ( userId: string, raidId: string ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const tasksResponse = await this._raiderTaskModel.checkIfExist({ moderatorId: userId });
     if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
@@ -149,7 +157,6 @@ class ModeratorUserTaskService {
     if (!raidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
     if (raidResponse.data.taskId === tasksResponse.data._id) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
-
     tasksResponse.data.modifyUserRaidsNumber('remove');
 
     const updatedTaskResponse = await this._raiderTaskModel.updateTaskDetailToDB(raidResponse.data.taskId, tasksResponse.data.getDBModel);
@@ -157,6 +164,32 @@ class ModeratorUserTaskService {
 
     raidResponse.data.addTaskToModel = updatedTaskResponse.data;
     this._raiderServiceModel.updateCancelAnalytics(raidResponse.data.assigneeId);
+
+    return { raid: raidResponse.data }
+  }
+
+  public approveRaid = async ( userId: string, raidId: string ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
+    const tasksResponse = await this._raiderTaskModel.checkIfExist({ moderatorId: userId });
+    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
+    const raidResponse = await this._raidModel.checkIfExist({ _id: raidId });
+    if (!raidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
+    if (raidResponse.data.taskId === tasksResponse.data._id) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
+    this._userModel.updateBalance(raidResponse.data.assigneeId, RaiderTaskDto.getPricingByAction(tasksResponse.data?.raidInformation.action));
+    this._transactionModel.saveTransaction({
+      name: TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+      userId: raidResponse.data.assigneeId,
+      updatedAt: new Date(),
+      createdAt: new Date(),
+      transactionType: TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+      transactionStatus: TransactionStatusEnum.COMPLETED,
+      amount: RaiderTaskDto.getPricingByAction(tasksResponse.data?.raidInformation.action),
+      isVerified: true,
+    });
+
+    await this._raidModel.updateRaid(raidId, { taskStatus: TaskStatusStatus.COMPLETED });
 
     return { raid: raidResponse.data }
   }
@@ -169,7 +202,7 @@ class ModeratorUserTaskService {
     if (!updatedTaskResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
     await this._userModel.updateCompletedAnalytics(tasksResponse.data.userId, ServiceAccountTypeEnum.raider);
 
-    const raidsResponse = await this._raidModel.getAllRaids([{ taskId }]);
+    const raidsResponse = await this._raidModel.getAllRaids([{ taskId, taskStatus: TaskStatusStatus.STARTED }]);
     if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
     Promise.all(raidsResponse.data.map((raid) => {
