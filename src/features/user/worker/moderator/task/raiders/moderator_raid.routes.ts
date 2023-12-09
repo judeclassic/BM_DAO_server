@@ -40,6 +40,8 @@ const useRaiderTaskForModeratorRoutes = ({router}: {router: RequestHandler}) => 
 
     router.getWithAuth('/raid/:raidId', clientRaidController.getUserSingleRaid );
 
+    router.postWithBodyAndAuth('/raid/approve', clientRaidController.approveRaid );
+
     router.postWithBodyAndAuth('/raid/reject', clientRaidController.rejectRaid );
 }
 

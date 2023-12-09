@@ -70,6 +70,19 @@ class ModeratorUserRaidController {
       sendJson(201, { data: response.raid.getResponse, code: 201, status: true });
     }
 
+    public approveRaid = async (
+      { body, user }: { body: { raidId: string }, user: AutheticatedUserInterface },
+      sendJson: (code: number, response: ResponseInterface<IRaidResponse>)=>void
+    )  => {
+      const validationErrors = this._taskValidator.validateIdBeforeCreation(body.raidId);
+      if (validationErrors.length > 0)  return sendJson(400, { error: validationErrors, code: 400, status: false });
+  
+      const response = await this._moderatorUserTaskService.rejectRaid(user.id, body.raidId );
+      if ( !response.raid ) return sendJson(401, { error: response.errors, code: 401, status: false });
+      
+      sendJson(201, { data: response.raid.getResponse, code: 201, status: true });
+    }
+
     public approveTaskAsComplete = async (
       { body, user }: { body: { taskId: string }, user: AutheticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IRaiderTaskResponse>)=>void
@@ -136,13 +149,13 @@ class ModeratorUserRaidController {
     }
 
     public getUserSingleRaid = async (
-      { params, user }: { params: { taskId: string; }, user: AutheticatedUserInterface },
+      { params, user }: { params: { raidId: string; }, user: AutheticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IRaidResponse>)=>void
     )  => {
-      const validationErrors = this._taskValidator.validateIdBeforeCreation(params.taskId);
+      const validationErrors = this._taskValidator.validateIdBeforeCreation(params.raidId);
       if (validationErrors.length > 0) return sendJson(400, { error: validationErrors, code: 400, status: false });
   
-      const response = await this._moderatorUserTaskService.getRaiderSingleRaid(params.taskId);
+      const response = await this._moderatorUserTaskService.getRaiderSingleRaid(params.raidId);
       if ( !response.raid ) return sendJson(401, { error: response.errors, code: 401, status: false });
   
       sendJson(201, { data: response.raid.getResponse, code: 201, status: true });

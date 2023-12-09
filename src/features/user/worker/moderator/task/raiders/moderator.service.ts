@@ -142,13 +142,6 @@ class ModeratorUserTaskService {
     return { raids: raidsResponse.data };
   }
 
-  public getModeratorRaiderRaid = async ( raidId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
-    const raidsResponse = await this._raidModel.checkIfExist({ _id: raidId });
-    if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
-
-    return { raid: raidsResponse.data };
-  }
-
   public rejectRaid = async ( userId: string, raidId: string ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const tasksResponse = await this._raiderTaskModel.checkIfExist({ moderatorId: userId });
     if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
