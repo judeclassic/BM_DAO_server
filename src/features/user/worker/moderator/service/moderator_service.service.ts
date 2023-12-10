@@ -1,12 +1,10 @@
 import TransactionModel from "../../../../../lib/modules/db/models/transaction.model";
 import ModeratorUserServiceDto, { MultipleModeratorServiceDto } from "../../../../../types/dtos/service/moderators.dto";
-import RaiderUserServiceDto, { MultipleUserServiceDto } from "../../../../../types/dtos/service/raiders.dto";
 import { AmountEnum, AmountPercentageEnum } from "../../../../../types/dtos/user.dto";
 import ErrorInterface from "../../../../../types/interfaces/error";
 import AuthorizationInterface from "../../../../../types/interfaces/modules/auth";
 import IUserModelRepository from "../../../../../types/interfaces/modules/db/models/Iuser.model";
 import IModeratorServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/moderator.model";
-import IRaiderServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/raider.model";
 import { ICreateUserServiceRequest } from "../../../../../types/interfaces/requests/user/create-user";
 import { ServiceAccountTypeEnum } from "../../../../../types/interfaces/response/services/enums";
 import { IModeratorUserService } from "../../../../../types/interfaces/response/services/moderator.response";
@@ -196,7 +194,6 @@ class ModeratorUserServiceService {
     if ( !userService.data ) {
       return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] }
     }
-
 
     return { userService: userService.data };
   }

@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const raiders_dto_1 = require("../../../../../../types/dtos/task/raiders.dto");
 const enums_1 = require("../../../../../../types/interfaces/response/services/enums");
+const raid_response_1 = require("../../../../../../types/interfaces/response/services/raid.response");
 const raider_task_response_1 = require("../../../../../../types/interfaces/response/task/raider_task.response");
 const transaction_response_1 = require("../../../../../../types/interfaces/response/transaction.response");
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE = {
@@ -122,6 +123,30 @@ class ModeratorUserTaskService {
             this._raiderServiceModel.updateCancelAnalytics(raidResponse.data.assigneeId);
             return { raid: raidResponse.data };
         });
+        this.approveRaid = (userId, raidId) => __awaiter(this, void 0, void 0, function* () {
+            var _a, _b;
+            const tasksResponse = yield this._raiderTaskModel.checkIfExist({ moderatorId: userId });
+            if (!tasksResponse.data)
+                return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+            const raidResponse = yield this._raidModel.checkIfExist({ _id: raidId });
+            if (!raidResponse.data)
+                return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+            if (raidResponse.data.taskId === tasksResponse.data._id)
+                return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+            this._userModel.updateBalance(raidResponse.data.assigneeId, raiders_dto_1.RaiderTaskDto.getPricingByAction((_a = tasksResponse.data) === null || _a === void 0 ? void 0 : _a.raidInformation.action));
+            this._transactionModel.saveTransaction({
+                name: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+                userId: raidResponse.data.assigneeId,
+                updatedAt: new Date(),
+                createdAt: new Date(),
+                transactionType: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+                transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
+                amount: raiders_dto_1.RaiderTaskDto.getPricingByAction((_b = tasksResponse.data) === null || _b === void 0 ? void 0 : _b.raidInformation.action),
+                isVerified: true,
+            });
+            yield this._raidModel.updateRaid(raidId, { taskStatus: raid_response_1.TaskStatusStatus.COMPLETED });
+            return { raid: raidResponse.data };
+        });
         this.approveTaskAsComplete = (userId, taskId) => __awaiter(this, void 0, void 0, function* () {
             const tasksResponse = yield this._raiderTaskModel.checkIfExist({ _id: taskId });
             if (!tasksResponse.data)
@@ -130,7 +155,7 @@ class ModeratorUserTaskService {
             if (!updatedTaskResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             yield this._userModel.updateCompletedAnalytics(tasksResponse.data.userId, enums_1.ServiceAccountTypeEnum.raider);
-            const raidsResponse = yield this._raidModel.getAllRaids([{ taskId }]);
+            const raidsResponse = yield this._raidModel.getAllRaids([{ taskId, taskStatus: raid_response_1.TaskStatusStatus.STARTED }]);
             if (!raidsResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             Promise.all(raidsResponse.data.map((raid) => {

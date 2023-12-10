@@ -47,6 +47,15 @@ class ModeratorUserRaidController {
                 return sendJson(401, { error: response.errors, code: 401, status: false });
             sendJson(201, { data: response.raid.getResponse, code: 201, status: true });
         });
+        this.approveRaid = ({ body, user }, sendJson) => __awaiter(this, void 0, void 0, function* () {
+            const validationErrors = this._taskValidator.validateIdBeforeCreation(body.raidId);
+            if (validationErrors.length > 0)
+                return sendJson(400, { error: validationErrors, code: 400, status: false });
+            const response = yield this._moderatorUserTaskService.rejectRaid(user.id, body.raidId);
+            if (!response.raid)
+                return sendJson(401, { error: response.errors, code: 401, status: false });
+            sendJson(201, { data: response.raid.getResponse, code: 201, status: true });
+        });
         this.approveTaskAsComplete = ({ body, user }, sendJson) => __awaiter(this, void 0, void 0, function* () {
             const validationErrors = this._taskValidator.validateIdBeforeCreation(body.taskId);
             if (validationErrors.length > 0)
@@ -93,10 +102,10 @@ class ModeratorUserRaidController {
             sendJson(201, { data: response.raids.getResponse, code: 201, status: true });
         });
         this.getUserSingleRaid = ({ params, user }, sendJson) => __awaiter(this, void 0, void 0, function* () {
-            const validationErrors = this._taskValidator.validateIdBeforeCreation(params.taskId);
+            const validationErrors = this._taskValidator.validateIdBeforeCreation(params.raidId);
             if (validationErrors.length > 0)
                 return sendJson(400, { error: validationErrors, code: 400, status: false });
-            const response = yield this._moderatorUserTaskService.getRaiderSingleRaid(params.taskId);
+            const response = yield this._moderatorUserTaskService.getRaiderSingleRaid(params.raidId);
             if (!response.raid)
                 return sendJson(401, { error: response.errors, code: 401, status: false });
             sendJson(201, { data: response.raid.getResponse, code: 201, status: true });
