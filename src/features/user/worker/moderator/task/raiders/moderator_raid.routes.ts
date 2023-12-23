@@ -26,6 +26,8 @@ const useRaiderTaskForModeratorRoutes = ({router}: {router: RequestHandler}) => 
 
     router.getWithAuth('/other', clientRaidController.getAllOtherTask );
 
+    router.getWithAuth('/task/:taskId', clientRaidController.getSingleTask );
+
     router.postWithBodyAndAuth('/moderate_task', clientRaidController.moderateTask );
 
     router.getWithAuth('/me/active', clientRaidController.getAllModeratorsActiveTasks );
@@ -37,7 +39,7 @@ const useRaiderTaskForModeratorRoutes = ({router}: {router: RequestHandler}) => 
     router.postWithBodyAndAuth('/me/approve', clientRaidController.approveTaskAsComplete );
 
     router.getWithAuth('/raids/:taskId', clientRaidController.getModeratedRaids );
-
+    
     router.getWithAuth('/raid/:raidId', clientRaidController.getUserSingleRaid );
 
     router.postWithBodyAndAuth('/raid/approve', clientRaidController.approveRaid );

@@ -24,6 +24,7 @@ const useRaiderTaskForModeratorRoutes = ({ router }) => {
     const clientRaidController = new moderator_controller_1.default({ taskValidator, moderatorUserTaskService });
     router.getWithAuth('/active', clientRaidController.getAllActiveTask);
     router.getWithAuth('/other', clientRaidController.getAllOtherTask);
+    router.getWithAuth('/task/:taskId', clientRaidController.getSingleTask);
     router.postWithBodyAndAuth('/moderate_task', clientRaidController.moderateTask);
     router.getWithAuth('/me/active', clientRaidController.getAllModeratorsActiveTasks);
     router.getWithAuth('/me/other', clientRaidController.getAllModeratorsTasks);

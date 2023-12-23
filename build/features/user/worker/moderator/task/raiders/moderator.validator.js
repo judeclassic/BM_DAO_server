@@ -105,6 +105,14 @@ class ModeratorTaskValidator extends validator_1.default {
             }
             return errors;
         };
+        this.validateRaidIdBeforeCreation = (id) => {
+            const errors = [];
+            const validateId = this._validateID(id);
+            if (validateId.message) {
+                errors.push({ field: 'raidId', message: validateId.message });
+            }
+            return errors;
+        };
     }
 }
 exports.default = ModeratorTaskValidator;

@@ -38,6 +38,12 @@ const ERROR_THIS_TASK_HAS_A_MODERATOR_ALREADY = {
 const ERROR_THIS_TASK_IS_ALREADY_MODERATED_BY_YOU = {
     message: 'This task is being moderated by you already',
 };
+const ERROR_GETTING_THIS_TASK = {
+    message: 'Error fetching this task',
+};
+const ERROR_GETTING_THIS_RAID = {
+    message: 'Error fetching this raid',
+};
 class ModeratorUserTaskService {
     constructor({ raiderTaskModel, raidModel, moderatorServiceModel, raiderServiceModel, userModel, transactionModel }) {
         this.getAllActiveTask = (userId, option) => __awaiter(this, void 0, void 0, function* () {
@@ -63,6 +69,12 @@ class ModeratorUserTaskService {
             if (!tasksResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             return { tasks: tasksResponse.data };
+        });
+        this.getSingleTask = (taskId) => __awaiter(this, void 0, void 0, function* () {
+            const tasksResponse = yield this._raiderTaskModel.checkIfExist({ _id: taskId });
+            if (!tasksResponse.data)
+                return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+            return { task: tasksResponse.data };
         });
         this.getRaiderSingleRaid = (raidId) => __awaiter(this, void 0, void 0, function* () {
             const raidsResponse = yield this._raidModel.checkIfExist({ _id: raidId });
@@ -114,43 +126,61 @@ class ModeratorUserTaskService {
             if (!raidResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             if (raidResponse.data.taskId === tasksResponse.data._id)
+                return { errors: [ERROR_GETTING_THIS_RAID] };
+            if (raidResponse.data.taskStatus === raid_response_1.TaskStatusStatus.APPROVED)
+                return { errors: [{ message: 'this raid has been approved already' }] };
+            if (raidResponse.data.taskStatus === raid_response_1.TaskStatusStatus.REJECTED)
+                return { errors: [{ message: 'this raid has been rejected already' }] };
+            if (raidResponse.data.taskId === tasksResponse.data._id)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             tasksResponse.data.modifyUserRaidsNumber('remove');
+            const updatedRaidResponse = yield this._raidModel.updateRaid(raidId, { taskStatus: raid_response_1.TaskStatusStatus.REJECTED });
+            if (!updatedRaidResponse.data)
+                return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             const updatedTaskResponse = yield this._raiderTaskModel.updateTaskDetailToDB(raidResponse.data.taskId, tasksResponse.data.getDBModel);
             if (!updatedTaskResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
-            raidResponse.data.addTaskToModel = updatedTaskResponse.data;
-            this._raiderServiceModel.updateCancelAnalytics(raidResponse.data.assigneeId);
-            return { raid: raidResponse.data };
+            updatedRaidResponse.data.addTaskToModel = updatedTaskResponse.data;
+            this._raiderServiceModel.updateCancelAnalytics(updatedRaidResponse.data.assigneeId);
+            return { raid: updatedRaidResponse.data };
         });
         this.approveRaid = (userId, raidId) => __awaiter(this, void 0, void 0, function* () {
             var _a, _b;
             const tasksResponse = yield this._raiderTaskModel.checkIfExist({ moderatorId: userId });
             if (!tasksResponse.data)
-                return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+                return { errors: [ERROR_GETTING_THIS_TASK] };
             const raidResponse = yield this._raidModel.checkIfExist({ _id: raidId });
             if (!raidResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             if (raidResponse.data.taskId === tasksResponse.data._id)
+                return { errors: [ERROR_GETTING_THIS_RAID] };
+            if (raidResponse.data.taskStatus === raid_response_1.TaskStatusStatus.APPROVED)
+                return { errors: [{ message: 'this raid has been approved already' }] };
+            if (raidResponse.data.taskStatus === raid_response_1.TaskStatusStatus.REJECTED)
+                return { errors: [{ message: 'this raid has been rejected already' }] };
+            const updatedRaidResponse = yield this._raidModel.updateRaid(raidId, { taskStatus: raid_response_1.TaskStatusStatus.APPROVED });
+            if (!updatedRaidResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
-            this._userModel.updateBalance(raidResponse.data.assigneeId, raiders_dto_1.RaiderTaskDto.getPricingByAction((_a = tasksResponse.data) === null || _a === void 0 ? void 0 : _a.raidInformation.action));
-            this._transactionModel.saveTransaction({
-                name: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
-                userId: raidResponse.data.assigneeId,
-                updatedAt: new Date(),
-                createdAt: new Date(),
-                transactionType: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
-                transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
-                amount: raiders_dto_1.RaiderTaskDto.getPricingByAction((_b = tasksResponse.data) === null || _b === void 0 ? void 0 : _b.raidInformation.action),
-                isVerified: true,
-            });
-            yield this._raidModel.updateRaid(raidId, { taskStatus: raid_response_1.TaskStatusStatus.COMPLETED });
-            return { raid: raidResponse.data };
+            updatedRaidResponse.data.addTaskToModel = tasksResponse.data;
+            yield Promise.all([
+                this._userModel.updateBalance(updatedRaidResponse.data.assigneeId, raiders_dto_1.RaiderTaskDto.getPricingByAction((_a = tasksResponse.data) === null || _a === void 0 ? void 0 : _a.raidInformation.action)),
+                this._transactionModel.saveTransaction({
+                    name: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+                    userId: raidResponse.data.assigneeId,
+                    updatedAt: new Date(),
+                    createdAt: new Date(),
+                    transactionType: transaction_response_1.TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+                    transactionStatus: transaction_response_1.TransactionStatusEnum.COMPLETED,
+                    amount: raiders_dto_1.RaiderTaskDto.getPricingByAction((_b = tasksResponse.data) === null || _b === void 0 ? void 0 : _b.raidInformation.action),
+                    isVerified: true,
+                })
+            ]);
+            return { raid: updatedRaidResponse.data };
         });
         this.approveTaskAsComplete = (userId, taskId) => __awaiter(this, void 0, void 0, function* () {
             const tasksResponse = yield this._raiderTaskModel.checkIfExist({ _id: taskId });
             if (!tasksResponse.data)
-                return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+                return { errors: [ERROR_GETTING_THIS_TASK] };
             const updatedTaskResponse = yield this._raiderTaskModel.updateTaskDetailToDB(taskId, tasksResponse.data.getDBModel);
             if (!updatedTaskResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };

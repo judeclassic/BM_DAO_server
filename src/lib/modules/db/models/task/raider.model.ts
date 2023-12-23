@@ -106,7 +106,7 @@ class  RaiderTaskModel implements  IRaiderTaskModelRepository {
 
     updateTaskDetailToDB = async (id : string, details : Partial<IRaiderTask>) => {
         try {
-            const data = await this.Task.findByIdAndUpdate(id, details, {new: true});
+            const data = await this.Task.findByIdAndUpdate(id, details, { new: true });
             console.log(data);
             if (data) {
               return {status: true, data: new RaiderTaskDto(data)};

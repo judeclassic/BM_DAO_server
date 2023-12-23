@@ -29,6 +29,15 @@ class ModeratorUserRaidController {
                 return sendJson(401, { error: response.errors, code: 401, status: false });
             sendJson(201, { data: response.tasks.getResponse, code: 201, status: true });
         });
+        this.getSingleTask = ({ params, user }, sendJson) => __awaiter(this, void 0, void 0, function* () {
+            const validationErrors = this._taskValidator.validateIdBeforeCreation(params.taskId);
+            if (validationErrors.length > 0)
+                return sendJson(400, { error: validationErrors, code: 400, status: false });
+            const response = yield this._moderatorUserTaskService.getSingleTask(params.taskId);
+            if (!response.task)
+                return sendJson(401, { error: response.errors, code: 401, status: false });
+            sendJson(201, { data: response.task.getResponse, code: 201, status: true });
+        });
         this.moderateTask = ({ body, user }, sendJson) => __awaiter(this, void 0, void 0, function* () {
             const validationErrors = this._taskValidator.validateIdBeforeCreation(body.taskId);
             if (validationErrors.length > 0)
@@ -51,7 +60,7 @@ class ModeratorUserRaidController {
             const validationErrors = this._taskValidator.validateIdBeforeCreation(body.raidId);
             if (validationErrors.length > 0)
                 return sendJson(400, { error: validationErrors, code: 400, status: false });
-            const response = yield this._moderatorUserTaskService.rejectRaid(user.id, body.raidId);
+            const response = yield this._moderatorUserTaskService.approveRaid(user.id, body.raidId);
             if (!response.raid)
                 return sendJson(401, { error: response.errors, code: 401, status: false });
             sendJson(201, { data: response.raid.getResponse, code: 201, status: true });
@@ -102,7 +111,7 @@ class ModeratorUserRaidController {
             sendJson(201, { data: response.raids.getResponse, code: 201, status: true });
         });
         this.getUserSingleRaid = ({ params, user }, sendJson) => __awaiter(this, void 0, void 0, function* () {
-            const validationErrors = this._taskValidator.validateIdBeforeCreation(params.raidId);
+            const validationErrors = this._taskValidator.validateRaidIdBeforeCreation(params.raidId);
             if (validationErrors.length > 0)
                 return sendJson(400, { error: validationErrors, code: 400, status: false });
             const response = yield this._moderatorUserTaskService.getRaiderSingleRaid(params.raidId);

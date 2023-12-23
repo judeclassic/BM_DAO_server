@@ -1,7 +1,9 @@
 export enum TaskStatusStatus {
-    STARTED = "STARTED",
-    EXPIRED = "EXPIRED",
-    COMPLETED = "COMPLETED"
+  STARTED = "STARTED",
+  EXPIRED = "EXPIRED",
+  COMPLETED = "COMPLETED",
+  APPROVED = "APPROVED",
+  REJECTED = "REJECTED"
 }
 
 export enum RaidType {

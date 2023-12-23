@@ -43,6 +43,14 @@ const ERROR_THIS_TASK_IS_ALREADY_MODERATED_BY_YOU: ErrorInterface = {
   message: 'This task is being moderated by you already',
 };
 
+const ERROR_GETTING_THIS_TASK: ErrorInterface = {
+  message: 'Error fetching this task',
+};
+
+const ERROR_GETTING_THIS_RAID: ErrorInterface = {
+  message: 'Error fetching this raid',
+};
+
 class ModeratorUserTaskService {
   private _raidModel: IRaidModelRepository;
   private _userModel: IUserModelRepository;
@@ -96,6 +104,14 @@ class ModeratorUserTaskService {
     return { tasks: tasksResponse.data };
   }
 
+  public getSingleTask = async (taskId: string) : Promise<{ errors?: ErrorInterface[]; task?: RaiderTaskDto }> => {
+
+    const tasksResponse = await this._raiderTaskModel.checkIfExist({ _id: taskId });
+    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
+    return { task: tasksResponse.data };
+  }
+
   public getRaiderSingleRaid = async (raidId: string) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const raidsResponse = await this._raidModel.checkIfExist({ _id: raidId });
     if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };  
@@ -146,50 +162,63 @@ class ModeratorUserTaskService {
     const tasksResponse = await this._raiderTaskModel.checkIfExist({ moderatorId: userId });
     if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
-    const raidResponse = await this._raidModel.checkIfExist({ _id: raidId });
+    const raidResponse = await this._raidModel.checkIfExist({ _id: raidId })
     if (!raidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
+    if (raidResponse.data.taskId === tasksResponse.data._id) return { errors: [ERROR_GETTING_THIS_RAID] };
+    if (raidResponse.data.taskStatus === TaskStatusStatus.APPROVED) return { errors: [{message: 'this raid has been approved already'}] };
+    if (raidResponse.data.taskStatus === TaskStatusStatus.REJECTED) return { errors: [{message: 'this raid has been rejected already'}] };
 
     if (raidResponse.data.taskId === tasksResponse.data._id) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
     tasksResponse.data.modifyUserRaidsNumber('remove');
 
+    const updatedRaidResponse = await this._raidModel.updateRaid(raidId, { taskStatus: TaskStatusStatus.REJECTED })
+    if (!updatedRaidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
     const updatedTaskResponse = await this._raiderTaskModel.updateTaskDetailToDB(raidResponse.data.taskId, tasksResponse.data.getDBModel);
     if (!updatedTaskResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
-    raidResponse.data.addTaskToModel = updatedTaskResponse.data;
-    this._raiderServiceModel.updateCancelAnalytics(raidResponse.data.assigneeId);
+    updatedRaidResponse.data.addTaskToModel = updatedTaskResponse.data;
+    this._raiderServiceModel.updateCancelAnalytics(updatedRaidResponse.data.assigneeId);
 
-    return { raid: raidResponse.data }
+    return { raid: updatedRaidResponse.data }
   }
 
   public approveRaid = async ( userId: string, raidId: string ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const tasksResponse = await this._raiderTaskModel.checkIfExist({ moderatorId: userId });
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_THIS_TASK] };
 
-    const raidResponse = await this._raidModel.checkIfExist({ _id: raidId });
+    const raidResponse = await this._raidModel.checkIfExist({ _id: raidId })
     if (!raidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
-    if (raidResponse.data.taskId === tasksResponse.data._id) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (raidResponse.data.taskId === tasksResponse.data._id) return { errors: [ERROR_GETTING_THIS_RAID] };
+    if (raidResponse.data.taskStatus === TaskStatusStatus.APPROVED) return { errors: [{message: 'this raid has been approved already'}] };
+    if (raidResponse.data.taskStatus === TaskStatusStatus.REJECTED) return { errors: [{message: 'this raid has been rejected already'}] };
 
-    this._userModel.updateBalance(raidResponse.data.assigneeId, RaiderTaskDto.getPricingByAction(tasksResponse.data?.raidInformation.action));
-    this._transactionModel.saveTransaction({
-      name: TransactionTypeEnum.RAIDER_SUBSCRIPTION,
-      userId: raidResponse.data.assigneeId,
-      updatedAt: new Date(),
-      createdAt: new Date(),
-      transactionType: TransactionTypeEnum.RAIDER_SUBSCRIPTION,
-      transactionStatus: TransactionStatusEnum.COMPLETED,
-      amount: RaiderTaskDto.getPricingByAction(tasksResponse.data?.raidInformation.action),
-      isVerified: true,
-    });
+    const updatedRaidResponse = await this._raidModel.updateRaid(raidId, { taskStatus: TaskStatusStatus.APPROVED })
+    if (!updatedRaidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    updatedRaidResponse.data.addTaskToModel = tasksResponse.data
 
-    await this._raidModel.updateRaid(raidId, { taskStatus: TaskStatusStatus.COMPLETED });
+    await Promise.all([
+      this._userModel.updateBalance(updatedRaidResponse.data.assigneeId, RaiderTaskDto.getPricingByAction(tasksResponse.data?.raidInformation.action)),
+      this._transactionModel.saveTransaction({
+        name: TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+        userId: raidResponse.data.assigneeId,
+        updatedAt: new Date(),
+        createdAt: new Date(),
+        transactionType: TransactionTypeEnum.RAIDER_SUBSCRIPTION,
+        transactionStatus: TransactionStatusEnum.COMPLETED,
+        amount: RaiderTaskDto.getPricingByAction(tasksResponse.data?.raidInformation.action),
+        isVerified: true,
+      })
+    ]);
 
-    return { raid: raidResponse.data }
+    return { raid: updatedRaidResponse.data }
   }
 
   public approveTaskAsComplete = async ( userId: string, taskId: string ) : Promise<{ errors?: ErrorInterface[]; task?: RaiderTaskDto }> => {
     const tasksResponse = await this._raiderTaskModel.checkIfExist({_id: taskId });
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_THIS_TASK] };
 
     const updatedTaskResponse = await this._raiderTaskModel.updateTaskDetailToDB(taskId, tasksResponse.data.getDBModel);
     if (!updatedTaskResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
