@@ -5,7 +5,7 @@ import ErrorInterface from "../../../../../types/interfaces/error";
 import AuthorizationInterface from "../../../../../types/interfaces/modules/auth";
 import IUserModelRepository from "../../../../../types/interfaces/modules/db/models/Iuser.model";
 import IRaiderServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/raider.model";
-import { ICreateUserServiceRequest } from "../../../../../types/interfaces/requests/user/create-user";
+import { ICreateRaiderUserServiceRequest } from "../../../../../types/interfaces/requests/user/create-user";
 import { TransactionStatusEnum, TransactionTypeEnum } from "../../../../../types/interfaces/response/transaction.response";
 import { AccountTypeEnum } from "../../../../../types/interfaces/response/user.response";
 
@@ -63,7 +63,7 @@ class RaiderUserServiceService {
     accountType,
     handles,
     userId,
-  } : ICreateUserServiceRequest): Promise<{ errors?: ErrorInterface[]; userService?: RaiderUserServiceDto }> => {
+  } : ICreateRaiderUserServiceRequest): Promise<{ errors?: ErrorInterface[]; userService?: RaiderUserServiceDto }> => {
     console.log(userId);
     const user = await this._userModel.checkIfExist({ _id: userId });
 

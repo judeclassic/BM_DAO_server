@@ -6,28 +6,35 @@ import RaiderUserServiceDto from "./service/raiders.dto";
 
 export enum AmountPercentageEnum {
   total = 100,
-  referal1 = 15,
-  referal2 = 7,
-  referal3 = 3,
+  referal1 = 20,
+  referal2 = 10,
+  referal3 = 10,
 }
 
 export enum AmountEnum {
-  subscriptionPackage1 = 10.00,
+  subscriptionPackage1 = 5.00,
   moderatorSubscriptionPackage1 = 50.0,
 
-  raidClientFollowPay = 0.0075,
-  raidClientRaidPay = 0.15,
-  raidClientLikePay = 0.005,
-  raidClientTweetPay = 0.12,
-  raidClientCommentpay = 0.022,
-  raidClientRetweetpay = 0.005,
-
   raidClientFollowCharge = 0.015,
-  raidClientRaidCharge = 0.03,
+  raidClientRaidCharge = 0.3,
   raidClientLikeCharge = 0.01,
   raidClientTweetCharge = 0.25,
-  raidClientCommentCharge = 0.045,
-  raidClientRetweetCharge = 0.01
+  raidClientCommentCharge = 0.1,
+  raidClientRetweetCharge = 0.2,
+
+  raidRaiderFollowPay = 0.007,
+  raidRaiderRaidPay = 0.15,
+  raidRaiderLikePay = 0.005,
+  raidRaiderTweetPay = 0.1,
+  raidRaiderCommentpay = 0.05,
+  raidRaiderRetweetpay = 0.1,
+
+  raidModeratorFollowPay = 0.002,
+  raidModeratorRaidPay = 0.03,
+  raidModeratorLikePay = 0.001,
+  raidModeratorTweetPay = 0.05,
+  raidModeratorCommentpay = 0.01,
+  raidModeratorRetweetpay = 0.02,
 }
 
 export interface IWalletResponse {

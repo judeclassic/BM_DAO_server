@@ -15,5 +15,9 @@ export interface ICreateUserRequest {
 export interface ICreateUserServiceRequest {
   accountType: ServiceAccountTypeEnum;
   userId: string;
+}
+export interface ICreateRaiderUserServiceRequest {
+  accountType: ServiceAccountTypeEnum;
+  userId: string;
   handles: ISocialHandle
 }

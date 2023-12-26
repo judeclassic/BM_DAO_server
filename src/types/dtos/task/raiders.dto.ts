@@ -166,21 +166,21 @@ export class RaiderTaskDto implements IRaiderTask {
 
   static getPayoutByAction(action: RaidActionEnum) {
     if (action === RaidActionEnum.commentOnPost) {
-      return AmountEnum.raidClientCommentpay
+      return AmountEnum.raidRaiderCommentpay
     }
     if (action === RaidActionEnum.createATweet) {
-      return AmountEnum.raidClientTweetPay
+      return AmountEnum.raidRaiderTweetPay
     }
     if (action === RaidActionEnum.followAccount) {
-      return AmountEnum.raidClientFollowPay
+      return AmountEnum.raidRaiderFollowPay
     }
     if (action === RaidActionEnum.likePost) {
-      return AmountEnum.raidClientLikePay
+      return AmountEnum.raidRaiderLikePay
     }
     if (action === RaidActionEnum.raid) {
-      return AmountEnum.raidClientRaidPay
+      return AmountEnum.raidRaiderRaidPay
     }
-    return AmountEnum.raidClientRetweetpay;
+    return AmountEnum.raidRaiderRetweetpay;
   }
 }
 

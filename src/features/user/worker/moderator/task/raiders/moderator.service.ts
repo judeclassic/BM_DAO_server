@@ -1,6 +1,8 @@
 import TransactionModel from "../../../../../../lib/modules/db/models/transaction.model";
 import { RaidDto, MultipleRaidDto } from "../../../../../../types/dtos/service/raids.dto";
+import { ModeratorTaskDto } from "../../../../../../types/dtos/task/moderator.dto";
 import { MultipleRaiderTaskDto, RaiderTaskDto } from "../../../../../../types/dtos/task/raiders.dto";
+import UserDto, { AmountEnum } from "../../../../../../types/dtos/user.dto";
 import ErrorInterface from "../../../../../../types/interfaces/error";
 import IUserModelRepository from "../../../../../../types/interfaces/modules/db/models/Iuser.model";
 import IModeratorServiceModelRepository from "../../../../../../types/interfaces/modules/db/models/service/moderator.model";
@@ -240,9 +242,18 @@ class ModeratorUserTaskService {
         isVerified: true,
       });
     }));
-
     this._moderatorServiceModel.updateCompletedAnalytics(userId);
-    this._userModel.updateCompletedAnalytics(updatedTaskResponse.data.userId, ServiceAccountTypeEnum.raider);
+    const user = await this._userModel.updateCompletedAnalytics(userId, ServiceAccountTypeEnum.raider);
+    if (!user.data) return { errors: [ERROR_GETTING_THIS_TASK] };
+
+    user.data.updateUserWithdrawableBalance({
+      amount: ModeratorTaskDto.getRaiderPayoutByAction(updatedTaskResponse.data?.raidInformation.action),
+      multiplier: tasksResponse.data.raidInformation.amount,
+      type: 'paid'
+    })
+
+    const updatedUser = await this._userModel.updateUserDetailToDB(userId, user.data.getDBModel);
+    if (!updatedUser.data) return { errors: [ERROR_GETTING_THIS_TASK] };
 
     await this._raidModel.deleteAllRaids({ taskId });
 
