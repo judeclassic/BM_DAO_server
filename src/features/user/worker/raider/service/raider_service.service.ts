@@ -61,6 +61,7 @@ class RaiderUserServiceService {
 
   public subscribeForAService = async ({
     accountType,
+    handles,
     userId,
   } : ICreateUserServiceRequest): Promise<{ errors?: ErrorInterface[]; userService?: RaiderUserServiceDto }> => {
     console.log(userId);
@@ -74,21 +75,7 @@ class RaiderUserServiceService {
     const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: AmountEnum.subscriptionPackage1, type: 'charged' });
     if (!isWithdrawed) return { errors: [ERROR_NOT_ENOUGH_BALANCE] };
 
-    const userServiceRequest = {
-        accountType: accountType,
-        userId: userId,
-        updatedAt: new Date(),
-        createdAt: new Date(),
-        subscriptionDate: Date.parse((new Date()).toISOString()),
-        isVerified: false,
-        work_timeout: Date.parse((new Date()).toISOString()),
-        tasks: [],
-        analytics: {
-          availableTask: 0,
-          pendingTask: 0,
-          completedTask: 0,
-        }
-    }
+    const userServiceRequest = RaiderUserServiceDto.createRequest({ userId, accountType, handles });
     const userServiceResponse = await this._userServiceModel.createUserService(userServiceRequest);
 
     if ( !userServiceResponse.data ) return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };

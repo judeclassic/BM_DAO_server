@@ -42,6 +42,16 @@ const RaiderUserServiceSchema = new Schema<IRaiderUserService>({
   subscriptionDate: {
     type: Number,
   },
+  handles: {
+    twitter: String,
+    reddit: String,
+    tiktok: String,
+    instagram: String,
+    telegram: String,
+    thread: String,
+    discord: String,
+    youtube: String,
+  },
   work_timeout: {
     type: Number,
   },

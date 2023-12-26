@@ -26,8 +26,8 @@ class RaiderUserServiceController {
           });
         }
     
-        const { accountType } = body;
-        const response = await this._raiderServiceService.subscribeForAService({ accountType, userId: user.id });
+        const { accountType, handles } = body;
+        const response = await this._raiderServiceService.subscribeForAService({ accountType, userId: user.id, handles });
     
         if ( !response.userService ) return sendJson(401, {
           error: response.errors,

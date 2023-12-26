@@ -6,6 +6,17 @@ export interface IAnalytic {
     completedTask: number;
 }
 
+export interface ISocialHandle {
+    twitter?: string;
+    reddit?: string;
+    tiktok?: string;
+    instagram?: string;
+    telegram?: string;
+    thread?: string;
+    discord?: string;
+    youtube?: string;
+}
+
 export interface IRaiderUserService {
     _id?: string;
     accountType: ServiceAccountTypeEnum;
@@ -15,7 +26,8 @@ export interface IRaiderUserService {
     createdAt?: Date;
     isVerified?: boolean;
     work_timeout: number;
-    analytics: IAnalytic
+    analytics: IAnalytic;
+    handles: ISocialHandle;
 }
 
 export interface IMultipleRaiderUserService {
