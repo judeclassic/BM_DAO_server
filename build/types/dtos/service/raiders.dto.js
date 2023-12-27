@@ -10,6 +10,7 @@ class RaiderUserServiceDto {
         this.createdAt = subUser.createdAt;
         this.subscriptionDate = subUser.subscriptionDate;
         this.isVerified = subUser.isVerified;
+        this.handles = subUser.handles;
         this.work_timeout = subUser.work_timeout;
         this.analytics = subUser.analytics;
     }
@@ -48,6 +49,23 @@ class RaiderUserServiceDto {
     get isUserSubscribed() {
         const currentTime = Date.parse((new Date()).toISOString());
         return (currentTime < this.expirationDate);
+    }
+    static createRequest({ userId, accountType, handles }) {
+        return {
+            accountType: accountType,
+            userId: userId,
+            updatedAt: new Date(),
+            createdAt: new Date(),
+            subscriptionDate: Date.parse((new Date()).toISOString()),
+            isVerified: false,
+            work_timeout: Date.parse((new Date()).toISOString()),
+            handles: handles,
+            analytics: {
+                availableTask: 0,
+                pendingTask: 0,
+                completedTask: 0,
+            }
+        };
     }
 }
 class MultipleUserServiceDto {

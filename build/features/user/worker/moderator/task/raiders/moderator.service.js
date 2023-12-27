@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const moderator_dto_1 = require("../../../../../../types/dtos/task/moderator.dto");
 const raiders_dto_1 = require("../../../../../../types/dtos/task/raiders.dto");
 const enums_1 = require("../../../../../../types/interfaces/response/services/enums");
 const raid_response_1 = require("../../../../../../types/interfaces/response/services/raid.response");
@@ -178,6 +179,7 @@ class ModeratorUserTaskService {
             return { raid: updatedRaidResponse.data };
         });
         this.approveTaskAsComplete = (userId, taskId) => __awaiter(this, void 0, void 0, function* () {
+            var _c;
             const tasksResponse = yield this._raiderTaskModel.checkIfExist({ _id: taskId });
             if (!tasksResponse.data)
                 return { errors: [ERROR_GETTING_THIS_TASK] };
@@ -203,7 +205,17 @@ class ModeratorUserTaskService {
                 });
             }));
             this._moderatorServiceModel.updateCompletedAnalytics(userId);
-            this._userModel.updateCompletedAnalytics(updatedTaskResponse.data.userId, enums_1.ServiceAccountTypeEnum.raider);
+            const user = yield this._userModel.updateCompletedAnalytics(userId, enums_1.ServiceAccountTypeEnum.raider);
+            if (!user.data)
+                return { errors: [ERROR_GETTING_THIS_TASK] };
+            user.data.updateUserWithdrawableBalance({
+                amount: moderator_dto_1.ModeratorTaskDto.getRaiderPayoutByAction((_c = updatedTaskResponse.data) === null || _c === void 0 ? void 0 : _c.raidInformation.action),
+                multiplier: tasksResponse.data.raidInformation.amount,
+                type: 'paid'
+            });
+            const updatedUser = yield this._userModel.updateUserDetailToDB(userId, user.data.getDBModel);
+            if (!updatedUser.data)
+                return { errors: [ERROR_GETTING_THIS_TASK] };
             yield this._raidModel.deleteAllRaids({ taskId });
             return { task: updatedTaskResponse.data };
         });

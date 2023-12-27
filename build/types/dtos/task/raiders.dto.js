@@ -119,21 +119,21 @@ class RaiderTaskDto {
     }
     static getPayoutByAction(action) {
         if (action === raider_task_response_1.RaidActionEnum.commentOnPost) {
-            return user_dto_1.AmountEnum.raidClientCommentpay;
+            return user_dto_1.AmountEnum.raidRaiderCommentpay;
         }
         if (action === raider_task_response_1.RaidActionEnum.createATweet) {
-            return user_dto_1.AmountEnum.raidClientTweetPay;
+            return user_dto_1.AmountEnum.raidRaiderTweetPay;
         }
         if (action === raider_task_response_1.RaidActionEnum.followAccount) {
-            return user_dto_1.AmountEnum.raidClientFollowPay;
+            return user_dto_1.AmountEnum.raidRaiderFollowPay;
         }
         if (action === raider_task_response_1.RaidActionEnum.likePost) {
-            return user_dto_1.AmountEnum.raidClientLikePay;
+            return user_dto_1.AmountEnum.raidRaiderLikePay;
         }
         if (action === raider_task_response_1.RaidActionEnum.raid) {
-            return user_dto_1.AmountEnum.raidClientRaidPay;
+            return user_dto_1.AmountEnum.raidRaiderRaidPay;
         }
-        return user_dto_1.AmountEnum.raidClientRetweetpay;
+        return user_dto_1.AmountEnum.raidRaiderRetweetpay;
     }
 }
 exports.RaiderTaskDto = RaiderTaskDto;

@@ -8,7 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const raiders_dto_1 = __importDefault(require("../../../../../types/dtos/service/raiders.dto"));
 const user_dto_1 = require("../../../../../types/dtos/user.dto");
 const transaction_response_1 = require("../../../../../types/interfaces/response/transaction.response");
 const user_response_1 = require("../../../../../types/interfaces/response/user.response");
@@ -44,7 +48,7 @@ const ERROR_USER_IS_A_CLIENT = {
 };
 class RaiderUserServiceService {
     constructor({ authRepo, userModel, userServiceModel, transactionModel }) {
-        this.subscribeForAService = ({ accountType, userId, }) => __awaiter(this, void 0, void 0, function* () {
+        this.subscribeForAService = ({ accountType, handles, userId, }) => __awaiter(this, void 0, void 0, function* () {
             var _a;
             console.log(userId);
             const user = yield this._userModel.checkIfExist({ _id: userId });
@@ -56,21 +60,7 @@ class RaiderUserServiceService {
             const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: user_dto_1.AmountEnum.subscriptionPackage1, type: 'charged' });
             if (!isWithdrawed)
                 return { errors: [ERROR_NOT_ENOUGH_BALANCE] };
-            const userServiceRequest = {
-                accountType: accountType,
-                userId: userId,
-                updatedAt: new Date(),
-                createdAt: new Date(),
-                subscriptionDate: Date.parse((new Date()).toISOString()),
-                isVerified: false,
-                work_timeout: Date.parse((new Date()).toISOString()),
-                tasks: [],
-                analytics: {
-                    availableTask: 0,
-                    pendingTask: 0,
-                    completedTask: 0,
-                }
-            };
+            const userServiceRequest = raiders_dto_1.default.createRequest({ userId, accountType, handles });
             const userServiceResponse = yield this._userServiceModel.createUserService(userServiceRequest);
             if (!userServiceResponse.data)
                 return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
