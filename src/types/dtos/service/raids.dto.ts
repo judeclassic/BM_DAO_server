@@ -1,6 +1,8 @@
 import { ISubSciptionStatus } from "../../interfaces/response/services/enums";
 import { IMultipleRaids, IRaid, TaskStatusStatus } from "../../interfaces/response/services/raid.response";
+import { IRaiderUserService } from "../../interfaces/response/services/raider.response";
 import { IRaiderTaskResponse, RaiderTaskDto } from "../task/raiders.dto";
+import RaiderUserServiceDto from "./raiders.dto";
 
 export interface IRaidResponse {
   id?: string;
@@ -11,6 +13,7 @@ export interface IRaidResponse {
   taskStatus: TaskStatusStatus;
   imageProve?: string[]; 
   task?: IRaiderTaskResponse
+  service?: IRaiderUserService;
 }
 
 export interface IMultipleRaidResponse {
@@ -29,6 +32,7 @@ export class RaidDto implements IRaid {
   proofs?: string[];
   task?: RaiderTaskDto
   serviceId: string;
+  service?: RaiderUserServiceDto;
 
   constructor (raid: IRaid) {
     this._id = raid._id;
@@ -66,12 +70,17 @@ export class RaidDto implements IRaid {
       taskStatus: this.taskStatus,
       timeLine: timeLine,
       proofs: this.proofs,
-      task: this.task?.getResponse
+      task: this.task?.getResponse,
+      service: this.service?.getResponse,
     } as IRaidResponse
   }
 
   set addTaskToModel(task: RaiderTaskDto) {
     this.task = task;
+  }
+
+  set addServiceToModel(service: RaiderUserServiceDto) {
+    this.service = service;
   }
 }
 

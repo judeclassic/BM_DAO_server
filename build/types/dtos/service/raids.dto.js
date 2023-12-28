@@ -25,7 +25,7 @@ class RaidDto {
         };
     }
     get getResponse() {
-        var _a;
+        var _a, _b;
         const currentTime = Date.parse((new Date()).toISOString()); // + (1000 * 60 * 60 * 24)
         const timeLine = currentTime < (this.timeLine + (1000 * 60 * 60 * 24)) ? 'ACTIVE' : 'EXPIRED';
         return {
@@ -36,11 +36,15 @@ class RaidDto {
             taskStatus: this.taskStatus,
             timeLine: timeLine,
             proofs: this.proofs,
-            task: (_a = this.task) === null || _a === void 0 ? void 0 : _a.getResponse
+            task: (_a = this.task) === null || _a === void 0 ? void 0 : _a.getResponse,
+            service: (_b = this.service) === null || _b === void 0 ? void 0 : _b.getResponse,
         };
     }
     set addTaskToModel(task) {
         this.task = task;
+    }
+    set addServiceToModel(service) {
+        this.service = service;
     }
 }
 exports.RaidDto = RaidDto;

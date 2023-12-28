@@ -41,6 +41,10 @@ const ERROR_THIS_TASK_HAS_A_MODERATOR_ALREADY: ErrorInterface = {
   message: 'This task already have a moderator',
 };
 
+const ERROR_GETTING_THIS_USER_SERVICE: ErrorInterface = {
+  message: 'error getting the raider service and social handles',
+};
+
 const ERROR_THIS_TASK_IS_ALREADY_MODERATED_BY_YOU: ErrorInterface = {
   message: 'This task is being moderated by you already',
 };
@@ -121,13 +125,11 @@ class ModeratorUserTaskService {
     const tasksResponse = await this._raiderTaskModel.checkIfExist({ _id: raidsResponse.data.taskId });
     if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
-    const raiderService = await this._raiderServiceModel.checkIfExist({
-      _id: raidsResponse.data.serviceId,
-      userId: raidsResponse.data.assigneeId,
-    });
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    const raiderService = await this._raiderServiceModel.checkIfExist({ _id: raidsResponse.data.serviceId });
+    if (!raiderService.data) return { errors: [ERROR_GETTING_THIS_USER_SERVICE] };
 
     raidsResponse.data.addTaskToModel = tasksResponse.data;
+    raidsResponse.data.addServiceToModel = raiderService.data;
 
     return { raid: raidsResponse.data };
   }

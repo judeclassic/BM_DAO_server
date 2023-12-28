@@ -36,6 +36,9 @@ const ERROR_SERVICE_DO_NOT_BELONG_TO_THIS_USER = {
 const ERROR_THIS_TASK_HAS_A_MODERATOR_ALREADY = {
     message: 'This task already have a moderator',
 };
+const ERROR_GETTING_THIS_USER_SERVICE = {
+    message: 'error getting the raider service and social handles',
+};
 const ERROR_THIS_TASK_IS_ALREADY_MODERATED_BY_YOU = {
     message: 'This task is being moderated by you already',
 };
@@ -84,13 +87,11 @@ class ModeratorUserTaskService {
             const tasksResponse = yield this._raiderTaskModel.checkIfExist({ _id: raidsResponse.data.taskId });
             if (!tasksResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
-            const raiderService = yield this._raiderServiceModel.checkIfExist({
-                _id: raidsResponse.data.serviceId,
-                userId: raidsResponse.data.assigneeId,
-            });
-            if (!tasksResponse.data)
-                return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+            const raiderService = yield this._raiderServiceModel.checkIfExist({ _id: raidsResponse.data.serviceId });
+            if (!raiderService.data)
+                return { errors: [ERROR_GETTING_THIS_USER_SERVICE] };
             raidsResponse.data.addTaskToModel = tasksResponse.data;
+            raidsResponse.data.addServiceToModel = raiderService.data;
             return { raid: raidsResponse.data };
         });
         this.getModeratorTask = (taskId) => __awaiter(this, void 0, void 0, function* () {
