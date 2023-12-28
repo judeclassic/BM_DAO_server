@@ -38,7 +38,7 @@ class UserProfileService {
       updatedAt: new Date()
     });
 
-    if (finalUser.error || !finalUser.data ) return {errors: [ERROR_INSUFFICIENT_PERMISSIONS]};
+    if (finalUser.error || !finalUser.data ) return { errors: [ERROR_INSUFFICIENT_PERMISSIONS] };
     const raiderService = await this._raiderUserServiceModel.checkIfExist({ userId: user.data.id });
     finalUser.data.raiderService = raiderService.data;
 
@@ -58,31 +58,30 @@ class UserProfileService {
 
   public getUserReferals = async (userId: string, level: '1' | '2' | '3'): Promise<{data?: UserDto; errors?: ErrorInterface[]}> => {
     const user = await this._userModel.checkIfExist({ _id: userId });
-
     if (user.error || !user.data ) return {errors: [ERROR_USER_NOT_FOUND]};
     
     const raiderService = await this._raiderUserServiceModel.checkIfExist({ userId: user.data.id });
     user.data.raiderService = raiderService.data;
-    user.data.referals = (await this.getReferalInfo(level, user.data.referal))?.data;
+    const referals = await this.getReferalInfo(level, user.data.referal);
+    console.log(user.data.referal);
+    user.data.referals = referals?.data;
 
     return { data: user.data };
   };
 
   private getReferalInfo = async (level: '1' | '2' | '3', referal?: {
-    referalCode1?: string;
-    referalCode2?: string;
-    referalCode3?: string;
-}) => {
+    myReferalCode?: string;
+  }) => {
     if (level === '1') {
-      const userWith1stReferalExists = await this._userModel.getReferals({ referalCode1: referal?.referalCode1 });
+      const userWith1stReferalExists = await this._userModel.getReferals({ referalCode1: referal?.myReferalCode });
       return userWith1stReferalExists;
     }
     if (level === '2') {
-      const userWith1stReferalExists = await this._userModel.getReferals({ referalCode2: referal?.referalCode2 });
+      const userWith1stReferalExists = await this._userModel.getReferals({ referalCode2: referal?.myReferalCode });
       return userWith1stReferalExists;
     }
     if (level === '3') {
-      const userWith1stReferalExists = await this._userModel.getReferals({ referalCode3: referal?.referalCode3 });
+      const userWith1stReferalExists = await this._userModel.getReferals({ referalCode3: referal?.myReferalCode });
       return userWith1stReferalExists;
     }
   }

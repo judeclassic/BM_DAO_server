@@ -158,7 +158,7 @@ class  UserModel implements  IUserModelRepository {
     private deepSearchDetails = (name: string, data: any) => {
       const finalObject: any = {};
       Object.entries(data).forEach((data) => {
-        finalObject[`personal_information.${data[0]}`] = data[1];
+        finalObject[`${name}.${data[0]}`] = data[1];
       })
       return finalObject;
     }
@@ -265,7 +265,7 @@ class  UserModel implements  IUserModelRepository {
     }
 
     checkIfReferalExist = async (details : Partial<IUser['referal']>) => {
-        const referalInformation: any = this.deepSearchDetails( 'referal', details);
+        const referalInformation: any = this.deepSearchDetails( 'personal_information', details);
         try {
             const data = await this.User.findOne(referalInformation);
             if (data) {
@@ -281,12 +281,14 @@ class  UserModel implements  IUserModelRepository {
 
     getReferals = async (details : Partial<IUser['referal']>) => {
         const referalInformation: any = this.deepSearchDetails( 'referal', details);
+        console.log(referalInformation);
         try {
             const data = await this.User.find(referalInformation);
+            console.log(data.length);
             if (data) {
               return {status: true, data: data.map((user) => (new UserDto(user)).getUnSecureResponse) };
             }else {
-                return {status: false, error: `Can't find Details`};
+                return { status: false, error: `Can't find Details` };
             }
         } catch (error) {
             defaultLogger.error(error);

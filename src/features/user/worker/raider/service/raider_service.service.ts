@@ -6,6 +6,7 @@ import AuthorizationInterface from "../../../../../types/interfaces/modules/auth
 import IUserModelRepository from "../../../../../types/interfaces/modules/db/models/Iuser.model";
 import IRaiderServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/raider.model";
 import { ICreateRaiderUserServiceRequest } from "../../../../../types/interfaces/requests/user/create-user";
+import { ISocialHandle } from "../../../../../types/interfaces/response/services/raider.response";
 import { TransactionStatusEnum, TransactionTypeEnum } from "../../../../../types/interfaces/response/transaction.response";
 import { AccountTypeEnum } from "../../../../../types/interfaces/response/user.response";
 
@@ -176,6 +177,18 @@ class RaiderUserServiceService {
     if ( !userService.data ) {
       return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] }
     }
+
+    return { userService: userService.data };
+  }
+
+  public updateSocialHandle = async (userId: string, userServiceId: string, handles: ISocialHandle) => {
+    const userExists = await this._userModel.checkIfExist({ _id: userId });
+
+    if ( !userExists.data ) return { errors: [ERROR_USER_NOT_FOUND] };
+
+    const userService = await this._userServiceModel.updateSocialHandle({_id: userServiceId }, handles);
+
+    if ( !userService.data ) return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
 
     return { userService: userService.data };
   }

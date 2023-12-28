@@ -3,7 +3,7 @@ import mongoosePaginate from 'mongoose-paginate-v2'
 import UserServiceDto, { MultipleUserServiceDto } from '../../../../../types/dtos/service/raiders.dto';
 import IRaiderUserServiceModelRepository from '../../../../../types/interfaces/modules/db/models/service/raider.model';
 import { ServiceAccountTypeEnum } from '../../../../../types/interfaces/response/services/enums';
-import { IAnalytic, IRaiderUserService } from '../../../../../types/interfaces/response/services/raider.response';
+import { IAnalytic, IRaiderUserService, ISocialHandle } from '../../../../../types/interfaces/response/services/raider.response';
 import { defaultLogger } from '../../../logger';
 
 const AnalyticSchema = new Schema<IAnalytic>({
@@ -75,7 +75,7 @@ class  RaiderUserServiceModel implements  IRaiderUserServiceModelRepository {
   constructor() {
     this.UserService =  UserService;
   }
-
+  
   createUserService = async (details: IRaiderUserService) => {
     try {
       const data = await this.UserService.create(details);
@@ -87,6 +87,22 @@ class  RaiderUserServiceModel implements  IRaiderUserServiceModelRepository {
     } catch (error) {
         defaultLogger.error(error);
         return {status: false, error };
+    }
+  }
+
+  updateSocialHandle = async (details: Partial<IRaiderUserService>, handles: ISocialHandle) => {
+    try {
+      const data = await this.UserService.findOne(details);
+      if (data) {
+        data.handles = { ...data.handles, ...handles };
+        await data.save();
+        return {status: true, data: new UserServiceDto(data)};
+      } else {
+        return {status: false, error: "Couldn't update userservice"};
+      }
+    } catch (error) {
+        defaultLogger.error(error);
+        return { status: false, error };
     }
   }
 

@@ -15,6 +15,7 @@ export interface IUserServiceResponse {
   subscriptionStatus: ISubSciptionStatus;
   isVerified?: boolean;
   analytics: IAnalytic;
+  handles: ISocialHandle
 }
 
 export interface IMultipleUserServiceResponse {
@@ -81,7 +82,8 @@ class RaiderUserServiceDto implements IRaiderUserService {
       createdAt: this.createdAt,
       subscriptionStatus: subscriptionStatus,
       isVerified: this.isVerified,
-      analytics: this.analytics
+      analytics: this.analytics,
+      handles: this.handles
     } as IUserServiceResponse;
   }
   

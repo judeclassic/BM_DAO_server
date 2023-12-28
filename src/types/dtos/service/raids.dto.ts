@@ -28,12 +28,14 @@ export class RaidDto implements IRaid {
   timeLine: number;
   proofs?: string[];
   task?: RaiderTaskDto
+  serviceId: string;
 
   constructor (raid: IRaid) {
     this._id = raid._id;
     this.assignerId = raid.assignerId;
     this.assigneeId = raid.assigneeId;
     this.taskId = raid.taskId;
+    this.serviceId = raid.serviceId;
     this.taskStatus = raid.taskStatus;
     this.timeLine = raid.timeLine;
     this.proofs = raid.proofs;
@@ -45,6 +47,7 @@ export class RaidDto implements IRaid {
       assignerId: this.assignerId,
       assigneeId: this.assigneeId,
       taskId: this.taskId,
+      serviceId: this.serviceId,
       taskStatus: this.taskStatus,
       timeLine: this.timeLine,
       imageProve: this.proofs,

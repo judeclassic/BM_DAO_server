@@ -137,7 +137,28 @@ class RaiderUserServiceController {
       });
   
       return sendJson(201, {
-        data: response.userService.getResponse ,
+        data: response.userService.getResponse,
+        code: 201,
+        status: true
+      });
+    }
+
+    public updateSocialHandle = async ({ user, body }:{
+      user: AutheticatedUserInterface,
+      body: any 
+    }, sendJson: (code: number, response: ResponseInterface<any>)=>void)  => {
+      const { serviceId, handles } = body;
+  
+      const response = await this._raiderServiceService.updateSocialHandle(user.id, serviceId, handles);
+
+      if ( !response.userService ) return sendJson(401, {
+        error: response.errors,
+        code: 401,
+        status: false
+      });
+  
+      return sendJson(201, {
+        data: response.userService.getResponse,
         code: 201,
         status: true
       });

@@ -1,5 +1,5 @@
 import UserServiceDto, { MultipleUserServiceDto } from "../../../../../dtos/service/raiders.dto";
-import { IRaiderUserService } from "../../../../response/services/raider.response";
+import { IRaiderUserService, ISocialHandle } from "../../../../response/services/raider.response";
 
 
 interface IRaiderServiceModelRepository{
@@ -15,6 +15,8 @@ interface IRaiderServiceModelRepository{
     updateCancelAnalytics: (userId: string) => Promise<{status: boolean, error?: string | unknown, data?: UserServiceDto }>;
 
     checkIfExist: (details : Partial<IRaiderUserService>) => Promise<{status: boolean, error?: string | unknown, data?: UserServiceDto }>;
+
+    updateSocialHandle: (details : Partial<IRaiderUserService>, handles: ISocialHandle) => Promise<{status: boolean, error?: string | unknown, data?: UserServiceDto }>;
 
     getAllUserService: (details : Partial<IRaiderUserService>, option: { page: number, limit: number }) => 
         Promise<{status: boolean, error?: string | unknown, data?: MultipleUserServiceDto }>;

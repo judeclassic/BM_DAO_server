@@ -145,6 +145,10 @@ export class RaiderTaskDto implements IRaiderTask {
     }
   }
 
+  get isTaskAvailable() {
+    return this.availableRaids < this.totalRaids;
+  }
+
   static getPricingByAction(action: RaidActionEnum) {
     if (action === RaidActionEnum.commentOnPost) {
       return AmountEnum.raidClientCommentCharge

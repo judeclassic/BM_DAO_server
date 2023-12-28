@@ -1,4 +1,4 @@
-import { IModeratorServiceResponse } from "../../../../../types/dtos/service/moderators.dto";
+import { IModeratorServiceResponse, IMultipleModeratorServiceResponse } from "../../../../../types/dtos/service/moderators.dto";
 import { IMultipleUserServiceResponse } from "../../../../../types/dtos/service/raiders.dto";
 import AutheticatedUserInterface from "../../../../../types/interfaces/requests/user/authencated-user";
 import ResponseInterface from "../../../../../types/interfaces/response/response";
@@ -102,7 +102,7 @@ class ModeratorUserServiceController {
     }
 
     public listAllUserServices = async ({ user, query }: { user: AutheticatedUserInterface, query: any },
-      sendJson: (code: number, response: ResponseInterface<IMultipleUserServiceResponse>
+      sendJson: (code: number, response: ResponseInterface<IMultipleModeratorServiceResponse>
     ) => void)  => {
       const { page, limit } = query;
 

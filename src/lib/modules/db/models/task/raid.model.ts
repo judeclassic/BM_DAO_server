@@ -9,6 +9,7 @@ import { RaidDto, MultipleRaidDto } from '../../../../../types/dtos/service/raid
 const RaidSchema = new Schema<IRaid>({
   assignerId: String,
   assigneeId: String,
+  serviceId: String,
   taskId: String,
   timeLine: Number,
   taskStatus: String,

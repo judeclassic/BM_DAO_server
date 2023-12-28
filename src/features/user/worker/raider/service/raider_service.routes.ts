@@ -28,6 +28,8 @@ const useRaiderUserServicesRoutes = ({router}: {router: RequestHandler}) => {
     router.getWithAuth('/', userServiceController.getUserService );
 
     router.postWithBodyAndAuth('/unsubscibe', userServiceController.unSubscribeFromUserService );
+
+    router.postWithBodyAndAuth('/updatehandle', userServiceController.updateSocialHandle );
 }
 
 export default useRaiderUserServicesRoutes;
