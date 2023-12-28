@@ -99,6 +99,9 @@ class RaiderTaskDto {
             name: moderatorServiceDto.name
         };
     }
+    get isTaskAvailable() {
+        return this.availableRaids < this.totalRaids;
+    }
     static getPricingByAction(action) {
         if (action === raider_task_response_1.RaidActionEnum.commentOnPost) {
             return user_dto_1.AmountEnum.raidClientCommentCharge;

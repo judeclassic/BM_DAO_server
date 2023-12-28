@@ -84,6 +84,12 @@ class ModeratorUserTaskService {
             const tasksResponse = yield this._raiderTaskModel.checkIfExist({ _id: raidsResponse.data.taskId });
             if (!tasksResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+            const raiderService = yield this._raiderServiceModel.checkIfExist({
+                _id: raidsResponse.data.serviceId,
+                userId: raidsResponse.data.assigneeId,
+            });
+            if (!tasksResponse.data)
+                return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             raidsResponse.data.addTaskToModel = tasksResponse.data;
             return { raid: raidsResponse.data };
         });

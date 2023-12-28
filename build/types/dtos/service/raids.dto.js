@@ -7,6 +7,7 @@ class RaidDto {
         this.assignerId = raid.assignerId;
         this.assigneeId = raid.assigneeId;
         this.taskId = raid.taskId;
+        this.serviceId = raid.serviceId;
         this.taskStatus = raid.taskStatus;
         this.timeLine = raid.timeLine;
         this.proofs = raid.proofs;
@@ -17,6 +18,7 @@ class RaidDto {
             assignerId: this.assignerId,
             assigneeId: this.assigneeId,
             taskId: this.taskId,
+            serviceId: this.serviceId,
             taskStatus: this.taskStatus,
             timeLine: this.timeLine,
             imageProve: this.proofs,

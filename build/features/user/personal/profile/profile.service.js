@@ -41,26 +41,27 @@ class UserProfileService {
             return user.data;
         });
         this.getUserReferals = (userId, level) => __awaiter(this, void 0, void 0, function* () {
-            var _a;
             const user = yield this._userModel.checkIfExist({ _id: userId });
             if (user.error || !user.data)
                 return { errors: [ERROR_USER_NOT_FOUND] };
             const raiderService = yield this._raiderUserServiceModel.checkIfExist({ userId: user.data.id });
             user.data.raiderService = raiderService.data;
-            user.data.referals = (_a = (yield this.getReferalInfo(level, user.data.referal))) === null || _a === void 0 ? void 0 : _a.data;
+            const referals = yield this.getReferalInfo(level, user.data.referal);
+            console.log(user.data.referal);
+            user.data.referals = referals === null || referals === void 0 ? void 0 : referals.data;
             return { data: user.data };
         });
         this.getReferalInfo = (level, referal) => __awaiter(this, void 0, void 0, function* () {
             if (level === '1') {
-                const userWith1stReferalExists = yield this._userModel.getReferals({ referalCode1: referal === null || referal === void 0 ? void 0 : referal.referalCode1 });
+                const userWith1stReferalExists = yield this._userModel.getReferals({ referalCode1: referal === null || referal === void 0 ? void 0 : referal.myReferalCode });
                 return userWith1stReferalExists;
             }
             if (level === '2') {
-                const userWith1stReferalExists = yield this._userModel.getReferals({ referalCode2: referal === null || referal === void 0 ? void 0 : referal.referalCode2 });
+                const userWith1stReferalExists = yield this._userModel.getReferals({ referalCode2: referal === null || referal === void 0 ? void 0 : referal.myReferalCode });
                 return userWith1stReferalExists;
             }
             if (level === '3') {
-                const userWith1stReferalExists = yield this._userModel.getReferals({ referalCode3: referal === null || referal === void 0 ? void 0 : referal.referalCode3 });
+                const userWith1stReferalExists = yield this._userModel.getReferals({ referalCode3: referal === null || referal === void 0 ? void 0 : referal.myReferalCode });
                 return userWith1stReferalExists;
             }
         });

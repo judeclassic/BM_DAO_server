@@ -43,7 +43,8 @@ class RaiderUserServiceDto {
             createdAt: this.createdAt,
             subscriptionStatus: subscriptionStatus,
             isVerified: this.isVerified,
-            analytics: this.analytics
+            analytics: this.analytics,
+            handles: this.handles
         };
     }
     get isUserSubscribed() {

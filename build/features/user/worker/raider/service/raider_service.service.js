@@ -142,6 +142,15 @@ class RaiderUserServiceService {
             }
             return { userService: userService.data };
         });
+        this.updateSocialHandle = (userId, userServiceId, handles) => __awaiter(this, void 0, void 0, function* () {
+            const userExists = yield this._userModel.checkIfExist({ _id: userId });
+            if (!userExists.data)
+                return { errors: [ERROR_USER_NOT_FOUND] };
+            const userService = yield this._userServiceModel.updateSocialHandle({ _id: userServiceId }, handles);
+            if (!userService.data)
+                return { errors: [ERROR_UNABLE_TO_CREATE_USER_SERVICE] };
+            return { userService: userService.data };
+        });
         this.adwardReferals = ({ referalCode1, referalCode2, referalCode3, isGiven }) => __awaiter(this, void 0, void 0, function* () {
             if (isGiven)
                 return;

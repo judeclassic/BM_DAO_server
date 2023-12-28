@@ -113,6 +113,21 @@ class RaiderUserServiceController {
                 status: true
             });
         });
+        this.updateSocialHandle = ({ user, body }, sendJson) => __awaiter(this, void 0, void 0, function* () {
+            const { serviceId, handles } = body;
+            const response = yield this._raiderServiceService.updateSocialHandle(user.id, serviceId, handles);
+            if (!response.userService)
+                return sendJson(401, {
+                    error: response.errors,
+                    code: 401,
+                    status: false
+                });
+            return sendJson(201, {
+                data: response.userService.getResponse,
+                code: 201,
+                status: true
+            });
+        });
         this._raiderServiceService = raiderServiceService;
         this._raiderServiceValidator = raiderServiceValidator;
     }

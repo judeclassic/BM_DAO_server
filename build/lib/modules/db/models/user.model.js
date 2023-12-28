@@ -162,7 +162,7 @@ class UserModel {
         this.deepSearchDetails = (name, data) => {
             const finalObject = {};
             Object.entries(data).forEach((data) => {
-                finalObject[`personal_information.${data[0]}`] = data[1];
+                finalObject[`${name}.${data[0]}`] = data[1];
             });
             return finalObject;
         };
@@ -284,7 +284,7 @@ class UserModel {
             }
         });
         this.checkIfReferalExist = (details) => __awaiter(this, void 0, void 0, function* () {
-            const referalInformation = this.deepSearchDetails('referal', details);
+            const referalInformation = this.deepSearchDetails('personal_information', details);
             try {
                 const data = yield this.User.findOne(referalInformation);
                 if (data) {
@@ -301,8 +301,10 @@ class UserModel {
         });
         this.getReferals = (details) => __awaiter(this, void 0, void 0, function* () {
             const referalInformation = this.deepSearchDetails('referal', details);
+            console.log(referalInformation);
             try {
                 const data = yield this.User.find(referalInformation);
+                console.log(data.length);
                 if (data) {
                     return { status: true, data: data.map((user) => (new user_dto_1.default(user)).getUnSecureResponse) };
                 }

@@ -20,6 +20,7 @@ const raids_dto_1 = require("../../../../../types/dtos/service/raids.dto");
 const RaidSchema = new mongoose_1.Schema({
     assignerId: String,
     assigneeId: String,
+    serviceId: String,
     taskId: String,
     timeLine: Number,
     taskStatus: String,

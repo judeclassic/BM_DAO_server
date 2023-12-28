@@ -117,6 +117,23 @@ class RaiderUserServiceModel {
                 return { status: false, error };
             }
         });
+        this.updateSocialHandle = (details, handles) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.UserService.findOne(details);
+                if (data) {
+                    data.handles = Object.assign(Object.assign({}, data.handles), handles);
+                    yield data.save();
+                    return { status: true, data: new raiders_dto_1.default(data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't update userservice" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
         this.updateUserService = (id, details) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield this.UserService.findByIdAndUpdate(id, details, { new: true });

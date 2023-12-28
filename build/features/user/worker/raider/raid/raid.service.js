@@ -28,6 +28,9 @@ const ERROR_GETING_ALL_USER_TASKS = {
 const ERROR_USER_HAS_STARTED_THIS_TASK = {
     message: 'user have already aplied for this task',
 };
+const ERROR_TASK_HAVE_BEEN_FILLED_UP = {
+    message: 'this task have been filled with users',
+};
 const ERROR_SERVICE_DO_NOT_BELONG_TO_THIS_USER = {
     message: 'this service do not belong to the user',
 };
@@ -64,7 +67,9 @@ class RaiderUserTaskRaidService {
             const tasksResponse = yield this._raiderTaskModel.checkIfExist({ _id: taskId });
             if (!tasksResponse.data)
                 return { errors: [ERROR_UNABLE_TO_GET_TASK] };
-            const raidExists = yield this._raidModel.checkIfExist({ taskId, assigneeId: userId });
+            if (!tasksResponse.data.isTaskAvailable)
+                return { errors: [ERROR_TASK_HAVE_BEEN_FILLED_UP] };
+            const raidExists = yield this._raidModel.checkIfExist({ taskId, assigneeId: userId, serviceId });
             if (raidExists.data)
                 return { errors: [ERROR_USER_HAS_STARTED_THIS_TASK] };
             const raidResponse = yield this._raidModel.createRaid(tasksResponse.data.getAssignedTask(userId));
