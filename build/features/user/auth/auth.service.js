@@ -36,7 +36,7 @@ const ERROR_RESET_PASSWORD_TOKEN_EXPIRED = {
     message: 'This token has expired. Please request a new password reset.',
 };
 class UserAuthService {
-    constructor({ mailRepo, authRepo, userModel, raiderUserServiceModel }) {
+    constructor({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel }) {
         this.registerUser = ({ accountType, name, username, country, emailAddress, password, referalCode }) => __awaiter(this, void 0, void 0, function* () {
             const userWithEmailExists = yield this._userModel.checkIfExist({ emailAddress });
             if (userWithEmailExists.data) {
@@ -79,6 +79,8 @@ class UserAuthService {
             user.data.accessToken = accessToken;
             const raiderService = yield this._raiderUserServiceModel.checkIfExist({ userId: user.data.id });
             user.data.raiderService = raiderService.data;
+            const moderatorService = yield this._moderatorUserServiceModel.checkIfExist({ userId: user.data.id });
+            user.data.moderatorService = moderatorService.data;
             this._userModel.updateUserDetailToDB(user.data.id, { accessToken });
             return { user: user.data };
         });
@@ -147,6 +149,7 @@ class UserAuthService {
         this._userModel = userModel;
         this._authRepo = authRepo;
         this._raiderUserServiceModel = raiderUserServiceModel;
+        this._moderatorUserServiceModel = moderatorUserServiceModel;
     }
 }
 exports.default = UserAuthService;

@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const auth_1 = __importDefault(require("../../../lib/modules/auth"));
+const moderator_model_1 = __importDefault(require("../../../lib/modules/db/models/service/moderator.model"));
 const raider_model_1 = __importDefault(require("../../../lib/modules/db/models/service/raider.model"));
 const user_model_1 = __importDefault(require("../../../lib/modules/db/models/user.model"));
 const mailer_1 = __importDefault(require("../../../lib/modules/mailer"));
@@ -15,8 +16,9 @@ const useUserAuthRoutes = ({ router }) => {
     const authRepo = new auth_1.default();
     const mailRepo = new mailer_1.default();
     const userModel = new user_model_1.default();
+    const moderatorUserServiceModel = new moderator_model_1.default();
     const raiderUserServiceModel = new raider_model_1.default();
-    const userAuthService = new auth_service_1.default({ mailRepo, authRepo, userModel, raiderUserServiceModel });
+    const userAuthService = new auth_service_1.default({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel });
     // AUTH ROUTES HANDLER
     const userAuthController = new auth_controller_1.default({ authValidator, userAuthService });
     router.postWithBody('/register', userAuthController.registerUser);

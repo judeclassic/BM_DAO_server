@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const enums_1 = require("../../../../../types/interfaces/response/services/enums");
 const raid_response_1 = require("../../../../../types/interfaces/response/services/raid.response");
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE = {
     field: 'serviceId',
@@ -81,6 +82,7 @@ class RaiderUserTaskRaidService {
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             raidResponse.data.addTaskToModel = tasksResponse.data;
             this._raiderServiceModel.updateCreatedAnalytics(userId);
+            this._userModel.updateCompletedAnalytics(userId, enums_1.ServiceAccountTypeEnum.raider);
             return { raid: raidResponse.data };
         });
         this.cancelRaidTask = (userId, raidId) => __awaiter(this, void 0, void 0, function* () {
@@ -101,6 +103,7 @@ class RaiderUserTaskRaidService {
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             updatedRaidResponse.data.addTaskToModel = updatedTaskResponse.data;
             this._raiderServiceModel.updateCancelAnalytics(raidResponse.data.assigneeId);
+            this._userModel.updateCancelAnalytics(userId, enums_1.ServiceAccountTypeEnum.raider);
             return { raid: updatedRaidResponse.data };
         });
         this.completeRaidTask = (userId, raidId, proofs) => __awaiter(this, void 0, void 0, function* () {
@@ -121,6 +124,7 @@ class RaiderUserTaskRaidService {
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
             raidResponse.data.addTaskToModel = updatedTaskResponse.data;
             this._raiderServiceModel.updateCompletedAnalytics(raidResponse.data.assigneeId);
+            this._userModel.updateCompletedAnalytics(raidResponse.data.assigneeId, enums_1.ServiceAccountTypeEnum.raider);
             return { raid: raidResponse.data };
         });
         this._raiderTaskModel = raiderTaskModel;

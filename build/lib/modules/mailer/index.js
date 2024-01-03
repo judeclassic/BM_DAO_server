@@ -46,6 +46,19 @@ class MailerRepo {
                 },
             });
         };
+        this.initGmail = () => {
+            this.transporter = nodemailer_1.default.createTransport({
+                host: DEFAULT_SMTP_HOST,
+                port: 587,
+                tls: {
+                    ciphers: 'SSLv3'
+                },
+                auth: {
+                    user: DEFAULT_SMTP_USER,
+                    pass: DEFAULT_SMTP_PASSWORD, // generated ethereal password
+                },
+            });
+        };
         this.sendReminderEmail = (to, info) => __awaiter(this, void 0, void 0, function* () {
             const { name, subject } = info;
             let htmlContent = fs_1.default.readFileSync(path_1.default.join(__dirname, './mails/reminder-mail.html')).toString();

@@ -15,7 +15,7 @@ const ERROR_USER_NOT_FOUND = {
     message: 'User with this email/password combination does not exist.',
 };
 class UserProfileService {
-    constructor({ userModel, raiderUserServiceModel }) {
+    constructor({ userModel, raiderUserServiceModel, moderatorUserServiceModel }) {
         this.updateProfileInformation = (userId, { name, phoneNumber, country }) => __awaiter(this, void 0, void 0, function* () {
             const user = yield this._userModel.checkIfExist({ _id: userId });
             if (user.error || !user.data)
@@ -30,6 +30,8 @@ class UserProfileService {
                 return { errors: [errors_1.ERROR_INSUFFICIENT_PERMISSIONS] };
             const raiderService = yield this._raiderUserServiceModel.checkIfExist({ userId: user.data.id });
             finalUser.data.raiderService = raiderService.data;
+            const moderatorService = yield this._moderatorUserServiceModel.checkIfExist({ userId: user.data.id });
+            user.data.moderatorService = moderatorService.data;
             return { user: finalUser.data };
         });
         this.findUserById = (userId) => __awaiter(this, void 0, void 0, function* () {
@@ -38,6 +40,8 @@ class UserProfileService {
                 return null;
             const raiderService = yield this._raiderUserServiceModel.checkIfExist({ userId: user.data.id });
             user.data.raiderService = raiderService.data;
+            const moderatorService = yield this._moderatorUserServiceModel.checkIfExist({ userId: user.data.id });
+            user.data.moderatorService = moderatorService.data;
             return user.data;
         });
         this.getUserReferals = (userId, level) => __awaiter(this, void 0, void 0, function* () {
@@ -67,6 +71,7 @@ class UserProfileService {
         });
         this._userModel = userModel;
         this._raiderUserServiceModel = raiderUserServiceModel;
+        this._moderatorUserServiceModel = moderatorUserServiceModel;
     }
 }
 exports.default = UserProfileService;

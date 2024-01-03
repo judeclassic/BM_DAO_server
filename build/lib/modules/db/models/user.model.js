@@ -38,21 +38,26 @@ const WalletSchema = new mongoose_1.Schema({
 });
 const AnalyticSchema = new mongoose_1.Schema({
     totalUploaded: Number,
+    totalPending: Number,
     totalCompleted: Number,
     raiders: {
         totalUploaded: Number,
+        totalPending: Number,
         totalCompleted: Number,
     },
     moderators: {
         totalUploaded: Number,
+        totalPending: Number,
         totalCompleted: Number,
     },
     chatEngagers: {
         totalUploaded: Number,
+        totalPending: Number,
         totalCompleted: Number,
     },
     collabManagers: {
         totalUploaded: Number,
+        totalPending: Number,
         totalCompleted: Number,
     }
 });
@@ -211,6 +216,60 @@ class UserModel {
                 return { status: false, error };
             }
         });
+        this.updateCancelAnalytics = (userId, type) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.User.findById(userId);
+                if (data) {
+                    if (!data.analytics)
+                        data.analytics = this.createAnalytics;
+                    data.analytics.totalUploaded--;
+                    if (type === enums_1.ServiceAccountTypeEnum.chatter)
+                        data.analytics.chatEngagers.totalUploaded--;
+                    if (type === enums_1.ServiceAccountTypeEnum.collab_manager)
+                        data.analytics.collabManagers.totalUploaded--;
+                    if (type === enums_1.ServiceAccountTypeEnum.moderators)
+                        data.analytics.moderators.totalUploaded--;
+                    if (type === enums_1.ServiceAccountTypeEnum.raider)
+                        data.analytics.raiders.totalUploaded--;
+                    const updatedUser = yield data.save();
+                    return { status: true, data: new user_dto_1.default(updatedUser !== null && updatedUser !== void 0 ? updatedUser : data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't create user" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
+        this.updatePendingAnalytics = (userId, type) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.User.findById(userId);
+                if (data) {
+                    if (!data.analytics)
+                        data.analytics = this.createAnalytics;
+                    data.analytics.totalPending++;
+                    if (type === enums_1.ServiceAccountTypeEnum.chatter)
+                        data.analytics.chatEngagers.totalPending++;
+                    if (type === enums_1.ServiceAccountTypeEnum.collab_manager)
+                        data.analytics.collabManagers.totalPending++;
+                    if (type === enums_1.ServiceAccountTypeEnum.moderators)
+                        data.analytics.moderators.totalPending++;
+                    if (type === enums_1.ServiceAccountTypeEnum.raider)
+                        data.analytics.raiders.totalPending++;
+                    const updatedUser = yield data.save();
+                    return { status: true, data: new user_dto_1.default(updatedUser !== null && updatedUser !== void 0 ? updatedUser : data) };
+                }
+                else {
+                    return { status: false, error: "Couldn't create user" };
+                }
+            }
+            catch (error) {
+                logger_1.defaultLogger.error(error);
+                return { status: false, error };
+            }
+        });
         this.updateCompletedAnalytics = (userId, type) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield this.User.findById(userId);
@@ -322,21 +381,26 @@ class UserModel {
     get createAnalytics() {
         return {
             totalUploaded: 0,
+            totalPending: 0,
             totalCompleted: 0,
             raiders: {
                 totalUploaded: 0,
+                totalPending: 0,
                 totalCompleted: 0,
             },
             moderators: {
                 totalUploaded: 0,
+                totalPending: 0,
                 totalCompleted: 0,
             },
             chatEngagers: {
                 totalUploaded: 0,
+                totalPending: 0,
                 totalCompleted: 0,
             },
             collabManagers: {
                 totalUploaded: 0,
+                totalPending: 0,
                 totalCompleted: 0,
             }
         };
