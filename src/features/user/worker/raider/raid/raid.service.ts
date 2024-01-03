@@ -4,6 +4,7 @@ import IUserModelRepository from "../../../../../types/interfaces/modules/db/mod
 import IRaidModelRepository from "../../../../../types/interfaces/modules/db/models/service/raid.model";
 import IRaiderServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/raider.model";
 import IRaiderTaskModelRepository from "../../../../../types/interfaces/modules/db/models/task/Iraider.model";
+import { ServiceAccountTypeEnum } from "../../../../../types/interfaces/response/services/enums";
 import { TaskStatusStatus } from "../../../../../types/interfaces/response/services/raid.response";
 
 const ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE: ErrorInterface = {
@@ -103,6 +104,7 @@ class RaiderUserTaskRaidService {
     raidResponse.data.addTaskToModel = tasksResponse.data;
 
     this._raiderServiceModel.updateCreatedAnalytics(userId);
+    this._userModel.updateCompletedAnalytics(userId, ServiceAccountTypeEnum.raider);
 
     return { raid: raidResponse.data }
   }
@@ -125,6 +127,7 @@ class RaiderUserTaskRaidService {
     updatedRaidResponse.data.addTaskToModel = updatedTaskResponse.data;
 
     this._raiderServiceModel.updateCancelAnalytics(raidResponse.data.assigneeId);
+    this._userModel.updateCancelAnalytics(userId, ServiceAccountTypeEnum.raider);
 
     return { raid: updatedRaidResponse.data }
   }
@@ -147,6 +150,7 @@ class RaiderUserTaskRaidService {
     raidResponse.data.addTaskToModel = updatedTaskResponse.data;
 
     this._raiderServiceModel.updateCompletedAnalytics(raidResponse.data.assigneeId);
+    this._userModel.updateCompletedAnalytics(raidResponse.data.assigneeId, ServiceAccountTypeEnum.raider);
 
     return { raid: raidResponse.data }
   }

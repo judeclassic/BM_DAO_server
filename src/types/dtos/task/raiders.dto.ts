@@ -146,7 +146,7 @@ export class RaiderTaskDto implements IRaiderTask {
   }
 
   get isTaskAvailable() {
-    return this.availableRaids < this.totalRaids;
+    return this.availableRaids !== 0;
   }
 
   static getPricingByAction(action: RaidActionEnum) {

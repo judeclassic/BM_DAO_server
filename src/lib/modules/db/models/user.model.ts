@@ -26,21 +26,26 @@ const WalletSchema = new Schema<IWallet>({
 
 const AnalyticSchema = new Schema<IAnalytics>({
   totalUploaded: Number,
+  totalPending: Number,
   totalCompleted: Number,
   raiders: {
       totalUploaded: Number,
+      totalPending: Number,
       totalCompleted: Number,
   },
   moderators: {
       totalUploaded: Number,
+      totalPending: Number,
       totalCompleted: Number,
   },
   chatEngagers: {
       totalUploaded: Number,
+      totalPending: Number,
       totalCompleted: Number,
   },
   collabManagers: {
       totalUploaded: Number,
+      totalPending: Number,
       totalCompleted: Number,
   }
 })
@@ -201,6 +206,48 @@ class  UserModel implements  IUserModelRepository {
       }
     }
 
+    updateCancelAnalytics = async (userId: string, type: ServiceAccountTypeEnum) => {
+      try {
+        const data = await this.User.findById(userId);
+        if (data) {
+          if (!data.analytics) data.analytics = this.createAnalytics;
+          data.analytics.totalUploaded--;
+          if (type === ServiceAccountTypeEnum.chatter) data.analytics.chatEngagers.totalUploaded--;
+          if (type === ServiceAccountTypeEnum.collab_manager) data.analytics.collabManagers.totalUploaded--;
+          if (type === ServiceAccountTypeEnum.moderators) data.analytics.moderators.totalUploaded--;
+          if (type === ServiceAccountTypeEnum.raider) data.analytics.raiders.totalUploaded--;
+          const updatedUser = await data.save();
+          return {status: true, data: new UserDto(updatedUser ?? data)};
+        } else {
+          return {status: false, error: "Couldn't create user"};
+        }
+      } catch (error) {
+          defaultLogger.error(error);
+          return {status: false, error };
+      }
+    }
+
+    updatePendingAnalytics = async (userId: string, type: ServiceAccountTypeEnum) => {
+      try {
+        const data = await this.User.findById(userId);
+        if (data) {
+          if (!data.analytics) data.analytics = this.createAnalytics;
+          data.analytics.totalPending++;
+          if (type === ServiceAccountTypeEnum.chatter) data.analytics.chatEngagers.totalPending++;
+          if (type === ServiceAccountTypeEnum.collab_manager) data.analytics.collabManagers.totalPending++;
+          if (type === ServiceAccountTypeEnum.moderators) data.analytics.moderators.totalPending++;
+          if (type === ServiceAccountTypeEnum.raider) data.analytics.raiders.totalPending++;
+          const updatedUser = await data.save();
+          return { status: true, data: new UserDto(updatedUser ?? data) };
+        } else {
+          return { status: false, error: "Couldn't create user" };
+        }
+      } catch (error) {
+          defaultLogger.error(error);
+          return {status: false, error };
+      }
+    }
+
     updateCompletedAnalytics = async (userId: string, type: ServiceAccountTypeEnum) => {
       try {
         const data = await this.User.findById(userId);
@@ -299,21 +346,26 @@ class  UserModel implements  IUserModelRepository {
     private get createAnalytics() {
       return {
         totalUploaded: 0,
+        totalPending: 0,
         totalCompleted: 0,
         raiders: {
             totalUploaded: 0,
+            totalPending: 0,
             totalCompleted: 0,
         },
         moderators: {
             totalUploaded: 0,
+            totalPending: 0,
             totalCompleted: 0,
         },
         chatEngagers: {
             totalUploaded: 0,
+            totalPending: 0,
             totalCompleted: 0,
         },
         collabManagers: {
             totalUploaded: 0,
+            totalPending: 0,
             totalCompleted: 0,
         }
       }

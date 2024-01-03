@@ -8,6 +8,10 @@ interface IUserModelRepository{
 
     updateUpdatedAnalytics: (userId: string, type: ServiceAccountTypeEnum) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;
 
+    updatePendingAnalytics: (userId: string, type: ServiceAccountTypeEnum) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;
+
+    updateCancelAnalytics: (userId: string, type: ServiceAccountTypeEnum) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;
+
     updateCompletedAnalytics: (userId: string, type: ServiceAccountTypeEnum) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;
 
     saveUserToDB: (details: Partial<IUser>) => Promise<{status: boolean, error?: string | unknown, data?: UserDto }>;

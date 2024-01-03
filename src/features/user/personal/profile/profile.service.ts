@@ -1,3 +1,4 @@
+import ModeratorUserServiceModel from "../../../../lib/modules/db/models/service/moderator.model";
 import RaiderUserServiceModel from "../../../../lib/modules/db/models/service/raider.model";
 import { ERROR_INSUFFICIENT_PERMISSIONS } from "../../../../types/constants/errors";
 import UserDto, { UnSecureUserResponseInterface, UserResponseInterface } from "../../../../types/dtos/user.dto";
@@ -15,13 +16,16 @@ const ERROR_USER_NOT_FOUND: ErrorInterface = {
 class UserProfileService {
   private _userModel: UserModelInterface;
   private _raiderUserServiceModel: RaiderUserServiceModel;
+  private _moderatorUserServiceModel: ModeratorUserServiceModel;
 
-  constructor ({ userModel, raiderUserServiceModel } : {
+  constructor ({ userModel, raiderUserServiceModel, moderatorUserServiceModel } : {
     userModel: UserModelInterface;
     raiderUserServiceModel: RaiderUserServiceModel;
+    moderatorUserServiceModel: ModeratorUserServiceModel;
   }){
     this._userModel = userModel;
     this._raiderUserServiceModel = raiderUserServiceModel;
+    this._moderatorUserServiceModel = moderatorUserServiceModel;
   }
 
   public updateProfileInformation = async (userId: string, { name, phoneNumber, country }: IUpdateUserRequest): Promise<{
@@ -39,8 +43,12 @@ class UserProfileService {
     });
 
     if (finalUser.error || !finalUser.data ) return { errors: [ERROR_INSUFFICIENT_PERMISSIONS] };
+
     const raiderService = await this._raiderUserServiceModel.checkIfExist({ userId: user.data.id });
     finalUser.data.raiderService = raiderService.data;
+
+    const moderatorService = await this._moderatorUserServiceModel.checkIfExist({ userId: user.data.id });
+    user.data.moderatorService = moderatorService.data;
 
     return { user: finalUser.data }
   };
@@ -52,6 +60,9 @@ class UserProfileService {
     
     const raiderService = await this._raiderUserServiceModel.checkIfExist({ userId: user.data.id });
     user.data.raiderService = raiderService.data;
+
+    const moderatorService = await this._moderatorUserServiceModel.checkIfExist({ userId: user.data.id });
+    user.data.moderatorService = moderatorService.data;
 
     return user.data;
   };

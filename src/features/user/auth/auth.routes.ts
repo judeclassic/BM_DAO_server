@@ -1,4 +1,5 @@
 import AuthorizationRepo from "../../../lib/modules/auth";
+import ModeratorUserServiceModel from "../../../lib/modules/db/models/service/moderator.model";
 import RaiderUserServiceModel from "../../../lib/modules/db/models/service/raider.model";
 import UserModel from "../../../lib/modules/db/models/user.model";
 import MailerRepo from "../../../lib/modules/mailer";
@@ -13,9 +14,10 @@ const useUserAuthRoutes = ({router}: {router: RequestHandler}) => {
     const authRepo = new AuthorizationRepo();
     const mailRepo = new MailerRepo();
     const userModel = new UserModel();
+    const moderatorUserServiceModel = new ModeratorUserServiceModel();
     const raiderUserServiceModel = new RaiderUserServiceModel();
     
-    const userAuthService = new UserAuthService({ mailRepo, authRepo, userModel, raiderUserServiceModel });
+    const userAuthService = new UserAuthService({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel });
 
     // AUTH ROUTES HANDLER
     const userAuthController = new UserAuthController({ authValidator, userAuthService });

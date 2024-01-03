@@ -14,21 +14,26 @@ export interface IWallet {
 
 export interface IAnalytics {
     totalUploaded: number;
+    totalPending: number;
     totalCompleted: number;
     raiders: {
         totalUploaded: number;
+        totalPending: number;
         totalCompleted: number;
     },
     moderators: {
         totalUploaded: number;
+        totalPending: number;
         totalCompleted: number;
     },
     chatEngagers: {
         totalUploaded: number;
+        totalPending: number;
         totalCompleted: number;
     },
     collabManagers: {
         totalUploaded: number;
+        totalPending: number;
         totalCompleted: number;
     }
 }

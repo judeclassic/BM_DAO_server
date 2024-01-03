@@ -1,3 +1,4 @@
+import ModeratorUserServiceModel from "../../../lib/modules/db/models/service/moderator.model";
 import RaiderUserServiceModel from "../../../lib/modules/db/models/service/raider.model";
 import { ERROR_INSUFFICIENT_PERMISSIONS } from "../../../types/constants/errors";
 import UserDto from "../../../types/dtos/user.dto";
@@ -38,17 +39,20 @@ class UserAuthService {
   private _authRepo: AuthorizationInterface;
   private _userModel: UserModelInterface;
   private _raiderUserServiceModel: RaiderUserServiceModel;
+  private _moderatorUserServiceModel: ModeratorUserServiceModel;
 
-  constructor ({mailRepo, authRepo, userModel, raiderUserServiceModel } : {
+  constructor ({mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel } : {
     mailRepo: MailerRepoInterface;
     authRepo: AuthorizationInterface;
     userModel: UserModelInterface;
     raiderUserServiceModel: RaiderUserServiceModel;
+    moderatorUserServiceModel: ModeratorUserServiceModel;
   }){
     this._mailRepo = mailRepo;
     this._userModel = userModel;
     this._authRepo = authRepo;
     this._raiderUserServiceModel = raiderUserServiceModel;
+    this._moderatorUserServiceModel = moderatorUserServiceModel;
   }
 
   public registerUser = async ({
@@ -112,6 +116,9 @@ class UserAuthService {
 
     const raiderService = await this._raiderUserServiceModel.checkIfExist({ userId: user.data.id });
     user.data.raiderService = raiderService.data;
+
+    const moderatorService = await this._moderatorUserServiceModel.checkIfExist({ userId: user.data.id });
+    user.data.moderatorService = moderatorService.data;
 
     this._userModel.updateUserDetailToDB( user.data.id!, { accessToken });
 

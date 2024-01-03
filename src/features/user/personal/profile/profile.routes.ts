@@ -1,4 +1,5 @@
 import AuthorizationRepo from "../../../../lib/modules/auth";
+import ModeratorUserServiceModel from "../../../../lib/modules/db/models/service/moderator.model";
 import RaiderUserServiceModel from "../../../../lib/modules/db/models/service/raider.model";
 import UserModel from "../../../../lib/modules/db/models/user.model";
 import MailerRepo from "../../../../lib/modules/mailer";
@@ -12,8 +13,9 @@ const useUserProfileRoutes = ({router}: {router: RequestHandler}) => {
     
     const userModel = new UserModel();
     const raiderUserServiceModel = new RaiderUserServiceModel();
+    const moderatorUserServiceModel = new ModeratorUserServiceModel();
     
-    const userService = new UserProfileService({ userModel, raiderUserServiceModel });
+    const userService = new UserProfileService({ userModel, raiderUserServiceModel, moderatorUserServiceModel });
 
     const userController = new UserProfileController({ userValidator, userService });
 

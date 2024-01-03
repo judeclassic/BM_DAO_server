@@ -43,6 +43,20 @@ class MailerRepo implements MailerRepoInterface {
         });
     }
 
+    private initGmail = ()=>{
+        this.transporter = nodeMailer.createTransport({
+            host: DEFAULT_SMTP_HOST, // hostnamee
+            port: 587, // port for secure SMTP
+            tls: {
+                ciphers:'SSLv3'
+            },// true for 465, false for other ports
+            auth: {
+                user: DEFAULT_SMTP_USER, // generated ethereal user
+                pass: DEFAULT_SMTP_PASSWORD, // generated ethereal password
+            },
+        });
+    }
+
      private async sendEmail(message: { to: string, subject: string, html: string}) {
         try {
             return await this.transporter.sendMail({...message, from: `${DEFAULT_SMTP_FROM_EMAIL} ${DEFAULT_EMAIL_NAME}`});
