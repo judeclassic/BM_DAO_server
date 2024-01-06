@@ -70,7 +70,7 @@ class RaiderUserTaskRaidService {
                 return { errors: [ERROR_UNABLE_TO_GET_TASK] };
             if (!tasksResponse.data.isTaskAvailable)
                 return { errors: [ERROR_TASK_HAVE_BEEN_FILLED_UP] };
-            const raidExists = yield this._raidModel.checkIfExist({ taskId, assigneeId: userId, serviceId });
+            const raidExists = yield this._raidModel.checkIfExist({ taskId, serviceId });
             if (raidExists.data)
                 return { errors: [ERROR_USER_HAS_STARTED_THIS_TASK] };
             const raidResponse = yield this._raidModel.createRaid(tasksResponse.data.getAssignedTask(userId));

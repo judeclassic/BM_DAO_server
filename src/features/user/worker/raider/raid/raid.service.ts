@@ -16,14 +16,15 @@ const ERROR_UNABLE_TO_GET_TASK: ErrorInterface = {
   field: 'taskId',
   message: 'unable to get this task',
 };
+
 const ERROR_USER_IS_NOT_A_USER: ErrorInterface = {
   field: 'serviceId',
   message: 'This raider account is expired please subscribe again',
 };
+
 const ERROR_GETING_ALL_USER_TASKS: ErrorInterface = {
   message: 'unable to fetch all users tasks',
 };
-
 
 const ERROR_USER_HAS_STARTED_THIS_TASK: ErrorInterface = {
   message: 'user have already aplied for this task',
@@ -36,6 +37,7 @@ const ERROR_TASK_HAVE_BEEN_FILLED_UP: ErrorInterface = {
 const ERROR_SERVICE_DO_NOT_BELONG_TO_THIS_USER: ErrorInterface = {
   message: 'this service do not belong to the user',
 };
+
 const ERROR_RAID_DO_NOT_BELONG_TO_THIS_USER: ErrorInterface = {
   message: 'this raid was not created by this user',
 };
@@ -91,7 +93,7 @@ class RaiderUserTaskRaidService {
 
     if (!tasksResponse.data.isTaskAvailable) return { errors: [ERROR_TASK_HAVE_BEEN_FILLED_UP] };
 
-    const raidExists = await this._raidModel.checkIfExist({ taskId, assigneeId: userId, serviceId });
+    const raidExists = await this._raidModel.checkIfExist({ taskId, serviceId });
     if (raidExists.data) return { errors: [ERROR_USER_HAS_STARTED_THIS_TASK] };
 
     const raidResponse = await this._raidModel.createRaid(tasksResponse.data.getAssignedTask(userId));
