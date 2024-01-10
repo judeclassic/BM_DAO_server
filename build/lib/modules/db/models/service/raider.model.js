@@ -296,12 +296,10 @@ class RaiderUserServiceModel {
         this.countUsersInPlatform = (details) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield this.UserService.count(details);
-                if (data) {
-                    return { status: true, data };
-                }
-                else {
+                if (data === null || data === undefined) {
                     return { status: false, error: "Couldn't get store details" };
                 }
+                return { status: true, data };
             }
             catch (error) {
                 return { status: false, error };

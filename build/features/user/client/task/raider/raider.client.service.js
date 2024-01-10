@@ -106,7 +106,9 @@ class RaiderClientTaskService {
         });
         this.createTask = (userId, task) => __awaiter(this, void 0, void 0, function* () {
             var _b;
+            console.log(userId);
             const user = yield this._userModel.checkIfExist({ _id: userId });
+            console.log(user);
             if (!user.data)
                 return { errors: [ERROR_USER_NOT_FOUND] };
             if (((_b = user.data) === null || _b === void 0 ? void 0 : _b.accountType) === user_response_1.AccountTypeEnum.user)
@@ -124,7 +126,8 @@ class RaiderClientTaskService {
                 return { errors: [ERROR_UNABLE_TO_CREATE_TASK] };
             }
             const userServiceResponse = yield this._raiderServiceModel.countUsersInPlatform({});
-            if (!userServiceResponse.data) {
+            console.log("userServiceResponse: ", userServiceResponse);
+            if (userServiceResponse.data === undefined) {
                 return { errors: [ERROR_USER_NOT_FOUND] };
             }
             if (userServiceResponse.data < task.numbers)
