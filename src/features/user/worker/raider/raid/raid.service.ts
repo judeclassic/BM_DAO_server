@@ -21,7 +21,7 @@ const ERROR_USER_IS_NOT_A_USER: ErrorInterface = {
   field: 'serviceId',
   message: 'This raider account is expired please subscribe again',
 };
-
+  
 const ERROR_GETING_ALL_USER_TASKS: ErrorInterface = {
   message: 'unable to fetch all users tasks',
 };

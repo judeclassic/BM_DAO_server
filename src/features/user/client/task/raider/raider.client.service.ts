@@ -128,7 +128,9 @@ class RaiderClientTaskService {
   }
 
   public createTask = async (userId: string, task : ICreateRaiderTaskRequest) : Promise<{ errors?: ErrorInterface[]; task?: RaiderTaskDto }> => {
+    console.log(userId)
     const user = await this._userModel.checkIfExist({ _id: userId });
+    console.log(user);
 
     if (!user.data) return { errors: [ERROR_USER_NOT_FOUND] };
 
@@ -149,7 +151,8 @@ class RaiderClientTaskService {
     }
 
     const userServiceResponse = await this._raiderServiceModel.countUsersInPlatform({});
-    if (!userServiceResponse.data) {
+    console.log("userServiceResponse: ", userServiceResponse)
+    if (userServiceResponse.data === undefined) {
       return { errors: [ERROR_USER_NOT_FOUND] }
     }
 

@@ -257,11 +257,10 @@ class  RaiderUserServiceModel implements  IRaiderUserServiceModelRepository {
   countUsersInPlatform = async (details: Partial<IRaiderUserService>) => {
     try {
       const data = await this.UserService.count(details);
-      if (data) {
-        return { status: true, data };
-      } else {
+      if (data === null || data === undefined) {
         return {status: false, error: "Couldn't get store details"};
       }
+      return { status: true, data };
     } catch (error) {
         return {status: false, error };
     }
