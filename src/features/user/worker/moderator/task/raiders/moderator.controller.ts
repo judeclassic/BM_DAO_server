@@ -2,6 +2,7 @@ import { IRaidResponse, IMultipleRaidResponse } from "../../../../../../types/dt
 import { IMultipleRaiderTaskResponse, IRaiderTaskResponse } from "../../../../../../types/dtos/task/raiders.dto";
 import AutheticatedUserInterface from "../../../../../../types/interfaces/requests/user/authencated-user";
 import ResponseInterface from "../../../../../../types/interfaces/response/response";
+import { TaskStatusStatus } from "../../../../../../types/interfaces/response/services/raid.response";
 import ModeratorUserTaskService from "./moderator.service";
 import ModeratorTaskValidator from "./moderator.validator";
 
@@ -123,7 +124,7 @@ class ModeratorUserRaidController {
     }
 
     public getAllModeratorsTasks = async (
-      { query, user }: { query: { limit: number; page: number}, user: AutheticatedUserInterface },
+      { query, user }: { query: { limit: number; page: number }, user: AutheticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IMultipleRaiderTaskResponse>)=>void
     )  => {
       const validationErrors = this._taskValidator.validateOptions(query);
@@ -149,7 +150,7 @@ class ModeratorUserRaidController {
     }
 
     public getModeratedRaids = async (
-      { params, query, user }: { params: { taskId: string; }, query: { limit: number; page: number}, user: AutheticatedUserInterface },
+      { params, query, user }: { params: { taskId: string; }, query: { limit: number; page: number, status: TaskStatusStatus }, user: AutheticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IMultipleRaidResponse>)=>void
     )  => {
       const validationErrors = this._taskValidator.validateIdBeforeCreation(params.taskId);

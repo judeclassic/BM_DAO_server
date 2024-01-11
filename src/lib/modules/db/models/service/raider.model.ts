@@ -195,7 +195,7 @@ class  RaiderUserServiceModel implements  IRaiderUserServiceModelRepository {
             hasNextPage: data.hasNextPage
           })};
       } else {
-        return {status: false, error: "Couldn't get store details"};
+        return { status: false, error: "Couldn't get store details" };
       }
     } catch (error) {
         return { status: false, error };

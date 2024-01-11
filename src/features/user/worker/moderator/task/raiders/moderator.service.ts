@@ -163,10 +163,14 @@ class ModeratorUserTaskService {
     return { task: updatedTaskResponse.data }
   }
 
-  public getModeratorRaidersRaid = async ( taskId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; raids?: MultipleRaidDto }> => {
+  public getModeratorRaidersRaid = async ( taskId: string, option : { limit: number; page: number, status: TaskStatusStatus }) : Promise<{ errors?: ErrorInterface[]; raids?: MultipleRaidDto }> => {
+    if (option.status) {
+      const raidsResponse = await this._raidModel.getAllRaid({ taskId, taskStatus: option.status }, option);
+      if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+      return { raids: raidsResponse.data };
+    }
     const raidsResponse = await this._raidModel.getAllRaid({ taskId }, option);
     if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
-
     return { raids: raidsResponse.data };
   }
 

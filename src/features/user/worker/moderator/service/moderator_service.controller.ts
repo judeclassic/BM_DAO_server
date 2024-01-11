@@ -74,7 +74,7 @@ class ModeratorUserServiceController {
         });
     
         return sendJson(201, {
-          data: response.userService.getResponse ,
+          data: response.userService.getResponse,
           code: 201,
           status: true
         });

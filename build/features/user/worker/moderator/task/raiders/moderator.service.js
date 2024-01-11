@@ -122,6 +122,12 @@ class ModeratorUserTaskService {
             return { task: updatedTaskResponse.data };
         });
         this.getModeratorRaidersRaid = (taskId, option) => __awaiter(this, void 0, void 0, function* () {
+            if (option.status) {
+                const raidsResponse = yield this._raidModel.getAllRaid({ taskId, taskStatus: option.status }, option);
+                if (!raidsResponse.data)
+                    return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+                return { raids: raidsResponse.data };
+            }
             const raidsResponse = yield this._raidModel.getAllRaid({ taskId }, option);
             if (!raidsResponse.data)
                 return { errors: [ERROR_GETING_ALL_USER_TASKS] };
