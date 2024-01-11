@@ -7,11 +7,12 @@ const user_dto_1 = require("../user.dto");
 class RaiderTaskDto {
     constructor(task) {
         var _a;
-        this.getAssignedTask = (assigneeId) => {
+        this.getAssignedTask = (assigneeId, assigneeServiceId) => {
             var _a;
             return {
                 assignerId: this.userId,
                 assigneeId: assigneeId,
+                serviceId: assigneeServiceId,
                 taskId: this._id,
                 timeLine: Date.parse((_a = this.endedAt) === null || _a === void 0 ? void 0 : _a.toDateString()),
                 taskStatus: raid_response_1.TaskStatusStatus.STARTED,

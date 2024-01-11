@@ -111,10 +111,11 @@ export class RaiderTaskDto implements IRaiderTask {
     } as IRaiderTask;
   }
 
-  getAssignedTask = (assigneeId: string) => {
+  getAssignedTask = (assigneeId: string, assigneeServiceId: string) => {
     return {
       assignerId: this.userId,
       assigneeId: assigneeId,
+      serviceId: assigneeServiceId,
       taskId: this._id,
       timeLine: Date.parse(this.endedAt?.toDateString()!),
       taskStatus: TaskStatusStatus.STARTED,
