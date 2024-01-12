@@ -2,6 +2,7 @@ import { IRaidResponse, IMultipleRaidResponse } from "../../../../../types/dtos/
 import { IMultipleRaiderTaskResponse, IRaiderTaskResponse } from "../../../../../types/dtos/task/raiders.dto";
 import AutheticatedUserInterface from "../../../../../types/interfaces/requests/user/authencated-user";
 import ResponseInterface from "../../../../../types/interfaces/response/response";
+import { TaskStatusStatus } from "../../../../../types/interfaces/response/services/raid.response";
 import RaiderUserTaskService from "./task.service";
 import RaidersTaskValidator from "./task.validator";
 

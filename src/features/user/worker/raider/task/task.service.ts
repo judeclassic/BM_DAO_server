@@ -1,6 +1,7 @@
 import { MultipleRaiderTaskDto, RaiderTaskDto } from "../../../../../types/dtos/task/raiders.dto";
 import ErrorInterface from "../../../../../types/interfaces/error";
 import IRaiderTaskModelRepository from "../../../../../types/interfaces/modules/db/models/task/Iraider.model";
+import { TaskStatusStatus } from "../../../../../types/interfaces/response/services/raid.response";
 import { TaskPriorityEnum } from "../../../../../types/interfaces/response/task/raider_task.response";
 
 const ERROR_GETING_ALL_USER_TASKS: ErrorInterface = {
