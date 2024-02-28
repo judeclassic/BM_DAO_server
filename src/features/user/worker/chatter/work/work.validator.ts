@@ -1,10 +1,9 @@
 import _BaseValidator from "../../../../../lib/modules/validator/validator";
 import ErrorInterface from "../../../../../types/interfaces/error";
-import { ICreateRaiderGigRequest, ICreateRaiderTaskRequest } from "../../../../../types/interfaces/requests/task/raider";
+import { ICreateRaiderGigRequest } from "../../../../../types/interfaces/requests/task/raider";
 import { ServiceAccountTypeEnum } from "../../../../../types/interfaces/response/services/enums";
-import { RaidActionEnum } from "../../../../../types/interfaces/response/task/raider_task.response";
 
-class RaiderClientTaskValidator extends _BaseValidator {
+class RaidersTaskRaidValidator extends _BaseValidator {
 
   validateBeforeRaiderGigCreation = ({serviceType, raidersNumber, startDate, weeks, dailyPost, compaignCaption, raidLink }: ICreateRaiderGigRequest) => {
     const errors: ErrorInterface[] = [];
@@ -51,8 +50,7 @@ class RaiderClientTaskValidator extends _BaseValidator {
       errors.push({ field: 'startDate', message: 'startDate can not be empty' });
     } else {
       try {
-        const date = (new Date(startDate)).toISOString();
-        console.log(date);
+        var _testing = (new Date(startDate).toISOString());
       } catch (er) {
         errors.push({ field: 'startDate', message: 'startDate must be date' });
       }
@@ -67,74 +65,6 @@ class RaiderClientTaskValidator extends _BaseValidator {
       errors.push({ field: 'raidLink', message: raidLinkError.message });
     }
 
-    return errors;
-  }
-
-  validateBeforeRaiderTaskCreation = ({taskType, action, numbers, raidLink, mediaUrl, campaignCaption, startDate }: ICreateRaiderTaskRequest) => {
-    const errors: ErrorInterface[] = [];
-
-    if (!taskType) {
-      errors.push({ field: 'taskType', message: 'taskType can not be empty' });
-    } else {
-      if (!(Object.values(ServiceAccountTypeEnum).find((c) => c === taskType ))) {
-        errors.push({field: 'taskType', message: `taskType is a valid account type '${Object.values(ServiceAccountTypeEnum).join("', '")}'` });
-      }
-    }
-
-    if (!action) {
-      errors.push({ field: 'actions', message: 'action can not be empty' });
-    } else {
-      try {
-        if (!(Object.values(RaidActionEnum).find((c) => c === action ))) {
-          errors.push({field: 'actions', message: `actions is a valid account type '${Object.values(RaidActionEnum).join("', '")}'` });
-        }
-      } catch (er) {
-        errors.push({field: 'action', message: `action is a valid account type '${Object.values(RaidActionEnum).join("', '")}'` });
-      }
-    }
-
-    if (!numbers) {
-      errors.push({ field: 'numbers', message: 'users can not be empty' });
-    } else {
-      try {
-        parseInt(numbers.toString());
-      } catch (er) {
-        errors.push({ field: 'numbers', message: 'users must be an interger' });
-      }
-    }
-
-    if (!raidLink) {
-      errors.push({ field: 'raidLink', message: 'raidLink can not be empty' });
-    }
-
-    if (!mediaUrl && (
-      (action === RaidActionEnum.commentOnPost) ||
-      (action === RaidActionEnum.createATweet) ||
-      (action === RaidActionEnum.raid)
-    )) {
-      errors.push({ field: 'mediaUrl', message: 'mediaUrl can not be empty' });
-    }
-
-    if (!campaignCaption && (
-      (action === RaidActionEnum.commentOnPost) ||
-      (action === RaidActionEnum.createATweet) ||
-      (action === RaidActionEnum.raid)
-    )) {
-      errors.push({ field: 'campaignCaption', message: 'campaignCaption can not be empty' });
-    }
-
-    if (!startDate) {
-      errors.push({ field: 'startDate', message: 'startDate can not be empty' });
-    } else {
-      try {
-        const date = new Date(startDate).toISOString();
-        if (!(date)) {
-          errors.push({ field: 'startDate', message: 'startDate must be date anana' });
-        }
-      } catch (er) {
-        errors.push({ field: 'startDate', message: 'startDate must be date' });
-      }
-    }
     return errors;
   }
 
@@ -176,4 +106,4 @@ class RaiderClientTaskValidator extends _BaseValidator {
   }
 }
 
-export default RaiderClientTaskValidator;
+export default RaidersTaskRaidValidator;

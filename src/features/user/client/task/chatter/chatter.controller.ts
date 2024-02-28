@@ -1,10 +1,9 @@
-
-import { IRaiderTaskResponse, IMultipleRaiderTaskResponse } from "../../../../../types/dtos/task/raiders.dto";
-import { ICreateRaiderGigRequest, ICreateRaiderTaskRequest } from "../../../../../types/interfaces/requests/task/raider";
+import { IChatterTaskResponse, IMultipleChatterTaskResponse } from "../../../../../types/dtos/task/chatters.dto";
+import { ICreateChatterGigRequest } from "../../../../../types/interfaces/requests/task/chatter";
 import AutheticatedUserInterface from "../../../../../types/interfaces/requests/user/authencated-user";
 import ResponseInterface from "../../../../../types/interfaces/response/response";
-import RaiderClientTaskService from "./chatter.client.service";
-import RaiderClientTaskValidator from "./raider.validator";
+import RaiderClientTaskService from "./chatter.service";
+import RaiderClientTaskValidator from "./chatter.validator";
 
 class ClientRaidController {
     private _taskValidator: RaiderClientTaskValidator;
@@ -18,33 +17,8 @@ class ClientRaidController {
         this._raiderClientTaskService = raiderTaskService;
     }
 
-    public createRaidTask = async ({ body, user }: { body: ICreateRaiderGigRequest, user: AutheticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IRaiderTaskResponse[]>)=>void)  => {
-      const validationErrors = this._taskValidator.validateBeforeRaiderGigCreation({ ...body });
-      if (validationErrors.length > 0) {
-        return sendJson(400, {
-          error: validationErrors,
-          code: 400,
-          status: false
-        });
-      }
-  
-      const response = await this._raiderClientTaskService.createRaidTask(user.id, body);
-  
-      if ( !response.tasks ) return sendJson(401, {
-        error: response.errors,
-        code: 401,
-        status: false
-      });
-  
-      return sendJson(201, {
-        data: response.tasks.map( (task) => task.getResponse),
-        code: 201,
-        status: true
-      });
-    }
-
-    public createTask = async ({ body, user }: { body: ICreateRaiderTaskRequest, user: AutheticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IRaiderTaskResponse>)=>void)  => {
-      const validationErrors = this._taskValidator.validateBeforeRaiderTaskCreation({ ...body });
+    public createTask = async ({ body, user }: { body: ICreateChatterGigRequest, user: AutheticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IChatterTaskResponse>)=>void)  => {
+      const validationErrors = this._taskValidator.validateBeforeTaskCreation({ ...body });
       if (validationErrors.length > 0) {
         return sendJson(400, {
           error: validationErrors,
@@ -70,7 +44,7 @@ class ClientRaidController {
 
     public getAllUserTask = async (
       { query, user }: { query: { limit: number; page: number}, user: AutheticatedUserInterface },
-      sendJson: (code: number, response: ResponseInterface<IMultipleRaiderTaskResponse>)=>void
+      sendJson: (code: number, response: ResponseInterface<IMultipleChatterTaskResponse>)=>void
     )  => {
       const validationErrors = this._taskValidator.validateOptions(query);
       if (validationErrors.length > 0) {
@@ -98,7 +72,7 @@ class ClientRaidController {
 
     public getActiveTasks = async (
       { query, user }: { query: { limit: number; page: number}, user: AutheticatedUserInterface },
-      sendJson: (code: number, response: ResponseInterface<IMultipleRaiderTaskResponse>)=>void
+      sendJson: (code: number, response: ResponseInterface<IMultipleChatterTaskResponse>)=>void
     )  => {
       const validationErrors = this._taskValidator.validateOptions(query);
       if (validationErrors.length > 0) {
@@ -126,7 +100,7 @@ class ClientRaidController {
 
     public getUserSingleTask = async (
       { params, user }: { params: { taskId: string }, user: AutheticatedUserInterface },
-      sendJson: (code: number, response: ResponseInterface<IRaiderTaskResponse>)=>void
+      sendJson: (code: number, response: ResponseInterface<IChatterTaskResponse>)=>void
     )  => {
       const validationErrors = this._taskValidator.validateIdBeforeCreation(params.taskId);
       if (validationErrors.length > 0) {

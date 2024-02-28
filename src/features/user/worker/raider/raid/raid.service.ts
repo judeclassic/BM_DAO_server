@@ -83,8 +83,6 @@ class RaiderUserTaskRaidService {
   public startRaidTask = async (userId: string, taskId: string, serviceId: string ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const userService = await this._raiderServiceModel.checkIfExist({ _id: serviceId });
 
-    console.log(userService);
-
     if (!userService.data) return { errors: [ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE] };
     if ( userService.data.userId !== userId ) return { errors: [ERROR_SERVICE_DO_NOT_BELONG_TO_THIS_USER] };
     if ( !userService.data.isUserSubscribed ) return { errors: [ERROR_USER_IS_NOT_A_USER] };

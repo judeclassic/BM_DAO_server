@@ -11,6 +11,9 @@ export enum AmountPercentageEnum {
   referal3 = 10,
 }
 
+
+
+
 export enum AmountEnum {
   subscriptionPackage1 = 5.00,
   moderatorSubscriptionPackage1 = 50.0,
@@ -35,6 +38,9 @@ export enum AmountEnum {
   raidModeratorTweetPay = 0.05,
   raidModeratorCommentpay = 0.01,
   raidModeratorRetweetpay = 0.02,
+
+  chatterCharge = 0.7,
+  chatterPay = 0.5,
 }
 
 export interface IWalletResponse {

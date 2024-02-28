@@ -998,3 +998,712 @@
 [[31merror[39m] Tue, 09 Jan 2024 20:09:32 GMT undefined [[!!🐞] Error: Error: querySrv ESERVFAIL _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]
 [[31merror[39m] Wed, 10 Jan 2024 01:23:59 GMT undefined [[!!🐞] Error: MongoServerError: bad auth : authentication failed]
 [[31merror[39m] Wed, 10 Jan 2024 01:58:51 GMT undefined [[!!🐞] Error: MongoServerError: bad auth : authentication failed]
+[[31merror[39m] Sat, 17 Feb 2024 07:20:33 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d05e41a379560692e9280f")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:20:33.006Z,
+  createdAt: 2024-02-17T07:20:33.006Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:20:33 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d05e41a379560692e9280f")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:20:33.006Z,
+  createdAt: 2024-02-17T07:20:33.006Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:20:33 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d05e41a379560692e9280f")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:20:33.006Z,
+  createdAt: 2024-02-17T07:20:33.006Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:20:33 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d05e41a379560692e9280f")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:20:33.006Z,
+  createdAt: 2024-02-17T07:20:33.006Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:20:33 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d05e41a379560692e9280f")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:20:33.006Z,
+  createdAt: 2024-02-17T07:20:33.006Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:20:33 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d05e41a379560692e9280f")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:20:33.006Z,
+  createdAt: 2024-02-17T07:20:33.006Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:20:33 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d05e41a379560692e9280f")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:20:33.006Z,
+  createdAt: 2024-02-17T07:20:33.006Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:20:33 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d05e41a379560692e9280f")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:20:33.006Z,
+  createdAt: 2024-02-17T07:20:33.006Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:31:53 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d060e929723001cf6a10d0")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:31:53.758Z,
+  createdAt: 2024-02-17T07:31:53.758Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:31:53 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d060e929723001cf6a10d0")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:31:53.758Z,
+  createdAt: 2024-02-17T07:31:53.758Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:31:53 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d060e929723001cf6a10d0")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:31:53.758Z,
+  createdAt: 2024-02-17T07:31:53.758Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:31:53 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d060e929723001cf6a10d0")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:31:53.758Z,
+  createdAt: 2024-02-17T07:31:53.758Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:31:53 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d060e929723001cf6a10d0")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:31:53.758Z,
+  createdAt: 2024-02-17T07:31:53.758Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:31:53 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d060e929723001cf6a10d0")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:31:53.758Z,
+  createdAt: 2024-02-17T07:31:53.758Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:31:53 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d060e929723001cf6a10d0")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:31:53.758Z,
+  createdAt: 2024-02-17T07:31:53.758Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:31:53 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d060e929723001cf6a10d0")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:31:53.758Z,
+  createdAt: 2024-02-17T07:31:53.758Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:34:42 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d061922554db9102f4608e")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:34:42.323Z,
+  createdAt: 2024-02-17T07:34:42.323Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:34:42 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d061922554db9102f4608e")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:34:42.323Z,
+  createdAt: 2024-02-17T07:34:42.323Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:34:42 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d061922554db9102f4608e")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:34:42.323Z,
+  createdAt: 2024-02-17T07:34:42.323Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:34:42 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d061922554db9102f4608e")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:34:42.323Z,
+  createdAt: 2024-02-17T07:34:42.323Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:34:42 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d061922554db9102f4608e")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:34:42.323Z,
+  createdAt: 2024-02-17T07:34:42.323Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:34:42 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d061922554db9102f4608e")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:34:42.323Z,
+  createdAt: 2024-02-17T07:34:42.323Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:34:42 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d061922554db9102f4608e")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:34:42.323Z,
+  createdAt: 2024-02-17T07:34:42.323Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 07:34:42 GMT undefined [[!!🐞] ChatTask validation failed: task: Cast to ObjectId failed for value "{
+  userId: '659d97d59df7bdde07408bd5',
+  raidInformation: {
+    serviceType: 'chatter',
+    postLink: 'string',
+    compaignCaption: 'string',
+    chatterPerSession: 1,
+    hoursPerDay: 1,
+    startDate: 2023-05-01T23:00:00.000Z,
+    days: 1,
+    _id: new ObjectId("65d061922554db9102f4608e")
+  },
+  availableTask: 1,
+  totalTasks: 1,
+  completedTasks: 0,
+  approvedTask: undefined,
+  startedAt: 2023-05-01T23:00:00.000Z,
+  endedAt: 2023-05-02T23:00:00.000Z,
+  updatedAt: 2024-02-17T07:34:42.323Z,
+  createdAt: 2024-02-17T07:34:42.323Z,
+  isVerified: false,
+  startTimeLine: 1682982000000,
+  endTimeLine: 1683068400000,
+  level: 'low',
+  moderator: undefined,
+  moderatorId: undefined,
+  isModerated: false
+}" (type Object) at path "task" because of "BSONTypeError"]
+[[31merror[39m] Sat, 17 Feb 2024 09:44:17 GMT undefined [[!!🐞] Operation `users.findOne()` buffering timed out after 10000ms]
+[[31merror[39m] Sat, 17 Feb 2024 09:44:31 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:44:31 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:44:31 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:44:31 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:44:32 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:44:32 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:44:33 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:44:33 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:45:51 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:45:51 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:45:51 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:45:51 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:45:51 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:45:52 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:45:56 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 09:45:58 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:08:58 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:08:58 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:08:58 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:08:59 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:08:59 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:08:59 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:08:59 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:09:01 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:21:48 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:21:49 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:21:49 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:21:49 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:21:50 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:21:50 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:21:50 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Sat, 17 Feb 2024 13:21:51 GMT undefined [[!!🐞] Cannot read properties of undefined (reading '_id')]
+[[31merror[39m] Tue, 27 Feb 2024 19:16:09 GMT undefined [[!!🐞] Error: Error: querySrv ESERVFAIL _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]
+[[31merror[39m] Tue, 27 Feb 2024 19:17:30 GMT undefined [[!!🐞] Error: Error: querySrv ESERVFAIL _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]
+[[31merror[39m] Tue, 27 Feb 2024 19:18:22 GMT undefined [[!!🐞] Error: Error: querySrv ESERVFAIL _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]
+[[31merror[39m] Tue, 27 Feb 2024 19:19:03 GMT undefined [[!!🐞] Error: Error: querySrv ESERVFAIL _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]
