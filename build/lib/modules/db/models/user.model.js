@@ -34,6 +34,10 @@ const WalletSchema = new mongoose_1.Schema({
         totalBalance: {
             type: Number
         }
+    },
+    wallet: {
+        address: String,
+        privateKey: String,
     }
 });
 const AnalyticSchema = new mongoose_1.Schema({

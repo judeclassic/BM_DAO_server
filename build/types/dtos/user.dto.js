@@ -30,19 +30,31 @@ var AmountEnum;
     AmountEnum[AmountEnum["raidModeratorTweetPay"] = 0.05] = "raidModeratorTweetPay";
     AmountEnum[AmountEnum["raidModeratorCommentpay"] = 0.01] = "raidModeratorCommentpay";
     AmountEnum[AmountEnum["raidModeratorRetweetpay"] = 0.02] = "raidModeratorRetweetpay";
+    AmountEnum[AmountEnum["chatterCharge"] = 0.7] = "chatterCharge";
+    AmountEnum[AmountEnum["chatterPay"] = 0.5] = "chatterPay";
 })(AmountEnum = exports.AmountEnum || (exports.AmountEnum = {}));
 class WalletDto {
     constructor(wallet) {
         this.balance = wallet.balance;
+        this.wallet = wallet.wallet;
     }
     get getModel() {
+        var _a, _b;
         return {
             balance: this.balance,
+            wallet: {
+                address: (_a = this.wallet) === null || _a === void 0 ? void 0 : _a.address,
+                privateKey: (_b = this.wallet) === null || _b === void 0 ? void 0 : _b.privateKey,
+            }
         };
     }
     get getResponse() {
+        var _a;
         return {
             balance: this.balance,
+            wallet: {
+                address: (_a = this.wallet) === null || _a === void 0 ? void 0 : _a.address,
+            }
         };
     }
 }

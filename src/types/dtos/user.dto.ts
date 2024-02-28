@@ -94,20 +94,33 @@ export class WalletDto implements IWallet {
     walletBalance: number;
     totalBalance: number;
   };
+  wallet?: {
+    address: string;
+    privateKey: string;
+  };
 
   constructor(wallet: IWallet) {
     this.balance = wallet.balance;
+    this.wallet = wallet.wallet;
   }
 
   get getModel() {
     return {
       balance: this.balance,
+      wallet: {
+        address: this.wallet?.address,
+        privateKey: this.wallet?.privateKey,
+      }
+      
     } as IWallet;
   }
 
   get getResponse() {
     return {
       balance: this.balance,
+      wallet: {
+        address: this.wallet?.address,
+      }
     } as IWalletResponse;
   }
 }

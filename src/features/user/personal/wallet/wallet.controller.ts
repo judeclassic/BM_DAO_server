@@ -1,5 +1,4 @@
 import AutheticatedUserInterface from "../../../../types/interfaces/requests/user/authencated-user";
-import { IUpdateUserRequest } from "../../../../types/interfaces/requests/user/update-user";
 import ResponseInterface from "../../../../types/interfaces/response/response";
 import UserProfileService from "./wallet.service";
 import UserProfileValidator from "./wallet.validator";

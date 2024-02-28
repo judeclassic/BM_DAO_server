@@ -10,6 +10,10 @@ export interface IWallet {
         walletBalance: number;
         totalBalance: number;
     };
+    wallet?: {
+        address: string;
+        privateKey: string;
+    }
 }
 
 export interface IAnalytics {

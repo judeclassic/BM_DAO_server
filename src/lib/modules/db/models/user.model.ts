@@ -21,7 +21,11 @@ const WalletSchema = new Schema<IWallet>({
     totalBalance: {
       type: Number
     }
-  }
+  },
+  wallet: {
+    address: String,
+    privateKey: String,
+}
 });
 
 const AnalyticSchema = new Schema<IAnalytics>({

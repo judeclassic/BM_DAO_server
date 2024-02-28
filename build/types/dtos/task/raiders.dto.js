@@ -101,7 +101,7 @@ class RaiderTaskDto {
         };
     }
     get isTaskAvailable() {
-        return this.availableRaids !== 0;
+        return this.availableRaids > 0;
     }
     static getPricingByAction(action) {
         if (action === raider_task_response_1.RaidActionEnum.commentOnPost) {
