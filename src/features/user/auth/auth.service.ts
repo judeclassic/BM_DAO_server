@@ -11,6 +11,7 @@ import LoginRequest from "../../../types/interfaces/requests/auth/login";
 import { ICreateUserRequest } from "../../../types/interfaces/requests/user/create-user";
 import { IUpdateUserRequest } from "../../../types/interfaces/requests/user/update-user";
 import { IUser, IWallet } from "../../../types/interfaces/response/user.response";
+import CryptoRepository from "../../../lib/modules/crypto/crypto";
 
 const ERROR_USER_ALREADY_EXISTS_WITH_EMAIL: ErrorInterface = {
   field: 'emailAddress',
@@ -40,19 +41,22 @@ class UserAuthService {
   private _userModel: UserModelInterface;
   private _raiderUserServiceModel: RaiderUserServiceModel;
   private _moderatorUserServiceModel: ModeratorUserServiceModel;
+  private _cryptoRepository: CryptoRepository;
 
-  constructor ({mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel } : {
+  constructor ({mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel, cryptoRepository } : {
     mailRepo: MailerRepoInterface;
     authRepo: AuthorizationInterface;
     userModel: UserModelInterface;
     raiderUserServiceModel: RaiderUserServiceModel;
     moderatorUserServiceModel: ModeratorUserServiceModel;
+    cryptoRepository: CryptoRepository
   }){
     this._mailRepo = mailRepo;
     this._userModel = userModel;
     this._authRepo = authRepo;
     this._raiderUserServiceModel = raiderUserServiceModel;
     this._moderatorUserServiceModel = moderatorUserServiceModel;
+    this._cryptoRepository = cryptoRepository
   }
 
   public registerUser = async ({
@@ -76,7 +80,17 @@ class UserAuthService {
 
     const myReferalCode = this._authRepo.generateCode(6);
     const hashedPassword = this._authRepo.encryptPassword(password);
-    const wallet: IWallet = { balance: { referalBonus: 0, taskBalance: 0, walletBalance: 0, totalBalance: 0 }, };
+
+    const createWallet = this._cryptoRepository.createWallet();
+    if (!createWallet) return { errors: [ERROR_UNABLE_TO_SAVE_USER] };
+    
+    const wallet: IWallet = {
+      balance: { referalBonus: 0, taskBalance: 0, walletBalance: 0, totalBalance: 0 },
+      wallet: {
+        address: createWallet?.address,
+        privateKey: createWallet?.private_key
+      }
+    };
 
     const request: IUser = {
       accountType,

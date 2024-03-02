@@ -7,14 +7,16 @@ import RequestHandler from "../../../../lib/modules/server/router";
 import UserProfileController from "./wallet.controller";
 import UserProfileService from "./wallet.service";
 import UserProfileValidator from "./wallet.validator";
+import CryptoRepository from "./../../../../lib/modules/crypto/crypto";
 
 const useUserWalletRoutes = ({router}: {router: RequestHandler}) => {
     const userValidator = new UserProfileValidator();
     
     const userModel = new UserModel();
     const transactionModel = new TransactionModel();
+    const cryptoRepository = new CryptoRepository()
     
-    const userService = new UserProfileService({ userModel, transactionModel });
+    const userService = new UserProfileService({ userModel, transactionModel, cryptoRepository });
     const userController = new UserProfileController({ userValidator, userService });
 
     router.postWithBodyAndAuth('/fund', userController.fundUserWallet);

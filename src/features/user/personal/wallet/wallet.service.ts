@@ -3,6 +3,7 @@ import { MultipleTransactionDto, TransactionDto } from "../../../../types/dtos/t
 import ErrorInterface from "../../../../types/interfaces/error";
 import UserModelInterface from "../../../../types/interfaces/modules/db/models/Iuser.model";
 import { TransactionStatusEnum, TransactionTypeEnum } from "../../../../types/interfaces/response/transaction.response";
+import CryptoRepository from "../../../../lib/modules/crypto/crypto";
 
 const ERROR_USER_NOT_FOUND: ErrorInterface = {
   field: 'password',
@@ -12,13 +13,16 @@ const ERROR_USER_NOT_FOUND: ErrorInterface = {
 class UserWalletService {
   private _userModel: UserModelInterface;
   private _transactionModel: TransactionModel;
+  private _cryptoRepository: CryptoRepository
 
-  constructor ({ userModel, transactionModel } : {
+  constructor ({ userModel, transactionModel, cryptoRepository } : {
     userModel: UserModelInterface;
     transactionModel: TransactionModel;
+    cryptoRepository: CryptoRepository
   }){
     this._userModel = userModel;
     this._transactionModel = transactionModel;
+    this._cryptoRepository = cryptoRepository
   }
 
   public fundUserWallet = async (userId: string, amount: number): Promise<{
@@ -27,6 +31,10 @@ class UserWalletService {
   }> => {
     const user = await this._userModel.checkIfExist({ _id: userId });
     if ( !user.data ) return { errors: [ERROR_USER_NOT_FOUND] };
+
+    if (!user.data.wallet.wallet) return { errors: [ERROR_USER_NOT_FOUND] };
+
+    const cryptoDeposit = await this._cryptoRepository.deposit({address: user.data.wallet.wallet?.address, private_key: user.data.wallet.wallet?.privateKey, amount: amount})
 
     user.data.updateUserWithdrawableBalance({ amount, type: 'paid'});
 
@@ -55,6 +63,10 @@ class UserWalletService {
   }> => {
     const user = await this._userModel.checkIfExist({ _id: userId });
     if ( !user.data ) return { errors: [ERROR_USER_NOT_FOUND] };
+
+    if (!user.data.wallet.wallet) return { errors: [ERROR_USER_NOT_FOUND] };
+
+    const cryptoDeposit = await this._cryptoRepository.withdrawal({address: user.data.wallet.wallet?.address, amount: amount})
 
     user.data.updateUserWithdrawableBalance({ amount, type: 'charged'});
 
