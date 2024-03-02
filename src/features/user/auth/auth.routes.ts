@@ -7,6 +7,7 @@ import RequestHandler from "../../../lib/modules/server/router";
 import UserAuthController from "./auth.controller";
 import UserAuthService from "./auth.service";
 import UserAuthValidator from "./auth.validator";
+import CryptoRepository from "../../../lib/modules/crypto/crypto";
 
 const useUserAuthRoutes = ({router}: {router: RequestHandler}) => {
     const authValidator = new UserAuthValidator();
@@ -16,8 +17,9 @@ const useUserAuthRoutes = ({router}: {router: RequestHandler}) => {
     const userModel = new UserModel();
     const moderatorUserServiceModel = new ModeratorUserServiceModel();
     const raiderUserServiceModel = new RaiderUserServiceModel();
+    const cryptoRepository = new CryptoRepository()
     
-    const userAuthService = new UserAuthService({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel });
+    const userAuthService = new UserAuthService({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel, cryptoRepository });
 
     // AUTH ROUTES HANDLER
     const userAuthController = new UserAuthController({ authValidator, userAuthService });
