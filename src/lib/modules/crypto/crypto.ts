@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ethers,} from 'ethers'
 
 const YOUR_ANKR_PROVIDER_URL = 'https://rpc.ankr.com/polygon/44d9bdcfa6aa588d96fa0212dcb18dcc5cb27bcf9c1cdcda0578b337fbacb786'
-const ETHERSCAN_API_KEY = 'KTKTSF63Z2Q8PHXP2Y3JJNNVIWHEEQXICS';
+const ETHERSCAN_API_KEY = 'GN3876WGJB4PB2N893YZXVY2II1W2927PW';
 
 import { abi } from "./abi";
 const contractAddress = process.env.CONTRACT_ADDRESS!
@@ -30,7 +30,8 @@ class CryptoRepository {
 
     getGasPrices = async () => {
         try {
-          const response = await axios.get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${ETHERSCAN_API_KEY}`);
+        //   const response = await axios.get(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${ETHERSCAN_API_KEY}`);
+          const response = await axios.get(`https://api.polygonscan.com/api?module=gastracker&action=gasoracle&apikey=${ETHERSCAN_API_KEY};`);
           if (response.data.status === "1") {
               return {
                   success: true,
@@ -60,6 +61,8 @@ class CryptoRepository {
             }
         } catch (err) {
 
+            console.log('account error', err)
+
             return undefined;
         }
     }
@@ -70,6 +73,7 @@ class CryptoRepository {
         amount: number
     }) => {
         try {
+
             const WALLET_SECRET = this.decryptToken(private_key);
             const web3Provider = this.ethProvider;
             const wallet = new ethers.Wallet(WALLET_SECRET);
@@ -77,8 +81,13 @@ class CryptoRepository {
 
             const contract = new ethers.Contract( contractAddress, abi, web3Provider);
 
-            const gas = (await this.getGasPrices()).gasPrices?.high
+            const gasPrice = await this.getGasPrices()
+
+            const gas = await gasPrice.gasPrices?.high
+
             const transferAmout = ethers.utils.parseUnits(amount.toString(), 18).toString();
+
+            console.log('amount', transferAmout)
 
             const transfer = await contract.connect(connectedWallet).transfer(
                 masterWallet,
@@ -96,6 +105,7 @@ class CryptoRepository {
             }
 
         } catch (error) {
+            console.log('deposit error', error)
             return {
                 error: 'unable carryout transaction'
             };
@@ -109,12 +119,14 @@ class CryptoRepository {
     }) => {
         try{
             const web3Provider = this.ethProvider;
+
             const wallet = new ethers.Wallet(secretKey);
+
             const connectedWallet = wallet.connect(web3Provider);
 
             const contract = new ethers.Contract( contractAddress, abi, web3Provider);
 
-            const gas = (await this.getGasPrices()).gasPrices?.high
+            const gas = await (await this.getGasPrices()).gasPrices?.high
 
             const transferAmout = ethers.utils.parseUnits(amount.toString(), 18).toString();
 
@@ -134,6 +146,7 @@ class CryptoRepository {
             }
 
         } catch (error) {
+            console.log('withdraw error', error)
             return {
                 error: 'unable carryout transaction'
             };

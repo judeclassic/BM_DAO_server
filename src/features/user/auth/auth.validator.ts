@@ -21,7 +21,7 @@ class UserAuthValidator  extends _BaseValidator{
 
     const _validatePhoneNumber = this._validateEmail(emailAddress);
     if (_validatePhoneNumber.status === false && _validatePhoneNumber.message ) {
-      errors.push({ field: 'phoneNumber', message: _validatePhoneNumber.message });
+      errors.push({ field: 'emailAddress', message: _validatePhoneNumber.message });
     }
 
     const _validatePassword = this._validatePassword(password);

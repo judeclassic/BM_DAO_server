@@ -10,6 +10,16 @@ const ERROR_USER_NOT_FOUND: ErrorInterface = {
   message: 'User with this email/password combination does not exist.',
 };
 
+const ERROR_CRYPTO_FOUND: ErrorInterface = {
+  field: 'account',
+  message: 'unable to fund wallet, check your crypto wallet balance',
+};
+
+const ERROR_CRYPTO_WITHDRAW: ErrorInterface = {
+  field: 'account',
+  message: 'unable withdraw fund, please try again',
+};
+
 class UserWalletService {
   private _userModel: UserModelInterface;
   private _transactionModel: TransactionModel;
@@ -36,6 +46,8 @@ class UserWalletService {
 
     const cryptoDeposit = await this._cryptoRepository.deposit({address: user.data.wallet.wallet?.address, private_key: user.data.wallet.wallet?.privateKey, amount: amount})
 
+    if (cryptoDeposit.error) return { errors: [ERROR_CRYPTO_FOUND] };
+
     user.data.updateUserWithdrawableBalance({ amount, type: 'paid'});
 
     const updatedUser = await this._userModel.updateUserDetailToDB(userId, user.data.getDBModel);
@@ -57,7 +69,7 @@ class UserWalletService {
     return { data: transaction.data };
   };
 
-  public withdrawUserWallet =async (userId: string, amount: number): Promise<{
+  public withdrawUserWallet =async (userId: string, amount: number, wallet: string): Promise<{
     errors?: ErrorInterface[];
     data?: TransactionDto;
   }> => {
@@ -66,7 +78,9 @@ class UserWalletService {
 
     if (!user.data.wallet.wallet) return { errors: [ERROR_USER_NOT_FOUND] };
 
-    const cryptoDeposit = await this._cryptoRepository.withdrawal({address: user.data.wallet.wallet?.address, amount: amount})
+    const cryptoDeposit = await this._cryptoRepository.withdrawal({address: wallet, amount: amount})
+
+    if (cryptoDeposit.error) return { errors: [ERROR_CRYPTO_WITHDRAW] };
 
     user.data.updateUserWithdrawableBalance({ amount, type: 'charged'});
 

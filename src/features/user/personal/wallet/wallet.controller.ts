@@ -21,10 +21,11 @@ class UserWalletController {
         return sendJson(200, { status: true, code: 200, data: transaction.data.getResponse });
     }
     
-    public withdrawUserWallet = async ({ user, body }: { user: AutheticatedUserInterface, body: { amount: number }}, sendJson: (code: number, response: ResponseInterface<any>)=>void)  => {
+    public withdrawUserWallet = async ({ user, body }: { user: AutheticatedUserInterface, body: { amount: number, wallet: string }}, sendJson: (code: number, response: ResponseInterface<any>)=>void)  => {
         if (!body.amount) return sendJson(403, { code: 403, status: false, error: [{message: 'please enter amount'}] });
+        if (!body.wallet) return sendJson(403, { code: 403, status: false, error: [{message: 'please enter wallet'}] });
     
-        const transaction = await this._userService.withdrawUserWallet(user.id, body.amount);
+        const transaction = await this._userService.withdrawUserWallet(user.id, body.amount, body.wallet);
         if (!transaction.data) return sendJson(401, { error: transaction.errors, status: false, code: 401 });
     
         return sendJson(200, { status: true, code: 200, data: transaction.data.getResponse });
