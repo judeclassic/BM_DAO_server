@@ -11,6 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 class UserWalletController {
     constructor({ userService, userValidator }) {
+        this.getWalletInformation = ({ user }, sendJson) => __awaiter(this, void 0, void 0, function* () {
+            const userResponse = yield this._userService.getWalletInformation(user.id);
+            if (!userResponse.user)
+                return sendJson(401, { error: userResponse.errors, status: false, code: 401 });
+            return sendJson(200, { status: true, code: 200, data: userResponse.user.getResponse });
+        });
         this.fundUserWallet = ({ user, body }, sendJson) => __awaiter(this, void 0, void 0, function* () {
             if (!body.amount)
                 return sendJson(403, { code: 403, status: false, error: [{ message: 'please enter amount' }] });

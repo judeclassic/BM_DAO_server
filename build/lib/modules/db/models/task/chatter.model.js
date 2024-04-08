@@ -48,7 +48,7 @@ const ChatterTaskSchema = new mongoose_1.Schema({
     approvedTask: {
         type: Number,
     },
-    raidInformation: ChatTaskInformationSchema,
+    chatInformation: ChatTaskInformationSchema,
     startedAt: {
         type: Date,
         default: new Date()

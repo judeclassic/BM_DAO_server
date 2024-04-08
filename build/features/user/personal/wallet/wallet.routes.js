@@ -8,14 +8,17 @@ const user_model_1 = __importDefault(require("../../../../lib/modules/db/models/
 const wallet_controller_1 = __importDefault(require("./wallet.controller"));
 const wallet_service_1 = __importDefault(require("./wallet.service"));
 const wallet_validator_1 = __importDefault(require("./wallet.validator"));
+const crypto_1 = __importDefault(require("./../../../../lib/modules/crypto/crypto"));
 const useUserWalletRoutes = ({ router }) => {
     const userValidator = new wallet_validator_1.default();
     const userModel = new user_model_1.default();
     const transactionModel = new transaction_model_1.default();
-    const userService = new wallet_service_1.default({ userModel, transactionModel });
+    const cryptoRepository = new crypto_1.default();
+    const userService = new wallet_service_1.default({ userModel, transactionModel, cryptoRepository });
     const userController = new wallet_controller_1.default({ userValidator, userService });
     router.postWithBodyAndAuth('/fund', userController.fundUserWallet);
     router.postWithBodyAndAuth('/withdraw', userController.withdrawUserWallet);
+    router.getWithAuth('/', userController.getWalletInformation);
     router.getWithAuth('/all', userController.getAllUserTransaction);
 };
 exports.default = useUserWalletRoutes;

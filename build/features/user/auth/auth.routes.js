@@ -11,6 +11,7 @@ const mailer_1 = __importDefault(require("../../../lib/modules/mailer"));
 const auth_controller_1 = __importDefault(require("./auth.controller"));
 const auth_service_1 = __importDefault(require("./auth.service"));
 const auth_validator_1 = __importDefault(require("./auth.validator"));
+const crypto_1 = __importDefault(require("../../../lib/modules/crypto/crypto"));
 const useUserAuthRoutes = ({ router }) => {
     const authValidator = new auth_validator_1.default();
     const authRepo = new auth_1.default();
@@ -18,7 +19,8 @@ const useUserAuthRoutes = ({ router }) => {
     const userModel = new user_model_1.default();
     const moderatorUserServiceModel = new moderator_model_1.default();
     const raiderUserServiceModel = new raider_model_1.default();
-    const userAuthService = new auth_service_1.default({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel });
+    const cryptoRepository = new crypto_1.default();
+    const userAuthService = new auth_service_1.default({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel, cryptoRepository });
     // AUTH ROUTES HANDLER
     const userAuthController = new auth_controller_1.default({ authValidator, userAuthService });
     router.postWithBody('/register', userAuthController.registerUser);

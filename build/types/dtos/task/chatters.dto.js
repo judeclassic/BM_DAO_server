@@ -33,7 +33,7 @@ class ChatterTaskDto {
         this.id = task._id;
         this.claimableTask = [];
         this.userId = task.userId;
-        this.raidInformation = task.raidInformation;
+        this.chatInformation = task.chatInformation;
         this.availableTask = task.availableTask;
         this.approvedTask = task.approvedTask;
         this.totalTasks = task.totalTasks;
@@ -55,7 +55,7 @@ class ChatterTaskDto {
             id: this.id,
             userId: this.userId,
             claimableTask: this.claimableTask.map(task => task.getResponse),
-            raidInformation: this.raidInformation,
+            chatInformation: this.chatInformation,
             availableTask: this.availableTask,
             totalTasks: this.totalTasks,
             completedTasks: this.completedTasks,
@@ -74,7 +74,7 @@ class ChatterTaskDto {
     get getDBModel() {
         return {
             userId: this.userId,
-            raidInformation: this.raidInformation,
+            chatInformation: this.chatInformation,
             availableTask: this.availableTask,
             totalTasks: this.totalTasks,
             completedTasks: this.completedTasks,

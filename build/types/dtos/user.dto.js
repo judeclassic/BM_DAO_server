@@ -31,7 +31,8 @@ var AmountEnum;
     AmountEnum[AmountEnum["raidModeratorCommentpay"] = 0.01] = "raidModeratorCommentpay";
     AmountEnum[AmountEnum["raidModeratorRetweetpay"] = 0.02] = "raidModeratorRetweetpay";
     AmountEnum[AmountEnum["chatterCharge"] = 0.7] = "chatterCharge";
-    AmountEnum[AmountEnum["chatterPay"] = 0.5] = "chatterPay";
+    AmountEnum[AmountEnum["chatterPay"] = 0.4] = "chatterPay";
+    AmountEnum[AmountEnum["moderatorChatterPay"] = 0.1] = "moderatorChatterPay";
 })(AmountEnum = exports.AmountEnum || (exports.AmountEnum = {}));
 class WalletDto {
     constructor(wallet) {
@@ -54,6 +55,7 @@ class WalletDto {
             balance: this.balance,
             wallet: {
                 address: (_a = this.wallet) === null || _a === void 0 ? void 0 : _a.address,
+                balance: this.balance
             }
         };
     }

@@ -36,7 +36,7 @@ const ERROR_RESET_PASSWORD_TOKEN_EXPIRED = {
     message: 'This token has expired. Please request a new password reset.',
 };
 class UserAuthService {
-    constructor({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel }) {
+    constructor({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel, cryptoRepository }) {
         this.registerUser = ({ accountType, name, username, country, emailAddress, password, referalCode }) => __awaiter(this, void 0, void 0, function* () {
             const userWithEmailExists = yield this._userModel.checkIfExist({ emailAddress });
             if (userWithEmailExists.data) {
@@ -48,7 +48,16 @@ class UserAuthService {
             }
             const myReferalCode = this._authRepo.generateCode(6);
             const hashedPassword = this._authRepo.encryptPassword(password);
-            const wallet = { balance: { referalBonus: 0, taskBalance: 0, walletBalance: 0, totalBalance: 0 }, };
+            const createWallet = this._cryptoRepository.createWallet();
+            if (!createWallet)
+                return { errors: [ERROR_UNABLE_TO_SAVE_USER] };
+            const wallet = {
+                balance: { referalBonus: 0, taskBalance: 0, walletBalance: 0, totalBalance: 0 },
+                wallet: {
+                    address: createWallet === null || createWallet === void 0 ? void 0 : createWallet.address,
+                    privateKey: createWallet === null || createWallet === void 0 ? void 0 : createWallet.private_key
+                }
+            };
             const request = {
                 accountType,
                 name,
@@ -150,6 +159,7 @@ class UserAuthService {
         this._authRepo = authRepo;
         this._raiderUserServiceModel = raiderUserServiceModel;
         this._moderatorUserServiceModel = moderatorUserServiceModel;
+        this._cryptoRepository = cryptoRepository;
     }
 }
 exports.default = UserAuthService;
