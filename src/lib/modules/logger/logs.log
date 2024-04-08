@@ -1707,3 +1707,7 @@
 [[31merror[39m] Tue, 27 Feb 2024 19:17:30 GMT undefined [[!!🐞] Error: Error: querySrv ESERVFAIL _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]
 [[31merror[39m] Tue, 27 Feb 2024 19:18:22 GMT undefined [[!!🐞] Error: Error: querySrv ESERVFAIL _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]
 [[31merror[39m] Tue, 27 Feb 2024 19:19:03 GMT undefined [[!!🐞] Error: Error: querySrv ESERVFAIL _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]
+[[31merror[39m] Sat, 02 Mar 2024 18:29:34 GMT undefined [[!!🐞] Error: Error: queryTxt ESERVFAIL cluster0.ub5eh3h.mongodb.net]
+[[31merror[39m] Sat, 02 Mar 2024 18:30:34 GMT undefined [[!!🐞] Error: Error: querySrv ESERVFAIL _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]
+[[31merror[39m] Sat, 02 Mar 2024 19:12:11 GMT undefined [[!!🐞] Error: Error: querySrv ESERVFAIL _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]
+[[31merror[39m] Sun, 07 Apr 2024 16:49:33 GMT undefined [[!!🐞] Error: Error: querySrv EREFUSED _mongodb._tcp.cluster0.ub5eh3h.mongodb.net]

@@ -97,7 +97,7 @@ class ChatterClientTaskService {
       userId: userId,
       startedAt: new Date(task.startDate),
       endedAt: endDate,
-      raidInformation: {
+      chatInformation: {
         serviceType: ServiceAccountTypeEnum.chatter,
         postLink: task.postLink,
         compaignCaption: task.compaignCaption,

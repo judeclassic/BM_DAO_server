@@ -40,7 +40,9 @@ export enum AmountEnum {
   raidModeratorRetweetpay = 0.02,
 
   chatterCharge = 0.7,
-  chatterPay = 0.5,
+  chatterPay = 0.4,
+  
+  moderatorChatterPay = 0.1,
 }
 
 export interface IWalletResponse {
@@ -97,6 +99,7 @@ export class WalletDto implements IWallet {
   wallet?: {
     address: string;
     privateKey: string;
+    balance?: string;
   };
 
   constructor(wallet: IWallet) {
@@ -120,6 +123,7 @@ export class WalletDto implements IWallet {
       balance: this.balance,
       wallet: {
         address: this.wallet?.address,
+        balance: this.balance
       }
     } as IWalletResponse;
   }

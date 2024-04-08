@@ -1,3 +1,4 @@
+import { UserResponseInterface } from "../../../../types/dtos/user.dto";
 import AutheticatedUserInterface from "../../../../types/interfaces/requests/user/authencated-user";
 import { IUpdateUserRequest } from "../../../../types/interfaces/requests/user/update-user";
 import ResponseInterface from "../../../../types/interfaces/response/response";
@@ -38,7 +39,7 @@ class UserProfileController {
       });
   }
     
-    public viewProfile = async ({ user }: { user: any }, sendJson: (code: number, response: ResponseInterface<any>)=>void)  => {
+    public viewProfile = async ({ user }: { user: any }, sendJson: (code: number, response: ResponseInterface<UserResponseInterface>)=>void)  => {
         if (!user.id) return sendJson(403, { code: 403, status: false });
     
         const foundUser = await this._userService.findUserById(user.id);
@@ -47,7 +48,7 @@ class UserProfileController {
         return sendJson(200, { status: true, code: 200, data: foundUser.getResponse });
     }
 
-    public getUserReferals = async ({ user, params }: { user: any, params: any }, sendJson: (code: number, response: ResponseInterface<any>)=>void)  => {
+    public getUserReferals = async ({ user, params }: { user: any, params: any }, sendJson: (code: number, response: ResponseInterface<UserResponseInterface>)=>void)  => {
         if (!user.id) return sendJson(403, { code: 403, status: false });
     
         const foundUser = await this._userService.getUserReferals(user.id, params.level);
@@ -56,7 +57,7 @@ class UserProfileController {
         return sendJson(200, { status: true, code: 200, data: foundUser.data.getResponse });
     }
 
-    public updateProfile = async ({ user, body }: { user: AutheticatedUserInterface, body: IUpdateUserRequest }, sendJson: (code: number, response: ResponseInterface<any>)=>void)  => {
+    public updateProfile = async ({ user, body }: { user: AutheticatedUserInterface, body: IUpdateUserRequest }, sendJson: (code: number, response: ResponseInterface<UserResponseInterface>)=>void)  => {
       const validationErrors = this._userValidator.validateBeforePersonalUpdate({ ...body });
       if (validationErrors.length > 0) {
         return sendJson(400, {

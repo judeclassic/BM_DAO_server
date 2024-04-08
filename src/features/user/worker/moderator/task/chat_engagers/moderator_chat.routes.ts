@@ -1,24 +1,24 @@
 import ModeratorUserServiceModel from "../../../../../../lib/modules/db/models/service/moderator.model";
-import RaiderUserServiceModel from "../../../../../../lib/modules/db/models/service/raider.model";
-import RaidModel from "../../../../../../lib/modules/db/models/task/raid.model";
-import RaiderTaskModel from "../../../../../../lib/modules/db/models/task/raider.model";
 import TransactionModel from "../../../../../../lib/modules/db/models/transaction.model";
 import UserModel from "../../../../../../lib/modules/db/models/user.model";
 import RequestHandler from "../../../../../../lib/modules/server/router";
-import ModeratorUserRaidController from "./moderator_raid.controller";
-import ModeratorUserTaskService from "./moderator.service";
+import ModeratorUserRaidController from "./moderator_chat.controller";
+import ModeratorUserTaskService from "./moderator_chat.service";
 import ModeratorTaskValidator from "./moderator.validator";
+import ChatterTaskModel from "../../../../../../lib/modules/db/models/task/chatter.model";
+import ChatTaskModel from "../../../../../../lib/modules/db/models/task/chat.model";
+import ChatterUserServiceModel from "../../../../../../lib/modules/db/models/service/chatter.model";
 
 const useRaiderTaskForModeratorRoutes = ({router}: {router: RequestHandler}) => {
     const taskValidator = new ModeratorTaskValidator();
     const userModel = new UserModel();
-    const raidModel = new RaidModel();
-    const raiderTaskModel = new RaiderTaskModel();
-    const raiderServiceModel = new RaiderUserServiceModel();
+    const chatModel = new ChatTaskModel();
+    const chatterTaskModel = new ChatterTaskModel()
+    const chatterServiceModel = new ChatterUserServiceModel()
     const moderatorServiceModel = new ModeratorUserServiceModel();
     const transactionModel = new TransactionModel()
 
-    const moderatorUserTaskService = new ModeratorUserTaskService({ raiderTaskModel, raidModel, raiderServiceModel, moderatorServiceModel, userModel, transactionModel });
+    const moderatorUserTaskService = new ModeratorUserTaskService({ chatterTaskModel, chatModel, chatterServiceModel, moderatorServiceModel, userModel, transactionModel });
 
     const clientRaidController = new ModeratorUserRaidController({ taskValidator, moderatorUserTaskService });
 
@@ -38,13 +38,13 @@ const useRaiderTaskForModeratorRoutes = ({router}: {router: RequestHandler}) => 
 
     router.postWithBodyAndAuth('/me/approve', clientRaidController.approveTaskAsComplete );
 
-    router.getWithAuth('/raids/:taskId', clientRaidController.getModeratedRaids );
+    router.getWithAuth('/chats/:taskId', clientRaidController.getModeratedChats );
     
-    router.getWithAuth('/raid/:raidId', clientRaidController.getUserSingleRaid );
+    router.getWithAuth('/chat/:chatId', clientRaidController.getUserSingleChat );
 
-    router.postWithBodyAndAuth('/raid/approve', clientRaidController.approveRaid );
+    router.postWithBodyAndAuth('/chat/approve', clientRaidController.approveChat );
 
-    router.postWithBodyAndAuth('/raid/reject', clientRaidController.rejectRaid );
+    router.postWithBodyAndAuth('/chat/reject', clientRaidController.rejectChat );
 }
 
 export default useRaiderTaskForModeratorRoutes;

@@ -2,7 +2,7 @@ import ChatterUserServiceDto, { MultipleChatterUserServiceDto } from "../../../.
 import { IChatterSocialHandle, IChatterUserService } from "../../../../response/services/chatter/chatter.response";
 
 
-interface IChatterUserServiceModelRepository{
+interface IChatterServiceModelRepository{
 
     createUserService: (details: IChatterUserService) => Promise<{status: boolean, error?: string | unknown, data?: ChatterUserServiceDto }>;
 
@@ -36,4 +36,4 @@ interface IChatterUserServiceModelRepository{
     deleteUserService: (requestId: string) => Promise<{status: boolean, error?: string | unknown, data?: ChatterUserServiceDto }>;
 }
 
-export default IChatterUserServiceModelRepository;
+export default IChatterServiceModelRepository;

@@ -13,6 +13,7 @@ export interface IWallet {
     wallet?: {
         address: string;
         privateKey: string;
+        balance?: string;
     }
 }
 

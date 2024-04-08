@@ -9,7 +9,7 @@ export interface IChatterTaskResponse {
   id?: string;
   claimableTask: IChatResponse[];
   userId: string;
-  raidInformation: IChatTaskInformation;
+  chatInformation: IChatTaskInformation;
   startedAt?: Date;
   endedAt?: Date;
   updatedAt?: Date;
@@ -41,7 +41,7 @@ export class ChatterTaskDto implements IChatterTask {
   id?: string;
   claimableTask: ChatTaskDto[];
   userId: string;
-  raidInformation: IChatTaskInformation;
+  chatInformation: IChatTaskInformation;
   startedAt?: Date;
   endedAt?: Date;
   updatedAt?: Date;
@@ -64,7 +64,7 @@ export class ChatterTaskDto implements IChatterTask {
     this.id = task._id;
     this.claimableTask = [];
     this.userId = task.userId;
-    this.raidInformation = task.raidInformation;
+    this.chatInformation = task.chatInformation;
     this.availableTask = task.availableTask;
     this.approvedTask = task.approvedTask;
     this.totalTasks = task.totalTasks;
@@ -88,7 +88,7 @@ export class ChatterTaskDto implements IChatterTask {
       id: this.id,
       userId: this.userId,
       claimableTask: this.claimableTask.map(task => task.getResponse),
-      raidInformation: this.raidInformation,
+      chatInformation: this.chatInformation,
       availableTask: this.availableTask,
       totalTasks: this.totalTasks,
       completedTasks: this.completedTasks,
@@ -108,7 +108,7 @@ export class ChatterTaskDto implements IChatterTask {
   get getDBModel(): IChatterTask {
     return {
       userId: this.userId,
-      raidInformation: this.raidInformation,
+      chatInformation: this.chatInformation,
       availableTask: this.availableTask,
       totalTasks: this.totalTasks,
       completedTasks: this.completedTasks,

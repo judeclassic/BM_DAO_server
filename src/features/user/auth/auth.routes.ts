@@ -11,7 +11,6 @@ import CryptoRepository from "../../../lib/modules/crypto/crypto";
 
 const useUserAuthRoutes = ({router}: {router: RequestHandler}) => {
     const authValidator = new UserAuthValidator();
-    
     const authRepo = new AuthorizationRepo();
     const mailRepo = new MailerRepo();
     const userModel = new UserModel();

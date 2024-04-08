@@ -1,5 +1,4 @@
 import { IModeratorServiceResponse, IMultipleModeratorServiceResponse } from "../../../../../types/dtos/service/moderators.dto";
-import { IMultipleUserServiceResponse } from "../../../../../types/dtos/service/raiders.dto";
 import AutheticatedUserInterface from "../../../../../types/interfaces/requests/user/authencated-user";
 import ResponseInterface from "../../../../../types/interfaces/response/response";
 import ModeratorUserServiceService from "./moderator_service.service";

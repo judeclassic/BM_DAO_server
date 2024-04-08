@@ -3,20 +3,23 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { ethers,} from 'ethers'
 
-const YOUR_ANKR_PROVIDER_URL = 'https://rpc.ankr.com/polygon/44d9bdcfa6aa588d96fa0212dcb18dcc5cb27bcf9c1cdcda0578b337fbacb786'
-const ETHERSCAN_API_KEY = 'KTKTSF63Z2Q8PHXP2Y3JJNNVIWHEEQXICS';
+const YOUR_ANKR_PROVIDER_URL = process.env.ANKR_POLYGON_URL ?? "";
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY ?? "";
 
 import { abi } from "./abi";
+import { AnkrProvider } from "@ankr.com/ankr.js";
 const contractAddress = process.env.CONTRACT_ADDRESS!
 const masterWallet = process.env.MASTER_WALLET!
 const secretKey= process.env.SECRET_KEY!
 
 class CryptoRepository {
     private provider: Web3;
+    private ankrProvider: AnkrProvider;
     ethProvider: ethers.providers.JsonRpcProvider;
 
     constructor () {
         this.provider = new Web3(new Web3.providers.HttpProvider(YOUR_ANKR_PROVIDER_URL));
+        this.ankrProvider = new AnkrProvider(YOUR_ANKR_PROVIDER_URL);
         this.ethProvider = new ethers.providers.JsonRpcProvider(YOUR_ANKR_PROVIDER_URL);
     }
 
@@ -48,7 +51,20 @@ class CryptoRepository {
           return { success: false, message: 'Error fetching gas prices' };
         }
   
-      }
+    }
+
+    getTokenPrice = async (walletAddress: string): Promise<string | null | undefined> => {
+        try {
+            const tokens = await this.ankrProvider.getAccountBalance({walletAddress, onlyWhitelisted: false});
+
+            if (tokens.assets) {
+                return tokens.assets.find(token => token.balance === contractAddress)?.balance;
+            }
+        } catch (err) {
+          console.log(err)
+            return undefined;
+        }
+    }
 
     createWallet =  () => {
         try {

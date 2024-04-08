@@ -24,7 +24,7 @@ export interface IChatterTask {
     _id?: string;
     level: TaskPriorityEnum;
     userId: string;
-    raidInformation: IChatTaskInformation;
+    chatInformation: IChatTaskInformation;
     startedAt?: Date;
     endedAt?: Date;
     updatedAt?: Date;

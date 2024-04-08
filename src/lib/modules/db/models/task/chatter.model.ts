@@ -38,7 +38,7 @@ const ChatterTaskSchema = new Schema<IChatterTask>({
   approvedTask: {
     type: Number,
   },
-  raidInformation: ChatTaskInformationSchema,
+  chatInformation: ChatTaskInformationSchema,
   startedAt: {
     type: Date,
     default: new Date()

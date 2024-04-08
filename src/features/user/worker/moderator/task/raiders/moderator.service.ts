@@ -2,7 +2,6 @@ import TransactionModel from "../../../../../../lib/modules/db/models/transactio
 import { RaidDto, MultipleRaidDto } from "../../../../../../types/dtos/service/raids.dto";
 import { ModeratorTaskDto } from "../../../../../../types/dtos/task/moderator.dto";
 import { MultipleRaiderTaskDto, RaiderTaskDto } from "../../../../../../types/dtos/task/raiders.dto";
-import UserDto, { AmountEnum } from "../../../../../../types/dtos/user.dto";
 import ErrorInterface from "../../../../../../types/interfaces/error";
 import IUserModelRepository from "../../../../../../types/interfaces/modules/db/models/Iuser.model";
 import IModeratorServiceModelRepository from "../../../../../../types/interfaces/modules/db/models/service/moderator.model";
@@ -29,7 +28,7 @@ const ERROR_USER_IS_NOT_A_CLIENT: ErrorInterface = {
   message: 'user not found with this user Id',
 };
 
-const ERROR_GETING_ALL_USER_TASKS: ErrorInterface = {
+const ERROR_GETTING_ALL_USER_TASKS: ErrorInterface = {
   message: 'unable to fetch all users tasks',
 };
 
@@ -82,50 +81,40 @@ class ModeratorUserTaskService {
       this._transactionModel = transactionModel;
   }
 
-  public getAllActiveTask = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaiderTaskDto }> => {
-    const tasksResponse = await this._raiderTaskModel.getActiveTask({ level: TaskPriorityEnum.high, isModerated: false }, option);
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
-
-    return { tasks: tasksResponse.data };
-  }
-
   public getAllOtherTask = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaiderTaskDto }> => {
-    const tasksResponse = await this._raiderTaskModel.getActiveTask({ level: TaskPriorityEnum.low, isModerated: false }, option);
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    const tasksResponse = await this._raiderTaskModel.getActiveTask({ level: TaskPriorityEnum.low }, option);
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     return { tasks: tasksResponse.data };
   }
 
   public getAllModeratorTask = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaiderTaskDto }> => {
     const tasksResponse = await this._raiderTaskModel.getActiveTask({ moderatorId: userId, level: TaskPriorityEnum.high }, option);
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     return { tasks: tasksResponse.data };
   }
 
   public getAllModeratorOtherTask = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaiderTaskDto }> => {
     const tasksResponse = await this._raiderTaskModel.getActiveTask({ moderatorId: userId, level: TaskPriorityEnum.low }, option);
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     return { tasks: tasksResponse.data };
   }
 
   public getSingleTask = async (taskId: string) : Promise<{ errors?: ErrorInterface[]; task?: RaiderTaskDto }> => {
-
     const tasksResponse = await this._raiderTaskModel.checkIfExist({ _id: taskId });
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     return { task: tasksResponse.data };
   }
 
   public getRaiderSingleRaid = async (raidId: string) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const raidsResponse = await this._raidModel.checkIfExist({ _id: raidId });
-    if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };  
+    if (!raidsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };  
 
     const tasksResponse = await this._raiderTaskModel.checkIfExist({ _id: raidsResponse.data.taskId });
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
-
-    console.log('raidsResponse: ', raidsResponse)
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     const raiderService = await this._raiderServiceModel.checkIfExist({ _id: raidsResponse.data.serviceId });
     if (!raiderService.data) return { errors: [ERROR_GETTING_THIS_USER_SERVICE] };
@@ -136,63 +125,36 @@ class ModeratorUserTaskService {
     return { raid: raidsResponse.data };
   }
 
-  public getModeratorTask = async (taskId: string) : Promise<{ errors?: ErrorInterface[]; task?: RaiderTaskDto }> => {
-    const tasksResponse = await this._raiderTaskModel.checkIfExist({ _id: taskId, level: TaskPriorityEnum.high });
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
-
-    return { task: tasksResponse.data };
-  }
-
-  public moderateTask = async (userId: string, taskId: string, serviceId: string ) : Promise<{ errors?: ErrorInterface[]; task?: RaiderTaskDto }> => {
-    const userService = await this._moderatorServiceModel.checkIfExist({ _id: serviceId });
-    if (!userService.data) return { errors: [ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE] };
-
-    const tasksResponse = await this._raiderTaskModel.checkIfExist({ _id: taskId });
-    if (!tasksResponse.data) return { errors: [ERROR_UNABLE_TO_GET_TASK] };
-
-    if ( userService.data.userId !== userId ) return { errors: [ERROR_SERVICE_DO_NOT_BELONG_TO_THIS_USER] };
-    if ( !userService.data.isUserSubscribed ) return { errors: [ERROR_USER_IS_NOT_A_CLIENT] };
-
-    if ( tasksResponse.data.moderatorId === userId ) return { errors: [ERROR_THIS_TASK_IS_ALREADY_MODERATED_BY_YOU] }
-    if ( tasksResponse.data.isModerated ) return { errors: [ERROR_THIS_TASK_HAS_A_MODERATOR_ALREADY] }
-
-    tasksResponse.data.addModerator = userService.data;
-    const updatedTaskResponse = await this._raiderTaskModel.updateTaskDetailToDB(taskId, tasksResponse.data.getDBModel);
-    this._raiderServiceModel.updateCreatedAnalytics(userId);
-
-    return { task: updatedTaskResponse.data }
-  }
-
   public getModeratorRaidersRaid = async ( taskId: string, option : { limit: number; page: number, status: TaskStatusStatus }) : Promise<{ errors?: ErrorInterface[]; raids?: MultipleRaidDto }> => {
     if (option.status) {
       const raidsResponse = await this._raidModel.getAllRaid({ taskId, taskStatus: option.status }, option);
-      if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+      if (!raidsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
       return { raids: raidsResponse.data };
     }
     const raidsResponse = await this._raidModel.getAllRaid({ taskId }, option);
-    if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!raidsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
     return { raids: raidsResponse.data };
   }
 
   public rejectRaid = async ( userId: string, raidId: string ) : Promise<{ errors?: ErrorInterface[]; raid?: RaidDto }> => {
     const tasksResponse = await this._raiderTaskModel.checkIfExist({ moderatorId: userId });
-    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     const raidResponse = await this._raidModel.checkIfExist({ _id: raidId })
-    if (!raidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!raidResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     if (raidResponse.data.taskId === tasksResponse.data._id) return { errors: [ERROR_GETTING_THIS_RAID] };
     if (raidResponse.data.taskStatus === TaskStatusStatus.APPROVED) return { errors: [{message: 'this raid has been approved already'}] };
     if (raidResponse.data.taskStatus === TaskStatusStatus.REJECTED) return { errors: [{message: 'this raid has been rejected already'}] };
 
-    if (raidResponse.data.taskId === tasksResponse.data._id) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (raidResponse.data.taskId === tasksResponse.data._id) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
     tasksResponse.data.modifyUserRaidsNumber('remove');
 
     const updatedRaidResponse = await this._raidModel.updateRaid(raidId, { taskStatus: TaskStatusStatus.REJECTED })
-    if (!updatedRaidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!updatedRaidResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     const updatedTaskResponse = await this._raiderTaskModel.updateTaskDetailToDB(raidResponse.data.taskId, tasksResponse.data.getDBModel);
-    if (!updatedTaskResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!updatedTaskResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     updatedRaidResponse.data.addTaskToModel = updatedTaskResponse.data;
     this._raiderServiceModel.updateCancelAnalytics(updatedRaidResponse.data.assigneeId);
@@ -205,14 +167,13 @@ class ModeratorUserTaskService {
     if (!tasksResponse.data) return { errors: [ERROR_GETTING_THIS_TASK] };
 
     const raidResponse = await this._raidModel.checkIfExist({ _id: raidId })
-    if (!raidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!raidResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     if (raidResponse.data.taskId === tasksResponse.data._id) return { errors: [ERROR_GETTING_THIS_RAID] };
-    if (raidResponse.data.taskStatus === TaskStatusStatus.APPROVED) return { errors: [{message: 'this raid has been approved already'}] };
-    if (raidResponse.data.taskStatus === TaskStatusStatus.REJECTED) return { errors: [{message: 'this raid has been rejected already'}] };
-
+    if (raidResponse.data.taskStatus !== TaskStatusStatus.COMPLETED) return { errors: [{message: 'this raid has been completed'}] };
+  
     const updatedRaidResponse = await this._raidModel.updateRaid(raidId, { taskStatus: TaskStatusStatus.APPROVED })
-    if (!updatedRaidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!updatedRaidResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
     updatedRaidResponse.data.addTaskToModel = tasksResponse.data
 
     await Promise.all([
@@ -237,11 +198,11 @@ class ModeratorUserTaskService {
     if (!tasksResponse.data) return { errors: [ERROR_GETTING_THIS_TASK] };
 
     const updatedTaskResponse = await this._raiderTaskModel.updateTaskDetailToDB(taskId, tasksResponse.data.getDBModel);
-    if (!updatedTaskResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!updatedTaskResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
     await this._userModel.updateCompletedAnalytics(tasksResponse.data.userId, ServiceAccountTypeEnum.raider);
 
     const raidsResponse = await this._raidModel.getAllRaids([{ taskId, taskStatus: TaskStatusStatus.STARTED }]);
-    if (!raidsResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    if (!raidsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     Promise.all(raidsResponse.data.map((raid) => {
       this._userModel.updateBalance(raid.assigneeId, RaiderTaskDto.getPricingByAction(tasksResponse.data?.raidInformation.action!));
@@ -273,6 +234,40 @@ class ModeratorUserTaskService {
 
     return { task: updatedTaskResponse.data }
   }
+
+  // public getAllActiveTask = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaiderTaskDto }> => {
+  //   const tasksResponse = await this._raiderTaskModel.getActiveTask({ level: TaskPriorityEnum.high, isModerated: false }, option);
+  //   if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+
+  //   return { tasks: tasksResponse.data };
+  // }
+
+  // public getModeratorTask = async (taskId: string) : Promise<{ errors?: ErrorInterface[]; task?: RaiderTaskDto }> => {
+  //   const tasksResponse = await this._raiderTaskModel.checkIfExist({ _id: taskId });
+  //   if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+
+  //   return { task: tasksResponse.data };
+  // }
+
+  // public moderateTask = async (userId: string, taskId: string, serviceId: string ) : Promise<{ errors?: ErrorInterface[]; task?: RaiderTaskDto }> => {
+  //   const userService = await this._moderatorServiceModel.checkIfExist({ _id: serviceId });
+  //   if (!userService.data) return { errors: [ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE] };
+
+  //   const tasksResponse = await this._raiderTaskModel.checkIfExist({ _id: taskId });
+  //   if (!tasksResponse.data) return { errors: [ERROR_UNABLE_TO_GET_TASK] };
+
+  //   if ( userService.data.userId !== userId ) return { errors: [ERROR_SERVICE_DO_NOT_BELONG_TO_THIS_USER] };
+  //   if ( !userService.data.isUserSubscribed ) return { errors: [ERROR_USER_IS_NOT_A_CLIENT] };
+
+  //   if ( tasksResponse.data.moderatorId === userId ) return { errors: [ERROR_THIS_TASK_IS_ALREADY_MODERATED_BY_YOU] }
+  //   if ( tasksResponse.data.isModerated ) return { errors: [ERROR_THIS_TASK_HAS_A_MODERATOR_ALREADY] }
+
+  //   tasksResponse.data.addModerator = userService.data;
+  //   const updatedTaskResponse = await this._raiderTaskModel.updateTaskDetailToDB(taskId, tasksResponse.data.getDBModel);
+  //   this._raiderServiceModel.updateCreatedAnalytics(userId);
+
+  //   return { task: updatedTaskResponse.data }
+  // }
 }
 
 export default ModeratorUserTaskService;
