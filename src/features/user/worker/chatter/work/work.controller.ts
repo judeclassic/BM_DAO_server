@@ -1,27 +1,27 @@
 import { IChatResponse, IMultipleChatResponse } from "../../../../../types/dtos/service/chats.dto";
-import AutheticatedUserInterface from "../../../../../types/interfaces/requests/user/authencated-user";
+import AuthenticatedUserInterface from "../../../../../types/interfaces/requests/user/authencated-user";
 import ResponseInterface from "../../../../../types/interfaces/response/response";
-import RaiderUserTaskRaidService from "./work.service";
-import RaidersTaskRaidValidator from "./work.validator";
+import ChattererUserTaskChatterService from "./work.service";
+import ChatterersTaskChatterValidator from "./work.validator";
 
 
-class CliamableChatController {
-    private _taskValidator: RaidersTaskRaidValidator;
-    private _raiderUserTaskService: RaiderUserTaskRaidService;
+class ClaimableChatController {
+    private _taskValidator: ChatterersTaskChatterValidator;
+    private _raiderUserTaskService: ChattererUserTaskChatterService;
     
-    constructor({taskValidator, raiderTaskService} : {taskValidator: RaidersTaskRaidValidator; raiderTaskService: RaiderUserTaskRaidService;}) {
+    constructor({taskValidator, raiderTaskService} : {taskValidator: ChatterersTaskChatterValidator; raiderTaskService: ChattererUserTaskChatterService;}) {
         this._taskValidator = taskValidator;
         this._raiderUserTaskService = raiderTaskService;
     }
 
-    public startRaidTask = async ({ body, user }: { body: { taskId: string; serviceId: string }, user: AutheticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void)  => {
-      const validationErrors = this._taskValidator.validateIdBeforeCreation(body.taskId);
+    public startChatterTask = async ({ body, user }: { body: { chatId: string; serviceId: string }, user: AuthenticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void)  => {
+      const validationErrors = this._taskValidator.validateIdBeforeCreation(body.chatId);
       if (validationErrors.length > 0) {
         sendJson(400, { error: validationErrors, code: 400, status: false });
         return;
       }
   
-      const response = await this._raiderUserTaskService.startChatTask(user.id, body.taskId, body.serviceId);
+      const response = await this._raiderUserTaskService.startChatTask(user.id, body.chatId, body.serviceId);
       if ( !response.chat ) {
         sendJson(401, { error: response.errors, code: 401, status: false });
         return;
@@ -30,13 +30,13 @@ class CliamableChatController {
       sendJson(201, { data: response.chat.getResponse, code: 201, status: true });
     }
 
-    public completeRaidTask = async ({ body, user }: { body: { raidId: string, proofs: string[] }, user: AutheticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void)  => {
-      const validationErrors = this._taskValidator.validateIdBeforeCreation(body.raidId);
+    public completeChatterTask = async ({ body, user }: { body: { chatId: string, proofs: string[] }, user: AuthenticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void)  => {
+      const validationErrors = this._taskValidator.validateIdAndProof(body.chatId, body.proofs);
       if (validationErrors.length > 0) {
         return sendJson(400, { error: validationErrors, code: 400, status: false });
       }
   
-      const response = await this._raiderUserTaskService.completeRaidTask(user.id, body.raidId, body.proofs );
+      const response = await this._raiderUserTaskService.completeChatterTask(user.id, body.chatId, body.proofs );
       if ( !response.chat ) {
         sendJson(401, { error: response.errors, code: 401, status: false });
         return;
@@ -44,13 +44,13 @@ class CliamableChatController {
       sendJson(201, { data: response.chat.getResponse, code: 201, status: true });
     }
 
-    public cancelRaidTask = async ({ body, user }: { body: { raidId: string }, user: AutheticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void)  => {
+    public cancelChatterTask = async ({ body, user }: { body: { raidId: string }, user: AuthenticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void)  => {
       const validationErrors = this._taskValidator.validateIdBeforeCreation(body.raidId);
       if (validationErrors.length > 0) {
         return sendJson(400, { error: validationErrors, code: 400, status: false });
       }
   
-      const response = await this._raiderUserTaskService.cancelRaidTask(user.id, body.raidId );
+      const response = await this._raiderUserTaskService.cancelChatterTask(user.id, body.raidId );
       if ( !response.raid ) {
         sendJson(401, { error: response.errors, code: 401, status: false });
         return;
@@ -58,8 +58,8 @@ class CliamableChatController {
       sendJson(201, { data: response.raid.getResponse, code: 201, status: true });
     }
 
-    public getAllUserRaid = async (
-      { query, user }: { query: { limit: number; page: number}, user: AutheticatedUserInterface },
+    public getAllUserChatter = async (
+      { query, user }: { query: { limit: number; page: number}, user: AuthenticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IMultipleChatResponse>) => void
     )  => {
       const validationErrors = this._taskValidator.validateOptions(query);
@@ -68,7 +68,7 @@ class CliamableChatController {
         return;
       }
   
-      const response = await this._raiderUserTaskService.getAllUsersRaids(user.id, query);
+      const response = await this._raiderUserTaskService.getAllUsersChatters(user.id, query);
       if ( !response.tasks ) {
         sendJson(401, { error: response.errors, code: 401, status: false });
         return;
@@ -76,8 +76,8 @@ class CliamableChatController {
       sendJson(201, { data: response.tasks.getResponse, code: 201, status: true });
     }
 
-    public getUserSingleRaid = async (
-      { params, user }: { params: { raidId: string; }, user: AutheticatedUserInterface },
+    public getUserSingleChatter = async (
+      { params, user }: { params: { raidId: string; }, user: AuthenticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void
     )  => {
       const validationErrors = this._taskValidator.validateIdBeforeCreation(params.raidId);
@@ -86,7 +86,7 @@ class CliamableChatController {
         return;
       }
   
-      const response = await this._raiderUserTaskService.getUserSingleRaid(params.raidId);
+      const response = await this._raiderUserTaskService.getUserSingleChatter(params.raidId);
   
       if ( !response.chat ) 
         return sendJson(401, { error: response.errors, code: 401, status: false });
@@ -94,7 +94,7 @@ class CliamableChatController {
       sendJson(201, { data: response.chat.getResponse, code: 201, status: true });
     }
 
-    public viewUserSingle = async ({ body, user }: { body: { taskId: string; serviceId: string }, user: AutheticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void)  => {
+    public viewUserSingle = async ({ body, user }: { body: { taskId: string; serviceId: string }, user: AuthenticatedUserInterface }, sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void)  => {
       const validationErrors = this._taskValidator.validateIdBeforeCreation(body.taskId);
       if (validationErrors.length > 0) {
         sendJson(400, { error: validationErrors, code: 400, status: false });
@@ -111,4 +111,4 @@ class CliamableChatController {
     }
 }
 
-export default CliamableChatController;
+export default ClaimableChatController;

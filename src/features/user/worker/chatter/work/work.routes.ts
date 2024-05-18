@@ -3,12 +3,12 @@ import ChatTaskModel from "../../../../../lib/modules/db/models/task/chat.model"
 import ChatterTaskModel from "../../../../../lib/modules/db/models/task/chatter.model";
 import UserModel from "../../../../../lib/modules/db/models/user.model";
 import RequestHandler from "../../../../../lib/modules/server/router";
-import UserRaidController from "./work.controller";
+import UserChatterController from "./work.controller";
 import ChatterWorkTaskService from "./work.service";
-import RaidersTaskRaidValidator from "./work.validator";
+import ChatterersTaskChatterValidator from "./work.validator";
 
 const useChatterWorkForUserRoutes = ({router}: {router: RequestHandler}) => {
-    const taskValidator = new RaidersTaskRaidValidator();
+    const taskValidator = new ChatterersTaskChatterValidator();
     const chatModel = new ChatTaskModel();
     const chatterTaskModel = new ChatterTaskModel();
     const chatterServiceModel = new ChatterUserServiceModel();
@@ -16,17 +16,17 @@ const useChatterWorkForUserRoutes = ({router}: {router: RequestHandler}) => {
 
     const raiderTaskService = new ChatterWorkTaskService({ chatterTaskModel, chatModel, chatterServiceModel, userModel });
 
-    const clientRaidController = new UserRaidController({ taskValidator, raiderTaskService });
+    const clientChatterController = new UserChatterController({ taskValidator, raiderTaskService });
 
-    router.postWithBodyAndAuth('/start_raid', clientRaidController.startRaidTask );
+    router.postWithBodyAndAuth('/start_raid', clientChatterController.startChatterTask );
 
-    router.postWithBodyAndAuth('/complete_raid', clientRaidController.completeRaidTask );
+    router.postWithBodyAndAuth('/complete_raid', clientChatterController.completeChatterTask );
 
-    router.postWithBodyAndAuth('/cancel_raid', clientRaidController.cancelRaidTask );
+    router.postWithBodyAndAuth('/cancel_raid', clientChatterController.cancelChatterTask );
 
-    router.getWithAuth('/', clientRaidController.getAllUserRaid );
+    router.getWithAuth('/', clientChatterController.getAllUserChatter );
 
-    router.getWithAuth('/:raidId', clientRaidController.getUserSingleRaid );
+    router.getWithAuth('/:raidId', clientChatterController.getUserSingleChatter );
 }
 
 export default useChatterWorkForUserRoutes;

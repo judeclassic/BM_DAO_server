@@ -81,12 +81,17 @@ class ModeratorUserTaskService {
     const tasksResponse = await this._chatterTaskModel.checkIfExist({ _id: taskId });
     if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
+    const chatsResponse = await this._chatModel.getAllTasks([{ taskId }]);
+    if (!chatsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+
+    tasksResponse.data.claimableTask = chatsResponse.data;
+
     return { task: tasksResponse.data };
   }
 
-  public getChatterSingleChat = async (ChatId: string) : Promise<{ errors?: ErrorInterface[]; Chat?: ChatTaskDto }> => {
-    const ChatsResponse = await this._chatModel.checkIfExist({ _id: ChatId });
-    if (!ChatsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };  
+  public getChatterSingleChat = async (chatId: string) : Promise<{ errors?: ErrorInterface[]; chat?: ChatTaskDto }> => {
+    const ChatsResponse = await this._chatModel.checkIfExist({ _id: chatId });
+    if (!ChatsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     const tasksResponse = await this._chatterTaskModel.checkIfExist({ _id: ChatsResponse.data.taskId });
     if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
@@ -97,35 +102,35 @@ class ModeratorUserTaskService {
     ChatsResponse.data.addTaskToModel = tasksResponse.data;
     ChatsResponse.data.addServiceToModel = ChatterService.data;
 
-    return { Chat: ChatsResponse.data };
+    return { chat: ChatsResponse.data };
   }
 
-  public getModeratorChattersChat = async ( taskId: string, option : { limit: number; page: number, status: TaskStatusStatus }) : Promise<{ errors?: ErrorInterface[]; Chats?: MultipleChatTaskDto }> => {
+  public getModeratorChattersChat = async ( taskId: string, option : { limit: number; page: number, status: TaskStatusStatus }) : Promise<{ errors?: ErrorInterface[]; chats?: MultipleChatTaskDto }> => {
     if (option.status) {
       const ChatsResponse = await this._chatModel.getAllTask({ taskId, taskStatus: option.status }, option);
       if (!ChatsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
-      return { Chats: ChatsResponse.data };
+      return { chats: ChatsResponse.data };
     }
     const ChatsResponse = await this._chatModel.getAllTask({ taskId }, option);
     if (!ChatsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
-    return { Chats: ChatsResponse.data };
+    return { chats: ChatsResponse.data };
   }
 
-  public rejectChat = async ( userId: string, ChatId: string ) : Promise<{ errors?: ErrorInterface[]; Chat?: ChatTaskDto }> => {
-    const tasksResponse = await this._chatterTaskModel.checkIfExist({ moderatorId: userId });
-    if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+  public rejectChat = async ( userId: string, chatId: string ) : Promise<{ errors?: ErrorInterface[]; chat?: ChatTaskDto }> => {
 
-    const ChatResponse = await this._chatModel.checkIfExist({ _id: ChatId })
+    const ChatResponse = await this._chatModel.checkIfExist({ _id: chatId })
     if (!ChatResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+
+    const tasksResponse = await this._chatterTaskModel.checkIfExist({ _id: ChatResponse.data.taskId });
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     if (ChatResponse.data.taskId === tasksResponse.data.id) return { errors: [ERROR_GETTING_THIS_Chat] };
     if (ChatResponse.data.taskStatus === TaskStatusStatus.APPROVED) return { errors: [{message: 'this Chat has been approved already'}] };
     if (ChatResponse.data.taskStatus === TaskStatusStatus.REJECTED) return { errors: [{message: 'this Chat has been rejected already'}] };
 
-    if (ChatResponse.data.taskId === tasksResponse.data.id) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
     tasksResponse.data.modifyUserChattersNumber('remove');
 
-    const updatedChatResponse = await this._chatModel.updateTask(ChatId, { taskStatus: TaskStatusStatus.REJECTED })
+    const updatedChatResponse = await this._chatModel.updateTask(chatId, { taskStatus: TaskStatusStatus.REJECTED })
     if (!updatedChatResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     const updatedTaskResponse = await this._chatterTaskModel.updateTaskDetailToDB(ChatResponse.data.taskId, tasksResponse.data.getDBModel);
@@ -135,21 +140,21 @@ class ModeratorUserTaskService {
     updatedChatResponse.data.assigneeId &&
       this._chatterServiceModel.updateCancelAnalytics(updatedChatResponse.data.assigneeId);
 
-    return { Chat: updatedChatResponse.data }
+    return { chat: updatedChatResponse.data }
   }
 
-  public approveChat = async ( userId: string, ChatId: string ) : Promise<{ errors?: ErrorInterface[]; Chat?: ChatTaskDto }> => {
-    const tasksResponse = await this._chatterTaskModel.checkIfExist({ moderatorId: userId });
-    if (!tasksResponse.data) return { errors: [ERROR_GETTING_THIS_TASK] };
+  public approveChat = async ( userId: string, chatId: string ) : Promise<{ errors?: ErrorInterface[]; chat?: ChatTaskDto }> => {
 
-    const ChatResponse = await this._chatModel.checkIfExist({ _id: ChatId })
-    if (!ChatResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+    const ChatResponse = await this._chatModel.checkIfExist({ _id: chatId })
+    if (!ChatResponse.data) return { errors: [{ message: "Error in getting this users task" }] };
 
-    if (ChatResponse.data.taskId === tasksResponse.data.id) return { errors: [ERROR_GETTING_THIS_Chat] };
-    if (ChatResponse.data.taskStatus !== TaskStatusStatus.COMPLETED) return { errors: [{message: 'this Chat has been completed'}] };
+    const tasksResponse = await this._chatterTaskModel.checkIfExist({ _id: ChatResponse.data.taskId });
+    if (!tasksResponse.data) return { errors: [{ message: "error unable to get general task data" }] };
+
+    if (ChatResponse.data.taskStatus !== TaskStatusStatus.COMPLETED) return { errors: [{message: 'this chat has not been been completed'}] };
   
-    const updatedChatResponse = await this._chatModel.updateTask(ChatId, { taskStatus: TaskStatusStatus.APPROVED })
-    if (!updatedChatResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+    const updatedChatResponse = await this._chatModel.updateTask(chatId, { taskStatus: TaskStatusStatus.APPROVED })
+    if (!updatedChatResponse.data) return { errors: [{ message: "Error in updating users task" }] };
     updatedChatResponse.data.addTaskToModel = tasksResponse.data
 
     updatedChatResponse.data.assigneeId && 
@@ -164,25 +169,44 @@ class ModeratorUserTaskService {
         transactionStatus: TransactionStatusEnum.COMPLETED,
         amount: ChatterTaskDto.getPayoutPay(),
         isVerified: true,
+      }),
+      this._userModel.updateBalance(userId, AmountEnum.moderatorChatterPay),
+      this._transactionModel.saveTransaction({
+        name: TransactionTypeEnum.MODERATOR_PAYMENT,
+        userId: userId,
+        updatedAt: new Date(),
+        createdAt: new Date(),
+        transactionType: TransactionTypeEnum.MODERATOR_PAYMENT,
+        transactionStatus: TransactionStatusEnum.COMPLETED,
+        amount: (AmountEnum.moderatorChatterPay),
+        isVerified: true,
       })
     ]);
 
-    return { Chat: updatedChatResponse.data }
+    return { chat: updatedChatResponse.data }
   }
 
   public approveTaskAsComplete = async ( userId: string, taskId: string ) : Promise<{ errors?: ErrorInterface[]; task?: ChatterTaskDto }> => {
     const tasksResponse = await this._chatterTaskModel.checkIfExist({_id: taskId });
-    if (!tasksResponse.data) return { errors: [ERROR_GETTING_THIS_TASK] };
+    if (!tasksResponse.data) return { errors: [{ message: "error getting user task" }] };
 
-    const updatedTaskResponse = await this._chatterTaskModel.updateTaskDetailToDB(taskId, tasksResponse.data.getDBModel);
-    if (!updatedTaskResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
     await this._userModel.updateCompletedAnalytics(tasksResponse.data.userId, ServiceAccountTypeEnum.chatter);
 
-    const ChatsResponse = await this._chatModel.getAllTasks([{ taskId, taskStatus: TaskStatusStatus.STARTED }]);
-    if (!ChatsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+    const ChatsResponse = await this._chatModel.getAllTasks([{ taskId }]);
+    if (!ChatsResponse.data) return { errors: [{ message: "Error in getting chat task" }] };
+
+    const user = await this._userModel.updateCompletedAnalytics(userId, ServiceAccountTypeEnum.chatter);
+    if (!user.data) return { errors: [ERROR_GETTING_THIS_TASK] };
+    
+    user.data.updateUserWithdrawableBalance({
+      amount: AmountEnum.moderatorChatterPay,
+      type: 'paid'
+    });
 
     Promise.all(ChatsResponse.data.map((Chat) => {
       if (!Chat.assigneeId) return;
+      if (Chat.taskStatus === TaskStatusStatus.APPROVED) return;
+      if (Chat.taskStatus === TaskStatusStatus.REJECTED) return;
       this._userModel.updateBalance(Chat.assigneeId, ChatterTaskDto.getPayoutPay());
       this._transactionModel.saveTransaction({
         name: TransactionTypeEnum.CHATTER_SUBSCRIPTION,
@@ -194,22 +218,27 @@ class ModeratorUserTaskService {
         amount: (ChatterTaskDto.getPayoutPay()),
         isVerified: true,
       });
+      this._userModel.updateBalance(userId, AmountEnum.moderatorChatterPay);
+      this._transactionModel.saveTransaction({
+        name: TransactionTypeEnum.MODERATOR_PAYMENT,
+        userId: userId,
+        updatedAt: new Date(),
+        createdAt: new Date(),
+        transactionType: TransactionTypeEnum.MODERATOR_PAYMENT,
+        transactionStatus: TransactionStatusEnum.COMPLETED,
+        amount: (AmountEnum.moderatorChatterPay),
+        isVerified: true,
+      });
+
     }));
     this._moderatorServiceModel.updateCompletedAnalytics(userId);
-    const user = await this._userModel.updateCompletedAnalytics(userId, ServiceAccountTypeEnum.chatter);
-    if (!user.data) return { errors: [ERROR_GETTING_THIS_TASK] };
-
-    user.data.updateUserWithdrawableBalance({
-      amount: AmountEnum.moderatorChatterPay,
-      type: 'paid'
-    });
 
     const updatedUser = await this._userModel.updateUserDetailToDB(userId, user.data.getDBModel);
     if (!updatedUser.data) return { errors: [ERROR_GETTING_THIS_TASK] };
 
     await this._chatModel.deleteAllTask({ taskId });
 
-    return { task: updatedTaskResponse.data }
+    return { task: tasksResponse.data }
   }
 
   // public getAllActiveTask = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleChatterTaskDto }> => {

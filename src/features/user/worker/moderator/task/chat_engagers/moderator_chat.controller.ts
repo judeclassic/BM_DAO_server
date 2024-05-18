@@ -46,29 +46,29 @@ class ModeratorUserChatController {
     }
 
     public rejectChat = async (
-      { body, user }: { body: { ChatId: string }, user: AutheticatedUserInterface },
+      { body, user }: { body: { chatId: string }, user: AutheticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void
     )  => {
-      const validationErrors = this._taskValidator.validateIdBeforeCreation(body.ChatId);
+      const validationErrors = this._taskValidator.validateIdBeforeCreation(body.chatId);
       if (validationErrors.length > 0)  return sendJson(400, { error: validationErrors, code: 400, status: false });
   
-      const response = await this._moderatorUserTaskService.rejectChat(user.id, body.ChatId );
-      if ( !response.Chat ) return sendJson(401, { error: response.errors, code: 401, status: false });
+      const response = await this._moderatorUserTaskService.rejectChat(user.id, body.chatId );
+      if ( !response.chat ) return sendJson(401, { error: response.errors, code: 401, status: false });
       
-      sendJson(201, { data: response.Chat.getResponse, code: 201, status: true });
+      sendJson(201, { data: response.chat.getResponse, code: 201, status: true });
     }
 
     public approveChat = async (
-      { body, user }: { body: { ChatId: string }, user: AutheticatedUserInterface },
+      { body, user }: { body: { chatId: string }, user: AutheticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void
     )  => {
-      const validationErrors = this._taskValidator.validateIdBeforeCreation(body.ChatId);
+      const validationErrors = this._taskValidator.validateIdBeforeCreation(body.chatId);
       if (validationErrors.length > 0)  return sendJson(400, { error: validationErrors, code: 400, status: false });
   
-      const response = await this._moderatorUserTaskService.approveChat(user.id, body.ChatId );
-      if ( !response.Chat ) return sendJson(401, { error: response.errors, code: 401, status: false });
+      const response = await this._moderatorUserTaskService.approveChat(user.id, body.chatId );
+      if ( !response.chat ) return sendJson(401, { error: response.errors, code: 401, status: false });
       
-      sendJson(201, { data: response.Chat.getResponse, code: 201, status: true });
+      sendJson(201, { data: response.chat.getResponse, code: 201, status: true });
     }
 
     public approveTaskAsComplete = async (
@@ -118,22 +118,22 @@ class ModeratorUserChatController {
       if (validationErrors.length > 0) return sendJson(400, { error: validationErrors, code: 400, status: false });
   
       const response = await this._moderatorUserTaskService.getModeratorChattersChat(params.taskId, query);
-      if ( !response.Chats ) return sendJson(401, { error: response.errors, code: 401, status: false });
+      if ( !response.chats ) return sendJson(401, { error: response.errors, code: 401, status: false });
   
-      sendJson(201, { data: response.Chats.getResponse, code: 201, status: true });
+      sendJson(201, { data: response.chats.getResponse, code: 201, status: true });
     }
 
     public getUserSingleChat = async (
-      { params, user }: { params: { ChatId: string; }, user: AutheticatedUserInterface },
+      { params, user }: { params: { chatId: string; }, user: AutheticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void
     )  => {
-      const validationErrors = this._taskValidator.validateIdBeforeCreation(params.ChatId);
+      const validationErrors = this._taskValidator.validateIdBeforeCreation(params.chatId);
       if (validationErrors.length > 0) return sendJson(400, { error: validationErrors, code: 400, status: false });
   
-      const response = await this._moderatorUserTaskService.getChatterSingleChat(params.ChatId);
-      if ( !response.Chat ) return sendJson(401, { error: response.errors, code: 401, status: false });
+      const response = await this._moderatorUserTaskService.getChatterSingleChat(params.chatId);
+      if ( !response.chat ) return sendJson(401, { error: response.errors, code: 401, status: false });
   
-      sendJson(201, { data: response.Chat.getResponse, code: 201, status: true });
+      sendJson(201, { data: response.chat.getResponse, code: 201, status: true });
     }
 
     // public getAllActiveTask = async (
