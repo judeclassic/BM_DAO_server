@@ -76,12 +76,14 @@ class RaidersTaskRaidValidator extends _BaseValidator {
       errors.push({ field: 'taskId', message: validateId.message });
     }
 
-    if (!proof.length) {
-      errors.push({ field: 'proof', message: "proof must be an array" });
-    } else {
-      if ( proof.length < 1 ) {
-        errors.push({ field: 'proof', message: "proof must not be empty" });
-      }
+    if (!proof) {
+      errors.push({ field: 'proof', message: "proof can not be empty" });
+    } else
+    if (!proof?.length) {
+      errors.push({ field: 'proof', message: "proof must be an array filled with one data" });
+    } else
+    if ( proof?.length < 1 ) {
+      errors.push({ field: 'proof', message: "proof must not be empty" });
     }
 
     return errors;

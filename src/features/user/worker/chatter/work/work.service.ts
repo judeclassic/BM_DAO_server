@@ -132,7 +132,7 @@ class ChatterWorkTaskService {
     nextTimeClaim.setHours(0, 0, 0, 0);
     const nextTimeClaimISO = nextTimeClaim.toISOString();
 
-    if (userService.data.nextClaimDay > now) return { errors: [ERROR_CLAIM_PER_DAY] };
+    // if (userService.data.nextClaimDay > now) return { errors: [ERROR_CLAIM_PER_DAY] };
 
     const chatResponse = await this._chatModel.checkIfExist({ _id: chatId });
     if (!chatResponse.data) return { errors: [ERROR_UNABLE_TO_GET_CHAT] };
@@ -194,15 +194,10 @@ class ChatterWorkTaskService {
     const tasksResponse = await this._chatterTaskModel.checkIfExist({ _id: chatResponse.data.taskId });
     if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
-    console.log('proof', proofs)
-
-    const updateChatterResponse = await this._chatModel.updateTask(chatId, { proofs, taskStatus: TaskStatusStatus.COMPLETED });
-    if (!updateChatterResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
-
-    // const updateChatterResponse = await this._chatModel.updateTaskProof(chatId, proofs, TaskStatusStatus.COMPLETED);
-    // if (!updateChatterResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
-
+    chatResponse.data.proofs = proofs;
+    chatResponse.data.taskStatus = TaskStatusStatus.COMPLETED;
     tasksResponse.data.modifyUserChattersNumber('complete');
+
     const updatedTaskResponse = await this._chatterTaskModel.updateTaskDetailToDB(chatResponse.data.taskId, tasksResponse.data.getDBModel);
     if (!updatedTaskResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 

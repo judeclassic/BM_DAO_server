@@ -86,7 +86,7 @@ class ClaimableChatController {
         return;
       }
 
-      const option = {limit: query.limit, page: query.page}
+      const option = { limit: query.limit, page: query.page };
   
       const response = await this._raiderUserTaskService.getUserStatusChatters(user.id, option, query.status);
       if ( !response.tasks ) {

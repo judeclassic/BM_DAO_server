@@ -11,7 +11,7 @@ class UserAuthController {
     private _userAuthService: UserAuthService;
     private _userAuthValidator: UserAuthValidator; 
     
-    constructor({authValidator, userAuthService} : {authValidator: UserAuthValidator, userAuthService : UserAuthService}) {
+    constructor({ authValidator, userAuthService } : {authValidator: UserAuthValidator, userAuthService : UserAuthService}) {
         this._userAuthValidator = authValidator;
         this._userAuthService = userAuthService;
     }
