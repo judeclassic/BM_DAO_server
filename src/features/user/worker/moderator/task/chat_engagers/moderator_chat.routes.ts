@@ -26,6 +26,9 @@ const useChattererTaskForModeratorRoutes = ({router}: {router: RequestHandler}) 
 
     router.getWithAuth('/other', clientChatterController.getAllOtherTask );
 
+    router.getWithAuth('/task/by/status', clientChatterController.getAllTaskByStatus );// by Akin
+    router.getWithAuth('/chat/task', clientChatterController.getModeratorChatTask );// by Akin
+
     router.getWithAuth('/task/:taskId', clientChatterController.getSingleTask );
 
     // router.postWithBodyAndAuth('/moderate_task', clientChatterController.moderateTask );

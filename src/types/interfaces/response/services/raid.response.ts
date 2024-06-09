@@ -17,7 +17,7 @@ export interface IRaid {
     _id?: string;
     assignerId: string;
     assigneeId: string;
-    taskId: string;
+    taskId: any;
     serviceId: string;
     timeLine: number;
     taskStatus: TaskStatusStatus;

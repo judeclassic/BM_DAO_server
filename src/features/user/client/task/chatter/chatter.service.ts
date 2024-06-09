@@ -36,7 +36,12 @@ const ERROR_GETING_ALL_USER_TASKS: ErrorInterface = {
   message: 'unable to fetch all users tasks',
 };
 const ERROR_USER_NUMBERS_ARE_BELOW_REQUIRED_NUMBER: ErrorInterface = {
-  message: 'we do not have enough raiders to complete this task',
+  message: 'we do not have enough chatters to complete this task',
+};
+
+const ERROR_CHAT_NOT_FOUND: ErrorInterface = {
+  field: 'chat',
+  message: 'unable to fetch all chat',
 };
 
 class ChatterClientTaskService {
@@ -73,8 +78,26 @@ class ChatterClientTaskService {
     if (userServiceCountResponse.data === undefined) {
       return { errors: [ERROR_USER_NOT_FOUND] }
     }
+  
+    let totalAvailbleTask
+    const totalAvailbleTaskResponse = await this._chatTaskModel.countAvailbleChatPerDay({taskStatus: TaskStatusStatus.PENDING})
+    if (!totalAvailbleTaskResponse.status) {
+      totalAvailbleTask = 0
+    }else{
+      totalAvailbleTask = totalAvailbleTaskResponse.data
+    }
 
-    if ( userServiceCountResponse.data < (task.chatterPerSession * task.hoursPerDay, task.days ) )
+    let totalClaimableTask
+    const totalClaimableTaskResponse = await this._chatTaskModel.countAvailbleChatPerDay({taskStatus: TaskStatusStatus.STARTED})
+    if (!totalClaimableTaskResponse.status) {
+      totalClaimableTask = 0
+    }else{
+      totalClaimableTask = totalClaimableTaskResponse.data
+    }
+
+    const currentAvailableUser = userServiceCountResponse.data - (totalAvailbleTask + totalClaimableTask)
+
+    if ( currentAvailableUser < (task.chatterPerSession * task.hoursPerDay ) )
       return { errors: [ERROR_USER_NUMBERS_ARE_BELOW_REQUIRED_NUMBER] };
 
     user.data.referal.isGiven = true;

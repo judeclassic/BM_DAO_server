@@ -150,6 +150,20 @@ class  ChatterTaskModel implements  IChatterTaskModelRepository {
       }
     }
 
+    getChatTask = async (details: Partial<IChatterTask>) => {
+      try {
+        const data = await this.Task.findOne(details);
+        if (data) {
+          return {status: true, data: data};
+        } else {
+          return {status: false, error: "Couldn't get data"};
+        }
+      } catch (error) {
+          defaultLogger.error(error);
+          return { status: false, error };
+      }
+    }
+
     getActiveTask = async (details: Partial<IChatterTask>, option: { page: number, limit: number }) => {
       try {
         const date = (new Date()).toISOString();

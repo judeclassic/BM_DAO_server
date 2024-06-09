@@ -14,6 +14,8 @@ interface IChatterServiceModelRepository{
 
     updateCancelAnalytics: (userId: string) => Promise<{status: boolean, error?: string | unknown, data?: ChatterUserServiceDto }>;
 
+    updateNextClaimable: (userId: string, currentClaimDay: any, nextClaimDay: any) => Promise<{status: boolean, error?: string | unknown, data?: ChatterUserServiceDto }>;
+
     checkIfExist: (details : Partial<IChatterUserService>) => Promise<{status: boolean, error?: string | unknown, data?: ChatterUserServiceDto }>;
 
     updateSocialHandle: (details : Partial<IChatterUserService>, handles: IChatterSocialHandle) => Promise<{status: boolean, error?: string | unknown, data?: ChatterUserServiceDto }>;

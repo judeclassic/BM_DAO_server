@@ -14,6 +14,8 @@ interface IRaiderTaskModelRepository{
 
     getActiveTask: (details : Partial<IRaiderTask>, option: { page: number, limit: number }) => Promise<{status: boolean, error?: string | unknown, data?: MultipleRaiderTaskDto }>;
 
+    getActiveTaskForDay: (details : Partial<IRaiderTask>, option: { page: number, limit: number }) => Promise<{status: boolean, error?: string | unknown, data?: MultipleRaiderTaskDto }>;
+
     getFutureTask: (details : Partial<IRaiderTask>, option: { page: number, limit: number }) => Promise<{status: boolean, error?: string | unknown, data?: MultipleRaiderTaskDto }>;
 }
 

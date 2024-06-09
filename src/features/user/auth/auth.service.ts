@@ -1,5 +1,6 @@
 import ModeratorUserServiceModel from "../../../lib/modules/db/models/service/moderator.model";
 import RaiderUserServiceModel from "../../../lib/modules/db/models/service/raider.model";
+import ChatterUserServiceModel from "../../../lib/modules/db/models/service/chatter.model"
 import { ERROR_INSUFFICIENT_PERMISSIONS } from "../../../types/constants/errors";
 import UserDto from "../../../types/dtos/user.dto";
 import EmailSubJectEnum from "../../../types/enums/email-subject-enum";
@@ -41,14 +42,16 @@ class UserAuthService {
   private _userModel: UserModelInterface;
   private _raiderUserServiceModel: RaiderUserServiceModel;
   private _moderatorUserServiceModel: ModeratorUserServiceModel;
+  private _chatterUserServiceModel: ChatterUserServiceModel;
   private _cryptoRepository: CryptoRepository;
 
-  constructor ({mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel, cryptoRepository } : {
+  constructor ({mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel, chatterUserServiceModel, cryptoRepository } : {
     mailRepo: MailerRepoInterface;
     authRepo: AuthorizationInterface;
     userModel: UserModelInterface;
     raiderUserServiceModel: RaiderUserServiceModel;
     moderatorUserServiceModel: ModeratorUserServiceModel;
+    chatterUserServiceModel: ChatterUserServiceModel;
     cryptoRepository: CryptoRepository
   }){
     this._mailRepo = mailRepo;
@@ -56,6 +59,7 @@ class UserAuthService {
     this._authRepo = authRepo;
     this._raiderUserServiceModel = raiderUserServiceModel;
     this._moderatorUserServiceModel = moderatorUserServiceModel;
+    this._chatterUserServiceModel = chatterUserServiceModel;
     this._cryptoRepository = cryptoRepository
   }
 
@@ -133,6 +137,9 @@ class UserAuthService {
 
     const moderatorService = await this._moderatorUserServiceModel.checkIfExist({ userId: user.data.id });
     user.data.moderatorService = moderatorService.data;
+
+    const chatterService = await this._chatterUserServiceModel.checkIfExist({userId: user.data.id});
+    user.data.chatterService = chatterService.data;
 
     this._userModel.updateUserDetailToDB( user.data.id!, { accessToken });
 

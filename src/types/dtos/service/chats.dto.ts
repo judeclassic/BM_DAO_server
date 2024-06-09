@@ -37,6 +37,8 @@ export class ChatTaskDto implements IChatTask {
   timeLine: number;
   taskStatus: TaskStatusStatus;
   proofs?: string[];
+  moderatorId?: string;
+  moderatorExpiredTime?: number;
   
 
   constructor (raid: IChatTask) {
@@ -52,6 +54,8 @@ export class ChatTaskDto implements IChatTask {
     this.endTime = raid.endTime;
     this.timeLine = raid.timeLine;
     this.proofs = raid.proofs;
+    this.moderatorId = raid.moderatorId;
+    this.moderatorExpiredTime = raid.moderatorExpiredTime
   }
 
   get getDBModel() {

@@ -95,12 +95,28 @@ class RaidersTaskRaidValidator extends _BaseValidator {
     return errors;
   }
 
-  validateIdBeforeCreation = (id: string) => {
+  validateIdBeforeCreation = (id: string,) => {
     const errors: ErrorInterface[] = [];
 
     const validateId = this._validateID(id);
     if (validateId.message) {
       errors.push({ field: 'taskId', message: validateId.message });
+    }
+
+    return errors;
+  }
+
+  validateProof = (proofs: string[]) => {
+    const errors: ErrorInterface[] = [];
+
+    if (!proofs) {
+      errors.push({ field: 'proofs', message: "proof is required" });
+
+      return errors;
+    }
+
+    if (proofs.length < 1) {
+      errors.push({ field: 'proofs', message: "proof can not be empty" });
     }
 
     return errors;

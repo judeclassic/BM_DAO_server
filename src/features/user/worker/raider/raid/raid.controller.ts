@@ -35,6 +35,11 @@ class UserRaidController {
       if (validationErrors.length > 0) {
         return sendJson(400, { error: validationErrors, code: 400, status: false });
       }
+
+      const validateProof = this._taskValidator.validateProof(body.proofs)
+      if (validateProof.length > 0) {
+        return sendJson(400, { error: validateProof, code: 400, status: false });
+      }
   
       const response = await this._raiderUserTaskService.completeRaidTask(user.id, body.raidId, body.proofs );
       if ( !response.raid ) {
@@ -69,6 +74,29 @@ class UserRaidController {
       }
   
       const response = await this._raiderUserTaskService.getAllUsersRaids(user.id, query);
+      if ( !response.tasks ) {
+        sendJson(401, { error: response.errors, code: 401, status: false });
+        return;
+      }
+      sendJson(201, { data: response.tasks.getResponse, code: 201, status: true });
+    }
+
+    public getAllRaidByStatus = async (
+      { query, user }: { query: { limit: number; page: number, status: any}, user: AutheticatedUserInterface },
+      sendJson: (code: number, response: ResponseInterface<IMultipleRaidResponse>)=>void
+    )  => {
+      const validationErrors = this._taskValidator.validateOptions(query);
+      if (validationErrors.length > 0) {
+        sendJson(400, { error: validationErrors, code: 400, status: false });
+        return;
+      }
+
+      const option = {
+        limit: query.limit, 
+        page: query.page
+      }
+      
+      const response = await this._raiderUserTaskService.getAllRaidByStatus(user.id, query.status, option);
       if ( !response.tasks ) {
         sendJson(401, { error: response.errors, code: 401, status: false });
         return;

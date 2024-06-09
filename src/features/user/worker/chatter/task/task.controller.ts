@@ -78,6 +78,27 @@ class ChatterUserController {
   
       sendJson(201, { data: response.task.getResponse, code: 201, status: true });
     }
+
+    public getAvailableTaskPerDay = async (
+      { query, user }: { query: { limit: number; page: number, status: any }, user: AutheticatedUserInterface },
+      sendJson: (code: number, response: ResponseInterface<IMultipleChatResponse>)=> void
+    )  => {
+      const validationErrors = this._taskValidator.validateOptions(query);
+      if (validationErrors.length > 0) {
+        sendJson(400, { error: validationErrors, code: 400, status: false });
+        return;
+      }
+
+      const option = {
+        limit: query.limit,
+        page: query.page
+      }
+  
+      const response = await this._chatterTaskService.getAvailableTaskPerDay(query.status, option);
+      if ( !response.tasks ) return sendJson(401, { error: response.errors, code: 401, status: false });
+  
+      sendJson(201, { data: response.tasks, code: 201, status: true });
+    }
 }
 
 export default ChatterUserController;

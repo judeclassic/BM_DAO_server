@@ -31,6 +31,32 @@ class RaidersTaskRaidValidator extends _BaseValidator {
     return errors;
   }
 
+  validatequery = ({ chatId, status}: { chatId: string; status: string}) => {
+    const errors: ErrorInterface[] = [];
+
+    if (!chatId) {
+      errors.push({ field: 'chatId', message: 'chatId can not be empty query' });
+    } else {
+      try {
+        chatId.toString();
+      } catch (er) {
+        errors.push({ field: 'chatId', message: 'chatId must be an string' });
+      }
+    }
+
+    if (!status) {
+      errors.push({ field: 'status', message: 'status can not be empty query' });
+    } else {
+      try {
+        status.toString();
+      } catch (er) {
+        errors.push({ field: 'status', message: 'status must be an string' });
+      }
+    }
+
+    return errors;
+  }
+
   validateIdBeforeCreation = (id: string) => {
     const errors: ErrorInterface[] = [];
 

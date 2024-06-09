@@ -27,7 +27,9 @@ export interface IChatterUserService {
     isVerified?: boolean;
     work_timeout: number;
     analytics: IAnalytic;
-    handles: IChatterSocialHandle
+    handles: IChatterSocialHandle;
+    currentClaimDay: Date;
+    nextClaimDay: Date;
 }
 
 export interface IMultipleChatterUserService {

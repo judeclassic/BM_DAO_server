@@ -63,8 +63,23 @@ class ModeratorUserTaskService {
     return { tasks: tasksResponse.data };
   }
 
+  public getAllTaskByStatus = async (userId: string, status: TaskStatusStatus, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: any }> => {
+    const tasksResponse = await this._chatModel.getAllTaskByStatus({ taskStatus:  status}, option);
+    console.log('moe', tasksResponse)
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+
+    return { tasks: tasksResponse.data };
+  }
+
   public getAllModeratorTask = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleChatterTaskDto }> => {
     const tasksResponse = await this._chatterTaskModel.getActiveTask({ moderatorId: userId, level: TaskPriorityEnum.high }, option);
+    if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+
+    return { tasks: tasksResponse.data };
+  }
+
+  public getModeratorChatTask = async (userId: string,) : Promise<{ errors?: ErrorInterface[]; tasks?: any }> => {
+    const tasksResponse = await this._chatModel.getTaskForModerator(userId);
     if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     return { tasks: tasksResponse.data };

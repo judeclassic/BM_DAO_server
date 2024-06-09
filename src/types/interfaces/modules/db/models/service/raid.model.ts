@@ -14,6 +14,9 @@ interface IRaidModelRepository{
     getAllRaid: (details : Partial<IRaid>, option: { page: number, limit: number }) => 
         Promise<{status: boolean, error?: string | unknown, data?: MultipleRaidDto }>;
 
+    getAllRaidByStatus: (details : Partial<IRaid>, option: { page: number, limit: number }) => 
+        Promise<{status: boolean, error?: string | unknown, data?: MultipleRaidDto }>;
+
     getAllRaidByWorkStatus: (status: 'free' | 'engage', option: { page: number, limit: number }) => 
         Promise<{status: boolean, error?: string | unknown, data?: MultipleRaidDto }>;
 

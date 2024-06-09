@@ -43,6 +43,10 @@ const ERROR_RAID_DO_NOT_BELONG_TO_THIS_USER: ErrorInterface = {
   message: 'this raid was not created by this user',
 };
 
+const ERROR_CLAIM_PER_DAY: ErrorInterface = {
+  message: 'you can only claim one task per day',
+};
+
 class ChatterWorkTaskService {
   private _chatterTaskModel: IChatterTaskModelRepository;
   private _chatModel: IChatTaskModelRepository;
@@ -69,6 +73,39 @@ class ChatterWorkTaskService {
     return { tasks: tasksResponse.data };
   }
 
+  public getUserStatusChatters = async (userId: string, option : { limit: number; page: number,}, status: any) : Promise<{ errors?: ErrorInterface[]; tasks?: any }> => {
+    const chatResponse = await this._chatModel.getAllTask({ assigneeId: userId, taskStatus: status }, option);
+    if (!chatResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+    let tasks = []
+    for (let i = 0; i <  chatResponse.data.chats.length; i++) {
+      const chat = chatResponse.data.chats[i];
+      let chatTask = await this._chatterTaskModel.getChatTask({_id: chat.taskId})
+      let allTask = {
+        chat: chat,
+        task: chatTask
+      }
+      tasks.push(allTask)
+    }
+    return { tasks: tasks };
+  }
+
+  public getUserTotalStatusTask = async (userId: string, status: any) : Promise<{ errors?: ErrorInterface[]; totalTask?: any }> => {
+    const chatResponse = await this._chatModel.getTotalStatusTask({ assigneeId: userId, taskStatus: status });
+    if (!chatResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+    return { totalTask: chatResponse.data };
+  }
+
+  public getAllUserSingleChattersTask = async (userId: string, query : { chatId: string; status: any}) : Promise<{ errors?: ErrorInterface[]; task?: any }> => {
+    const chatResponse = await this._chatModel.getSingleTask({_id: query.chatId, taskStatus: query.status, });
+    if (!chatResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+    let chatTask = await this._chatterTaskModel.getChatTask({_id: chatResponse.data.taskId})
+    let task = {
+      chat: chatResponse.data,
+      task: chatTask
+    }
+    return { task: task };
+  }
+
   public getUserSingleChatter = async (raidId: string) : Promise<{ errors?: ErrorInterface[]; chat?: ChatTaskDto }> => {
     const raidsResponse = await this._chatModel.checkIfExist({ _id: raidId });
     if (!raidsResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
@@ -87,6 +124,15 @@ class ChatterWorkTaskService {
     if (!userService.data) return { errors: [ERROR_THIS_USER_HAVE_NOT_SUBSCRIBE] };
     if (userService.data.userId !== userId) return { errors: [ERROR_SERVICE_DO_NOT_BELONG_TO_THIS_USER] };
     if (!userService.data.isUserSubscribed) return { errors: [ERROR_USER_IS_NOT_A_USER] };
+
+    const now = new Date();
+
+    const nextTimeClaim = new Date(now);
+    nextTimeClaim.setDate(now.getDate() + 1);
+    nextTimeClaim.setHours(0, 0, 0, 0);
+    const nextTimeClaimISO = nextTimeClaim.toISOString();
+
+    if (userService.data.nextClaimDay > now) return { errors: [ERROR_CLAIM_PER_DAY] };
 
     const chatResponse = await this._chatModel.checkIfExist({ _id: chatId });
     if (!chatResponse.data) return { errors: [ERROR_UNABLE_TO_GET_CHAT] };
@@ -107,6 +153,7 @@ class ChatterWorkTaskService {
 
     updatedChatResponse.data.task = updatedTaskResponse.data;
 
+    this._chatterServiceModel.updateNextClaimable(userId, now, nextTimeClaimISO)
     this._chatterServiceModel.updateCreatedAnalytics(userId);
     this._userModel.updateCompletedAnalytics(userId, ServiceAccountTypeEnum.raider);
 
@@ -147,8 +194,13 @@ class ChatterWorkTaskService {
     const tasksResponse = await this._chatterTaskModel.checkIfExist({ _id: chatResponse.data.taskId });
     if (!tasksResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
+    console.log('proof', proofs)
+
     const updateChatterResponse = await this._chatModel.updateTask(chatId, { proofs, taskStatus: TaskStatusStatus.COMPLETED });
     if (!updateChatterResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
+
+    // const updateChatterResponse = await this._chatModel.updateTaskProof(chatId, proofs, TaskStatusStatus.COMPLETED);
+    // if (!updateChatterResponse.data) return { errors: [ERROR_GETTING_ALL_USER_TASKS] };
 
     tasksResponse.data.modifyUserChattersNumber('complete');
     const updatedTaskResponse = await this._chatterTaskModel.updateTaskDetailToDB(chatResponse.data.taskId, tasksResponse.data.getDBModel);

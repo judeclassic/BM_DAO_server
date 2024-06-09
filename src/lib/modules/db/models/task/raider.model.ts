@@ -173,6 +173,41 @@ class  RaiderTaskModel implements  IRaiderTaskModelRepository {
       }
     }
 
+    getActiveTaskForDay = async (details: Partial<IRaiderTask>, option: { page: number, limit: number }) => {
+      try {
+        const date = (new Date()).toISOString();
+        const timeLine = Date.parse(date);
+
+        // Get the current date
+        const now = new Date();
+
+        // Get the start of the day
+        const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+        const startOfDayISO = startOfDay.toISOString();
+        const StartTimeLine = Date.parse(startOfDayISO);
+
+        // Get the end of the day
+        const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+        const endOfDayISO = endOfDay.toISOString();
+        const endTimeLine = Date.parse(endOfDayISO);
+
+        const data = await this.Task.paginate({ startTimeLine: { $lt: endTimeLine }, endTimeLine: { $gt: StartTimeLine }, availableRaids: { $gt: 0 }, ...details }, {...option, sort: {_id: -1}});
+        if (data) {
+          return {status: true,
+            data: new MultipleRaiderTaskDto({
+              tasks : data.docs,
+              totalTasks: data.totalDocs,
+              hasNextPage: data.hasNextPage
+            })
+          };
+        } else {
+          return {status: false, error: "Couldn't get store details"};
+        }
+      } catch (error) {
+          return {status: false, error };
+      }
+    }
+
     getFutureTask = async (details: Partial<IRaiderTask>, option: { page: number, limit: number }) => {
       try {
         const date = (new Date()).toISOString();

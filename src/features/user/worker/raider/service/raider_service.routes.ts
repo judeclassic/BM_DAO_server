@@ -1,4 +1,5 @@
 import AuthorizationRepo from "../../../../../lib/modules/auth";
+import ModeratorUserServiceModel from "../../../../../lib/modules/db/models/service/moderator.model";
 import RaiderUserServiceModel from "../../../../../lib/modules/db/models/service/raider.model";
 import TransactionModel from "../../../../../lib/modules/db/models/transaction.model";
 import UserModel from "../../../../../lib/modules/db/models/user.model";
@@ -14,8 +15,9 @@ const useRaiderUserServicesRoutes = ({router}: {router: RequestHandler}) => {
     const userModel = new UserModel();
     const userServiceModel = new RaiderUserServiceModel()
     const transactionModel = new TransactionModel()
+    const moderatorServiceModel = new ModeratorUserServiceModel()
     
-    const raiderServiceService = new RaiderUserServiceService({ authRepo, userModel, userServiceModel, transactionModel });
+    const raiderServiceService = new RaiderUserServiceService({ authRepo, userModel, userServiceModel, transactionModel, moderatorServiceModel});
 
     const userServiceController = new RaiderUserServiceController({ raiderServiceValidator, raiderServiceService });
 

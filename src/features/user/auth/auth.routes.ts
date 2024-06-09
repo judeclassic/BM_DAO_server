@@ -1,6 +1,7 @@
 import AuthorizationRepo from "../../../lib/modules/auth";
 import ModeratorUserServiceModel from "../../../lib/modules/db/models/service/moderator.model";
 import RaiderUserServiceModel from "../../../lib/modules/db/models/service/raider.model";
+import ChatterUserServiceModel from "../../../lib/modules/db/models/service/chatter.model"
 import UserModel from "../../../lib/modules/db/models/user.model";
 import MailerRepo from "../../../lib/modules/mailer";
 import RequestHandler from "../../../lib/modules/server/router";
@@ -16,9 +17,10 @@ const useUserAuthRoutes = ({router}: {router: RequestHandler}) => {
     const userModel = new UserModel();
     const moderatorUserServiceModel = new ModeratorUserServiceModel();
     const raiderUserServiceModel = new RaiderUserServiceModel();
+    const chatterUserServiceModel = new ChatterUserServiceModel();
     const cryptoRepository = new CryptoRepository()
     
-    const userAuthService = new UserAuthService({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel, cryptoRepository });
+    const userAuthService = new UserAuthService({ mailRepo, authRepo, userModel, raiderUserServiceModel, moderatorUserServiceModel, chatterUserServiceModel, cryptoRepository });
 
     // AUTH ROUTES HANDLER
     const userAuthController = new UserAuthController({ authValidator, userAuthService });

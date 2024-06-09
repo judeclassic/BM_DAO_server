@@ -30,6 +30,8 @@ class ChatterUserServiceDto implements IChatterUserService {
   handles: IChatterSocialHandle;
   work_timeout: number;
   analytics: IAnalytic;
+  currentClaimDay: Date;
+  nextClaimDay: Date;
   
   
   constructor (subUser: IChatterUserService) {
@@ -43,6 +45,8 @@ class ChatterUserServiceDto implements IChatterUserService {
     this.handles = subUser.handles;
     this.work_timeout = subUser.work_timeout;
     this.analytics = subUser.analytics;
+    this.currentClaimDay = subUser.currentClaimDay;
+    this.nextClaimDay = subUser.nextClaimDay
   }
   
   get getDBModel() {
@@ -88,6 +92,11 @@ class ChatterUserServiceDto implements IChatterUserService {
   }
 
   static createRequest({ userId, accountType, handles }: { userId: string; accountType: ServiceAccountTypeEnum; handles: IChatterSocialHandle }): IChatterUserService {
+    const now = new Date();
+    const pastdate = new Date(now);
+    pastdate.setDate(now.getDate() - 3);
+    const formattedPastDate = pastdate.toISOString();
+
     return {
       accountType: accountType,
       userId: userId,
@@ -101,7 +110,9 @@ class ChatterUserServiceDto implements IChatterUserService {
         availableTask: 0,
         pendingTask: 0,
         completedTask: 0,
-      }
+      },
+      currentClaimDay: new Date(),
+      nextClaimDay: new Date(formattedPastDate),
     }
   }
 }

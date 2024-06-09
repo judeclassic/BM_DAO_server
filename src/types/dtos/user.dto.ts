@@ -1,5 +1,6 @@
 import AutheticatedUserInterface from "../interfaces/requests/user/authencated-user";
 import { AccountTypeEnum, IAnalytics, IUser, IWallet } from "../interfaces/response/user.response";
+import ChatterUserServiceDto from "./service/chatters.dto";
 import ModeratorUserServiceDto from "./service/moderators.dto";
 import RaiderUserServiceDto from "./service/raiders.dto";
 
@@ -147,6 +148,7 @@ class UserDto implements IUser {
   public authenticationCode?: string;
   public raiderService?: RaiderUserServiceDto;
   public moderatorService?: ModeratorUserServiceDto;
+  public chatterService?: ChatterUserServiceDto;
 
   public referals?: UnSecureUserResponseInterface[] = []
   public analytics?: IAnalytics;
@@ -267,7 +269,7 @@ class UserDto implements IUser {
     }
   }
 
-  updateUserWithdrawableBalance = ({ amount, multiplier = 1, type  }: { amount: AmountEnum, multiplier?: number; type: 'charged' | 'paid' }) => {
+  updateUserWithdrawableBalance =  ({ amount, multiplier = 1, type  }: { amount: AmountEnum, multiplier?: number; type: 'charged' | 'paid' }) => {
     if (type === 'charged') {
       this.wallet.balance.walletBalance -= (amount * multiplier);
       this.wallet.balance.totalBalance -= (amount * multiplier);

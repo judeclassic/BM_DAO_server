@@ -23,6 +23,8 @@ const useChatterTaskForUserRoutes = ({router}: {router: RequestHandler}) => {
     router.getWithAuth('/other/time', chatterTaskController.getAllOtherCliamableTask );
 
     router.getWithAuth('/single_task/:taskId', chatterTaskController.getSingleTask );
+
+    router.getWithAuth('/avaibleTask/task', chatterTaskController.getAvailableTaskPerDay );
 }
 
 export default useChatterTaskForUserRoutes;

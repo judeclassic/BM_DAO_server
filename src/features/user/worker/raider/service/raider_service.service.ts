@@ -4,6 +4,7 @@ import { AmountEnum, AmountPercentageEnum } from "../../../../../types/dtos/user
 import ErrorInterface from "../../../../../types/interfaces/error";
 import AuthorizationInterface from "../../../../../types/interfaces/modules/auth";
 import IUserModelRepository from "../../../../../types/interfaces/modules/db/models/Iuser.model";
+import IModeratorServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/moderator.model";
 import IRaiderServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/raider.model";
 import { ICreateRaiderUserServiceRequest } from "../../../../../types/interfaces/requests/user/create-user";
 import { ISocialHandle } from "../../../../../types/interfaces/response/services/raider.response";
@@ -41,23 +42,29 @@ const ERROR_THIS_USER_SUBSCRIPTION_IS_ACTIVE: ErrorInterface = {
 const ERROR_USER_IS_A_CLIENT: ErrorInterface = {
   message: 'user is a client, unable to subscribe service',
 };
+const ERROR_USER_IS_A_MODERATOR: ErrorInterface = {
+  message: 'user is moderator already, unable to subscribe service',
+};
 
 class RaiderUserServiceService {
   private _transactionModel: TransactionModel;
   private _userServiceModel: IRaiderServiceModelRepository;
   private _userModel: IUserModelRepository;
   private _authRepo: AuthorizationInterface;
+  private _moderatorServiceModel: IModeratorServiceModelRepository;
 
-  constructor ({ authRepo, userModel, userServiceModel, transactionModel } : {
+  constructor ({ authRepo, userModel, userServiceModel, transactionModel, moderatorServiceModel } : {
       transactionModel: TransactionModel;
       authRepo: AuthorizationInterface;
       userModel: IUserModelRepository;
       userServiceModel: IRaiderServiceModelRepository;
+      moderatorServiceModel: IModeratorServiceModelRepository
   }){
     this._authRepo = authRepo;
     this._userModel = userModel;
     this._userServiceModel = userServiceModel;
     this._transactionModel = transactionModel;
+    this._moderatorServiceModel = moderatorServiceModel
   }
 
   public subscribeForAService = async ({
@@ -71,6 +78,9 @@ class RaiderUserServiceService {
     if (!user.data) return { errors: [ERROR_USER_NOT_FOUND] };
 
     if ( user.data?.accountType === AccountTypeEnum.client) return { errors: [ERROR_USER_IS_A_CLIENT] };
+
+    const checkifModerating = await this._moderatorServiceModel.checkIfExist({userId})
+    if (checkifModerating.status) return { errors: [ERROR_USER_IS_A_MODERATOR] };
 
     user.data.referal.isGiven = true;
     const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: AmountEnum.subscriptionPackage1, type: 'charged' });
@@ -116,6 +126,9 @@ class RaiderUserServiceService {
     if ( userService.data.isUserSubscribed ) return { errors: [ERROR_THIS_USER_SUBSCRIPTION_IS_ACTIVE] };
 
     if ( userService.data.userId !== userId ) return { errors: [ERROR_THIS_USERSERVICE_DO_NOT_BELONG_TO_USER] };
+
+    const checkifModerating = await this._moderatorServiceModel.checkIfExist({userId})
+    if (checkifModerating.status) return { errors: [ERROR_USER_IS_A_MODERATOR] };
 
     const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: AmountEnum.subscriptionPackage1, type: 'charged' });
     if (!isWithdrawed) return { errors: [ERROR_NOT_ENOUGH_BALANCE] };

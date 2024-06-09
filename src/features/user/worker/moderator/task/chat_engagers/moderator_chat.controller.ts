@@ -32,6 +32,33 @@ class ModeratorUserChatController {
       sendJson(201, { data: response.tasks.getResponse, code: 201, status: true });
     }
 
+    public getAllTaskByStatus = async (
+      { query, user }: { query: { limit: number; page: number, status: any}, user: AutheticatedUserInterface },
+      sendJson: (code: number, response: ResponseInterface<IMultipleChatterTaskResponse>)=> void
+    )  => {
+      const validationErrors = this._taskValidator.validateOptions(query);
+      if (validationErrors.length > 0) return sendJson(400, { error: validationErrors, code: 400, status: false });
+      
+      const option = {
+        limit: query.limit,
+        page: query.page
+      }
+      const response = await this._moderatorUserTaskService.getAllTaskByStatus(user.id, query.status, option);
+      if ( !response.tasks ) return sendJson(401, { error: response.errors, code: 401, status: false });
+  
+      sendJson(201, { data: response.tasks, code: 201, status: true });
+    }
+
+    public getModeratorChatTask = async (
+      { user }: { user: AutheticatedUserInterface },
+      sendJson: (code: number, response: ResponseInterface<IMultipleChatterTaskResponse>)=> void
+    )  => {
+      const response = await this._moderatorUserTaskService.getModeratorChatTask(user.id);
+      if ( !response.tasks ) return sendJson(401, { error: response.errors, code: 401, status: false });
+  
+      sendJson(201, { data: response.tasks, code: 201, status: true });
+    }
+
     public getSingleTask = async (
       { params, user }: { params: { taskId: string }, user: AutheticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IChatterTaskResponse>)=> void

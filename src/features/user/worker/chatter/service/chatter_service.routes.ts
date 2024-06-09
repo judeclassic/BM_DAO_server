@@ -1,5 +1,6 @@
 import AuthorizationRepo from "../../../../../lib/modules/auth";
 import ChatterUserServiceModel from "../../../../../lib/modules/db/models/service/chatter.model";
+import ModeratorUserServiceModel from "../../../../../lib/modules/db/models/service/moderator.model";
 import TransactionModel from "../../../../../lib/modules/db/models/transaction.model";
 import UserModel from "../../../../../lib/modules/db/models/user.model";
 import RequestHandler from "../../../../../lib/modules/server/router";
@@ -14,8 +15,9 @@ const useChatterUserServicesRoutes = ({router}: {router: RequestHandler}) => {
     const userModel = new UserModel();
     const userServiceModel = new ChatterUserServiceModel()
     const transactionModel = new TransactionModel()
+    const moderatorServiceModel = new ModeratorUserServiceModel()
     
-    const raiderServiceService = new ChatterUserServiceService({ authRepo, userModel, userServiceModel, transactionModel });
+    const raiderServiceService = new ChatterUserServiceService({ authRepo, userModel, userServiceModel, transactionModel, moderatorServiceModel });
 
     const userServiceController = new ChatterUserServiceController({ raiderServiceValidator, raiderServiceService });
 

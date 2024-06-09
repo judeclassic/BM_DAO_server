@@ -4,7 +4,9 @@ import { AmountEnum, AmountPercentageEnum } from "../../../../../types/dtos/user
 import ErrorInterface from "../../../../../types/interfaces/error";
 import AuthorizationInterface from "../../../../../types/interfaces/modules/auth";
 import IUserModelRepository from "../../../../../types/interfaces/modules/db/models/Iuser.model";
+import IChatterServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/chatter.model";
 import IModeratorServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/moderator.model";
+import IRaiderServiceModelRepository from "../../../../../types/interfaces/modules/db/models/service/raider.model";
 import { ICreateUserServiceRequest } from "../../../../../types/interfaces/requests/user/create-user";
 import { ServiceAccountTypeEnum } from "../../../../../types/interfaces/response/services/enums";
 import { IModeratorUserService } from "../../../../../types/interfaces/response/services/moderator.response";
@@ -42,23 +44,35 @@ const ERROR_THIS_USER_SUBSCRIPTION_IS_ACTIVE: ErrorInterface = {
 const ERROR_USER_IS_A_CLIENT: ErrorInterface = {
   message: 'user is a client, unable to subscribe service',
 };
+const ERROR_USER_IS_A_CHATTER: ErrorInterface = {
+  message: 'user is chatter already, unable to subscribe service',
+};
+const ERROR_USER_IS_A_RAIDER: ErrorInterface = {
+  message: 'user is raider already, unable to subscribe service',
+};
 
 class ModeratorUserServiceService {
   private _transactionModel: TransactionModel;
   private _userServiceModel: IModeratorServiceModelRepository;
   private _userModel: IUserModelRepository;
   private _authRepo: AuthorizationInterface;
+  private _chatterServiceModel: IChatterServiceModelRepository;
+  private _raiderServiceModel: IRaiderServiceModelRepository;
 
-  constructor ({ authRepo, userModel, userServiceModel, transactionModel } : {
+  constructor ({ authRepo, userModel, userServiceModel, transactionModel, chatterServiceModel, raiderServiceModel } : {
       authRepo: AuthorizationInterface;
       userModel: IUserModelRepository;
       transactionModel: TransactionModel;
       userServiceModel: IModeratorServiceModelRepository;
+      chatterServiceModel: IChatterServiceModelRepository;
+      raiderServiceModel: IRaiderServiceModelRepository
   }){
     this._authRepo = authRepo;
     this._userModel = userModel;
     this._userServiceModel = userServiceModel;
     this._transactionModel = transactionModel;
+    this._chatterServiceModel = chatterServiceModel;
+    this._raiderServiceModel = raiderServiceModel;
   }
 
   public subscribeForAService = async ({
@@ -74,6 +88,12 @@ class ModeratorUserServiceService {
     const userServiceExists = await this._userServiceModel.checkIfExist({ userId, accountType: ServiceAccountTypeEnum.moderators });
 
     if ( userServiceExists.data ) return { errors: [ERROR_ALREADY_HAVE_THIS_ACCOUNT] };
+
+    const checkIfChatter = await this._chatterServiceModel.checkIfExist({userId})
+    if ( checkIfChatter.status ) return { errors: [ERROR_USER_IS_A_CHATTER] };
+
+    const checkIfRaider = await this._raiderServiceModel.checkIfExist({userId})
+    if ( checkIfRaider.status ) return { errors: [ERROR_USER_IS_A_RAIDER] };
 
     user.data.referal.isGiven = true;
     const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: AmountEnum.moderatorSubscriptionPackage1, type: 'charged' });
@@ -133,6 +153,12 @@ class ModeratorUserServiceService {
     if ( userService.data.isUserSubscribed ) return { errors: [ERROR_THIS_USER_SUBSCRIPTION_IS_ACTIVE] };
 
     if ( userService.data.userId !== userId ) return { errors: [ERROR_THIS_USERSERVICE_DO_NOT_BELONG_TO_USER] };
+
+    const checkIfChatter = await this._chatterServiceModel.checkIfExist({userId})
+    if ( checkIfChatter.status ) return { errors: [ERROR_USER_IS_A_CHATTER] };
+
+    const checkIfRaider = await this._raiderServiceModel.checkIfExist({userId})
+    if ( checkIfRaider.status ) return { errors: [ERROR_USER_IS_A_RAIDER] };
 
     const isWithdrawed = user.data.updateUserWithdrawableBalance({ amount: AmountEnum.subscriptionPackage1, type: 'charged' });
     if (!isWithdrawed) return { errors: [ERROR_NOT_ENOUGH_BALANCE] };

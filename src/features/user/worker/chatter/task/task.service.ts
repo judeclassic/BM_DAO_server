@@ -61,6 +61,23 @@ class ChatterUserTaskService {
 
     return { task: tasksResponse.data };
   }
+
+  public getAvailableTaskPerDay = async (status: TaskStatusStatus, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: any }> => {
+    const tasksResponse = await this._chatTaskModel.getAvailableTaskPerDay({taskStatus: status }, option);
+    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+    let tasks = []
+    for (let i = 0; i < tasksResponse.data.chats.length; i++) {
+      const chat = tasksResponse.data.chats[i];
+      let chatTask = await this._chatterTaskModel.getChatTask({_id: chat.taskId})
+      let allTask = {
+        chat: chat,
+        task: chatTask
+      }
+      tasks.push(allTask)
+    }
+    const result = {data: tasks, totalTask: tasksResponse.data.totalChats, hasNextPage: tasksResponse.data.hasNextPage}
+    return { tasks: result };
+  }
 }
 
 export default ChatterUserTaskService;

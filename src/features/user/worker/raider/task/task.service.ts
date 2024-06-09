@@ -25,6 +25,14 @@ class RaiderUserTaskService {
     return { tasks: tasksResponse.data };
   }
 
+  public getActiveTaskForDay = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaiderTaskDto }> => {
+    const tasksResponse = await this._raiderTaskModel.getActiveTaskForDay({}, option);
+    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
+    return { tasks: tasksResponse.data };
+  }
+
+
   public getAllOtherTask = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaiderTaskDto }> => {
     const tasksResponse = await this._raiderTaskModel.getActiveTask({ level: TaskPriorityEnum.low }, option);
     if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };

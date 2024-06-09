@@ -10,7 +10,10 @@ const RaidSchema = new Schema<IRaid>({
   assignerId: String,
   assigneeId: String,
   serviceId: String,
-  taskId: String,
+  taskId: {
+    type: Schema.Types.ObjectId,
+    ref: 'RaiderTask',
+  },
   timeLine: Number,
   taskStatus: String,
   proofs: [String],
@@ -92,6 +95,27 @@ class  RaidModel implements  IRaidModelRepository {
               raids : data.docs,
               totalRaids: data.totalDocs,
               hasNextPage: data.hasNextPage
+            })};
+        } else {
+          return {status: false, error: "Couldn't get store details"};
+        }
+      } catch (error) {
+          return {status: false, error };
+      }
+    }
+
+    getAllRaidByStatus = async (details: Partial<IRaid>, option: { page: number; limit: number; }) => {
+      try {
+        const skip = (option.page - 1) * option.limit;
+        const totalData = await this.Raid.countDocuments(details);
+        // const data = await this.Raid.paginate(details, {...option, sort: {_id: -1}});
+        const data = await this.Raid.find(details).populate("taskId").skip(skip).limit(option.limit);
+        if (data) {
+          return {status: true,
+            data: new MultipleRaidDto({ 
+              raids : data,
+              totalRaids: totalData,
+              hasNextPage: true
             })};
         } else {
           return {status: false, error: "Couldn't get store details"};

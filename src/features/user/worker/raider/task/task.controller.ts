@@ -32,6 +32,22 @@ class UserRaidController {
       sendJson(201, { data: response.tasks.getResponse, code: 201, status: true });
     }
 
+    public getActiveTaskForDay = async (
+      { query, user }: { query: { limit: number; page: number}, user: AutheticatedUserInterface },
+      sendJson: (code: number, response: ResponseInterface<IMultipleRaiderTaskResponse>)=> void
+    )  => {
+      const validationErrors = this._taskValidator.validateOptions(query);
+      if (validationErrors.length > 0) {
+        sendJson(400, { error: validationErrors, code: 400, status: false });
+        return;
+      }
+  
+      const response = await this._raiderUserTaskService.getActiveTaskForDay(user.id, query);
+      if ( !response.tasks ) return sendJson(401, { error: response.errors, code: 401, status: false });
+  
+      sendJson(201, { data: response.tasks.getResponse, code: 201, status: true });
+    }
+
     public getAllOtherTask = async (
       { query, user }: { query: { limit: number; page: number }, user: AutheticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IMultipleRaiderTaskResponse>)=> void

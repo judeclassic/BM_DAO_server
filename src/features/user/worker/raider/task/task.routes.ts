@@ -18,6 +18,8 @@ const useRaiderTaskForUserRoutes = ({router}: {router: RequestHandler}) => {
 
     router.getWithAuth('/active', clientRaidController.getAllActiveTask );
 
+    router.getWithAuth('/active/per/day', clientRaidController.getActiveTaskForDay );
+
     router.getWithAuth('/other', clientRaidController.getAllOtherTask );
 
     router.getWithAuth('/single_task/:taskId', clientRaidController.getSingleTask );

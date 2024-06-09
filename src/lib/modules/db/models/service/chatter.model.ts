@@ -62,6 +62,12 @@ const RaiderUserServiceSchema = new Schema<IChatterUserService>({
       pendingTask: 0,
       completedTask: 0
     }
+  },
+  currentClaimDay: {
+    type: Date
+  },
+  nextClaimDay: {
+    type: Date
   }
 });
 
@@ -160,6 +166,23 @@ class  ChatterUserServiceModel implements IChatterUserServiceModelRepository {
       if (data) {
         data.analytics.availableTask--;
         data.analytics.pendingTask--;
+        const updatedUser = await data.save();
+        return {status: true, data: new ChatterUserServiceDto(updatedUser ?? data)};
+      } else {
+        return {status: false, error: "Couldn't update userservice"};
+      }
+    } catch (error) {
+        defaultLogger.error(error);
+        return { status: false, error };
+    }
+  }
+
+  updateNextClaimable = async (userId: string, currentClaimDay: any, nextClaimDay: any) => {
+    try {
+      const data = await this.UserService.findOne({userId});
+      if (data) {
+        data.createdAt = currentClaimDay;
+        data.nextClaimDay = nextClaimDay;
         const updatedUser = await data.save();
         return {status: true, data: new ChatterUserServiceDto(updatedUser ?? data)};
       } else {

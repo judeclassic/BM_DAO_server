@@ -76,6 +76,57 @@ class ClaimableChatController {
       sendJson(201, { data: response.tasks.getResponse, code: 201, status: true });
     }
 
+    public getUserStatusChatters = async (
+      { query, user }: { query: { limit: number; page: number, status: string}, user: AuthenticatedUserInterface },
+      sendJson: (code: number, response: ResponseInterface<IMultipleChatResponse>) => void
+    )  => {
+      const validationErrors = this._taskValidator.validateOptions(query);
+      if (validationErrors.length > 0) {
+        sendJson(400, { error: validationErrors, code: 400, status: false });
+        return;
+      }
+
+      const option = {limit: query.limit, page: query.page}
+  
+      const response = await this._raiderUserTaskService.getUserStatusChatters(user.id, option, query.status);
+      if ( !response.tasks ) {
+        sendJson(401, { error: response.errors, code: 401, status: false });
+        return;
+      }
+      sendJson(201, { data: response.tasks, code: 201, status: true });
+    }
+
+    public getUserTotalStatusTask = async (
+      { query, user }: { query: { status: string}, user: AuthenticatedUserInterface },
+      sendJson: (code: number, response: ResponseInterface<IMultipleChatResponse>) => void
+    )  => {
+      const response = await this._raiderUserTaskService.getUserTotalStatusTask(user.id, query.status);
+      if ( !response.totalTask ) {
+        sendJson(401, { error: response.errors, code: 401, status: false });
+        return;
+      }
+      sendJson(201, { data: response.totalTask, code: 201, status: true });
+    }
+
+    public getAllUserSingleChattersTask = async (
+      { query, user }: { query: { chatId: string; status: string}, user: AuthenticatedUserInterface },
+      sendJson: (code: number, response: ResponseInterface<IMultipleChatResponse>) => void
+    )  => {
+      const validationErrors = this._taskValidator.validatequery(query);
+      if (validationErrors.length > 0) {
+        sendJson(400, { error: validationErrors, code: 400, status: false });
+        return;
+      }
+  
+      const response = await this._raiderUserTaskService.getAllUserSingleChattersTask(user.id, query);
+      if ( !response.task ) {
+        sendJson(401, { error: response.errors, code: 401, status: false });
+        return;
+      }
+      sendJson(201, { data: response.task, code: 201, status: true });
+    }
+
+
     public getUserSingleChatter = async (
       { params, user }: { params: { raidId: string; }, user: AuthenticatedUserInterface },
       sendJson: (code: number, response: ResponseInterface<IChatResponse>)=>void

@@ -26,6 +26,10 @@ const useChatterWorkForUserRoutes = ({router}: {router: RequestHandler}) => {
 
     router.getWithAuth('/', clientChatterController.getAllUserChatter );
 
+    router.getWithAuth('/status/task', clientChatterController.getUserStatusChatters );
+    router.getWithAuth('/single/task', clientChatterController.getAllUserSingleChattersTask );
+    router.getWithAuth('/status/total', clientChatterController.getUserTotalStatusTask );
+
     router.getWithAuth('/:raidId', clientChatterController.getUserSingleChatter );
 }
 

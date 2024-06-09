@@ -16,13 +16,15 @@ export interface IChatTask {
     assigneeId?: string;
     serviceId?: string;
     service?: IChatterUserService;
-    taskId: string;
+    taskId: any;
     task?: IChatterTask;
     startTime: number;
     endTime: number;
     timeLine: number;
     taskStatus: TaskStatusStatus;
     proofs?: string[];
+    moderatorId?: string;
+    moderatorExpiredTime?: number;
 }
 
 export interface IMultipleChatTask {

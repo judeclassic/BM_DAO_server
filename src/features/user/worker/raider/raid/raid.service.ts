@@ -42,6 +42,10 @@ const ERROR_RAID_DO_NOT_BELONG_TO_THIS_USER: ErrorInterface = {
   message: 'this raid was not created by this user',
 };
 
+const ERROR_RAID_HAS_NO_STARTED: ErrorInterface = {
+  message: 'this raid has not been started',
+};
+
 class RaiderUserTaskRaidService {
   private _raiderTaskModel: IRaiderTaskModelRepository;
   private _raidModel: IRaidModelRepository;
@@ -63,6 +67,13 @@ class RaiderUserTaskRaidService {
 
   public getAllUsersRaids = async (userId: string, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaidDto }> => {
     const tasksResponse = await this._raidModel.getAllRaid({ assigneeId: userId }, option);
+    if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
+    return { tasks: tasksResponse.data };
+  }
+
+  public getAllRaidByStatus = async (userId: string, status: TaskStatusStatus, option : { limit: number; page: number}) : Promise<{ errors?: ErrorInterface[]; tasks?: MultipleRaidDto }> => {
+    const tasksResponse = await this._raidModel.getAllRaidByStatus({ assigneeId: userId, taskStatus: status }, option);
     if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
 
     return { tasks: tasksResponse.data };
@@ -140,6 +151,8 @@ class RaiderUserTaskRaidService {
 
     const tasksResponse = await this._raiderTaskModel.checkIfExist({_id: raidResponse.data.taskId });
     if (!tasksResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };
+
+    if (raidResponse.data.taskStatus !== TaskStatusStatus.STARTED) return { errors: [ERROR_RAID_HAS_NO_STARTED] };
 
     const updateRaidResponse = await this._raidModel.updateRaid(raidId, { proofs, taskStatus: TaskStatusStatus.COMPLETED });
     if (!updateRaidResponse.data) return { errors: [ERROR_GETING_ALL_USER_TASKS] };

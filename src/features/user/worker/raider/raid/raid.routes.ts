@@ -26,6 +26,8 @@ const useRaiderRaidForUserRoutes = ({router}: {router: RequestHandler}) => {
 
     router.getWithAuth('/', clientRaidController.getAllUserRaid );
 
+    router.getWithAuth('/by/status', clientRaidController.getAllRaidByStatus );
+
     router.getWithAuth('/:raidId', clientRaidController.getUserSingleRaid );
 }
 
